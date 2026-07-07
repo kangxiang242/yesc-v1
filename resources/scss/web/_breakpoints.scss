@@ -1,0 +1,113 @@
+/* ==========================================================================
+   Breakpoints — 核心 API：up() / down() / between()
+   ========================================================================== */
+
+$bp-sm: 480px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;
+$bp-2xl: 1536px;
+
+$breakpoints: (
+  "sm": $bp-sm,
+  "md": $bp-md,
+  "lg": $bp-lg,
+  "xl": $bp-xl,
+  "2xl": $bp-2xl,
+) !default;
+
+@function bp-down($v) {
+  @return $v - 0.02px;
+}
+
+@function bp-get($key) {
+  $v: map-get($breakpoints, $key);
+  @return if($v != null, $v, $key);
+}
+
+/* --------------------------------------------------------------------------
+   核心 API（主入口）
+   -------------------------------------------------------------------------- */
+@mixin up($key) {
+  $value: bp-get($key);
+  @media (min-width: $value) {
+    @content;
+  }
+}
+
+@mixin down($key) {
+  $value: bp-get($key);
+  @media (max-width: bp-down($value)) {
+    @content;
+  }
+}
+
+@mixin between($min, $max) {
+  $min-val: bp-get($min);
+  $max-val: bp-get($max);
+  @media (min-width: $min-val) and (max-width: bp-down($max-val)) {
+    @content;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   语义别名：mobile / tablet / desktop
+   -------------------------------------------------------------------------- */
+@mixin mobile {
+  @include down("md") {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @include between("md", "lg") {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @include up("lg") {
+    @content;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   from / until（少量语义别名，非主入口）
+   -------------------------------------------------------------------------- */
+@mixin from-md {
+  @include up("md") {
+    @content;
+  }
+}
+
+@mixin until-md {
+  @include down("md") {
+    @content;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   交互：触控 / 指针
+   -------------------------------------------------------------------------- */
+/// 触控为主（无悬停、粗指针，如手机/平板触屏）
+@mixin touch {
+  @media (hover: none) and (pointer: coarse) {
+    @content;
+  }
+}
+
+/// 指针为主（可悬停、精确指针，如鼠标/触控笔）
+@mixin pointer {
+  @media (hover: hover) and (pointer: fine) {
+    @content;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   prefers-reduced-motion
+   -------------------------------------------------------------------------- */
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}

@@ -1,0 +1,67 @@
+/.phpunit.cache
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+/vendor
+/log/*
+!/log/.gitkeep
+.env
+.env.backup
+.env.production
+.phpactor.json
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+/auth.json
+/.fleet
+/.idea
+/.nova
+/.vscode
+/.zed
+/public/uploads/
+/public/static/
+
+# Sensitive credentials
+
+# Test reports (keep directory)
+/log/*.md
+!/log/.gitkeep
+
+# IDE and editor configs
+.obsidian/
+.vscode/
+.idea/
+.fleet/
+.nova/
+.zed/
+
+# Debug/Test screenshots
+/log/*.png
+/log/*.jpg
+/log/*.jpeg
+.DS_Store
+
+# Database dumps
+*.sql
+
+# Unused frontend build tools (project uses Blade, not Vite/Tailwind)
+/package.json
+/package-lock.json
+/tailwind.config.js
+/vite.config.js
+/postcss.config.js
+
+# Test artifacts
+/screenshots/
+/sop/
+/docs/
+
+# Temp scripts
+/fix-robots.php
+
+.pi/

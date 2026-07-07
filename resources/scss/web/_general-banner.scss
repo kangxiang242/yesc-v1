@@ -1,0 +1,196 @@
+@use "breakpoints" as media;
+@use "tokens" as *;
+
+.general-banner {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    height: fit-content;
+    grid-area: banner;
+    min-height: 220px;
+    @include media.desktop {
+        border-radius: 30px 30px 0 0;
+        z-index: 2;
+    }
+    &:before{
+        content: '';
+        display: none;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(20px) brightness(0.95) saturate(1.6) contrast(1.1);
+        -webkit-backdrop-filter: blur(20px) brightness(0.95) saturate(1.6) contrast(1.1);
+        mask-image: linear-gradient(to top, black, transparent 70%, black 100%);
+        -webkit-mask-image: linear-gradient(to top, black 0%, transparent 80%,black 100%);
+    }
+
+    .general-banner-content {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+    .slogan-box{
+        position: absolute;
+        top: 35%;
+        transform: translateY(-50%);
+        left: 0;
+        width: 100%;
+        z-index: 3;
+        padding: 0 15px;
+        font-size: clamp(13px, 2vw, 18px);
+        .h2-text{
+            position: relative;
+            display: flex;
+            height: auto;
+            width: fit-content;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 0 0.5em;
+            margin-bottom: 0.3em;
+            font-size: 1.5em;
+            color: #fff;
+            font-weight: 700;
+            font-style: italic;
+            z-index: 1;
+            line-height: 1.4;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+
+            .big{
+                font-size: 2.5em;
+                line-height: 1;
+                color: #58e9ff;
+                -webkit-text-stroke: 1px #58e9ff;
+                text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+                padding: 0 0 0 0.1em;
+            }
+            &:after {
+                content: '';
+                width: 100%;
+                height: 60%;
+                border-radius: 5px;
+                position: absolute;
+                display: block;
+                background: linear-gradient(to right,$main-color 33.3%, darken($main-color, 10%) 33.3% , darken($main-color, 10%) 66.6%, $main-color 66.6%) no-repeat;
+                background-size: 300%;
+                background-position: 100%;
+                bottom: -5%;
+                left: 0;
+                z-index: -1;
+                animation: infinite 2s load-loop ease;
+            }
+        }
+
+        @keyframes load-loop {
+            0% {
+              background-position: 100%;
+            }
+
+            40% {
+              background-position: 50%;
+            }
+
+            50% {
+              background-position: 50%;
+            }
+
+            90% {
+              background-position: 0%;
+            }
+
+            100% {
+              background-position: 0%;
+            }
+          }
+
+        p{
+            font-size: 1em;
+            font-weight: 700;
+            color: darken($main-color, 20%);
+            text-shadow: 0 0 3px rgba(255, 255, 255, 1), 0 0 6px rgba(255, 255, 255, 1), 0 0 9px rgba(255, 255, 255, 1), 0 0 12px rgba(255, 255, 255, 1), 0 0 15px rgba(255, 255, 255, 1);
+            padding-left: 1em;
+        }
+    }
+
+    .line{
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 100%;
+        height: 150px;
+        z-index: 1;
+
+        .aurora-stop-start{
+            stop-color: $body-bg-color;
+            stop-opacity: 0.3;
+        }
+        .aurora-stop-end{
+            stop-color: $body-bg-color;
+            stop-opacity: 1;
+        }
+        .inner-line{
+            fill: none;
+            stroke: $main-color;
+            stroke-width: 5px;
+        }
+        .inner-fill{
+            fill: url(#aurora-gradient-v2);
+        }
+        .dot-group{
+            fill: $main-color;
+            .line-dot{
+                r: 4;
+                fill: $main-color;
+            }
+            .line-dot2{
+                r: 0;
+                fill: none;
+                stroke: $main-color;
+                stroke-width: 4;
+                opacity: 0.8;
+            }
+        }
+    }
+    .small-card{
+        position: absolute;
+        width: 100%;
+        z-index: 3;
+        bottom: 15px;
+        left: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding: 5px 15px 5px 10px;
+        @include media.desktop{
+            bottom: 0;
+        }
+        .small-card-product{
+            display: flex;
+            align-items: flex-end;
+            .small-card-product-img{
+                width: 80px;
+            }
+            .small-card-product-content{
+                font-weight: 700;
+
+                h3{
+                    font-size: clamp(13px, 1vw, 18px);
+                    color: darken($main-color, 10%);
+                }
+                p{
+                    font-size: clamp(12px, 0.8vw, 14px);
+                    color: $main-text-color;
+                }
+            }
+        }
+        .main-btn{
+            padding: 6px 12px;
+            font-size: clamp(12px, 1vw, 13px);
+            gap: 0px;
+        }
+    }
+}

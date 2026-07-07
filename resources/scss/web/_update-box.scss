@@ -1,0 +1,52 @@
+.update-box {
+    position: fixed;
+    top: 120px;
+    right: 10px;
+    z-index: 998;
+    pointer-events: none;
+    .update-item {
+        position: relative;
+        width: fit-content;
+        background: rgba(0, 0, 0, 0.75);
+        color: #fff;
+        padding: 5px 15px;
+        border-radius: 4950px;
+        display: flex;
+        font-size: 12px;
+        font-weight: 700;
+        gap: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        pointer-events: none;
+        will-change: transform, opacity;
+        transform: translateX(20%);
+        opacity: 0;
+        &.slide-in {
+            animation: slideInRight 0.3s ease-in-out forwards;
+        }
+
+        &.fade-out {
+            animation: slideOutUp 0.3s ease-in-out forwards;
+        }
+    }
+    @keyframes slideInRight {
+        0% {
+            transform: translateX(20%);
+            opacity: 0;
+        }
+        100% {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideOutUp {
+        0% {
+            transform: translateX(0) translateY(0);
+            opacity: 1;
+        }
+        100% {
+            transform: translateX(0) translateY(-100%);
+            opacity: 0;
+        }
+    }
+}

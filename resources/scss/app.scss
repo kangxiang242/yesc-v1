@@ -1,0 +1,18 @@
+/* Laravel Vite CSS entry */
+
+@use "./web/reset";
+@use "./web/breakpoints";
+@use "./web/tokens";
+@use "./web/header";
+@use "./web/global";
+@use "./web/update-box";
+@use "./web/general-banner";
+@use "./web/footer";
+@use "./web/breadcrumb";
+@use "./web/form";
+@use "./web/checkout";
+@use "./web/order";
+@use "./web/goods";
+@use "./web/product";
+@use "./web/message";
+@use "./web/qa";

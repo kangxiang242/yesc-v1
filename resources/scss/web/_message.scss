@@ -1,0 +1,174 @@
+@use "tokens" as *;
+@use "breakpoints" as media;
+
+
+.page-form{
+    .main-content{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "breadcrumb"
+            "page-header"
+            "form"
+            "qa";
+        @include media.desktop{
+            grid-template-columns: 1fr;
+            grid-template-areas: 
+            "breadcrumb breadcrumb"
+            "page-header page-header"
+            "form qa";
+            gap: 0 60px;
+        }
+        .qa-wrap{
+            @include media.desktop{
+                margin: 40px 0;
+            }
+        }
+    }
+}
+form{
+    display: flex;
+    flex-direction: column;
+    grid-area: form;
+    margin-bottom: 60px;
+    width: 100%;
+    padding: 0 30px;
+    @include media.desktop{
+        padding: 0 100px;
+    }
+    .or{
+        text-align: center;
+        font-size: 10px;
+        color: $text-gray;
+        margin-bottom: 30px;
+        padding: 3px 0;
+    }
+
+    .form-btn{
+        width: 100%;
+        height: 40px;
+        margin: 0 auto 5px;
+        border-radius: 8px;
+        @include media.desktop{
+            height: 48px;
+        }
+    }
+    .form-desc{
+        font-size: clamp(13px, 1vw, 14px);
+        color: $text-gray;
+        text-align: center;
+        word-break: keep-all;
+        font-style: italic;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        .righticon{
+            width: 1.2em;
+            height: 1.2em;
+            color: $main-color;
+        }
+    }
+
+    .check-type-selector {
+        position: relative;
+        display: flex;
+        border-radius: 99px;
+        border: 1px solid $line-color;
+        background: transparent;
+        padding: 4px;
+        width: fit-content;
+        height: 52px;
+        margin: 0 auto 30px;
+        overflow: hidden;
+        @include media.mobile{
+            margin: 0 auto 20px;
+        }
+        .active-bg {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: calc(50% - 4px);
+            height: calc(100% - 8px);
+            background-color: $main-color;
+            border-radius: 99px;
+            transition: transform 0.3s ease;
+            z-index: 0;
+        }
+
+        input[type="radio"] {
+            display: none;
+
+            &:checked + .check-type-label {
+                color: #fff;
+            }
+
+            &[value="contact"]:checked ~ .active-bg {
+                transform: translateX(100%);
+            }
+        }
+
+        .check-type-label {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+            cursor: pointer;
+            text-align: center;
+            place-content: center;
+            display: grid;
+            font-weight: 500;
+            color: #1c1c1c;
+            transition: color 0.3s ease;
+            font-size: clamp(14px, 1vw, 15px);
+            padding: 0 12px;
+            line-height: 1.2;
+        }
+    }
+
+    .check-sections-viewport {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        margin-bottom: 40px;
+        transition: height 0.35s ease;
+    }
+
+    .check-sections-track {
+        display: flex;
+        width: 100%;
+        min-height: 1px;
+        align-items: flex-start;
+        transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: transform;
+    }
+
+    .check-section {
+        flex: 0 0 100%;
+        width: 100%;
+        transition: opacity 0.25s ease;
+
+        &:not(.is-active) {
+            opacity: 0.35;
+            pointer-events: none;
+        }
+
+        &.is-active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    }
+
+    .check-sections-track[data-active="order_id"] {
+        transform: translateX(0);
+    }
+
+    .check-sections-track[data-active="contact"] {
+        transform: translateX(-100%);
+    }
+
+    @include media.mobile {
+        .check-type-selector {
+            height: 48px;
+        }
+    }
+}
