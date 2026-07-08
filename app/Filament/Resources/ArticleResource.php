@@ -68,6 +68,10 @@ class ArticleResource extends Resource
                                 'blockquote', 'codeBlock',
                                 'undo', 'redo',
                             ]),
+                        Forms\Components\ViewField::make('code_helper')
+                            ->label('')
+                            ->view('forms.components.code-editor-helper')
+                            ->columnSpanFull(),
                     ])->columns(2),
 
                 Forms\Components\Section::make('發佈設置')

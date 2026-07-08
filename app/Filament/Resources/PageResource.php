@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Components\WangEditor;
 use App\Filament\Resources\PageResource\Pages;
 use App\Models\Page;
 use Filament\Forms;
@@ -42,6 +41,10 @@ class PageResource extends Resource
                         ->columnSpanFull(),
                     Forms\Components\RichEditor::make('content')
                         ->label('內容')
+                        ->columnSpanFull(),
+                    Forms\Components\ViewField::make('code_helper')
+                        ->label('')
+                        ->view('forms.components.code-editor-helper')
                         ->columnSpanFull(),
                     Forms\Components\Radio::make('status')
                         ->label('狀態')

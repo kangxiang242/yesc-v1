@@ -14,6 +14,6 @@
         size="sm"
         wire:click="runExportOrders"
     >
-        導出訂單
+        全部匯出
     </x-filament::button>
 </div>
