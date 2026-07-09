@@ -147,21 +147,25 @@ php artisan serve --port=8001
 
 | 项目 | 内容 |
 |:-----|:------|
+| 测试域名 | https://slir4.top |
 | 测试服务器 | 45.148.120.52（1Panel Docker） |
-| SSH 密钥 | `/Users/a123/workspace/wwwroot/hk-server-keys/deploy_key` |
-| SSH 用户 | root |
-| SSH 端口 | 22 |
+| SSH 密钥 | `~/workspace/wwwroot/hk-server-keys/deploy_key`（需 `ssh -A` agent forwarding） |
+| SSH 用户 | root:22 |
+| 站点路径（宿主机） | `/opt/1panel/www/sites/slir4.top/index/` |
+| 站点路径（容器内） | `/www/sites/slir4.top/index/` |
+| Nginx 配置 | `/opt/1panel/www/conf.d/slir4.top.conf` |
 | PHP 容器 | `php82`（`docker exec -w <path> php82 php ...`） |
 | Nginx 容器 | `1Panel-openresty-UOYX` |
-| 数据库 | 本地 MySQL Docker（172.18.0.2）或共享 5.182.210.43:3306 |
-| 部署方式 | `git pull origin main`（remote: `git@github.com:kangxiang242/yesc-v1.git`） |
-| 快取清除 | `docker exec php82 php artisan optimize:clear && docker exec php82 php -r 'opcache_reset();'` |
-| Nginx 参考 | `deploy/nginx-slir7.conf` |
-
-> ⚠️ 当前尚未部署到测试服务器，需要：
-> 1. 确定测试域名（新增如 `slir6.top`，或复用 `slir7.top` 但需不同路径）
-> 2. 在服务器配置 Nginx 站点 + 数据库 + CF DNS
-> 3. 参考 `deploy/nginx-slir7.conf` 调整 server_name 和 root 路径
+| 数据库 | MySQL `yescialis_v1`（Docker `1Panel-mysql-FTgQ`） |
+| 后台路径 | `/pthj1l0cxsau` |
+| 后台账号 | `web0wer16888` / `888d00rkeeper888` |
+| 部署方式 | `rsync -avz --exclude={vendor,node_modules,.git,.env} -e 'ssh -A' ./ root@45.148.120.52:/opt/1panel/www/sites/slir4.top/index/` |
+| Composer | `docker exec -w /www/sites/slir4.top/index php82 composer install --no-dev` |
+| 快取清除 | `docker exec -w /www/sites/slir4.top/index php82 php artisan optimize:clear` |
+| CF 账号 | `aqs33202@outlook.com`（Token: ⚠️ 已移除，请查看 .env） |
+| CF Zone ID | `97709f8bb53a452a8379fcc230c5e28e` |
+| GIT 仓库 | `git@github.com:kangxiang242/yesc-v1.git`（main） |
+| SSH 注意 | 服务器 `MaxStartups` 限制严格，短时间多次连接会被拒绝，需等待5-10秒重试，加 `-A` 转发 agent |
 
 ---
 
@@ -212,4 +216,4 @@ c834597  docs: 更新 root.md 为 yesc-v1（Cialis）专属内容
 ## 参考
 
 - 服务器文档：`/Users/a123/workspace/wwwroot/my-notes/香港集策/服务器/测试与备份/test-45.148.120.52.md`
-- 原始模板：`/Users/a123/workspace/wwwroot/V-viagraeshop/twshop-v1`
+- 原始模板：`/Users/a123/workspace/wwwroot/Y-yescialis.com/yescialis.com`
