@@ -8,9 +8,12 @@
 
 | 入口 | 地址 |
 |------|------|
-| 前台首頁（本地） | http://localhost:8001 |
-| 後台管理（本地） | http://localhost:8001/pthj1l0cxsau |
-| 後台帳號 | `web0wer16888` / `888d00rkeeper888` |
+| 🌐 前台（测试域名） | https://slir4.top |
+| 🔐 后台（机密域名） | https://ami3-17drt4-6ne634russ.slir4.top/pthj1l0cxsau |
+| 🔐 后台（本地） | http://localhost:8001/pthj1l0cxsau |
+| 👤 后台账号 | `web0wer16888` |
+| 🔑 后台密码 | `888d00rkeeper888` |
+| ⚠️ 注意 | 主域名 `slir4.top/pthj1l0cxsau` 已 Nginx 层拦截返回 404，仅机密子域名可访问后台 |
 
 ---
 
@@ -162,7 +165,7 @@ php artisan serve --port=8001
 | 部署方式 | `rsync -avz --exclude={vendor,node_modules,.git,.env} -e 'ssh -A' ./ root@45.148.120.52:/opt/1panel/www/sites/slir4.top/index/` |
 | Composer | `docker exec -w /www/sites/slir4.top/index php82 composer install --no-dev` |
 | 快取清除 | `docker exec -w /www/sites/slir4.top/index php82 php artisan optimize:clear` |
-| CF 账号 | `aqs33202@outlook.com`（Token: ⚠️ 已移除，请查看 .env） |
+| CF 账号 | `aqs33202@outlook.com`（Token: ⚠️ 已从提交历史中移除，请查看 .env / 1Panel 面板） |
 | CF Zone ID | `97709f8bb53a452a8379fcc230c5e28e` |
 | GIT 仓库 | `git@github.com:kangxiang242/yesc-v1.git`（main） |
 | SSH 注意 | 服务器 `MaxStartups` 限制严格，短时间多次连接会被拒绝，需等待5-10秒重试，加 `-A` 转发 agent |

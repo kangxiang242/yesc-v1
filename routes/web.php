@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\WangEditorUploadController;
 use App\Http\Controllers\Api\RegionStoreController;
+use App\Http\Controllers\BuyerMessageController;
 use App\Http\Controllers\Web\ApiController;
 use App\Http\Controllers\Web\AreaController;
 use App\Http\Controllers\Web\IndexController;
@@ -97,6 +98,12 @@ Route::group([], function () {
     Route::get('/robots.txt', [ApiController::class, 'robots']);
     Route::get('/sitemap.xml', [ApiController::class, 'sitemap']);
     Route::get('google{str}.html', [ApiController::class, 'googleVerify']);
+
+    // 购买消息相关 API（首页实时购买通知）
+    Route::get('/api/buyer-message/box-buyers', [BuyerMessageController::class, 'getBoxBuyers']);
+    Route::get('/api/buyer-message/next-message', [BuyerMessageController::class, 'getNextMessage']);
+    Route::post('/api/buyer-message/confirm', [BuyerMessageController::class, 'confirmMessage']);
+    Route::post('/api/buyer-message/increment', [BuyerMessageController::class, 'incrementBuyer']);
 });
 
 // 主前端路由（设备跳转 + SEO 检测）
