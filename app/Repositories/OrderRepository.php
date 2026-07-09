@@ -201,7 +201,7 @@ class OrderRepository extends Repository
                 $order_product[] = [
                     'order_id'=>$order->id,
                     'product_id'=>$item->id,
-                    'product_name'=>'威而鋼'.$item->quantity.'盒',
+                    'product_name'=>$item->name,
                     'product_img'=>$item->img,
                     'number'=>$num,
                     'unit_price'=>$item->price,
