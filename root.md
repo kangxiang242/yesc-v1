@@ -90,7 +90,7 @@ public/uploads/           # 上传文件
 | 移動端 | https://m.viagra-twshop.com |
 | 後台 | /mgx7k9p2 / 帳號 `web0wer16888` / 密碼 `888d00rkeeper888` |
 | IP | 5.182.210.30 |
-| SSH | `sshpass -p '1GQvXLWU2fBe2nixHlTT'` |
+| SSH | `ssh -i ~/.ssh/small-summer root@5.182.210.30`（密钥登录，密码已禁用） |
 | 專案路徑 | `/www/sites/viagra-twshop.com` |
 | Git 倉庫 | `git@github.com:kangxiang242/viagra-twshop.com-v1.git` |
 | Git remote | `origin`（SSH） |
@@ -200,7 +200,7 @@ a19651b  merge: 合并 origin/main (Raingor) 到 company/main
 | 域名 | https://www.viagra-twshop.com |
 | 移动端 | https://m.viagra-twshop.com |
 | 服务器 | 5.182.210.30（原生 Ubuntu 20.04） |
-| SSH | `sshpass -p '1GQvXLWU2fBe2nixHlTT' ssh root@5.182.210.30` |
+| SSH | `ssh -i ~/.ssh/small-summer root@5.182.210.30`（密钥登录，密码已禁用） |
 | 远程路径 | `/www/sites/viagra-twshop.com` |
 | Git 部署 | `git pull --rebase origin main`（remote: SSH `git@github.com:kangxiang242/viagra-twshop.com-v1.git`） |
 | PHP-FPM | `/usr/local/php82/sbin/php-fpm`（restart: `kill -USR2`） |
