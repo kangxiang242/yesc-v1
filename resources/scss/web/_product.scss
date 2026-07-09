@@ -836,16 +836,16 @@
         background-color: rgb(255 234 176);
         z-index: 0;
         -webkit-mask-image:
-            url(/public/static/img/lillylogo.svg),
-            url(/public/static/img/lillylogo.svg);
+            url(/static/img/lillylogo.svg),
+            url(/static/img/lillylogo.svg);
 
         -webkit-mask-repeat: repeat, repeat;
         -webkit-mask-size: 70px 70px, 70px 70px;
         -webkit-mask-position: 0 0, 35px 35px;
         animation: watermark-scroll 3s linear infinite;
         mask-image:
-            url(/public/static/img/lillylogo.svg),
-            url(/public/static/img/lillylogo.svg);
+            url(/static/img/lillylogo.svg),
+            url(/static/img/lillylogo.svg);
 
         mask-repeat: repeat, repeat;
         mask-size: 70px 70px, 70px 70px;
