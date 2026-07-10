@@ -45,6 +45,10 @@ class AdminPanelProvider extends PanelProvider
                 'panels::global-search.after',
                 fn () => view('filament.hooks.frontend-button')
             )
+            ->renderHook(
+                'panels::head.end',
+                fn () => view('filament.hooks.wang-editor-head')
+            )
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([

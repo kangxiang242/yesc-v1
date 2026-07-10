@@ -23,6 +23,10 @@ class PageController extends Controller
     }
 
     public function index($uri){
+        // 排除后台管理员路径，避免拦截 Filament Admin 路由
+        if ($uri === config('global.admin_path')) {
+            abort(404);
+        }
 
         $page = PageRepository::make()->findToUri($uri);
         

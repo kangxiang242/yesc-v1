@@ -23,6 +23,11 @@ class NewsController extends Controller
 
     public function show($uri, $id)
     {
+        // 排除后台管理员路径，避免拦截 Filament Admin 路由
+        if ($uri === config('global.admin_path')) {
+            abort(404);
+        }
+
         $cate = ArticleCategoryRepository::make()
             ->all()
             ->where('uri', $uri)
