@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Components\WangEditor;
 use App\Filament\Resources\PageResource\Pages;
 use App\Models\Page;
 use Filament\Forms;
@@ -39,7 +40,7 @@ class PageResource extends Resource
                         ->label('頁面描述')
                         ->rows(2)
                         ->columnSpanFull(),
-                    Forms\Components\RichEditor::make('content')
+                    WangEditor::make('content')
                         ->label('內容')
                         ->columnSpanFull(),
                     Forms\Components\ViewField::make('code_helper')

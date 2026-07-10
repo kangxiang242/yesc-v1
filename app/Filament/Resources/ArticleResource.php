@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Components\WangEditor;
 use App\Filament\Resources\ArticleResource\Pages;
 use App\Models\Article;
 use App\Models\ArticleCate;
@@ -58,7 +59,7 @@ class ArticleResource extends Resource
                             ->label('文章簡介')
                             ->rows(3)
                             ->columnSpanFull(),
-                        Forms\Components\RichEditor::make('content')
+                        WangEditor::make('content')
                             ->label('內容')
                             ->columnSpanFull()
                             ->toolbarButtons([

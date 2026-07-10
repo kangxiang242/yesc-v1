@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Article;
 use App\Observers\ArticleObserver;
 use App\Services\ConfigService;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -29,6 +30,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Article::observe(ArticleObserver::class);
+
+        // 使用 Bootstrap 5 分页样式
+        Paginator::useBootstrapFive();
 
         // 前端 web.* 视图公共数据（平移自源项目 LayoutComposer）
         view()->composer(

@@ -136,10 +136,13 @@
                     </div>
                 @endif--}}
             </div>
-            @include('components.qa', ['faqs' => $faqs, 'headingLevel' => 3])
         </section>
         
     @endforeach
+
+    {{-- FAQ 常见问题 — 只渲染一次，移出 groups 循环 --}}
+    @include('components.qa', ['faqs' => $faqs, 'headingLevel' => 3])
+
     {{--<section class="page-content">
         <h2 class="sec-title">關於犀利士Cialis價格</h2>
         <p class="sec-content">

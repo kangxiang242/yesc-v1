@@ -53,12 +53,12 @@
 @stop
 
 @section('landing_style')
-    <link rel="stylesheet" href="{{ asset('build/assets/landing-Dbtr52v2.css') }}">
+    @vite(['resources/scss/landing.scss'])
 @stop
 @section('body-class', 'page-news')
 
 @section('content')
-    @include('components.breadcrumb', ['itemsHtml' => '<li class="breadcrumb__item">'.$cate->name.'</li>'])
+    @include('components.breadcrumb', ['itemsHtml' => '<li class="breadcrumb__item">'.($cate->name ?? '').'</li>'])
     @if(isset($page) && $page)<h1 class="page-title">{{ $page->title }}</h1>@endif
     {{--@if(isset($page) && !empty($page->title))
         <header class="page-header">
@@ -150,7 +150,7 @@
         />
 
         <div class="list-pagination">
-            {!! $news->links() !!}
+            {!! $news->links('vendor.pagination.bootstrap-5') !!}
         </div>
     </section>
     <div class="team-box">

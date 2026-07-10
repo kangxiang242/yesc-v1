@@ -5,7 +5,7 @@
 @stop
 
 @section('landing_style')
-    <link rel="stylesheet" href="/build/assets/landing-BA_X5aJj.css">
+    @vite(['resources/scss/landing.scss'])
 @stop
 
 

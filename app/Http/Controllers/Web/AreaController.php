@@ -2,95 +2,225 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Handlers\DeviceTypeHandlers;
 use App\Http\Controllers\Controller;
-use App\Models\Area;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class AreaController extends Controller
 {
-    private $request_city_name;
-    private $request_county_name;
-    private $request_road_name;
+    private const STORE_API_BASE = 'https://www.slir2.top/api/regionstore';
 
-    public function __construct(Request $request)
+    /**
+     * 统一名称：API 使用简化字（台），前端可能用传统字（臺）
+     */
+    private static function normalizeName(string $name): string
     {
-        $this->request_city_name = $request->city_name?trim($request->city_name):"";
-
-        $this->request_county_name = $request->county_name?trim($request->county_name):"";
-
-        $this->request_road_name = $request->road_name?trim($request->road_name):"";
+        return str_replace(['臺', '臺'], '台', $name);
     }
 
-    public function get(Request $request){
-        $area = Area::where('parent_id',$request->get('pid',0))->where('is_special',0)->get()->toJson();
-        return response()->json($area);
-    }
+    /**
+     * 调用 slir2.top API 获取地区/门店数据（后端代理模式）
+     */
+    private function callStoreApi(array $params = []): array
+    {
+        try {
+            $client = new Client(['timeout' => 10, 'verify' => false]);
+            $response = $client->get(self::STORE_API_BASE . '/linkage', ['query' => $params]);
+            $result = json_decode((string) $response->getBody(), true);
 
-    public function getCity(Request $request){
-        if($request->type == 1){
-            return response()->json([]);
-
-        }elseif($request->type == 2){
-            return response()->json([]);
-
-        }else{
-            $data = Area::where('parent_id',0)->where('is_special',0)->select(['id','parent_id as pid','level','name'])->get()->toJson();
+            if (isset($result['code']) && $result['code'] === 1 && isset($result['data'])) {
+                return $result['data'];
+            }
+        } catch (\Exception $e) {
+            // 静默处理，API 不可用时返回空
         }
-        return response()->json($data);
+
+        return [];
     }
 
-    public function getCounty(Request $request){
-        if($request->type == 1){
-            return response()->json([]);
-        }elseif($request->type == 2){
-            return response()->json([]);
+    /**
+     * 获取城市列表
+     */
+    public function getCity(Request $request)
+    {
+        // type=0: 宅配, type=1: 7-11, type=2: 其他超商 — 全部走 slir2.top API
+        $data = $this->callStoreApi();
 
-        }else{
-            $city = Area::where('parent_id',0)->where('is_special',0)->where('name',$this->request_city_name)->select(['id','parent_id as pid','level','name'])->first();
-            if(!$city){
-                $data = '[]';
-            }else{
-                $data = Area::where('parent_id',$city->id)->where('is_special',0)->select(['id','parent_id as pid','level','name'])->get()->toJson();
+        return response()->json(
+            array_map(fn($item) => [
+                'id'        => $item['id'],
+                'parent_id' => 0,
+                'pid'       => 0,
+                'level'     => 1,
+                'name'      => $item['name'],
+            ], $data)
+        );
+    }
+
+    /**
+     * 获取区/县列表
+     */
+    public function getCounty(Request $request)
+    {
+        $cityName = trim($request->city_name ?? '');
+
+        if (!$cityName) {
+            return response()->json([]);
+        }
+
+        // 先查 city ID
+        $cities = $this->callStoreApi();
+        $cityNameNorm = static::normalizeName($cityName);
+        $cityId = null;
+        foreach ($cities as $c) {
+            if (static::normalizeName($c['name']) === $cityNameNorm) {
+                $cityId = $c['id'];
+                break;
             }
         }
-        return response()->json($data);
+
+        if (!$cityId) {
+            return response()->json([]);
+        }
+
+        $data = $this->callStoreApi(['city_id' => $cityId]);
+
+        return response()->json(
+            array_map(fn($item) => [
+                'id'        => $item['id'],
+                'parent_id' => $cityId,
+                'pid'       => $cityId,
+                'level'     => 2,
+                'name'      => $item['name'],
+            ], $data)
+        );
     }
 
-    public function getRoad(Request $request){
-        if($request->type == 1){
-            return response()->json([]);
-        }elseif($request->type == 2){
-            return response()->json([]);
+    /**
+     * 获取路段列表
+     */
+    public function getRoad(Request $request)
+    {
+        $cityName   = trim($request->city_name ?? '');
+        $countyName = trim($request->county_name ?? '');
 
-        }else{
-            $city = Area::where('parent_id',0)->where('is_special',0)->where('name',$this->request_city_name)->select(['id','parent_id as pid','level','name'])->first();
-            if(!$city){
-                $data = '[]';
-            }else{
-                $county = Area::where('parent_id',$city->id)->where('is_special',0)->where('name',$this->request_county_name)->select(['id','parent_id as pid','level','name'])->first();
-                $data = $county
-                    ? Area::where('parent_id',$county->id)->where('is_special',0)->select(['id','parent_id as pid','level','name'])->get()->toJson()
-                    : '[]';
+        if (!$cityName || !$countyName) {
+            return response()->json([]);
+        }
+
+        // 查 city ID
+        $cities = $this->callStoreApi();
+        $cityNameNorm = static::normalizeName($cityName);
+        $cityId = null;
+        foreach ($cities as $c) {
+            if (static::normalizeName($c['name']) === $cityNameNorm) {
+                $cityId = $c['id'];
+                break;
             }
         }
-        return response()->json($data);
+
+        if (!$cityId) {
+            return response()->json([]);
+        }
+
+        // 查 district ID
+        $districts = $this->callStoreApi(['city_id' => $cityId]);
+        $countyNameNorm = static::normalizeName($countyName);
+        $districtId = null;
+        foreach ($districts as $d) {
+            if (static::normalizeName($d['name']) === $countyNameNorm) {
+                $districtId = $d['id'];
+                break;
+            }
+        }
+
+        if (!$districtId) {
+            return response()->json([]);
+        }
+
+        $data = $this->callStoreApi(['city_id' => $cityId, 'district_id' => $districtId]);
+
+        return response()->json(
+            array_map(fn($item) => [
+                'id'        => $item['id'],
+                'parent_id' => $districtId,
+                'pid'       => $districtId,
+                'level'     => 3,
+                'name'      => $item['name'],
+            ], $data)
+        );
     }
 
-    public function getShop(Request $request){
-        $data = [];
-        if($request->type == 1){
-            return response("");
-        }elseif($request->type == 2){
+    /**
+     * 获取门店列表
+     */
+    public function getShop(Request $request)
+    {
+        $cityName   = trim($request->city_name ?? '');
+        $countyName = trim($request->county_name ?? '');
+
+        if (!$cityName || !$countyName) {
             return response("");
         }
 
-        $city_name = $this->request_city_name;
-        $county_name = $this->request_county_name;
+        // 查 city ID
+        $cities = $this->callStoreApi();
+        $cityNameNorm = static::normalizeName($cityName);
+        $cityId = null;
+        foreach ($cities as $c) {
+            if (static::normalizeName($c['name']) === $cityNameNorm) {
+                $cityId = $c['id'];
+                break;
+            }
+        }
 
-        return view('web.widgets.shopping-store-item',compact('data','city_name','county_name'))->render();
+        if (!$cityId) {
+            return response("");
+        }
 
+        // 查 district ID
+        $districts = $this->callStoreApi(['city_id' => $cityId]);
+        $countyNameNorm = static::normalizeName($countyName);
+        $districtId = null;
+        foreach ($districts as $d) {
+            if (static::normalizeName($d['name']) === $countyNameNorm) {
+                $districtId = $d['id'];
+                break;
+            }
+        }
+
+        // 调用门店 API 获取该区域所有门店
+        $params = ['city_id' => $cityId];
+        if ($districtId) {
+            $params['district_id'] = $districtId;
+        }
+
+        $data = $this->callStoreApi($params);
+
+        return view('web.widgets.shopping-store-item', compact('data', 'cityName', 'countyName'))->render();
     }
 
+    /**
+     * 旧版 areas 表查询 — 保留兼容（部分旧组件可能直接调用）
+     */
+    public function get(Request $request)
+    {
+        $pid = $request->get('pid', 0);
+        // 从 slir2.top 查询子级
+        if ($pid == 0) {
+            $data = $this->callStoreApi();
+        } else {
+            $data = $this->callStoreApi(['city_id' => $pid]);
+        }
 
+        return response()->json(
+            array_map(fn($item) => [
+                'id'        => $item['id'],
+                'parent_id' => $pid,
+                'pid'       => $pid,
+                'level'     => 1,
+                'name'      => $item['name'],
+            ], $data)
+        );
+    }
 }
