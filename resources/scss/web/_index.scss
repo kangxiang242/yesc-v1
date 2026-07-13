@@ -29,6 +29,7 @@
     @include media.mobile {
         padding-left: 5%;
         margin-bottom: 20px;
+        gap: 10px;
     }
 
     .text-effect-wrap {
@@ -255,16 +256,14 @@
 
 
     h1 {
+        position: relative;
+        width: fit-content;
         z-index: 1;
         color: #fff;
         font-size: clamp(18px, 5vw, 40px);
         font-weight: 500;
         display: flex;
         flex-direction: column;
-        @include media.mobile {
-            left: 6%;
-            top: 25%;
-        }
 
         .brand {
             font-size: 1.8em;
@@ -285,44 +284,88 @@
         width: 100%;
         max-width: 964px;
         margin: 0 auto;
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-        border-top: 1px solid #ffffff;
-        background: rgba(255, 255, 255, 0.3);
         border-radius: 99px;
-        transform: translate(-50%, 150%);
-        transition: transform 1s ease;
+        transform: translate(-50%, 0);
         will-change: bottom;
         padding: 40px 30px;
+        background: transparent;
+        pointer-events: none;
+
+        &::before{
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            border-radius: inherit;
+            border-top: 1px solid #ffffff;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            pointer-events: none;
+            transform: translateY(150%);
+            transition: transform 1s ease 0.5s;
+        }
+
+        &::after{
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: clamp(160px, 30vw, 360px);
+            aspect-ratio: 1;
+            background: url("/static/img/cialis-3.webp") no-repeat center / contain;
+            pointer-events: none;
+            z-index: -1;
+            transform: translate(30%, 150%);
+            transition: transform 1s ease;
+        }
+
         @include media.mobile {
             grid-template-columns: repeat(4, 1fr);
             border-radius: 30px 30px 0 0;
             padding: 10px 0px 25px;
             left: 0;
             bottom: 0;
-            transform: translateY(100%);
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), $body-bg-color);
+            transform: none;
+
+            &::before{
+                background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), $body-bg-color);
+                transform: translateY(100%);
+            }
+
+            &::after{
+                width: clamp(100px, 28vw, 180px);
+                transform: translate(30%, 100%);
+            }
         }
 
         &.core-sec--entered {
-            transform: translate(-50%, 0);
+            pointer-events: auto;
 
-            @include media.mobile {
+            &::before{
                 transform: translateY(0);
+            }
+
+            &::after{
+                transform: translate(30%, -15%);
             }
         }
 
         @media (prefers-reduced-motion: reduce) {
             &,
+            &::before,
+            &::after,
             .core-item {
                 transition: none;
             }
         }
 
         .core-item{
+            position: relative;
+            z-index: 1;
             opacity: 0;
             transform: scale(0.8);
-            transition: opacity 1s ease, transform 1s ease;
+            transition: opacity 1s ease 0.5s, transform 1s ease 0.5s;
             display: grid;
             grid-template-columns: 1fr 1.5fr;
             font-size: clamp(14px, 2vw, 20px);
@@ -336,21 +379,21 @@
             }
             &:nth-child(2){
                 --mount-y: -10px;
-                transition-delay: 0.3s;
+                transition-delay: 0.8s;
                 @include media.desktop {
                     --mount-y: 0;
                 }
             }
             &:nth-child(3){
                 --mount-y: -10px;
-                transition-delay: 0.6s;
+                transition-delay: 1.1s;
                 @include media.desktop {
                     --mount-y: 0;
                 }
             }
             &:nth-child(4){
                 --mount-y: 0;
-                transition-delay: 0.9s;
+                transition-delay: 1.4s;
             }
 
             &.core-item--entered {
@@ -1001,8 +1044,24 @@
             }
         }
         .pb-bg{
+            position: relative;
             overflow: hidden;
             border-radius: 30px;
+            img{
+                display: block;
+                width: 100%;
+            }
+            &::after{
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                height: 65%;
+                background: linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.35) 50%, transparent 100%);
+                pointer-events: none;
+                border-radius: inherit;
+            }
         }
     }
 }
@@ -1350,7 +1409,7 @@
                 backdrop-filter: blur(2px);
                 -webkit-backdrop-filter: blur(2px);
                 border: 1px solid rgba(255, 255, 255, 1);
-                background: linear-gradient(45deg, rgba($main-color, 0.5), transparent);
+                background: linear-gradient(45deg, rgba(255,227,99,0.5), transparent);
                 border-radius: 30px;
                 transform: skewX(-5deg);
                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
@@ -1907,20 +1966,20 @@
 
             &--level1{
                 --se-color: #{$main-color};
-                --se-title-bg: linear-gradient(135deg, #3ebcf7 0%, #{$main-color} 100%);
-                --se-bg: linear-gradient(45deg, rgba(62, 150, 247, 0.2), transparent);
+                --se-title-bg: linear-gradient(135deg, #6ee04a 0%, #{$main-color} 55%, #{$secondary-color} 100%);
+                --se-bg: linear-gradient(45deg, #{rgba($main-color, 0.18)}, transparent);
             }
 
             &--level2{
-                --se-color: #{$secondary-color};
-                --se-title-bg: linear-gradient(135deg, #a6a4ff 0%, #{$secondary-color} 100%);
-                --se-bg: linear-gradient(45deg, rgba(166, 164, 255, 0.2), transparent);
+                --se-color: #e08a00;
+                --se-title-bg: linear-gradient(135deg, #ffd36a 0%, #f5a623 55%, #e07b00 100%);
+                --se-bg: linear-gradient(45deg, rgba(245, 166, 35, 0.2), transparent);
             }
 
             &--level3{
                 --se-color: #e60606;
-                --se-title-bg: linear-gradient(135deg, #ff0707 0%, #b70000 100%);
-                --se-bg: linear-gradient(45deg, rgba(247, 62, 62, 0.2), transparent);
+                --se-title-bg: linear-gradient(135deg, #ff6b6b 0%, #e60606 55%, #a10000 100%);
+                --se-bg: linear-gradient(45deg, rgba(230, 6, 6, 0.18), transparent);
             }
         }
 
@@ -1958,18 +2017,12 @@
     max-width: 1600px;
     margin: 0 auto;
     padding: 0 30px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0 60px;
     @include media.mobile{
         padding: 30px 0 60px;
-        grid-template-columns: 1fr;
-        gap: 20px;
     }
 
     .sec-title{
         margin-bottom: 30px;
-        grid-column: 1 / -1;
         @include media.mobile{
             margin-bottom: 20px;
             padding: 0 15px;
@@ -1977,7 +2030,6 @@
     }
 
     .news-wrap{
-        grid-template-columns: 1fr;
         gap: 0;
     }
 
@@ -1985,210 +2037,11 @@
         display: flex;
         justify-content: center;
         padding: 0 15px;
-        grid-column: 2;
-        @include media.mobile{
-            grid-column: 1;
-        }
     }
 
     &__more{
         min-width: min(100%, 320px);
         justify-content: center;
-    }
-    .center-banner{
-        position: relative;
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        flex-direction: column;
-        font-size: clamp(13px, 1.5vw, 16px);
-        @include media.desktop{
-            height: fit-content;
-            border-radius: 60px;
-            overflow: hidden;
-        }
-        .center-banner-bg{
-            z-index: 0;
-            @include media.mobile{
-                margin-right: 15px;
-                border-radius: 30px;
-                overflow: hidden;
-            }
-            &:before{
-                content: '';
-                position: absolute;
-                inset: 0;
-                width: 100%;
-                height: 100%;
-                background: radial-gradient(at 0% 100%, $main-color, rgba(darken($main-color, 40%), 60%) 40%, transparent 70%);
-                z-index: 1;
-                @include media.mobile{
-                    background: linear-gradient(to right, #3e96f7, rgba(darken($main-color, 40%), 60%) 10%, transparent 80%);
-                }
-            }
-        }
-        .line-wrap{
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            display: flex;
-            padding: 0 30px 0 0;
-            width: 100%;
-            z-index: 1;
-            .line{
-                overflow: visible;
-                .aurora-stop-start{
-                    stop-color: $body-bg-color;
-                    stop-opacity: 0.6;
-                }
-                .aurora-stop-end{
-                    stop-color: $body-bg-color;
-                    stop-opacity: 1;
-                }
-                .inner-line{
-                    fill: none;
-                    stroke: $main-color;
-                    stroke-width: 3px;
-                    stroke-linecap: round;
-                }
-                .inner-fill{
-                    fill: url(#aurora-gradient-v2);
-                    opacity: 0;
-                    animation: fade-fill 0.3s 3s forwards;
-                }
-                .dot-group{
-                    fill: $main-color;
-                    .line-dot{
-                        r: 4;
-                        fill: #FFF;
-                    }
-                    .line-dot2{
-                        r: 0;
-                        fill: none;
-                        stroke: #FFF;
-                        stroke-width: 4;
-                        opacity: 0.8;
-                    }
-                }
-
-            }
-            .decoration-circle {
-                position: absolute;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                top: 0;
-                right: 30px;
-                z-index: -1;
-                &.now{
-                    &:before, &:after{
-                        animation: decoration-circle 2s 2s linear infinite;
-                    }
-                }
-                &:before, &:after{
-                    position: absolute;
-                    content: "";
-                    height: 50px;
-                    width: 50px;
-                    border: 8px solid $main-color;
-                    border-radius: 50%;
-
-                    opacity: 0;
-                }
-                &:after{
-                    opacity: 0;
-                    animation-delay: 3s !important;
-                }
-
-                @keyframes decoration-circle {
-                    0% {
-                        border: 8px solid #FFF;
-                        transform: scale(0);
-                        opacity: 1;
-                    }
-
-                    100% {
-                        border: 0 solid #FFF;
-                        transform: scale(1);
-                        opacity: 0;
-                    }
-                }
-            }
-        }
-        .bottom-text{
-            position: absolute;
-            bottom: 10px;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            font-style: italic;
-            font-size: 0.8em;
-            color: rgba(255, 255, 255, 0.6);
-            mix-blend-mode: plus-lighter;
-            z-index: 1;
-            @include media.mobile{
-                bottom: -2em;
-            }
-        }
-        .center-banner-content{
-            position: absolute;
-            left: 5%;
-            top: 45%;
-            transform: translateY(-50%);
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            .banner-desc{
-                position: relative;
-                font-size: 1em;
-                font-weight: 700;
-                color: #FFF;
-                opacity: 0;
-                transform: translateY(15px);
-                transition: opacity 1s 1s ease, transform 1s 1s ease;
-                &.now{
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-                &.highlight-line1, &.highlight-line2{
-                    display: inline-flex;
-                    align-items: flex-end;
-                    .highlight{
-                        display: inline-flex;
-                        line-height: 1;
-                        color: #FFF;
-                        font-weight: 700;
-                        font-style: italic;
-                        -webkit-text-stroke: 1px #FFF;
-                        text-stroke: 1px #FFF;
-                        .highlight-number{
-                            font-size: 2em;
-                            padding: 0 2px;
-                        }
-                        .highlight-percent{
-                            padding-top: 5px;
-                        }
-                    }
-                    .downbg-icon{
-                        width: 2em;
-                        height: 2em;
-                        color: #FFF;
-                    }
-                }
-                &.highlight-line1{
-                    font-size: 1.2em;
-                }
-                &.highlight-line2{
-                    font-size: clamp(2em, 2vw, 2em);
-
-                    .downbg-icon{
-                        transform: rotateX(180deg);
-                    }
-                }
-
-            }
-        }
     }
 }
 

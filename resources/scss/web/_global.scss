@@ -76,12 +76,14 @@ body{
     .page-title{
         position: relative;
         font-size: clamp(24px, 2vw, 36px);
-        text-align: center;
-        align-content: center;
+        align-content: end;
         z-index: 1;
-        color: #FFF;
+        color: $main-text-color;
         aspect-ratio: 16 / 5;
-
+        padding-left: 30px;
+        @include media.mobile{
+            padding-left: 20px;
+        }
     }
 }
 .page-product,
@@ -96,13 +98,20 @@ body{
         left: 0;
         top: 0;
         z-index: -1;
-        background: url("/public/static/img/gbanner.jpg") no-repeat center;
+        background: url("/static/img/gbanner.jpg") no-repeat center;
         background-size: cover;
         pointer-events: none;
-        border-radius: 0 0 30px 30px;
+        mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%);
+        mask-repeat: no-repeat;
+        mask-size: 100% 100%;
+        mask-position: 0 0;
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-size: 100% 100%;
+        -webkit-mask-position: 0 0;
 
         @include media.mobile {
-            border-radius: 0 0 16px 16px;
+            aspect-ratio: 12 / 5;
         }
     }
 }

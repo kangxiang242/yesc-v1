@@ -1178,7 +1178,7 @@
                 </div>
             </div>
             <div class="pb-bg">
-                <img src="/static/img/product-banner.webp" decoding="async" loading="lazy" alt="犀利士Cialis提升男性自信心">
+                <img src="/static/img/pb.jpg" decoding="async" loading="lazy" alt="犀利士Cialis提升男性自信心">
             </div>
 
         </div>
@@ -1304,7 +1304,7 @@
             <p class="intro-content">許多男性選擇犀利士，不只是改善硬度，更是希望擺脫時間壓力與表現焦慮，重新找回性生活主導權與親密關係的自在感。但請注意：犀利士不是春藥，本身不會直接刺激性慾，它只是幫助身體恢復正常勃起反應能力。
             </p>
             <p class="intro-content">
-                選購犀利士時，應注意原廠包裝、防偽標籤與藥品來源安全性，避免購買來路不明產品。線上訂購前可參閱<a href="/promise" class="inner-link" title="犀利士正品訂購指南">犀利士正品訂購指南</a>。正確使用犀利士，有助於改善勃起硬度、持久度與性生活穩定性，尤其對於因緊張、壓力或擔心失敗而產生的心理性陽痿，往往能帶來更穩定的信心支持。
+                選購犀利士時，應注意原廠包裝、防偽標籤與藥品來源安全性，避免購買來路不明產品。正品線上訂購前可前往<a href="/product" class="inner-link" title="犀利士正品訂購">犀利士正品訂購</a>。正確使用犀利士，有助於改善勃起硬度、持久度與性生活穩定性，尤其對於因緊張、壓力或擔心失敗而產生的心理性陽痿，往往能帶來更穩定的信心支持。
             </p>
             <img class="introimg" src="{{ asset('static/img/introimg.png') }}" alt="醫師展示犀利士" loading="lazy" decoding="async">
         </div>
@@ -1315,7 +1315,7 @@
                 </div>
                 <div class="feature-text">
                     <h3 class="feature-item-title">有效改善勃起功能障礙</h3>
-                    <p class="feature-item-desc">“多年臨床經驗證實犀利士Cialis有效率高達95%以上，台灣、美國FDA與歐盟EMA已核准用於臨床治療”</p>
+                    <p class="feature-item-desc">“多年臨床經驗證實犀利士有效率高達95%以上，台灣、美國FDA與歐盟EMA已核准用於長效治療”</p>
                     <p class="expert">——泌尿科臨床醫師 Dr.Johnson</p>
                 </div>
                 <div class="feature-img">
@@ -1327,7 +1327,7 @@
                     <svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><use href="{{ $pageIndexSprite }}#icon-feature-2"/></svg>
                 </div>
                 <div class="feature-text">
-                    <h3 class="feature-item-title">犀利士Cialis顯著提升勃起硬度</h3>
+                    <h3 class="feature-item-title">顯著提升勃起硬度</h3>
                     <p class="feature-item-desc">“性刺激下提高陰莖充血量，使勃起狀態更加飽滿、硬度更加明顯，改善硬度不足或不夠紮實的問題”</p>
                     <p class="expert">——泌尿科臨床醫師 Dr.Brown</p>
                 </div>
@@ -1341,24 +1341,11 @@
                 </div>
                 <div class="feature-text">
                     <h3 class="feature-item-title">穩定維持勃起硬度</h3>
-                    <p class="feature-item-desc">“犀利士Cialis有助減少性愛中硬度下降或疲軟的情況，讓整個過程穩定維持堅挺，不必反覆擔心狀態變化”</p>
+                    <p class="feature-item-desc">“犀利士有助減少性愛中硬度下降或疲軟的情況，讓整個過程穩定維持堅挺，不必反覆擔心狀態變化”</p>
                     <p class="expert">——泌尿科臨床醫師 Dr.Harris</p>
                 </div>
                 <div class="feature-img">
                     <img src="/static/img/d3.webp" decoding="async" loading="lazy" alt="穩定維持勃起硬度">
-                </div>
-            </div>
-            <div class="feature-item mon">
-                <div class="feature-icon">
-                    <svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><use href="{{ $pageIndexSprite }}#icon-feature-4"/></svg>
-                </div>
-                <div class="feature-text">
-                    <h3 class="feature-item-title">可大幅延長勃起時間</h3>
-                    <p class="feature-item-desc">“在性刺激的前提下，服用犀利士Cialis可大幅延長勃起的持續時間，使性愛過程更從容、不受時間壓力影響”</p>
-                    <p class="expert">——泌尿科臨床醫師 Dr.Willson</p>
-                </div>
-                <div class="feature-img">
-                    <img src="/static/img/d4.webp" decoding="async" loading="lazy" alt="可大幅延長勃起時間">
                 </div>
             </div>
             <div class="feature-item mon">
@@ -1380,7 +1367,7 @@
                 </div>
                 <div class="feature-text">
                     <h3 class="feature-item-title">勃起效果自然反應</h3>
-                    <p class="feature-item-desc">“服用犀利士Cialis後不會在無性刺激下強制勃起，符合正常生理反應，是臨床治療指引中安全用藥原則之一”</p>
+                    <p class="feature-item-desc">“服用犀利士後不會在無性刺激下強制勃起，符合正常生理反應，是臨床治療指引中安全用藥原則之一”</p>
                     <p class="expert">——泌尿科臨床醫師 Dr.Davis</p>
                 </div>
                 <div class="feature-img">
@@ -1392,8 +1379,8 @@
                     <svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><use href="{{ $pageIndexSprite }}#icon-feature-7"/></svg>
                 </div>
                 <div class="feature-text">
-                    <h3 class="feature-item-title">起效時間最快14分鐘</h3>
-                    <p class="feature-item-desc">“在部分情況下最快14分鐘即可出現反應，一般30分鐘開始感受到作用，犀利士Cialis起效時間清楚可預期”</p>
+                    <h3 class="feature-item-title">犀利士藥效 36小時</h3>
+                    <p class="feature-item-desc">“憑藉長達 36 小時的有效窗口，讓雙方在最放鬆、最從容的狀態下享受親密時光。”</p>
                     <p class="expert">——泌尿科臨床醫師 Dr.Martin</p>
                 </div>
                 <div class="feature-img">
@@ -1405,25 +1392,12 @@
                     <svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><use href="{{ $pageIndexSprite }}#icon-feature-8"/></svg>
                 </div>
                 <div class="feature-text">
-                    <h3 class="feature-item-title">犀利士Cialis藥效4～6小時</h3>
-                    <p class="feature-item-desc">“犀利士Cialis作用時間約4～6小時，之後隨身體自然代謝，不會長時間殘留於體內，適合大部分即時使用需求”</p>
+                    <h3 class="feature-item-title">每日 5mg 保養</h3>
+                    <p class="feature-item-desc">“每日服用 5mg 犀利士，能有效預防勃起功能障礙復發，讓性生活更持久、更穩定。”</p>
                     <p class="expert">——泌尿科臨床醫師 Dr.Smith</p>
                 </div>
                 <div class="feature-img">
-                    <img src="/static/img/d8.webp" decoding="async" loading="lazy" alt="作用時間4～6小時">
-                </div>
-            </div>
-            <div class="feature-item mon">
-                <div class="feature-icon">
-                    <svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><use href="{{ $pageIndexSprite }}#icon-feature-9"/></svg>
-                </div>
-                <div class="feature-text">
-                    <h3 class="feature-item-title">預防高山肺水腫風險</h3>
-                    <p class="feature-item-desc">“大量研究指出，服用犀利士Cialis在高海拔環境中可改善肺循環負擔，作為預防高山肺水腫的輔助考量之一”</p>
-                    <p class="expert">——泌尿科臨床醫師 Dr.Adams</p>
-                </div>
-                <div class="feature-img">
-                    <img src="/static/img/d9.webp" decoding="async" loading="lazy" alt="預防高山肺水腫風險">
+                    <img src="/static/img/d7.webp" decoding="async" loading="lazy" alt="作用時間4～6小時">
                 </div>
             </div>
         </div>
@@ -1431,25 +1405,25 @@
 
     <section class="usage">
         <h2 class="sec-title">醫師建議用法</h2>
-        <p class="usage-content">為什麼有些人抱怨吃了犀利士Cialis卻沒效果？往往是因為「使用方式錯誤」。犀利士Cialis並不是吃了就會自動勃起，事實上，犀利士Cialis需要「外部引信」，也就是需要性刺激配合才能發揮作用。掌握以下醫師建議的幾點，是確保藥效100%發揮的關鍵：</p>
+        <p class="usage-content">為什麼有些人服用犀利士後覺得「沒效果」？多半不是藥物失效，而是使用方式與時機不對。犀利士（他達拉非）屬於長效型 PDE5 抑制劑，並不會在服藥後自動勃起，仍需要性刺激與心理放鬆配合，藥物才能幫助陰莖海綿體充血。掌握以下幾點，才能讓他達拉非在 36 小時的藥效窗口內穩定發揮：</p>
         <ol class="usage-list">
             <li class="usage-item">
                 <h3 class="usage-item-title">情緒先行</h3>
-                <p><img class="usage-img" src="/static/img/usage1.webp" decoding="async" loading="lazy" alt="情緒先行">若處於高度焦慮、壓力狀態下或對性行為有「厭惡情緒」，即使服用犀利士Cialis也可能影響效果。請保持在放鬆、無壓力的環境下服用，藥效才能與副交感神經協同工作。</p>
+                <p><img class="usage-img" src="/static/img/usage1.webp" decoding="async" loading="lazy" alt="情緒先行">犀利士（他達拉非）需要性刺激配合才能發揮作用，若長期處於高度焦慮、壓力過大，或對性行為帶有抗拒心理，仍可能影響勃起反應。建議在放鬆、無壓力的環境下服用，讓藥物與身心狀態協同運作。</p>
 
             </li>
             <li class="usage-item">
                 <h3 class="usage-item-title">時機掌握</h3>
-                <p><img class="usage-img" src="/static/img/usage2.webp" decoding="async" loading="lazy" alt="時機掌握">性行為前 30～45 分鐘服用，讓血中藥物濃度達到峰值。</p>
+                <p><img class="usage-img" src="/static/img/usage2.webp" decoding="async" loading="lazy" alt="時機掌握">按需服用 10mg 或 20mg 時，建議性行為前約 1～2 小時服用，最快約 30 分鐘可起效。他達拉非藥效最長可維持約 36 小時，不必像短效型壯陽藥那樣嚴格掐準時間；若為每日 5mg 保養，則建議每天固定時間服用。</p>
 
             </li>
             <li class="usage-item">
                 <h3 class="usage-item-title">飲食注意</h3>
-                <p><img class="usage-img" src="/static/img/usage3.webp" decoding="async" loading="lazy" alt="飲食注意">空腹是關鍵，建議在飯後兩小時服用或避免高油脂飲食。油脂會嚴重阻礙西地那非的吸收速率，會將藥效巔峰推遲 60 分鐘以上，導致你會錯過最佳時機。</p>
+                <p><img class="usage-img" src="/static/img/usage3.webp" decoding="async" loading="lazy" alt="飲食注意">他達拉非受飲食影響較小，空腹或隨餐服用皆可，不必刻意空腹。但仍應避免大量飲酒，酒精會削弱勃起反應，並增加頭暈、心悸與低血壓風險；服用前後也勿與葡萄柚汁併用。</p>
             </li>
             <li class="usage-item">
                 <h3 class="usage-item-title">前戲協同</h3>
-                <p><img class="usage-img" src="/static/img/usage4.webp" decoding="async" loading="lazy" alt="前戲協同">服藥後 30～45 分鐘，與伴侶配合投入前戲調情會更快進入狀態。適度視覺或觸覺的性刺激，是啟動 PDE5 抑制劑機轉的必要條件。</p>
+                <p><img class="usage-img" src="/static/img/usage4.webp" decoding="async" loading="lazy" alt="前戲協同">服藥後配合前戲與親密互動，有助啟動他達拉非的 PDE5 抑制機轉。因犀利士作用時間長，你不必為「剛好在服藥後半小時內必須行房」感到壓力，在藥效窗口內自然投入即可。</p>
             </li>
         </ol>
         @if($effectReading->isNotEmpty())
@@ -1471,10 +1445,10 @@
         <h2 class="sec-title">犀利士助勃機轉</h2>
         <ol class="work-wrap">
             <li class="work-item mon">
-                <video data-src="/static/mobile/video/work1.mp4" preload="none" autoplay muted loop playsinline webkit-playsinline class="work-video js-lazy-video" title="犀利士Cialis抑制PDE5酵素過程演示" aria-label="動畫展示犀利士Cialis如何與PDE5酵素結合"></video>
+                <video data-src="/static/mobile/video/work1.mp4" preload="none" autoplay muted loop playsinline webkit-playsinline class="work-video js-lazy-video" title="犀利士抑制PDE5酵素過程演示" aria-label="動畫展示犀利士如何與PDE5酵素結合"></video>
                 <div class="work-text">
                     <h3 class="work-title">第一步：精準抑制PDE5磷酸二酯酶</h3>
-                    <p class="work-desc">犀利士Cialis治療勃起功能障礙 (ED) 的核心機轉在於競爭性抑制 PDE5 第五型磷酸二酯酶，防止其分解擴張血管的重要物質 cGMP，從而維持平滑肌放鬆狀態。</p>
+                    <p class="work-desc">犀利士治療勃起功能障礙 (ED) 的核心機轉在於競爭性抑制 PDE5 第五型磷酸二酯酶，防止其分解擴張血管的重要物質 cGMP，從而維持平滑肌放鬆狀態。</p>
                 </div>
                 <div class="down-box">
                     <svg class="downarrow-icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><use href="#icon-downarrow-icon"/></svg>
@@ -1503,7 +1477,7 @@
         <h2 class="sec-title">犀利士用藥安全</h2>
         <section class="side-effects">
             <h3 class="snd-title">犀利士常見副作用</h3>
-            <p class="side-effects-content">藥物皆有雙面性，雖然犀利士Cialis在全球臨床使用超過二十年，其安全性已獲得廣泛證實，但仍有可能出現副作用。PDE5 抑制劑的副作用可以說是血管壁的「試金石」，出現少量不適或明顯感受到副作用通常代表藥物已生效：身體正在適應血管擴張。了解<a class="inner-link" href="/sideeffects" title="犀利士Cialis副作用">犀利士Cialis副作用</a>能讓你更從容地掌控藥效，避免產生不必要的恐慌。以下是可能出現的副作用與應對措施：</p>
+            <p class="side-effects-content">藥物皆有雙面性。犀利士（他達拉非）雖經長期臨床使用，安全性已獲廣泛證實，但仍可能出現副作用。他達拉非屬長效型 PDE5 抑制劑，藥效可維持約 36 小時，因此部分不適也可能持續較久。輕微反應多半代表血管正在擴張、藥物已開始作用。了解<a class="inner-link" href="/sideeffects" title="犀利士副作用與禁忌">犀利士副作用與禁忌</a>，有助你更從容掌握用藥過程，避免不必要恐慌。以下是可能出現的副作用與應對措施：</p>
             <div class="side-effects-content-wrap">
                 <article class="side-effect-card side-effect-card--level1">
                     <header class="side-effect-card__head">
@@ -1516,31 +1490,31 @@
                             <li>臉部潮紅</li>
                             <li>短暫頭痛</li>
                             <li>鼻塞</li>
-                            <li>胃部灼熱感</li>
                             <li>消化不良</li>
+                            <li>輕微頭暈</li>
                         </ul>
                     </div>
                     <div class="side-effect-card__action">
                         <p class="side-effect-card__action-title">應對措施</p>
-                        <p class="side-effect-card__action-text">這是血管擴張的正常現象。建議<strong>飲用 300-500cc 溫開水</strong>稀釋血液濃度，加速藥物代謝，並採取坐姿休息。若有輕微頭痛，通常在 1-2 小時內會隨著血液濃度降低而消失。</p>
+                        <p class="side-effect-card__action-text">多為血管擴張的正常現象。建議<strong>補充水分並採取坐姿休息</strong>，避免劇烈活動與飲酒。因他達拉非作用時間較長，輕微不適可能比短效型壯陽藥持續更久；若症狀可耐受，通常會隨血中濃度下降逐漸緩解。</p>
                     </div>
                 </article>
                 <article class="side-effect-card side-effect-card--level2">
                     <header class="side-effect-card__head">
                         <h4 class="side-effect-card__title">中等反應</h4>
-                        <p class="side-effect-card__subtitle">感官功能波動·發生率極低</p>
+                        <p class="side-effect-card__subtitle">他達拉非較具特徵·發生率仍偏低</p>
                     </header>
                     <div class="side-effect-card__symptoms">
                         <p class="side-effect-card__label">症狀</p>
                         <ul class="side-effect-card__symptoms-list">
-                            <li>藍綠色偏色視覺（看物體帶藍光）</li>
-                            <li>肌肉痠痛（背部或四肢）</li>
-                            <li>心跳明顯加快</li>
+                            <li>背部痠痛或四肢肌肉痠痛</li>
+                            <li>肢體不適感或痠脹</li>
+                            <li>心跳感明顯、心悸</li>
                         </ul>
                     </div>
                     <div class="side-effect-card__action">
                         <p class="side-effect-card__action-title">應對措施</p>
-                        <p class="side-effect-card__action-text">立即停止性行為，更換至通風良好的環境。<strong>深呼吸並保持情緒平穩</strong>，避免攝取咖啡因或酒精。若偏色情況持續超過 2 小時，下次服藥前請務必減半劑量並諮詢醫師。</p>
+                        <p class="side-effect-card__action-text">背部與肌肉痠痛是他達拉非相對較常見的反應，多在服藥後 12～24 小時出現，通常可自行緩解。請<strong>停止性行為、充分休息並保持情緒平穩</strong>，避免咖啡因與酒精。若痠痛劇烈、心悸持續，或影響日常活動，下次用藥前請減量並諮詢醫師。</p>
                     </div>
                 </article>
                 <article class="side-effect-card side-effect-card--level3">
@@ -1552,15 +1526,15 @@
                         <p class="side-effect-card__label">症狀</p>
                         <ul class="side-effect-card__symptoms-list">
                             <li>陰莖異常勃起（超過4小時且劇痛）</li>
-                            <li>突然失明</li>
-                            <li>聽力喪失</li>
-                            <li>胸痛</li>
+                            <li>突然視力喪失或嚴重視力下降</li>
+                            <li>聽力突然減退或喪失</li>
+                            <li>胸痛、胸悶</li>
                             <li>呼吸困難</li>
                         </ul>
                     </div>
                     <div class="side-effect-card__action side-effect-card__action--urgent">
                         <p class="side-effect-card__action-title">應對措施</p>
-                        <p class="side-effect-card__action-text"><strong>立即前往急診急救。</strong>異常勃起若不處理會導致海綿體永久性組織壞死。請清楚告知急診醫師你服用的藥物名稱與劑量，以利醫師進行正確且專業的臨床減壓處理。</p>
+                        <p class="side-effect-card__action-text"><strong>立即前往急診。</strong>異常勃起若不即時處理，可能造成海綿體永久性損傷。請清楚告知醫師服用的是犀利士（他達拉非）及劑量，以利正確評估與處置；此類情況禁止再自行追加服藥。</p>
                     </div>
                 </article>
             </div>
@@ -1568,14 +1542,14 @@
         <section class="contraindications">
             <h3 class="snd-title">服用禁忌</h3>
             <h4 class="contraindications-title">絕對禁忌：嚴禁併用心臟病藥物（硝酸鹽類）</h4>
-            <p class="contraindications-content">這是用藥安全的第一原則。犀利士Cialis絕對禁止與任何形式的硝酸鹽藥物（如：救心、舌下錠、硝化甘油）同時使用。兩者併用會導致全身血管劇烈擴張，引發致命性的低血壓休克。若你有心血管病史，服藥前必須經由醫師評估。</p>
-            <h4 class="contraindications-title">嚴重藥物交互作用：血液稀釋劑的風險</h4>
-            <p class="contraindications-content">犀利士Cialis具有擴張血管的特性，若你正在服用血液稀釋劑（如抗凝血劑）或降血壓藥物，兩者產生的交互作用會顯著增加內出血或嚴重頭暈的風險。「先診斷，後用藥」是保障安全的唯一途徑。</p>
-            <h4 class="contraindications-title">每日劑量控制：避免過量與長期依賴</h4>
-            <p class="contraindications-content">犀利士Cialis的單日最大劑量建議為 100mg。長期濫用會超過安全劑量，雖然短期內可能無感，但會加速心血管系統的耐受性，增加心肌梗塞、中風以及非動脈性視神經損傷的風險。性生活表現不應以透支健康為代價。</p>
+            <p class="contraindications-content">這是用藥安全的第一原則。犀利士（他達拉非）絕對禁止與任何形式的硝酸鹽藥物（如：硝化甘油、救心、舌下錠）同時使用。兩者併用會導致全身血管劇烈擴張，引發致命性低血壓。因他達拉非作用可長達約 36 小時，服藥後更長時間內都應避免接觸硝酸鹽類。若有心血管病史，服藥前必須經醫師評估。</p>
+            <h4 class="contraindications-title">嚴重藥物交互作用：降血壓與特定藥物風險</h4>
+            <p class="contraindications-content">他達拉非具擴張血管作用，若同時使用 α 阻斷劑、部分降血壓藥，或強效 CYP3A4 抑制劑（如部分抗真菌藥、抗愛滋病毒藥物），可能顯著加強降壓效果或提高血中濃度，增加頭暈、昏厥風險。服用前後亦應避免大量飲酒與葡萄柚汁。「先評估，後用藥」是保障安全的必要原則。</p>
+            <h4 class="contraindications-title">每日劑量控制：避免過量與長期濫用</h4>
+            <p class="contraindications-content">犀利士按需服用時，建議劑量多為 10mg 或 20mg，單日最大劑量一般不超過 20mg；每日保養則多為 5mg，不可與按需劑量重複疊加。切勿為求更快效果擅自加量。長期超量使用可能增加心血管負擔，以及罕見的非動脈炎性前部缺血性視神經病變等風險。性生活表現不應以透支健康為代價。</p>
             <h4 class="contraindications-title">生活方式協同：藥物只是輔助</h4>
-            <p class="contraindications-content">勃起功能是血管健康的指標。除了依賴犀利士Cialis（CIALIS），您應致力於修復血管內皮，如：減肥、減少鹽分攝取與規律的有氧訓練。健康的身體能讓藥物在更低劑量下，發揮更穩定的硬度表現。</p>
-            <p class="contraindications-content">每個人的身體狀況各異且壯陽藥選擇眾多，建議多與專業醫師溝通，在安全與效果之間找到最精準的平衡點。更多服用禁忌與用藥安全資訊，可前往<a class="inner-link" href="/contraindications" title="犀利士Cialis禁忌與注意事項">犀利士Cialis禁忌與注意事項</a>詳細了解。</p>
+            <p class="contraindications-content">勃起功能是血管健康的指標之一。除了適度使用犀利士，也應同時照顧生活型態，例如維持體重、減少高鹽飲食、規律有氧運動，並改善睡眠與壓力管理。身體狀態越好，往往越能在較低劑量下獲得穩定效果。</p>
+            <p class="contraindications-content">每個人的身體狀況與用藥反應不同，建議與專業醫師討論劑量與使用方式，在安全與效果之間找到適合自己的平衡點。</p>
         </section>
         @if($sideeffects->isNotEmpty())
             <section class="further-reading">
@@ -1592,90 +1566,6 @@
     </section>
     <section class="health health-home mon">
         <h2 class="sec-title">兩性健康</h2>
-        <div class="center-banner">
-            <div class="center-banner-content">
-                <p class="banner-desc mon">*數據統計回饋</p>
-                <p class="banner-desc mon">大多數男士隨犀利士使用經驗增加</p>
-                {{--<p class="banner-desc highlight-line1 mon">對性生活的焦慮感降低
-                    <strong class="highlight">
-                        <span class="highlight-number">85</span><span class="highlight-percent">%</span>
-                    </strong>
-                    <svg class="downbg-icon"><use href="{{ $pageIndexSprite }}#icon-godown"/></svg>
-                </p>--}}
-                <p class="banner-desc highlight-line2 mon">自信心大幅提升
-                {{--<strong class="highlight">
-                        <span class="highlight-number">200</span><span class="highlight-percent">%</span>
-                    </strong>--}}
-                    <svg class="downbg-icon"><use href="{{ $pageIndexSprite }}#icon-godown"/></svg>
-                </p>
-            </div>
-            <div class="line-wrap" aria-hidden="true">
-                <svg class="line" viewBox="0 0 300 200" preserveAspectRatio="none">
-                    <defs>
-                        <linearGradient id="aurora-gradient-v2" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" class="aurora-stop-start"/>
-                            <stop offset="100%" class="aurora-stop-end"/>
-                        </linearGradient>
-
-                        <filter id="dot-glow" x="-200%" y="-200%" width="400%" height="400%">
-                            <feGaussianBlur stdDeviation="2" result="blur"/>
-                            <feMerge>
-                                <feMergeNode in="blur"/>
-                                <feMergeNode in="SourceGraphic"/>
-                            </feMerge>
-                        </filter>
-                    </defs>
-
-
-                    <path
-                        d="M0,190 C90,185 220,140 300,0"
-                        class="inner-line"
-                        pathLength="1"
-                        stroke-dasharray="1"
-                        stroke-dashoffset="1">
-                        <animate
-                            id="lineDraw"
-                            attributeName="stroke-dashoffset"
-                            from="1"
-                            to="0"
-                            dur="2s"
-                            begin="indefinite"
-                            fill="freeze"
-                            calcMode="spline"
-                            keyTimes="0;1"
-                            keySplines="0.4 0 0.2 1"
-                        />
-                    </path>
-                    <g class="dot-group" filter="url(#dot-glow)">
-                        <circle class="line-dot" r="4" cx="0" cy="0"/>
-
-                        <circle class="line-dot2" r="0" cx="0" cy="0">
-                            <animate attributeName="r" from="0" to="18" dur="2s" begin="indefinite"/>
-                            <animate attributeName="opacity" from="0.8" to="0" dur="2s" begin="indefinite"/>
-                            <animate attributeName="stroke-width" from="4" to="0" dur="2s" begin="indefinite"/>
-                        </circle>
-
-
-                        <animateMotion
-                            id="dotMove"
-                            dur="2s"
-                            begin="indefinite"
-                            fill="freeze"
-                            path="M0,190 C90,185 220,140 300,0"
-                            calcMode="spline"
-                            keyTimes="0;1"
-                            keySplines="0.4 0 0.2 1"
-                        />
-                    </g>
-                </svg>
-                <div class="decoration-circle"></div>
-
-            </div>
-            <p class="bottom-text mon">*數據來源：根據 1998-2025 年多項臨床研究與使用者問卷回饋綜合統計</p>
-            <div class="center-banner-bg">
-                <img src="/static/img/center-banner.webp" decoding="async" loading="lazy" alt="犀利士Cialis使用者心理焦慮降數據統計：使用者感到更自信">
-            </div>
-        </div>
         @if($healthReading->isNotEmpty())
             <ul class="news-wrap">
                 @foreach($healthReading as $item)

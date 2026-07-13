@@ -78,9 +78,9 @@
                                 
                                 <img class="product-card-img" src="{{ storage_url($item->m_img?:$item->img) }}" loading="auto" decoding="async" width="380" height="260" alt="{{ $item->name }}">
                                 <div class="preview-box">
-                                    <img class="preview-img" src="/static/mobile/img/pill-prev1.jpg" loading="auto" decoding="async" width="100" height="100" alt="犀利士Cialis藥錠外觀">
-                                    <img class="preview-img" src="/static/mobile/img/pill-prev2.jpg" loading="auto" decoding="async" width="100" height="100" alt="犀利士Cialis包裝">
-                                    <img class="preview-img" src="/static/mobile/img/pill-prev3.jpg" loading="auto" decoding="async" width="100" height="100" alt="犀利士Cialis原廠標籤">
+                                    <img class="preview-img" src="/static/img/pill-prev1.webp" loading="auto" decoding="async" width="100" height="100" alt="犀利士Cialis藥錠外觀">
+                                    <img class="preview-img" src="/static/img/pill-prev2.webp" loading="auto" decoding="async" width="100" height="100" alt="犀利士Cialis包裝">
+                                    <img class="preview-img" src="/static/img/pill-prev3.webp" loading="auto" decoding="async" width="100" height="100" alt="犀利士Cialis原廠標籤">
                                 </div>
                             </a>
                             <div class="product-card-info">
@@ -135,6 +135,7 @@
                         @include('components.tick-scroll')
                     </div>
                 @endif--}}
+                @include('components.secret')
             </div>
         </section>
         

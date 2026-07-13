@@ -451,6 +451,211 @@
     }
 }
 
+.center-banner{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    font-size: clamp(13px, 1.5vw, 16px);
+    grid-column: 1 / -1;
+    margin-bottom: 40px;
+    @include media.desktop{
+        height: fit-content;
+        border-radius: 60px;
+        overflow: hidden;
+        margin-bottom: 100px;
+    }
+    @include media.mobile{
+        padding: 0 15px;
+        margin-bottom: 60px;
+    }
+    .center-banner-bg{
+        z-index: 0;
+        @include media.mobile{
+            border-radius: 30px;
+            overflow: hidden;
+        }
+        &:before{
+            content: '';
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(at 0% 100%, $main-color, rgba(darken($main-color, 40%), 60%) 40%, transparent 70%);
+            z-index: 1;
+            @include media.mobile{
+                background: linear-gradient(to right, #3e96f7, rgba(darken($main-color, 40%), 60%) 10%, transparent 80%);
+            }
+        }
+        img{
+            display: block;
+            width: 100%;
+        }
+    }
+    .line-wrap{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        padding: 0 30px 0 0;
+        width: 100%;
+        z-index: 1;
+        .line{
+            overflow: visible;
+            .aurora-stop-start{
+                stop-color: $body-bg-color;
+                stop-opacity: 0.6;
+            }
+            .aurora-stop-end{
+                stop-color: $body-bg-color;
+                stop-opacity: 1;
+            }
+            .inner-line{
+                fill: none;
+                stroke: $main-color;
+                stroke-width: 3px;
+                stroke-linecap: round;
+            }
+            .inner-fill{
+                fill: url(#aurora-gradient-v2);
+                opacity: 0;
+                animation: fade-fill 0.3s 3s forwards;
+            }
+            .dot-group{
+                fill: $main-color;
+                .line-dot{
+                    r: 4;
+                    fill: #FFF;
+                }
+                .line-dot2{
+                    r: 0;
+                    fill: none;
+                    stroke: #FFF;
+                    stroke-width: 4;
+                    opacity: 0.8;
+                }
+            }
+
+        }
+        .decoration-circle {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            top: 0;
+            right: 30px;
+            z-index: -1;
+            &.now{
+                &:before, &:after{
+                    animation: center-banner-decoration-circle 2s 2s linear infinite;
+                }
+            }
+            &:before, &:after{
+                position: absolute;
+                content: "";
+                height: 50px;
+                width: 50px;
+                border: 8px solid $main-color;
+                border-radius: 50%;
+                opacity: 0;
+            }
+            &:after{
+                opacity: 0;
+                animation-delay: 3s !important;
+            }
+
+            @keyframes center-banner-decoration-circle {
+                0% {
+                    border: 8px solid #FFF;
+                    transform: scale(0);
+                    opacity: 1;
+                }
+
+                100% {
+                    border: 0 solid #FFF;
+                    transform: scale(1);
+                    opacity: 0;
+                }
+            }
+        }
+    }
+    .bottom-text{
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        font-style: italic;
+        font-size: 0.8em;
+        color: rgba(255, 255, 255, 0.6);
+        mix-blend-mode: plus-lighter;
+        z-index: 1;
+        @include media.mobile{
+            bottom: -2em;
+        }
+    }
+    .center-banner-content{
+        position: absolute;
+        left: 5%;
+        top: 45%;
+        transform: translateY(-50%);
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        .banner-desc{
+            position: relative;
+            font-size: 1em;
+            font-weight: 700;
+            color: #FFF;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 1s 1s ease, transform 1s 1s ease;
+            &.now{
+                opacity: 1;
+                transform: translateY(0);
+            }
+            &.highlight-line1, &.highlight-line2{
+                display: inline-flex;
+                align-items: flex-end;
+                .highlight{
+                    display: inline-flex;
+                    line-height: 1;
+                    color: #FFF;
+                    font-weight: 700;
+                    font-style: italic;
+                    -webkit-text-stroke: 1px #FFF;
+                    text-stroke: 1px #FFF;
+                    .highlight-number{
+                        font-size: 2em;
+                        padding: 0 2px;
+                    }
+                    .highlight-percent{
+                        padding-top: 5px;
+                    }
+                }
+                .downbg-icon{
+                    width: 2em;
+                    height: 2em;
+                    color: #FFF;
+                }
+            }
+            &.highlight-line1{
+                font-size: 1.2em;
+            }
+            &.highlight-line2{
+                font-size: clamp(2em, 2vw, 2em);
+
+                .downbg-icon{
+                    transform: rotateX(180deg);
+                }
+            }
+
+        }
+    }
+}
+
 .footer-buy{
     box-sizing: border-box;
     width: 90%;
@@ -898,7 +1103,7 @@
 .step{
     padding: 0 15px;
     grid-column: 1 / -1;
-    $step-bg-color: #a5d0ff;
+    $step-bg-color: #9aeb8a;
     .step-check {
         position: relative;
         width: 60%;

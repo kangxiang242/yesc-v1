@@ -119,9 +119,8 @@
             
             // 监听所有单选按钮的变化
             $('input[type="radio"][name^="iief_q"]').on('change', function() {
-                // 移除同组所有选项的选中样式（跨td清除）
-                var name = $(this).attr('name');
-                $('input[name="' + name + '"]').closest('.iief-option').removeClass('selected');
+                // 移除同组其他选项的选中样式
+                $(this).closest('.iief-options').find('.iief-option').removeClass('selected');
                 // 添加当前选项的选中样式
                 $(this).closest('.iief-option').addClass('selected');
                 calculateTotalScore();
@@ -272,35 +271,46 @@
 
     <script>
         (() => {
-            // 1️⃣ 要监听的所有元素
             const observeItems = document.querySelectorAll(
-                '.step-content-item'
+                '.step-content-item, .center-banner .mon, .center-banner svg.line'
             );
             if (!observeItems.length) return;
 
-            // 2️⃣ 防止重复触发（一次性）
             const processed = new WeakSet();
 
-            // 3️⃣ Observer
             const observer = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
                     if (!entry.isIntersecting) return;
                     const el = entry.target;
                     if (processed.has(el)) return;
 
-                    // ---- A. 普通 HTML 元素：加 .now ----
-                    if (el.classList.contains('step-content-item')) {
+                    if (el.classList.contains('step-content-item') || el.classList.contains('mon')) {
                         el.classList.add('now');
+                    }
+
+                    if (el.tagName.toLowerCase() === 'svg' && el.classList.contains('line')) {
+                        const lineDraw = el.querySelector('#lineDraw');
+                        const fillFade = el.querySelector('#fillFade');
+                        const dotMove  = el.querySelector('#dotMove');
+
+                        if (lineDraw) lineDraw.beginElement();
+                        if (fillFade) fillFade.beginElement();
+                        if (dotMove)  dotMove.beginElement();
+
+                        el.querySelectorAll('.line-dot2 animate, .line-dot3 animate')
+                            .forEach(anim => anim.beginElement());
+
+                        const decorationCircle = el.parentElement?.querySelector('.decoration-circle');
+                        if (decorationCircle) decorationCircle.classList.add('now');
                     }
 
                     processed.add(el);
                 });
             }, {
                 root: null,
-                threshold: 0.15   // ≈ 原本 triggerOffsetPercent = 0
+                threshold: 0.15
             });
 
-            // 4️⃣ 统一 observe
             observeItems.forEach(el => observer.observe(el));
         })();
     </script>
@@ -415,6 +425,93 @@
             @endforeach
         </dl>
     </section>
+    @php
+        $pageIndexSprite = asset('static/svg/page-index.svg');
+    @endphp
+    <div class="center-banner">
+        <div class="center-banner-content">
+            <p class="banner-desc mon">*數據統計回饋</p>
+            <p class="banner-desc mon">大多數男士隨犀利士使用經驗增加</p>
+            {{--<p class="banner-desc highlight-line1 mon">對性生活的焦慮感降低
+                <strong class="highlight">
+                    <span class="highlight-number">85</span><span class="highlight-percent">%</span>
+                </strong>
+                <svg class="downbg-icon"><use href="{{ $pageIndexSprite }}#icon-godown"/></svg>
+            </p>--}}
+            <p class="banner-desc highlight-line2 mon">自信心大幅提升
+            {{--<strong class="highlight">
+                    <span class="highlight-number">200</span><span class="highlight-percent">%</span>
+                </strong>--}}
+                <svg class="downbg-icon"><use href="{{ $pageIndexSprite }}#icon-godown"/></svg>
+            </p>
+        </div>
+        <div class="line-wrap" aria-hidden="true">
+            <svg class="line" viewBox="0 0 300 200" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="aurora-gradient-v2" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" class="aurora-stop-start"/>
+                        <stop offset="100%" class="aurora-stop-end"/>
+                    </linearGradient>
+
+                    <filter id="dot-glow" x="-200%" y="-200%" width="400%" height="400%">
+                        <feGaussianBlur stdDeviation="2" result="blur"/>
+                        <feMerge>
+                            <feMergeNode in="blur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+
+
+                <path
+                    d="M0,190 C90,185 220,140 300,0"
+                    class="inner-line"
+                    pathLength="1"
+                    stroke-dasharray="1"
+                    stroke-dashoffset="1">
+                    <animate
+                        id="lineDraw"
+                        attributeName="stroke-dashoffset"
+                        from="1"
+                        to="0"
+                        dur="2s"
+                        begin="indefinite"
+                        fill="freeze"
+                        calcMode="spline"
+                        keyTimes="0;1"
+                        keySplines="0.4 0 0.2 1"
+                    />
+                </path>
+                <g class="dot-group" filter="url(#dot-glow)">
+                    <circle class="line-dot" r="4" cx="0" cy="0"/>
+
+                    <circle class="line-dot2" r="0" cx="0" cy="0">
+                        <animate attributeName="r" from="0" to="18" dur="2s" begin="indefinite"/>
+                        <animate attributeName="opacity" from="0.8" to="0" dur="2s" begin="indefinite"/>
+                        <animate attributeName="stroke-width" from="4" to="0" dur="2s" begin="indefinite"/>
+                    </circle>
+
+
+                    <animateMotion
+                        id="dotMove"
+                        dur="2s"
+                        begin="indefinite"
+                        fill="freeze"
+                        path="M0,190 C90,185 220,140 300,0"
+                        calcMode="spline"
+                        keyTimes="0;1"
+                        keySplines="0.4 0 0.2 1"
+                    />
+                </g>
+            </svg>
+            <div class="decoration-circle"></div>
+
+        </div>
+        <p class="bottom-text mon">*數據來源：根據 1998-2025 年多項臨床研究與使用者問卷回饋綜合統計</p>
+        <div class="center-banner-bg">
+            <img src="/static/img/center-banner.webp" decoding="async" loading="lazy" alt="犀利士Cialis使用者心理焦慮降數據統計：使用者感到更自信">
+        </div>
+    </div>
     <section class="iief">
         <h2 class="sec-title">國際勃起功能指數表 (IIEF-5)</h2>
         <p class="iief-sub">國際通用的勃起性功能障礙自我評估表(簡稱IIEF-5)為國際臨床常用的勃起功能自我評估工具，可用於初步了解目前狀態與風險程度。</p>
