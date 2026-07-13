@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
  * 剥除所有 Set-Cookie 并设置公共缓存响应头，使 Cloudflare 可缓存。
  *
  * 注意：仅对桌面端请求启用缓存（移动端会被 RedirectDeviceMiddleware
- * 重定向到 m.viagra-twshop.com，缓存移动端页面会导致跳转失效）。
+ * 重定向到 m.slir7.top，缓存移动端页面会导致跳转失效）。
  *
  * 必须挂为全局中间件（而非路由中间件），以确保在
  * AddQueuedCookiesToResponse 把 cookies 写入响应之后再清理。

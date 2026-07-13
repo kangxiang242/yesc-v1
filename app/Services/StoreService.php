@@ -4,6 +4,10 @@
 namespace App\Services;
 
 
+/**
+ * @deprecated 2026-07-13 当前未使用，便利店同步功能已废弃。
+ * 仅保留文件以供参考，后续版本将删除。
+ */
 class StoreService
 {
 

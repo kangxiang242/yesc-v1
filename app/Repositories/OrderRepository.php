@@ -64,7 +64,7 @@ class OrderRepository extends Repository
             $ip_count = $this->getDayIpOrderCount(VehicleService::IP());
 
             if($ip_count>=5){
-                //throw new MsgException("您今日下單數過多，請理性消費！");
+                throw new MsgException("您今日下單數過多，請理性消費！");
             }
 
 
