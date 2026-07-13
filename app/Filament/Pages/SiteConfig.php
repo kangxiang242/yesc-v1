@@ -64,6 +64,16 @@ class SiteConfig extends Page implements HasForms
             'delivery_type' => json_decode($g('delivery_type', '[]'), true) ?: [],
             'freight_where' => $g('freight_where'),
             'freight' => $g('freight'),
+
+            // 產品分組
+            'product_group_trial_intro' => $g('product_group_trial_intro'),
+            'product_group_trial_faqs' => json_decode($g('product_group_trial_faqs', '[]'), true) ?: [],
+            'product_group_recommend_intro' => $g('product_group_recommend_intro'),
+            'product_group_recommend_faqs' => json_decode($g('product_group_recommend_faqs', '[]'), true) ?: [],
+            'product_group_repurchase_intro' => $g('product_group_repurchase_intro'),
+            'product_group_repurchase_faqs' => json_decode($g('product_group_repurchase_faqs', '[]'), true) ?: [],
+            'product_group_longterm_intro' => $g('product_group_longterm_intro'),
+            'product_group_longterm_faqs' => json_decode($g('product_group_longterm_faqs', '[]'), true) ?: [],
         ]);
     }
 
@@ -76,6 +86,7 @@ class SiteConfig extends Page implements HasForms
                         $this->tabSite(),
                         $this->tabGoogleSearch(),
                         $this->tabFreight(),
+                        $this->tabProductGroups(),
                     ]),
             ])
             ->statePath('data');
@@ -164,6 +175,42 @@ class SiteConfig extends Page implements HasForms
                     ->default('0'),
                 Forms\Components\Textarea::make('googlebot_index_page')->label('谷歌首頁內容')->rows(15),
                 Forms\Components\Textarea::make('googlebot_index_page_m')->label('谷歌首頁內容(m)')->rows(15),
+            ]);
+    }
+
+    protected function tabProductGroups(): Forms\Components\Tabs\Tab
+    {
+        return Forms\Components\Tabs\Tab::make('產品分組')
+            ->schema([
+                Forms\Components\Tabs::make('ProductGroups')
+                    ->tabs([
+                        $this->productGroupTab('trial', '初次體驗選擇'),
+                        $this->productGroupTab('recommend', '省心推薦專區'),
+                        $this->productGroupTab('repurchase', '穩定回購專區'),
+                        $this->productGroupTab('longterm', '長期保養專區'),
+                    ]),
+            ]);
+    }
+
+    protected function productGroupTab(string $key, string $label): Forms\Components\Tabs\Tab
+    {
+        return Forms\Components\Tabs\Tab::make($label)
+            ->schema([
+                Forms\Components\Textarea::make("product_group_{$key}_intro")
+                    ->label('介紹')
+                    ->rows(4)
+                    ->helperText('顯示在該分組組合列表上方'),
+                Forms\Components\Repeater::make("product_group_{$key}_faqs")
+                    ->label('常見問題')
+                    ->schema([
+                        Forms\Components\TextInput::make('q')->label('問題')->required(),
+                        Forms\Components\Textarea::make('a')->label('回答')->rows(3)->required(),
+                    ])
+                    ->columns(1)
+                    ->defaultItems(0)
+                    ->addActionLabel('新增常見問題')
+                    ->collapsible()
+                    ->itemLabel(fn(array $state): ?string => mb_substr($state['q'] ?? '', 0, 30)),
             ]);
     }
 

@@ -2,9 +2,26 @@
 @use "breakpoints" as media;
 .page-product{
     .main-content{
+        @include media.desktop{
+            display: grid;
+            grid-template-areas:
+                "breadcrumb breadcrumb"
+                "page-title page-title"
+                "product-list-1 qa"
+                "product-list-2 qa"
+                "product-list-3 qa"
+                "product-list-4 qa"
+                "page-content page-content";
+            grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+            gap: 0 60px;
+        }
 
-
-        .breadcrumb{
+        .page-title{
+            grid-area: page-title;
+        }
+        .qa-wrap{
+            grid-area: qa;
+            margin: 0;
             position: relative;
             @include media.desktop{
                 margin-top: 0;
@@ -31,12 +48,13 @@
             .product-area{
                 flex: 1.5;
             }
-            .qa-wrap{
+            .page-title{
+            grid-area: page-title;
+        }
+        .qa-wrap{
                 margin: 0;
                 @include media.desktop{
                     flex: 1;
-                    position: sticky;
-                    top: 128px;
                 }
             }
         }

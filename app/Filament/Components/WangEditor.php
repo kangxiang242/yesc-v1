@@ -14,6 +14,59 @@ class WangEditor extends Field
 
     protected array $toolbarButtons = [];
 
+    protected ?bool $hasCustomToolbar = null;
+
+    /**
+     * 默认完整工具栏键列表（wangEditor5 标准键）
+     *
+     * @see https://www.wangeditor.com/v5/toolbar-config.html
+     */
+    public const FULL_TOOLBAR = [
+        'headerSelect',
+        '|',
+        'bold', 'underline', 'italic', 'through',
+        'code', 'sub', 'sup', 'clearStyle',
+        'color', 'bgColor',
+        'fontSize', 'fontFamily',
+        'lineHeight',
+        '|',
+        'indent', 'delIndent',
+        'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyJustify',
+        '|',
+        'bulletedList', 'numberedList', 'todo',
+        'blockquote',
+        'codeBlock',
+        'codeSelectLang',
+        '|',
+        'insertTable',
+        'insertImage', 'uploadImage',
+        'insertLink', 'unLink',
+        'insertVideo',
+        'emotion',
+        'divider',
+        '|',
+        'undo', 'redo',
+        'fullScreen',
+    ];
+
+    /**
+     * 简单模式工具栏（常用基本工具）
+     */
+    public const SIMPLE_TOOLBAR = [
+        'bold', 'italic', 'underline', 'through',
+        'color', 'bgColor',
+        'fontSize',
+        '|',
+        'justifyLeft', 'justifyCenter', 'justifyRight',
+        'bulletList', 'orderedList',
+        'blockquote',
+        '|',
+        'insertLink',
+        'insertImage', 'uploadImage',
+        '|',
+        'undo', 'redo',
+    ];
+
     public function mode(string $mode): static
     {
         $this->mode = $mode;
@@ -42,11 +95,22 @@ class WangEditor extends Field
     public function toolbarButtons(array $buttons): static
     {
         $this->toolbarButtons = $buttons;
+        $this->hasCustomToolbar = true;
         return $this;
     }
 
     public function getToolbarButtons(): array
     {
-        return $this->toolbarButtons;
+        // 有自定义工具栏则直接返回
+        if ($this->hasCustomToolbar) {
+            return $this->toolbarButtons;
+        }
+
+        // 无自定义时，按 mode 返回默认值
+        if ($this->mode === 'simple') {
+            return self::SIMPLE_TOOLBAR;
+        }
+
+        return self::FULL_TOOLBAR;
     }
 }

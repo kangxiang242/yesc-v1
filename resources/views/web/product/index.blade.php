@@ -4,6 +4,10 @@
     @parent
 @stop
 
+@section('landing_style')
+    @vite(['resources/scss/home.scss', 'resources/js/app.js'])
+@stop
+
 @section('script')
     @parent
     <script src="{{ assetv('static/js/price-animator.js') }}"></script>
@@ -125,23 +129,12 @@
                         </li>
                     @endforeach
                 </ol>
-                {{--@if($loop->first)
-                    <div class="rice-wrap">
-                        @include('components.rice-scroll')
-                    </div>
-                @endif
-                @if($loop->index == 1)
-                    <div class="tick-wrap">
-                        @include('components.tick-scroll')
-                    </div>
-                @endif--}}
                 @include('components.secret')
             </div>
         </section>
-        
     @endforeach
 
-    {{-- FAQ 常见问题 — 只渲染一次，移出 groups 循环 --}}
+    {{-- FAQ 常见问题 --}}
     @include('components.qa', ['faqs' => $faqs, 'headingLevel' => 3])
 
     {{--<section class="page-content">

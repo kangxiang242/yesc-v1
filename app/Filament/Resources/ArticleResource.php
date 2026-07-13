@@ -61,14 +61,7 @@ class ArticleResource extends Resource
                             ->columnSpanFull(),
                         WangEditor::make('content')
                             ->label('內容')
-                            ->columnSpanFull()
-                            ->toolbarButtons([
-                                'bold', 'italic', 'underline', 'strike',
-                                'link', 'h2', 'h3', 'h4',
-                                'bulletList', 'orderedList',
-                                'blockquote', 'codeBlock',
-                                'undo', 'redo',
-                            ]),
+                            ->columnSpanFull(),
                         Forms\Components\ViewField::make('code_helper')
                             ->label('')
                             ->view('forms.components.code-editor-helper')
