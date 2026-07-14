@@ -5105,13 +5105,7 @@ form .form-textarea:focus {
 .page-product .main-content .page-content {
   grid-area: page-content;
 }
-@media (min-width: 1024px) {
-  .page-product .main-content .qa-wrap {
-    position: sticky;
-    top: 128px;
-    margin-bottom: 30vh;
-  }
-}
+
 
 .secret {
   position: relative;

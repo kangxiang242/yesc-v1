@@ -22,6 +22,7 @@
         .qa-wrap{
             grid-area: qa;
             margin: 0;
+            height: auto;
             position: relative;
             @include media.desktop{
                 margin-top: 0;
@@ -30,16 +31,16 @@
         .box-container{
             display: flex;
             gap: 60px;
-            &:nth-of-type(2){
+            &:nth-of-type(1){
                 grid-area: product-list-1;
             }
-            &:nth-of-type(3){
+            &:nth-of-type(2){
                 grid-area: product-list-2;
             }
-            &:nth-of-type(4){
+            &:nth-of-type(3){
                 grid-area: product-list-3;
             }
-            &:nth-of-type(5){
+            &:nth-of-type(4){
                 grid-area: product-list-4;
             }
             @include media.mobile{
