@@ -11,6 +11,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Support\Facades\FilamentView;
@@ -354,13 +356,6 @@ class OrderResource extends Resource
                             $records->each->update(['status' => $data['status']]);
                         })
                         ->deselectRecordsAfterCompletion(),
-                    Tables\Actions\BulkAction::make('export_selected')
-                        ->label('匯出選中訂單')
-                        ->icon('heroicon-o-arrow-down-tray')
-                        ->action(function (\Illuminate\Database\Eloquent\Collection $records) {
-                            return static::exportOrdersToXlsx($records, 'orders-selected-' . now()->format('Ymd-His') . '.xlsx');
-                        })
-                        ->deselectRecordsAfterCompletion(),
                 ]),
             ])
             ->headerActions([
@@ -371,12 +366,26 @@ class OrderResource extends Resource
                     ->action(function ($livewire) {
                         $livewire->dispatch('$refresh');
                     }),
-                Action::make('export_all')
-                    ->label('匯出全部訂單')
+                ActionGroup::make([
+                    Action::make('export_all')
+                        ->label('全部匯出')
+                        ->icon('heroicon-o-document-text')
+                        ->action(function () {
+                            return static::exportOrdersToXlsx(Order::query(), 'orders-all-' . now()->format('Ymd-His') . '.xlsx');
+                        }),
+                    Action::make('export_selected')
+                        ->label('匯出選中')
+                        ->icon('heroicon-o-check-circle')
+                        ->accessSelectedRecords()
+                        ->action(function ($livewire) {
+                            $selected = $livewire->getSelectedTableRecords();
+                            return static::exportOrdersToXlsx($selected, 'orders-selected-' . now()->format('Ymd-His') . '.xlsx');
+                        }),
+                ])
+                    ->label('匯出')
                     ->icon('heroicon-o-arrow-down-tray')
-                    ->action(function () {
-                        return static::exportOrdersToXlsx(Order::query(), 'orders-all-' . now()->format('Ymd-His') . '.xlsx');
-                    }),
+                    ->color('primary')
+                    ->button(),
             ]);
 
         static $registered = false;
