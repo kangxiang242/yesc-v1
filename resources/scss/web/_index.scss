@@ -3,6 +3,9 @@
 @use "breakpoints" as media;
 
 .page-home{
+    .center-banner{
+        display: none;
+    }
     .main-content{
         max-width: 100%;
         padding: 0;
@@ -313,7 +316,7 @@
             right: 0;
             width: clamp(160px, 30vw, 360px);
             aspect-ratio: 1;
-            background: url("/static/img/cialis-3.webp") no-repeat center / contain;
+            background: url("/static/img/cialis-v3.webp") no-repeat center / contain;
             pointer-events: none;
             z-index: -1;
             transform: translate(30%, 150%);
