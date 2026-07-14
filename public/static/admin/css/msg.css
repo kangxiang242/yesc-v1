@@ -1,0 +1,73 @@
+.msg_div{
+	width:400px;
+	height: 300px;
+	background: #fff;
+	position: fixed;
+	top: -400px;
+	left: 50%;
+	margin-left:-200px;
+	margin-top:-150px;
+	box-sizing: border-box;
+	padding:30px 20px 0px 20px;
+	box-shadow:0px 10px 10px #999;
+	z-index: 9;
+}
+.fase_success{
+	width:200px;
+	height: 200px;
+	background: #f00;
+	margin: 0 auto;
+	background: url(../images/fase_success.jpg);
+	background-size:100% 100%;
+}
+.fase_error{
+	width:200px;
+	height: 200px;
+	background: #f00;
+	margin: 0 auto;
+	background: url(../images/fase_error.jpg);
+	background-size:100% 100%;
+}
+.msg_text{
+	width:100%;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 18px;
+}
+.fase_hide{
+	display: none;
+}
+.msg_close{
+    background: #fff;
+    color:#f00;
+    border-radius: 12px;
+    line-height: 20px;
+    text-align: center;
+    height: 20px;
+    width: 20px;
+    font-size: 18px;
+    padding: 1px;
+    cursor: pointer;
+}
+.msg_close:hover{
+	background: #f00;
+	color:#fff;
+}
+.msg_close::before {
+    content: "\2716";
+}
+.msg_close {
+    top: 10px;
+    right: 10px;
+    position: absolute;
+}
+.msg_ba{
+	width:100%;
+	height: 100%;
+	background: rgba(0,0,0,0.2);
+	position: fixed;
+	left: 0;
+	top: 0;
+	display: none;
+}

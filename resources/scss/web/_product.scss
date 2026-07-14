@@ -5,32 +5,26 @@
         @include media.desktop{
             display: grid;
             grid-template-areas:
-                "breadcrumb breadcrumb"
-                "page-title page-title"
-                "product-list-1 qa"
-                "product-list-2 qa"
-                "product-list-3 qa"
-                "product-list-4 qa"
-                "page-content page-content";
-            grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-            gap: 0 60px;
+                "breadcrumb"
+                "page-title"
+                "product-list-1"
+                "product-list-2"
+                "product-list-3"
+                "product-list-4"
+                "page-content";
+            grid-template-columns: minmax(0, 1fr);
+            gap: 0;
         }
 
         .page-title{
             grid-area: page-title;
         }
-        .qa-wrap{
-            grid-area: qa;
-            margin: 0;
-            height: auto;
-            position: relative;
-            @include media.desktop{
-                margin-top: 0;
-            }
-        }
+
         .box-container{
             display: flex;
+            align-items: flex-start;
             gap: 60px;
+
             &:nth-of-type(1){
                 grid-area: product-list-1;
             }
@@ -43,27 +37,44 @@
             &:nth-of-type(4){
                 grid-area: product-list-4;
             }
+
             @include media.mobile{
                 flex-direction: column;
+                gap: 24px;
             }
+
             .product-area{
                 flex: 1.5;
+                min-width: 0;
             }
-            .page-title{
-            grid-area: page-title;
-        }
-        .qa-wrap{
+
+            .qa-wrap{
+                flex: 1;
+                min-width: 0;
                 margin: 0;
+                height: auto;
+                align-self: flex-start;
+
                 @include media.desktop{
-                    flex: 1;
+                    position: sticky;
+                    top: 120px;
+                    max-height: calc(100vh - 140px);
+                    overflow-y: auto;
+                }
+
+                @include media.mobile{
+                    position: relative;
+                    top: auto;
+                    max-height: none;
+                    overflow: visible;
+                    width: 100%;
                 }
             }
         }
+
         .page-content{
             grid-area: page-content;
         }
-
-        
     }
 }
 .secret{
@@ -143,6 +154,7 @@
             display: flex;
             align-items: center;
             letter-spacing: 0px;
+            white-space: nowrap;
             .righticon{
                 position: relative;
                 width: 1.2em;

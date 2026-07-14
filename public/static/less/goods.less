@@ -1,0 +1,181 @@
+.prescribe-container{
+    margin-top: 60px;
+    .toggle-link{
+        padding-left: 20px;
+        a{
+            color: #D42F1D;
+            text-decoration: underline;
+        }
+    }
+    .prescribe-content{
+        padding: 20px 20px;
+        .accordion{
+            .accordion-icon{
+                &:after{
+                    content: "+";
+                }
+            }
+
+            .accordion-header{
+                position: relative;
+                cursor: pointer;
+                height: 36px;
+                line-height: 36px;
+                display: flex;
+                align-items: center;
+                .a-title{
+                    display: flex;
+                    align-items: center;
+                    .accordion-icon {
+                        display: block;
+                        width: 1.1em;
+                        height: 1.1em;
+                        line-height: 1.1em;
+                        font-size: 1.4em;
+                        font-family: "Courier New", Courier, monospace;
+                        text-align: center;
+                        color: #fff;
+                        background: #c00;
+                        border-radius: 0.8em;
+                        font-weight: bold;
+                    }
+                    .text{
+                        font-weight: bold;
+                        font-size: 16px;
+                        margin-left: 6px;
+
+                    }
+                    &:hover{
+                        .text{
+                            text-decoration: underline;
+
+                        }
+
+                    }
+                }
+
+
+            }
+
+            .accordion-content{
+                height: 0;
+                overflow: hidden;
+                padding: 0 16px;
+                transition: all .2s ease-in;
+                opacity: 0;
+                margin-top: 0;
+                a{
+                    color: #c00;
+                    text-decoration: underline;
+                }
+                div{
+                    &.HighlightSection{
+                        margin-top: 1.8ex;
+                        padding-bottom: .25ex;
+                        border-top-style: dashed;
+                        border-top-width: thin;
+                    }
+                }
+                h2{
+                    font-size: 16px;
+                    margin-bottom: 12px;
+                    &.Highlights{
+                        text-align: center;
+                        margin-top: -1.6ex;
+                        span{
+                            background: white;
+                            padding-left: 0.25em;
+                            padding-right: 0.25em;
+                        }
+                    }
+                }
+                dl.Footnote{
+                    display: flex;
+                    dd{
+                        margin-left: 8px;
+                    }
+                }
+                .Highlighta{
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                }
+                h3{
+                    font-size: 16px;
+                }
+                .Section{
+                    margin-bottom: 18px;
+                }
+                .First{
+                    margin-top: 10px;
+                }
+                .Disc{
+                    list-style: disc;
+                    padding-left: 23px;
+                    li{
+                        list-style: disc;
+                    }
+                }
+                .Italics{
+                    font-style: italic;
+                }
+                table{
+                    border-collapse: collapse;
+                    margin-bottom: 30px;
+                    tbody{
+                        border:1px solid #000;
+                    }
+                    caption {
+                        margin-top: 10px;
+                        text-align: center;
+                        font-weight: bold;
+                        font-size: 100%;
+                    }
+                    tr{
+                        border-bottom: 1px solid #000; // 增加边框
+
+                    }
+                    tr:nth-of-type(1){
+                        border-top: 1px solid #000; // 增加边框
+
+                    }
+                    tfoot{
+                        tr{
+                            border-bottom: none;
+                            .Footnote{
+                                margin-top: 0;
+                            }
+                        }
+                    }
+                }
+                .hide-link{
+                    display: none;
+                }
+
+                .HighlightsSeeReference{
+                    font-weight: bold;
+                    margin-top: 12px;
+                }
+                .HighlightsRevision{
+                    text-align: right;
+                    font-weight: bold;
+                    margin-bottom: 1ex;
+                }
+            }
+
+            &.open{
+
+                .accordion-content{
+                    height: var(--height);
+                    opacity: 1;
+
+                }
+                .accordion-icon{
+                    &:after{
+                        content: "-";
+                    }
+                }
+            }
+
+        }
+    }
+}

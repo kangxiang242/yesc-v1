@@ -1,0 +1,83 @@
+.box-content {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    margin: 0 auto;
+    width: 1200px;
+    padding-top: 50px;
+    margin-bottom: 150px;
+}
+
+.question-box .title {
+    /* width: 1000px;
+    margin: 0 auto; */
+    margin-bottom: 20px;
+}
+
+.question-box .title h1 {
+
+    margin-bottom: 29px;
+    text-align: center;
+}
+
+.question-box .title .brief {
+    font-size: 16px;
+    color: #999999;
+}
+
+.division {
+
+    position: relative;
+}
+
+
+
+.division p {
+    color: #E51728;
+    font-size: 16px;
+    display: inline-block;
+    position: absolute;
+    background: #fff;
+    left: 0;
+    width: 70px;
+    text-align: left;
+    bottom: 0;
+}
+
+.division .line-2 {
+    width: 100%;
+	height: 10px;
+	display: inline-block;
+	background-color: #F5F5F5;
+}
+
+.content {
+    margin-top: 25px;
+	padding-bottom: 50px;
+    border-bottom: 1px solid #E6E6E6;
+	font-size: 16px;
+}
+
+.other{
+	margin-top: 60px;
+	width: 500px;
+
+}
+.ul-box{
+	margin-top: 20px;
+}
+.ul-box li{
+	height: 55px;
+	line-height: 55px;
+	border-bottom: 1px solid #E6E6E6;
+	padding-left: 30px;
+	position: relative;
+	font-size: 16px;
+}
+
+.ul-box li a span{
+	position: absolute;
+	right: 40px;
+	color: #E51728;
+	font-size: 18px;
+}

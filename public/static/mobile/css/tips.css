@@ -1,0 +1,71 @@
+.tips-msg{
+    width:5.2rem;
+    height:2.66rem;
+    background:rgba(255,255,255,1);
+    border-radius:0.1rem;
+    display: flex;
+}
+.tips-msg .tips-msg-box{
+    display: block;
+    margin: auto;
+
+}
+.tips-msg .main{
+    /*width:2.49rem;*/
+    height:0.80rem;
+    font-size:0.36rem;
+    font-family:PingFang SC;
+    font-weight:500;
+    color:#4B8900;
+    line-height:0.80rem;
+    text-align: center;
+
+
+
+}
+
+.tips-msg .sub-main{
+    /*width:3.62rem;*/
+    height:0.50rem;
+    font-size:0.28rem;
+    font-family:PingFang SC;
+    font-weight:400;
+    color:rgba(51,51,51,1);
+    line-height:0.50rem;
+    text-align: center;
+}
+
+.tips-msg .error{
+    color:#D72727;
+}
+/*PC*/
+@media screen and (min-width:960px){
+    .tips-msg{
+        width:225px;
+        height:133px;
+        background:rgba(255,255,255,1);
+        border-radius:10px;
+    }
+
+    .tips-msg .main{
+        /*width:2.49rem;*/
+        height:40px;
+        font-size:18px;
+        font-family:PingFang SC;
+        font-weight:500;
+        color:rgba(144,86,56,1);
+        line-height:40px;
+        text-align: center;
+    }
+
+    .tips-msg .sub-main{
+        /*width:3.62rem;*/
+        height:25px;
+        font-size:14px;
+        font-family:PingFang SC;
+        font-weight:400;
+        color:rgba(51,51,51,1);
+        line-height:25px;
+        text-align: center;
+    }
+}

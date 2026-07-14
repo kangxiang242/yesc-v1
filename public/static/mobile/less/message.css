@@ -1,0 +1,166 @@
+.container {
+  padding: 0 10px;
+  min-height: 100vh;
+}
+.container .title {
+  font-size: 0.4rem;
+  font-weight: 700;
+  margin-bottom: 0.1rem;
+  text-align: center;
+}
+.container .page-desc {
+  font-size: 0.24rem;
+  color: #999;
+  margin-bottom: 0.2rem;
+  text-align: center;
+  word-break: keep-all;
+}
+.container .page-desc:last-of-type {
+  margin-bottom: 0.6rem;
+}
+.container form {
+  display: flex;
+  flex-direction: column;
+}
+.container form .form-item {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.1rem;
+  margin-bottom: 0.6rem;
+  padding: 0 30px;
+}
+.container form .form-item .form-input {
+  position: relative;
+  width: 100%;
+  display: flex;
+}
+.container form .form-item .form-input:before {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.container form .form-item .form-input:before, .container form .form-item .form-input:after {
+  content: "";
+  left: 0;
+  right: 0;
+  position: absolute;
+  pointer-events: none;
+  bottom: 0;
+  z-index: 4;
+  width: 100%;
+}
+.container form .form-item .form-input:after {
+  content: "";
+  transform: scaleX(0);
+  transition: transform 1s cubic-bezier(0, 0, 0.2, 1);
+  will-change: transform;
+  border-bottom: 2px solid #01b21f;
+  transform-origin: left;
+}
+.container form .form-item .form-input:focus-within:after {
+  border-bottom: 2px solid #01b21f;
+  transform: scaleX(1);
+}
+.container form .form-item .form-input:focus-within .hint {
+  opacity: 1;
+  transition: opacity 0.3s 0.3s;
+}
+.container form .form-item .form-input.has-value .hint {
+  opacity: 0;
+  transition: opacity 0s;
+}
+.container form .form-item .form-input label {
+  position: absolute;
+  bottom: 0.05rem;
+  left: 0.24rem;
+  display: flex;
+}
+.container form .form-item .form-input label span {
+  display: inline-block;
+  width: 0.3rem;
+  font-size: 0.3rem;
+  font-weight: 700;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.container form .form-item .form-input input {
+  width: 100%;
+  height: 100%;
+  font-size: 0.4rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.01rem;
+  padding: 0.4rem 0.24rem 0.24rem;
+  height: 0;
+  border-bottom: 2px solid transparent;
+  z-index: 5;
+}
+.container form .form-item .form-input input::-moz-placeholder {
+  color: transparent;
+}
+.container form .form-item .form-input input::placeholder {
+  color: transparent;
+}
+.container form .form-item .form-input input:not(:-moz-placeholder-shown) + label span {
+  color: #01b21f;
+  transform: translate(-0.24rem, -0.48rem) scale(0.75);
+  width: 0.22rem;
+}
+.container form .form-item .form-input input:focus + label span, .container form .form-item .form-input input:valid + label span, .container form .form-item .form-input input:not(:placeholder-shown) + label span {
+  color: #01b21f;
+  transform: translate(-0.24rem, -0.48rem) scale(0.75);
+  width: 0.22rem;
+}
+.container form .form-item .form-input input:not(:-moz-placeholder-shown) {
+  border-bottom: 2px solid #01b21f;
+  -moz-transition: border-bottom-color 200ms 1s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: border-bottom-color 200ms 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.container form .form-item .form-input input:not(:placeholder-shown) {
+  border-bottom: 2px solid #01b21f;
+  transition: border-bottom-color 200ms 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.container form .form-item .form-input .hint {
+  position: absolute;
+  bottom: 0.05rem;
+  left: 0.24rem;
+  font-size: 0.32rem;
+  font-style: italic;
+  color: #999;
+  opacity: 0;
+}
+.container form .form-item .formicon {
+  width: 0.28rem;
+  height: 0.28rem;
+  flex-shrink: 0;
+  padding-bottom: 0.1rem;
+  color: #01b21f;
+}
+.container form .or {
+  text-align: center;
+  font-size: 0.2rem;
+  color: #999;
+  margin-bottom: 0.6rem;
+  padding: 0.06rem 0;
+  background-color: #f4f4f4;
+}
+.container form .form-btn {
+  width: 80%;
+  height: 0.8rem;
+  background: linear-gradient(45deg, #489430 0%, #41d062 100%);
+  color: #fff;
+  font-size: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1rem;
+  margin: 0 auto 0.1rem;
+}
+.container form .form-btn .safeicon {
+  width: 0.28rem;
+  height: 0.28rem;
+}
+.container form .form-desc {
+  font-size: 0.22rem;
+  color: #999;
+  text-align: center;
+  word-break: keep-all;
+  font-style: italic;
+}

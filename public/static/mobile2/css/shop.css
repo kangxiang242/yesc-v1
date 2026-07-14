@@ -1,0 +1,338 @@
+
+
+/* 产品开始 */
+.box-shop{
+    margin-left:0.2rem;
+    margin-right:0.2rem;
+
+}
+.goods-item{
+    margin-top: 0.46rem;
+    border-bottom: 0.01rem solid #E6E6E6;
+    padding-bottom: 0.4rem;
+}
+.goods-item .shop-img,.goods-item .shop-text{
+    float:left;
+}
+.goods-item .shop-text{
+    margin-left: 0.21rem;
+    padding-top: 0.3rem;
+    position: relative;
+    width: 4rem;
+    background-image: url(/static/mobile/img/shuiyin.jpg);
+    background-repeat: no-repeat;
+    background-size: 4rem 2.8rem;
+}
+.goods-item .shop-img img{
+    width: 2.6rem;
+    height: 2.6rem;
+}
+.goods-item .shop-text .main-title{
+    font-size: 0.3rem;
+    font-weight: 500;
+    margin-bottom: 0.29rem;
+}
+.goods-item .shop-text .main-title a{
+    color: #262626;
+}
+.goods-item .shop-text .sub-title {
+    color: #999999;
+    font-size: 0.24rem;
+    text-indent: -0.1rem;
+}
+
+.goods-item .shop-text .grey-price {
+    /* margin-top: 0.2rem; */
+    font-size: 0.24rem;
+    color: #434343;
+    text-decoration: line-through;
+    
+}
+
+.goods-item .shop-text  .red-price {
+    color: #E63333;
+    font-size: 0.28rem;
+    font-weight: 500;
+   
+}
+.goods-item .buy-button{
+    margin-top: 0.28rem;
+}
+.goods-item .buy-button a{
+    width: 4.1rem;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    background: #2D6EAB;
+    border-radius: 0.28rem;
+    color: #FFFFFF;
+    border: none;
+    font-size: 0.26rem;
+    box-shadow: 0 0.02rem 0.06rem 0 rgba(11, 55, 96, 0.4);
+    outline: none;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+}
+.goods-item .buy-button a .gou{
+    margin-right: 0.17rem;
+}
+.goods-item .buy-button a .icon-click{
+
+    font-size: 0.36rem;
+    position: absolute;
+}
+
+.box-shop .more{
+    margin-top: 0.3rem;
+    text-align: center;
+}
+.box-shop .more .next{
+    width: 3rem;
+    height: 0.68rem;
+    line-height: 0.68rem;
+    border: 0.01rem solid #1E772D;
+    border-radius: 0.1rem;
+    color: #1E772D;
+    display: inline-block;
+    font-size: 0.28rem;
+    margin-right: 0.3rem;
+}
+.box-shop .more .cent{
+    width: 3rem;
+    height: 0.68rem;
+    line-height: 0.68rem;
+    border: 0.01rem solid #1E772D;
+    border-radius: 0.1rem;
+    color: #fff;
+    display: inline-block;
+    background-color: #1E772D;
+    font-size: 0.28rem;
+}
+
+/* 产品end */
+
+
+
+.box-shop .goods{
+    margin-top: 0.2rem;
+}
+
+.shop-img img{
+    width: 2.6rem;
+}
+.item-top{
+    display: flex;
+}
+/* .item-top div{
+    float: left;
+    align-self: center;
+} */
+
+.item-top .shop-text{
+    margin-left: 0.21rem;
+    background-image: url(/static/mobile/img/sy1.jpg);
+    background-repeat: no-repeat;
+    background-size: 3.8rem auto;
+    width: 100%;
+}
+.item-top .main-title{
+    color: #262626;
+    font-size: 0.3rem;
+    font-weight: 500;
+}
+
+.item-top .sub-title{
+    margin-top: 0.1rem;
+    margin-bottom: 0.1rem;
+    color: #999999;
+    font-size: 0.24rem;
+    text-indent: -0.1rem;
+}
+
+.item-top .grey-price{
+    color: #444343;
+    font-size: 0.24rem;
+    text-decoration: line-through;
+    display: inline-block;
+}
+
+.item-top .red-price{
+    color: #E63333;
+    font-size: 0.3rem;
+    font-weight: 500;
+    display: inline-block;
+
+}
+.buy-button{
+    margin-top: 0.1rem;
+}
+.buy-button a{
+    display: inline-block;
+    width: 100%;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    text-align: center;
+    background-color: #2D6EAB;
+    color: #fff;
+    border-radius: 0.28rem;
+    float:right;
+    font-size: 0.26rem;
+    font-weight: 500;
+    /* box-shadow: 0 0.02rem 0.06rem 0 rgba(11, 55, 96, 0.4); */
+    outline: none;
+}
+
+.goods .item{
+    padding-top: 0.4rem;
+    padding-bottom: 0.2rem;
+    border-bottom: 0.01rem solid #E6E6E6;
+}
+
+.goods .item .buy-button a .gou{
+    margin-right: 0.17rem;
+}
+.goods .item .buy-button a .icon-click{
+
+    font-size: 0.36rem;
+    position: absolute;
+}
+
+.secret{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.2rem;
+}
+.secret .secret-text{
+    font-size: 0.22rem;
+    color: #2D6EAB;
+    overflow: hidden;
+    flex-shrink: 0;
+    white-space: nowrap;
+    position: relative;
+    width: 0;
+    transition: width 1s 0.5s ease-in-out;
+}
+.secret .secret-text .trail {
+	position: absolute;
+	right: 0;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	
+}
+
+
+svg {
+    fill: none;
+    transform: translate3d(0, 0, 0);
+    width: 0.5rem;
+    height: auto;
+    flex-shrink: 0;
+}
+  
+svg .bling {
+    stroke: #2d6eab;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-dasharray: 3;
+    stroke-dashoffset: 15;
+    transition: all 0.3s ease;
+}
+svg .lock {
+    stroke: #d2dfea;
+    stroke-width: 4;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    stroke-dasharray: 34;
+    transition: all 0.4s ease;
+}
+svg .lockb {
+    fill: #d2dfea;
+    fill-rule: evenodd;
+    clip-rule: evenodd;
+    transform: rotate(8deg);
+    transform-origin: 14px 20px;
+    transition: all 0.4s ease;
+}
+
+.secret-show .secret-text {
+	width: 5rem;
+	animation: opacity 1s 0.5s ease-in-out;
+}
+.secret-show .secret-text .trail {
+	animation: trail 1s 0.5s ease-in-out;
+}	
+@keyframes opacity {
+	0% {
+	  border-right: 1px solid transparent;
+	}
+  
+	10% {
+	  border-right: 1px solid #6795bd;
+	}
+  
+	80% {
+	  border-right: 1px solid #6795bd;
+	}
+  
+	100% {
+	  border-right: 1px solid transparent;
+	}
+}
+  
+@keyframes trail {
+	0% {
+	  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 90%, rgb(195, 226, 255) 100%);
+	  opacity: 0;
+	}
+  
+	30% {
+	  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 70%, rgb(195, 226, 255) 100%);
+	  opacity: 1;
+	}
+  
+	70% {
+	  background: linear-gradient(90deg, rgba(230, 230, 230, 0) 70%, rgb(195, 226, 255) 100%);
+	  opacity: 1;
+	}
+  
+	95% {
+	  background: linear-gradient(90deg, rgba(244, 244, 244, 0) 90%, rgb(195, 226, 255) 100%);
+	  opacity: 0;
+	}
+}
+.secret-show svg .bling {
+    stroke: #2d6eab;
+    animation: bling6132 0.3s linear forwards;
+    animation-delay: 0.2s;
+}
+  
+.secret-show svg .lock {
+    stroke: #2d6eab;
+    stroke-dasharray: 48;
+    animation: locked 0.3s linear forwards;
+}
+  
+.secret-show svg .lockb {
+    fill: #2d6eab;
+    transform: rotate(0);
+    transform-origin: 14px 22px;
+}
+@keyframes bling6132 {
+    50% {
+      stroke-dasharray: 3;
+      stroke-dashoffset: 12;
+    }
+  
+    100% {
+      stroke-dasharray: 3;
+      stroke-dashoffset: 9;
+    }
+}
+  
+@keyframes locked {
+    50% {
+      transform: translateY(1px);
+    }
+}

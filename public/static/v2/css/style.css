@@ -1,0 +1,107 @@
+body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dl, dt, dd, ol, form, input, textarea, th, td, select {
+            margin: 0;
+            padding: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+        table{
+            border-collapse:collapse;
+        }
+        body {
+            font-family: Microsoft YaHei;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: #232323;
+            outline: none;
+        }
+
+        input, textarea {
+            outline: none;
+            box-shadow: none;
+        }
+
+        textarea {
+            resize: none;
+            overflow: auto;
+        }
+
+        .clearfix {
+            zoom: 1;
+        }
+
+        .clearfix:after {
+            content: ".";
+            width: 0;
+            height: 0;
+            visibility: hidden;
+            display: block;
+            clear: both;
+        }
+
+        .fl {
+            float: left
+        }
+
+        .fr {
+            float: right
+        }
+
+        .tl {
+            text-align: left;
+        }
+
+        .tc {
+            text-align: center
+        }
+
+        .tr {
+            text-align: right;
+        }
+
+        .ellipse {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+
+.transition3{
+    -moz-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -ms-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+}
+
+.transition15{
+    -moz-transition: all .15s ease-in;
+    -webkit-transition: all .15s ease-in;
+    -o-transition: all .15s ease-in;
+    -ms-transition: all .15s ease-in;
+    transition: all .15s ease-in;
+
+}
+
+.transition-cubic-8{
+    -moz-transition: all .8s cubic-bezier(0.1, 0, 0, 1.0);
+    -webkit-transition: all .8s cubic-bezier(0.1, 0, 0, 1.0);
+    -o-transition: all .8s cubic-bezier(0.1, 0, 0, 1.0);
+    -ms-transition: all .8s cubic-bezier(0.1, 0, 0, 1.0);
+    transition: all .8s cubic-bezier(0.1, 0, 0, 1.0);
+}
+
+.not-select{
+    -moz-user-select:none; /*火狐*/
+    -webkit-user-select:none; /*webkit浏览器*/
+    -ms-user-select:none; /*IE10*/
+    -khtml-user-select:none; /*早期浏览器*/
+    user-select:none;
+}

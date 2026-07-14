@@ -13,57 +13,44 @@ class ProductController extends Controller
         $products = $productRepository->all();
         $productsById = $products->keyBy("id");
 
-        $groupProductIds = [
-            "trial" => [11, 12, 13],
-            "recommend" => [14, 15, 16, 17],
-            "repurchase" => [18, 19, 20],
-            "longterm" => [21, 22, 23, 24],
-        ];
+        $groupKeys = ["recommend", "repurchase", "longterm", "trial"];
+        $defaults = $this->productGroupDefaults();
 
-        $groups = [
-            "trial" => [
-                "title" => "初次體驗選擇",
-                "des" =>
-                    "若為首次接觸犀利士Cialis的族群，可從較小盒數組合開始，便於觀察自身反應與適應情況。此類方案適合偶爾需求或評估效果者，能在控制成本的同時，了解犀利士Cialis的實際表現與適合程度。",
-                "items" => collect($groupProductIds["trial"])
-                    ->map(fn($id) => $productsById->get($id))
-                    ->filter()
-                    ->values(),
-            ],
-            "recommend" => [
-                "title" => "省心推薦專區",
-                "des" =>
-                    "彙整常見需求與高評價組合，減少逐一比對的時間。適合希望一次掌握熱門選項、在效果與預算之間取得務實平衡的使用族群。",
-                "items" => collect($groupProductIds["recommend"])
-                    ->map(fn($id) => $productsById->get($id))
-                    ->filter()
-                    ->values(),
-            ],
-            "repurchase" => [
-                "title" => "穩定回購專區",
-                "des" =>
-                    "適合已建立使用節奏、清楚自身需求的族群。以固定週期補貨為取向，兼顧單盒成本與備貨充足度，降低臨時斷貨的不便。",
-                "items" => collect($groupProductIds["repurchase"])
-                    ->map(fn($id) => $productsById->get($id))
-                    ->filter()
-                    ->values(),
-            ],
-            "longterm" => [
-                "title" => "長期保養專區",
-                "des" =>
-                    "面向長期規劃與較大備量需求，透過多盒組合拉低平均成本。適合希望長期備用、降低單顆負擔並減少頻繁下單的使用者。",
-                "items" => collect($groupProductIds["longterm"])
-                    ->map(fn($id) => $productsById->get($id))
-                    ->filter()
-                    ->values(),
-            ],
-        ];
+        $groups = [];
+        foreach ($groupKeys as $key) {
+            $default = $defaults[$key];
 
-        $trialGroup = $groups["trial"];
-        unset($groups["trial"]);
-        $groups["trial"] = $trialGroup;
+            $title = trim((string) get_setting("product_group_{$key}_title"));
+            $des = trim((string) get_setting("product_group_{$key}_intro"));
+            $productIds = get_setting("product_group_{$key}_product_ids")->toArray();
+            $faqRows = get_setting("product_group_{$key}_faqs")->toArray();
 
-        $hot = $products->isNotEmpty() ? $products->random(3) : collect();
+            $productIds = array_values(array_filter(array_map('intval', $productIds)));
+            if ($productIds === []) {
+                $productIds = $default["product_ids"];
+            }
+
+            $faqs = collect($faqRows)
+                ->filter(fn($row) => is_array($row) && filled($row["q"] ?? null) && filled($row["a"] ?? null))
+                ->map(fn($row) => (object) [
+                    "title" => (string) $row["q"],
+                    "content" => (string) $row["a"],
+                ])
+                ->values();
+
+            $groups[$key] = [
+                "key" => $key,
+                "title" => $title !== "" ? $title : $default["title"],
+                "des" => $des !== "" ? $des : $default["intro"],
+                "items" => collect($productIds)
+                    ->map(fn($id) => $productsById->get($id))
+                    ->filter()
+                    ->values(),
+                "faqs" => $faqs,
+            ];
+        }
+
+        $hot = $products->isNotEmpty() ? $products->random(min(3, $products->count())) : collect();
 
         return template("product.index", compact("products", "hot", "groups"));
     }
@@ -105,5 +92,38 @@ class ProductController extends Controller
                 "goods_images",
             ),
         );
+    }
+
+    /**
+     * @return array<string, array{title: string, intro: string, product_ids: int[]}>
+     */
+    protected function productGroupDefaults(): array
+    {
+        return [
+            "trial" => [
+                "title" => "初次體驗選擇",
+                "intro" =>
+                    "若為首次接觸犀利士Cialis的族群，可從較小盒數組合開始，便於觀察自身反應與適應情況。此類方案適合偶爾需求或評估效果者，能在控制成本的同時，了解犀利士Cialis的實際表現與適合程度。",
+                "product_ids" => [11, 12, 13],
+            ],
+            "recommend" => [
+                "title" => "省心推薦專區",
+                "intro" =>
+                    "彙整常見需求與高評價組合，減少逐一比對的時間。適合希望一次掌握熱門選項、在效果與預算之間取得務實平衡的使用族群。",
+                "product_ids" => [14, 15, 16, 17],
+            ],
+            "repurchase" => [
+                "title" => "穩定回購專區",
+                "intro" =>
+                    "適合已建立使用節奏、清楚自身需求的族群。以固定週期補貨為取向，兼顧單盒成本與備貨充足度，降低臨時斷貨的不便。",
+                "product_ids" => [18, 19, 20],
+            ],
+            "longterm" => [
+                "title" => "長期保養專區",
+                "intro" =>
+                    "面向長期規劃與較大備量需求，透過多盒組合拉低平均成本。適合希望長期備用、降低單顆負擔並減少頻繁下單的使用者。",
+                "product_ids" => [21, 22, 23, 24],
+            ],
+        ];
     }
 }

@@ -496,12 +496,15 @@
                     font-weight: 700;
                     color: rgba(255, 255, 255, 0.6);
                 }
-                img{
+                &::after{
+                    content: "";
                     position: absolute;
                     right: -6%;
-                    top: 6%;
-                    width: 45px;
-                    transform: rotate(-30deg);
+                    top: -18%;
+                    width: 48px;
+                    aspect-ratio: 1;
+                    background: url("/static/img/C20.webp") no-repeat center / contain;
+                    pointer-events: none;
                 }
             }
         }

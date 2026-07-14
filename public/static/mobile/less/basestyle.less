@@ -1,0 +1,27 @@
+/* @body-bg-color: #F6F7F9; */
+@body-bg-color: #ddeeff;
+@main-color: #3e96f7;
+@secondary-color: #0500cf;
+@gradient: linear-gradient(to bottom, @main-color, darken(@main-color, 20%));
+@main-text-color: #000;
+@sub-text-color: rgba(0,0,0,0.3);
+
+
+@mobile: 768px;
+@desktop: 1024px;
+
+.mobile(@rules) {
+  @media (max-width: @mobile) {
+    & {
+      @rules();
+    }
+  }
+}
+
+.desktop(@rules) {
+  @media (min-width: (@desktop + 1)) {
+    & {
+      @rules();
+    }
+  }
+}

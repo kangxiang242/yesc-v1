@@ -3,7 +3,10 @@
     $headingLevel = max(2, min(5, (int) ($headingLevel ?? 2)));
     $titleTag = 'h' . $headingLevel;
     $questionTag = 'h' . min(6, $headingLevel + 1);
+    $idPrefix = $idPrefix ?? 'faq';
+    $withSchema = $withSchema ?? true;
 @endphp
+@if(!empty($faqs) && count($faqs))
 <section class="qa-wrap">
     <{{ $titleTag }} class="sec-title">常見疑問</{{ $titleTag }}>
     <ul class="faq-list">
@@ -41,7 +44,7 @@
                 }
 
                 $isOpen = $openFirst && $loop->index === 0;
-                $faqId = $loop->iteration;
+                $faqId = $idPrefix . '-' . $loop->iteration;
             @endphp
             <li class="faq-item{{ $isOpen ? ' is-open' : '' }}">
                 <{{ $questionTag }} class="faq-item__title">
@@ -70,27 +73,7 @@
     </ul>
 </section>
 
-
-
-@if(!empty($faqs) && count($faqs))
-
-@php
-    $schema = [
-        "@context" => "https://schema.org",
-        "@type" => "FAQPage",
-        "mainEntity" => collect($faqs)->map(function($faq){
-            return [
-                "@type" => "Question",
-                "name" => strip_tags($faq->title),
-                "acceptedAnswer" => [
-                    "@type" => "Answer",
-                    "text" => strip_tags($faq->content)
-                ]
-            ];
-        })->values()->toArray()
-    ];
-@endphp
-
+@once
 @push('qa-js')
 <script>
     (function () {
@@ -243,6 +226,10 @@
         }
 
         function initAccordion(wrap) {
+            if (wrap.classList.contains(ENHANCED_CLASS)) {
+                return;
+            }
+
             var items = Array.prototype.slice.call(wrap.querySelectorAll(ITEM_SELECTOR));
             if (!items.length) {
                 return;
@@ -358,12 +345,30 @@
     })();
 </script>
 @endpush
+@endonce
 
+@if($withSchema)
+@php
+    $schema = [
+        "@context" => "https://schema.org",
+        "@type" => "FAQPage",
+        "mainEntity" => collect($faqs)->map(function($faq){
+            return [
+                "@type" => "Question",
+                "name" => strip_tags($faq->title),
+                "acceptedAnswer" => [
+                    "@type" => "Answer",
+                    "text" => strip_tags($faq->content)
+                ]
+            ];
+        })->values()->toArray()
+    ];
+@endphp
 @push('schema')
 <script type="application/ld+json">
 {!! json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
 </script>
 @endpush
-
 @endif
 
+@endif

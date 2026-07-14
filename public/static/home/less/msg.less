@@ -1,0 +1,103 @@
+body{
+	background: #fff;
+}
+.banner{
+	width: 100%;
+	img{
+		width: 100%;
+	}
+}
+.msg{
+	margin: 40px 0;
+	.content{
+		overflow: hidden;
+		margin-top: 40px;
+	}
+	.page-r{
+		width: 765px;
+		float: left;
+	}
+	form{
+		width: 600px;
+		height: 443px;
+		background-color: #ffffff;
+		box-shadow: 10px 10px 20px 2px 
+			rgba(3, 73, 132, 0.1);
+		box-sizing: border-box;
+		padding: 20px 60px;
+		margin-bottom: 80px;
+		position: relative;
+		&:after{
+			content: "";
+			display: block;
+			position: absolute;
+			width: 100%;
+			height: 2px;
+			background: #dbe7f6;
+			bottom: -40px;
+			left: 0;
+		}
+		.form-item{
+			height: 54px;
+			line-height: 54px;
+			background: #ffffff;
+			border: solid 1px #7d7d7d;
+			margin-bottom: 40px;
+			padding: 0 20px;
+			font-size: 20px;
+			display: flex;
+		}
+		.noborder{
+			border: none;
+		}
+		.content{
+			height: 130px;
+		}
+		.prompt{
+			color: red;
+			display: none;
+		}
+		.text{
+			width: 100px;
+		}
+		.input{
+			flex: 1;
+			font-size: 20px;
+			border:none;
+		}
+		textarea{
+			resize: none;
+		}
+		.msg-btn{
+			width: 150px;
+			height: 48px;
+			background: #3190e2;
+			border-radius: 8px;
+			border: none;
+			font-size: 24px;
+			color: #fff;
+			margin: 0 auto;
+			cursor: pointer;
+		}
+	}
+	.msg-list{
+		font-size: 24px;
+		line-height: 48px;
+		color: #020202;
+		.question{
+			color: #3190e2;
+		}
+		.answer{
+			margin-bottom: 40px;
+		}
+	}
+	.check-form{
+		display: block;
+		margin: 0 auto;
+	    width: 800px;
+	    height: unset;
+	    .text{
+	    	width: 130px;
+	    }
+	}
+}

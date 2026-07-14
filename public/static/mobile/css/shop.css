@@ -1,0 +1,123 @@
+.shop{
+	padding-left: 0.24rem;
+	padding-right: 0.24rem;
+}
+.product-box {
+    border: 0.01rem solid #E6E6E6;
+    /* box-shadow: 0 0.02rem 0.05rem 0 rgba(33, 62, 108, 0.2); */
+    padding: 0.15rem;
+    padding-bottom: 0.3rem;
+    border-radius: 0.1rem;
+    position: relative;
+    margin-bottom: 0.3rem;
+    transform: scale(0.9) translateY(1rem);
+    transition: all 0.4s ease-in-out;
+    opacity: 0;
+}
+
+.product-box:first-child{
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+.product-box.show{
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+.shop-img {
+    float: left;
+    padding-top: 0.2rem;
+}
+
+.shop-text {
+    float: left;
+    margin-left: 0.2rem;
+    padding-top: 0.1rem;
+    width: 3.5rem;
+    background-image: url(/static/mobile/img/watermark.jpg);
+    background-repeat: no-repeat;
+    background-size: 3.7rem 3.2rem;
+}
+
+.shop-img img {
+    width: 3rem;
+
+}
+
+.main-title {
+    font-size: 0.28rem;
+    margin-bottom: 0.1rem;
+    font-weight: 500;
+}
+
+.main-title a{
+    color: #262626;
+}
+
+.sub-title {
+    /*color: #999999;*/
+    font-size: 0.22rem;
+    text-indent: -0.1rem;
+}
+
+.grey-price {
+    margin-top: 0.2rem;
+    font-size: 0.22rem;
+    color: #999999;
+    text-decoration: line-through;
+}
+
+.red-price {
+    color: #ED0C0C;
+    font-size: 0.28rem;
+    font-weight: 500;
+}
+
+.buy-button {
+    margin-top: 0.1rem;
+}
+
+.buy-button button {
+    width: 3.5rem;
+    height: 0.6rem;
+    background: var(--main-color);
+    border-radius: 0.08rem;
+    color: #FFFFFF;
+    border: none;
+    font-size: 0.26rem;
+    font-weight: 500;
+    /* background: linear-gradient(360deg, #FBAD07, #FFD272);
+    box-shadow: 0 0.02rem 0.06rem 0 rgba(144, 98, 0, 0.4);
+    text-shadow: 0 0.02rem 0.06rem #906200; */
+    outline: none;
+}
+
+.secret{
+	--yellow: #fff7e4;
+	color: #f3a110;
+    margin-top: 0.2rem;
+    display: inline-block;
+    font-size: 0.24rem;
+    font-weight: 500;
+    text-align: center;
+	border-radius: 0.1rem;
+	padding: 0.1rem 0;
+	border: 0.02rem dashed #ffc600;
+    width: 100%;
+	background: linear-gradient(135deg, var(--yellow) 0%, var(--yellow) 40%, #ffffff 60%,var(--yellow) 80%,var(--yellow) 100%);
+    background-size: 200% 200%;
+    animation: gold-glow 4s ease infinite;
+    
+}
+@keyframes gold-glow {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 0% 50%;
+	}
+	
+	100% {
+		background-position: -200% 50%;
+	}
+}

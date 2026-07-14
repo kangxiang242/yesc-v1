@@ -1,0 +1,271 @@
+a{
+	color:#4B8900;
+}
+input,textarea{
+
+	caret-color: var(--btn-color);
+}
+
+body{
+	--main-color: #4bb400;
+}
+.viagra-box{
+	margin-bottom: 2.6rem;
+}
+.banner img{
+	width: 100%;
+}
+.other-banner img{
+	height:auto;
+}
+
+.container-fluid{
+	margin-bottom: 2rem;
+}
+input {
+	text-shadow: none;
+	-webkit-user-select: text;
+}
+input[type=text],input[type=number],input[type=email]{
+	-webkit-appearance:none;
+}
+/**
+ * 头部START
+ */
+header{
+	background-color: #fff;
+	width: 100%;
+	height:1rem;
+	/*display: flex;*/
+}
+
+header .back{
+	align-self: center;
+	display: none;
+	color: #FFFFFF;
+	padding-left: 0.24rem;
+	position: absolute;
+}
+
+.nav-row{
+	/*position: relative;*/
+	position: fixed;
+	width: 100%;
+	max-width: 768px;
+	z-index: 9999;
+	background-color: #fff;
+}
+.nav-fixed-height{
+	width: 100%;
+	height: 1.72rem;
+}
+
+.header-nav{
+	/* background-color: #4B8900; */
+	height: 0.72rem;
+	display: flex;
+	box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.05);
+	width: 100%;
+}
+
+.header-nav .nav-item{
+	width: 1.44rem;
+    /* float: left; */
+    text-align: center;
+	position: relative;
+	border-right:0.02rem solid #c1e29a;
+	/* margin-top: 0.2rem;
+	margin-bottom: 0.2rem; */
+	/* height:0.6rem;
+	line-height: 0.6rem; */
+	font-size: 0.24rem;
+	align-self: center;
+	font-weight: 500;
+	
+
+}
+/* .nav :first-child{
+	width: 1.3rem;
+} */
+.header-nav .home-item{
+	width: 1.3rem;
+}
+.header-nav .nav-item-buy a{
+	color: #FFFFFF;
+	font-size: 0.26rem;
+	font-weight: 500;
+}
+.header-nav .nav-item-buy a span{
+	font-size: 0.26rem;
+	animation: goShop 1s infinite;
+	display: inline-block;
+}
+@keyframes goShop {
+	0%, 20%, 50%, 80%, 100% {
+		transform: translateX(0);
+	}
+	40% {
+		transform: translateX(6px);
+	}
+	60% {
+		transform: translateX(3px);
+	}
+}
+.nav-item-buy{
+	width: 1.8rem;
+    text-align: center;
+	position: relative;
+	bottom:-0.08rem;
+	background: var(--main-color);
+	/* box-shadow: -5px 0px 10px 0px rgba(0, 0, 0, 0.2); */
+	border-radius: 45px 0px 0px 45px;
+	height: 0.8rem;
+	line-height: 0.8rem;
+	z-index: 300;
+}
+
+.header-nav .nav-item a{
+	color: #000;
+}
+
+.header-nav .nav-item:nth-child(4){
+	border-right:none;
+}
+
+.logo{
+	padding-left: 0.24rem;
+	align-self: center;
+	float: left;
+	line-height: 1rem;
+}
+.other-header .logo{
+	margin: 0 auto;
+}
+.other-header .back{
+	display: block;
+
+}
+.logo img{
+	width: 2.11rem;
+	height:0.67rem;
+}
+header .right-packing{
+	display: flex;
+	float:right;
+	margin-left: 0.2rem;
+	height:1rem;
+	line-height: 1rem;
+}
+header .right-packing img{
+	width: 0.74rem;
+	height:0.74rem;
+	align-self: center;
+	margin-right: 0.15rem;
+	filter: hue-rotate(10deg) brightness(1.2);
+}
+
+/**
+ * 头部END
+ */
+
+
+/**
+ * 底部导航START
+ */
+.footer-menu {
+	z-index: 999999;
+	box-shadow: 0 -0.05rem 0.2rem 0 rgba(0, 0, 0, 0.1);
+	background: rgba(255, 255, 255, 0.9);
+	height: 1.2rem;
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	display: flex;
+	max-width: 768px;
+}
+.footer-menu .menu-item{
+	align-self: center;
+	float:left;
+	width: 20%;
+	text-align: center;
+	font-size: 0.22rem;
+	font-weight: 500;
+	margin-bottom: 0.1rem;
+}
+.footer-menu .menu-item p{
+	color:#000;
+	margin-top: 0.05rem;
+}
+.footer-menu .activat p{
+	color:var(--main-color);
+
+}
+.footer-menu .activat .home-icon-img{
+	filter: hue-rotate(10deg) brightness(1.2);
+}
+
+.footer-menu .icon-box{
+	width: 0.54rem;
+	height:0.52rem;
+	margin: 0 auto;
+	/* display: flex; */
+}
+
+.footer-menu .home-icon-img{
+	width: 0.54rem;
+	height:0.52rem;
+	align-self: center;
+	transform: scale(0.8);
+	
+
+}
+.footer-menu .buy-icon-img{
+	width: 0.48rem;
+	height:0.5rem;
+	align-self: center;
+}
+.footer-menu .check-icon-img{
+	width: 0.46rem;
+	height:0.47rem;
+	align-self: center;
+
+}
+.footer-menu .contact-icon-img{
+	width: 0.50rem;
+	height:0.39rem;
+	align-self: center;
+
+}
+/**
+ * 底部导航END
+ */
+
+
+
+
+/**
+ * 面包导航START
+ */
+.breadcrumb-box{
+	margin-top: 0.3rem;
+	margin-left: 0.3rem;
+	font-size: 0.24rem;
+}
+.breadcrumb{
+	padding: 0;
+	background-color:#fff;
+}
+.breadcrumb>li>a{
+	color: #000000;
+}
+.breadcrumb>.active{
+	color: var(--main-color);
+}
+.breadcrumb > li + li:before {
+    color: #000000;
+    content: "> ";
+    padding: 0 5px;
+}
+/**
+ * 面包导航END
+ */

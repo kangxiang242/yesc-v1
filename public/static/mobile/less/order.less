@@ -1,0 +1,163 @@
+@import "basestyle.less";
+
+@order-radius: 0.28rem;
+@order-padding: 0.28rem;
+@order-border: 1px solid fade(@main-color, 10%);
+@order-label-size: 0.26rem;
+@order-conta-size: 0.28rem;
+
+.order {
+    width: 100%;
+    padding: 0.6rem 0.3rem;
+    min-height: 100vh;
+    box-sizing: border-box;
+    background: @body-bg-color;
+    @media screen and (min-width: 769px) {
+        max-width: 920px;
+        margin: 0.4rem auto;
+        padding: 0.4rem 0.3rem;
+    }
+}
+
+.tips {
+    width: 100%;
+    font-size: @order-conta-size;
+    margin: 0.3rem 0;
+    line-height: 1.5;
+    color: @sub-text-color;
+}
+
+.ordertable {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.8));
+    border-radius: @order-radius;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #FFF;
+    border-bottom: none;
+    padding: 0;
+    margin-bottom: 0.4rem;
+    overflow: hidden;
+}
+
+.ordertable .item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: @order-padding 0.3rem;
+    border-bottom: @order-border;
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.ordertable .item label {
+    padding: 0 0 0 0.22rem;
+    margin-bottom: 0.08rem;
+    font-size: @order-label-size;
+    font-weight: 600;
+    line-height: 1.4;
+    color: @main-color;
+    border-left: 0.06rem solid @main-color;
+    border-radius: 0 2px 2px 0;
+}
+
+.ordertable .item label span {
+    width: 100%;
+}
+
+.ordertable .item .conta {
+    padding: 0 0 0 0.28rem;
+    font-size: @order-conta-size;
+    line-height: 1.5;
+    color: @main-text-color;
+    word-break: break-all;
+}
+
+.ordertable .item:nth-child(2) .conta {
+    font-weight: 700;
+}
+
+.ordertable .item:nth-child(9) .conta {
+    font-weight: 700;
+    font-size: 0.3rem;
+}
+
+.ordertable .item .conta .shopitem {
+    padding: 0.2rem 0;
+    margin-bottom: 0.16rem;
+    border-bottom: @order-border;
+    &:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+    }
+}
+
+.ordertable .item .conta .shopitem .shopMsg {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 0.16rem;
+}
+
+.ordertable .item .conta .shopitem .shopMsg .name {
+    width: 100%;
+    font-size: @order-label-size;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 0.06rem;
+    color: @main-text-color;
+}
+
+.ordertable .item .conta .shopitem .shopMsg .name em {
+    font-style: normal;
+    color: #e53935;
+}
+
+.ordertable .item .conta .shopitem .shopMsg span {
+    font-size: 0.24rem;
+    line-height: 1.4;
+    color: @main-text-color;
+    &:last-of-type {
+        font-weight: 700;
+    }
+}
+
+.ordertable .item .conta .shopitem .shopImg {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 0.1rem;
+    overflow: hidden;
+    border: @order-border;
+}
+
+.ordertable .item .conta .shopitem .shopImg img {
+    width: 100%;
+}
+
+.ordertable .item .trigger .hide {
+    display: none;
+}
+
+.ordertable .item .trigger {
+    position: absolute;
+    right: 0.2rem;
+    top: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.12rem;
+    margin-top: 0.2rem;
+    padding: 0.12rem 0 0 0.22rem;
+    font-size: 0.24rem;
+    color: @main-color;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    font-weight: 500;
+    .hideicon,
+    .showicon {
+        width: 0.36rem;
+        height: 0.36rem;
+        vertical-align: middle;
+        fill: @main-color;
+    }
+}

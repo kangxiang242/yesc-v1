@@ -80,10 +80,7 @@ body{
         z-index: 1;
         color: $main-text-color;
         aspect-ratio: 16 / 5;
-        padding-left: 30px;
-        @include media.mobile{
-            padding-left: 20px;
-        }
+        padding: 0 clamp(20px, 2vw, 30px);
     }
 }
 .page-product,
@@ -98,7 +95,9 @@ body{
         left: 0;
         top: 0;
         z-index: -1;
-        background: url("/static/img/gbanner.jpg") no-repeat center;
+        background-image: var(--page-banner-bg, url("/static/img/gbanner.jpg"));
+        background-repeat: no-repeat;
+        background-position: center;
         background-size: cover;
         pointer-events: none;
         mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%);

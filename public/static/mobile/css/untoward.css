@@ -1,0 +1,91 @@
+.untoward {
+  /*  margin-top: 0.58rem; */
+    padding-right: 0.24rem;
+}
+.article-row {
+    margin-top: 0.6rem;
+    margin-left: 0.41rem;
+}
+.article-row .item {
+    position: relative;
+    border-bottom: 0.01rem solid #E6E6E6;
+    margin-bottom: 0.3rem;
+    padding-bottom: 0.2rem;
+}
+.article-row .item:last-child{
+	border: none;
+}
+
+.article-row .item .text {
+    float: left;
+    height: 1rem;
+    padding-top: 0.25rem;
+	margin-left: 0.3rem;
+    width: 5rem;
+}
+
+.article-row .item .text a{
+	color: #262626;
+    font-size: 0.28rem;
+    font-weight: 500;
+}
+
+.article-row .item .article-img {
+    float: left;
+}
+
+.article-row .item .article-img img {
+    width: 1.5rem;
+
+}
+
+.article-row .item .date-time {
+    position: absolute;
+    left: 1.8rem;
+    bottom: 0.1rem;
+    color: #999999;
+    font-size: 0.26rem;
+}
+
+.side{
+    margin-top: 0.5rem;
+}
+.side-box{
+    /*margin-right: 0.24rem;
+    margin-left: 0.24rem;
+    margin-bottom: 0.6rem;
+    border-bottom: 0.01rem solid #E5E5E5;
+    padding-bottom: 0.2rem;*/
+    margin-left: 0.2rem;
+    margin-right: 0.24rem;
+    margin-bottom: 0.6rem;
+    display: flex;
+}
+.side-box:last-child{
+    border: none;
+}
+.side-box .side-img{
+    float:left;
+}
+.side-box .side-text{
+    float:left;
+    width: 4.5rem;
+    margin-left: 0.3rem;
+    align-self: center;
+}
+.side-box .side-text .main-title{
+    font-size: 0.3rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+}
+.side-box .side-text .main-title a{
+    color: #000000;
+}
+.side-box .side-text .brief{
+    font-size: 0.26rem;
+    color: #B2B2B2;
+    margin-top: 0.43rem;
+}
+.side-box .side-img img{
+    width: 2.18rem;
+}

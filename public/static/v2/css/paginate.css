@@ -1,0 +1,31 @@
+.pagelist {
+
+     text-align: center;
+}
+
+.pagelist .disabled, .pagelist span {
+    cursor: no-drop;
+}
+
+.pagelist a, .pagelist span {
+    padding: 2px 10px;
+    border: 1px solid #cacaca;
+    background: #fff;
+    color: #333;
+    display: inline-block;
+    text-decoration: none;
+    margin-left: 5px;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.pagelist a:hover, .pagelist .current {
+    padding: 2px 10px;
+    background: #00a629;
+    border: 1px solid #00a629;
+    color: #fff;
+    margin-left: 5px;
+}
+.pagelist form{
+    display: none;
+}

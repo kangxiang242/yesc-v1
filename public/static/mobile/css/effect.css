@@ -1,0 +1,45 @@
+
+/* 文章使用心得start */
+.sexual-box{
+	margin-top: 0.4rem;
+	margin-left: 0.2rem;
+	margin-right: 0.24rem;
+	margin-bottom: 0.6rem;
+	border-bottom: 0.01rem solid #E6E6E6;
+	padding-bottom: 0.4rem;
+}
+.sexual-box .sexual-img{
+	float:right;
+}
+.sexual-box .sexual-top{
+	display: flex;
+}
+.sexual-box .sexual-text{
+	float:left;
+	padding-right: 0.2rem;
+	align-self: center;
+	width: 5.2rem;
+}
+.sexual-box .sexual-text .main-title{
+	font-size: 0.3rem;
+	font-weight: 500;
+
+}
+.sexual-box .sexual-text .main-title a{
+	color: #000000;
+}
+.sexual-box .sexual-img img{
+	width: 1.96rem;
+	/*height: 1.6rem;*/
+}
+.sexual-box .sexual-buttom{
+	margin-top: 0.2rem;
+}
+.sexual-box .sexual-buttom .brief{
+	font-size: 0.26rem;
+	color: #999999;
+}
+.sexual-box .sexual-buttom .brief a{
+	color: #1E772D;
+}
+/* 文章使用心得end */

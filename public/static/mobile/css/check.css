@@ -1,0 +1,106 @@
+.box-content{
+	    margin-top: 1rem;
+	    /* padding-right: 0.2rem; */
+}
+.row{
+	/* margin: 0; */
+}
+.box-query {
+    margin-top: 0.5rem;
+    width: 100%;
+}
+
+.form-row {
+    margin-bottom: 0.6rem;
+    text-align: center;
+}
+
+.form-row label {
+    font-size: 0.32rem;
+    margin-right: 0.32rem;
+}
+
+.form-row input {
+    height: 0.6rem;
+    padding-left: 0.16rem;
+    padding-right: 0.16rem;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 0.01rem solid #CCCCCC;
+    font-size: 0.32rem;
+    width: 4.73rem;
+    outline: none;
+    border-radius: unset;
+}
+
+.form-row button {
+    width: 5.27rem;
+    height: 0.72rem;
+    border: none;
+    color: #FFFFFF;
+    font-size: 0.32rem;
+	background: linear-gradient(360deg, #FBAD07, #FFD272);
+	box-shadow: 0 0.02rem 0.06rem 0 rgba(144, 98, 0, 0.4);
+	border-radius: 0.08rem;
+    text-shadow: 0.01rem 0.02rem 0.06rem #906301;
+}
+
+.form-desc {
+    font-size: 0.28rem;
+    padding-left: 0.8rem;
+}
+
+.form-desc .desc-box {
+    /* width: 300px; */
+    margin-left: auto;
+    margin-right: auto;
+	color: #7F7F7F;
+	font-size: 0.28rem;
+}
+
+.check-botton p{
+	color:#4B8900;
+	font-size: 0.24rem;
+	margin-bottom: 0.1rem;
+}
+
+.form-row textarea {
+    width: 6.05rem;
+    text-shadow: none;
+    -webkit-appearance: none;
+    -webkit-user-select: text;
+    border: 0.01rem solid #B3B3B3;
+    background-color: #FAFAFA;
+    height: 2rem;
+    padding: 0.29rem 0.2rem 0.29rem 0.2rem;
+    border-radius: 5px;
+    font-size: 0.28rem;
+    outline: none;
+}
+
+input::-webkit-input-placeholder{
+	color:#CCCCCC;
+}
+input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+	color:#CCCCCC;
+}
+input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+	color:#CCCCCC;
+}
+input:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+	color:#CCCCCC;
+}
+
+textarea::-webkit-input-placeholder{
+	color:#CCCCCC;
+}
+textarea::-moz-placeholder{   /* Mozilla Firefox 19+ */
+	color:#CCCCCC;
+}
+textarea:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+	color:#CCCCCC;
+}
+textarea:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+	color:#CCCCCC;
+}

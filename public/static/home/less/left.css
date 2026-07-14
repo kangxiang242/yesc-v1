@@ -1,0 +1,64 @@
+.right-news {
+  width: 370px;
+  box-sizing: border-box;
+  margin-top: 40px;
+}
+.right-news:first-child {
+  margin-top: 0;
+}
+.right-news .title-text {
+  text-align: center;
+  height: 34px;
+  line-height: 34px;
+  color: #fff;
+  font-size: 28px;
+  padding: 20px 0;
+  background: #f0c181;
+  margin-bottom: 20px;
+}
+.right-news .title-text .icon {
+  width: 46px;
+  height: 34px;
+  display: inline-block;
+  background-size: 100% 100%;
+  vertical-align: top;
+}
+.right-news li {
+  margin: 0 20px;
+  padding-left: 40px;
+  height: 48px;
+  line-height: 48px;
+  font-size: 20px;
+  color: #644444;
+  width: 290px;
+  overflow: hidden;
+  border-bottom: 2px dashed #f0c181;
+  margin-bottom: 20px;
+  position: relative;
+}
+.right-news li .num {
+  position: absolute;
+  display: block;
+  left: 0;
+  top: 0;
+  width: 40px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  color: #ab9999;
+  font-weight: bold;
+}
+.right-news li .num1 {
+  color: #d65448;
+}
+.right-news li .num2 {
+  color: #e09049;
+}
+.right-news li .num3 {
+  color: #9f81a2;
+}
+.right-news .tagItem {
+  margin: 10px;
+  color: #fff;
+  font-size: 20px;
+}

@@ -69,7 +69,7 @@
    
 
     @foreach($groups as $group)
-        <section class="box-container">
+        <section class="box-container" data-group="{{ $group['key'] }}">
             <div class="product-area">
                 <h2 class="shopt guide">{{ $group['title'] }}</h2>
                 <p class="shopt-desc">{{ $group['des'] }}</p>
@@ -91,20 +91,7 @@
                                 <h3 class="goods-title">犀利士Cialis 20mg
                                     <strong class="box-count">{{ $item->name }}<span class="box-num">{{ $item->quantity }}</span>盒</strong>
                                 </h3>
-                                {{--<ul class="goods-label-sec">
-                                    <li class="goods-label">原廠正品</li>
-                                    <li class="goods-label">現貨供應</li>
-                                    <li class="goods-label">隱密包裝</li>
-                                </ul>--}}
                                 <p class="goods-subname">"{{ $item->subname }}"</p>
-                                {{--<dl class="sub-sec">
-                                    <dt class="sub-title">美國進口</dt>
-                                    <dd class="sub-content">原廠標籤</dd>
-                                    <dt class="sub-title">數量規格</dt>
-                                    <dd class="sub-content">4顆/盒</dd>
-                                    <dt class="sub-title">保質期限</dt>
-                                    <dd class="sub-content">60個月</dd>
-                                </dl>--}}
 
                                 <div class="price-box" data-market-price="{{ round($item->market_price) }}" data-price="{{ round($item->price) }}">
                                     <div class="mk-price">
@@ -125,18 +112,28 @@
                                 </a>
 
                             </div>
-                            {{--@include('components.secret')--}}
                         </li>
                     @endforeach
                 </ol>
                 @include('components.secret')
             </div>
+            @if($group['faqs']->isNotEmpty())
+                @include('components.qa', [
+                    'faqs' => $group['faqs'],
+                    'headingLevel' => 3,
+                    'idPrefix' => 'product-'.$group['key'],
+                    'withSchema' => false,
+                ])
+            @endif
         </section>
     @endforeach
 
-    {{-- FAQ 常见问题 --}}
-    @include('components.qa', ['faqs' => $faqs, 'headingLevel' => 3])
-
+    @php
+        $allGroupFaqs = collect($groups)->flatMap(fn ($group) => $group['faqs']);
+    @endphp
+    @if($allGroupFaqs->isNotEmpty())
+        @include('components.qa-schema', ['faqs' => $allGroupFaqs])
+    @endif
     {{--<section class="page-content">
         <h2 class="sec-title">關於犀利士Cialis價格</h2>
         <p class="sec-content">

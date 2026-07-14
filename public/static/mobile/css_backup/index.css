@@ -1,0 +1,436 @@
+/* .mount-box{
+	position: relative;
+	z-index: 100;
+	background: #1E772D;
+	padding: 0.3rem 0.3rem 0 0.3rem;
+} */
+.mount-img{
+	position: relative;
+	height: 4.78rem;
+	background: url("/static/mobile/img/p1.jpg") no-repeat;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-o-background-size: cover;
+	background-position: center 0;
+}
+.mount-img img{
+	width: 100%;
+}
+.mount-img p{
+	position: absolute;
+	bottom: 0.27rem;
+	left: 2.7rem;
+	color: #fff;
+	font-size: 0.34rem;
+	font-weight: 500;
+}
+
+/* .banner-mount{
+	margin: 0 auto;
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+	padding-bottom: 0.39rem;
+	background-color: #fff;
+	border-radius: 0.3rem 0.3rem 0 0;
+	top: -0.8rem;
+	left:0.2rem;
+	z-index: 200;
+	padding-top: 0.35rem;
+	background-image: url("/static/mobile/img/tyc/water.jpg");
+	background-repeat: no-repeat;
+	background-size:3.43rem auto;
+	background-position: 0.6rem 0.3rem;
+
+
+} */
+.banner-mount .header-img .logo1{
+	width: 1.56rem;
+}
+.banner-mount .header-img .logo2{
+	width: 0.96rem;
+	margin-left: 0.25rem;
+}
+
+.banner-mount .pill img{
+	width: 2.24rem;
+}
+
+.banner-mount .head-title{
+	/*font-weight: 500;*/
+	font-size: 0.36rem;
+	margin: 0;
+	margin-top: 0.2rem;
+}
+
+.banner-mount .head-content{
+	font-size: 0.26rem;
+	margin-top: 0.25rem;
+	line-height: 0.42rem;
+	z-index: 101;
+	position: relative;
+}
+
+.banner-mount .head-tips{
+	font-size: 0.28rem;
+	color: #EDA508;
+}
+
+/* .banner-mount .content{
+	margin-top: 0.27rem;
+    line-height: 1.5;
+} */
+
+/* .quick-dg {
+	width: 100%;
+	position: relative;
+	z-index: 100;
+	height: 0.95rem;
+	overflow: hidden;
+	background-image: url(/static/mobile/img/tyc/shop.png);
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	bottom: 0.3rem;
+}
+
+.quick-dg p{
+	color: #fff;
+    font-size: 0.3rem;
+    font-weight: 500;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 0.24rem;
+} */
+
+
+
+.go-button {
+    font-size: 0.26rem;
+    height: 0.56rem;
+    line-height: 0.56rem;
+    color: #4B8900;
+    text-align: center;
+    position: absolute;
+	bottom: 0.1rem;
+    right: 0.2rem;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+	border-radius: 0.25rem;
+	border: 0.02rem solid #4B8900;
+
+}
+
+/* 产品开始 */
+/* .box-shop{
+	margin-left:0.2rem;
+	margin-right:0.2rem;
+} */
+.goods-item{
+	margin-top: 0.4rem;
+	border-bottom: 0.01rem solid #E6E6E6;
+	padding-bottom: 0.4rem;
+}
+.goods-item:first-child{
+/*	margin-top: 0;*/
+}
+.goods-mask{
+	-webkit-mask : -webkit-gradient(linear,0% 0%, 0% 70%, from(rgba(255,255,255,1)), to(rgba(255,255,255,0)));
+}
+
+.goods-item .shop-img,.goods-item .shop-text{
+	float:left;
+}
+.goods-item .shop-text{
+	margin-left: 0.21rem;
+
+	position: relative;
+	width: 4.6rem;
+	background-image: url(/static/mobile/img/shuiyin.jpg);
+	background-repeat: no-repeat;
+	background-size: 3rem 2rem;
+}
+.goods-item .shop-img img{
+	width: 2rem;
+
+}
+.goods-item .shop-text .main-title{
+	font-size: 0.28rem;
+	font-weight: 500;
+}
+.goods-item .shop-text .main-title a{
+	color: #262626;
+}
+.goods-item .shop-text .sub-title {
+    color: #999999;
+    font-size: 0.24rem;
+    text-indent: -0.1rem;
+}
+
+.goods-item .shop-text .grey-price {
+    /* margin-top: 0.2rem; */
+    font-size: 0.24rem;
+    color: #434343;
+    text-decoration: line-through;
+}
+
+.goods-item .shop-text  .red-price {
+    color: #E63333;
+    font-size: 0.3rem;
+    font-weight: 500;
+}
+.goods-item .buy-button{
+	position: absolute;
+	right:0;
+	bottom: 0;
+}
+.goods-item .buy-button a{
+	width: 1.80rem;
+	height: 0.56rem;
+	line-height: 0.56rem;
+	background: #FCB946;
+	box-shadow: 0 0.02rem 0.06rem 0 rgba(110, 70, 1, 0.4);
+	text-shadow: 0 0.02rem 0.06rem #de980d;
+	border-radius: 0.28rem;
+	border: none;
+	color: #fff;
+	font-size: 0.26rem;
+	display: inline-block;
+	text-align: center;
+	position: relative;
+}
+.goods-item .buy-button a .gou{
+	margin-right: 0.35rem;
+}
+.icon-click{
+	font-size: 0.36rem;
+	margin-left: 0.05rem;
+	position: absolute;
+
+	right: 0.15rem;
+}
+.box-shop .more{
+	margin-top: 0.3rem;
+	text-align: center;
+}
+.box-shop .more .next{
+	width: 3rem;
+	height: 0.68rem;
+	line-height: 0.68rem;
+	border: 0.01rem solid #1E772D;
+	border-radius: 0.1rem;
+	color: #1E772D;
+	display: inline-block;
+	font-size: 0.28rem;
+	margin-right: 0.3rem;
+}
+.box-shop .more .cent{
+	width: 3rem;
+	height: 0.68rem;
+	line-height: 0.68rem;
+	border: 0.01rem solid #1E772D;
+	border-radius: 0.1rem;
+	color: #fff;
+	display: inline-block;
+	background-color: #1E772D;
+	font-size: 0.28rem;
+}
+
+/* 产品end */
+
+
+
+
+
+/* 板块标题start */
+.header-title{
+	margin-top: 1rem;
+	position: relative;
+	height: 0.9rem;
+	line-height: 0.9rem;
+	display: flex;
+
+}
+.header-title .l-line{
+	width: 0.16rem;
+	height: 0.9rem;
+	background: #1E772D;
+	float:left;
+}
+.header-title .shopping{
+	margin-left: 0.15rem;
+}
+.header-title .shopping p{
+	color: #1E772D;
+	align-self: center;
+	font-size: 0.36rem;
+	font-weight: 600;
+}
+/* 板块标题end */
+
+/* 推荐阅读start */
+.poular{
+	margin-top: 0.4rem;
+	margin-left: 0.3rem;
+	margin-right: 0.3rem;
+
+}
+.poular-item{
+	margin-bottom: 0.4rem;
+	border-bottom-style: dashed;
+	border-bottom-color:#E6E6E6;
+	border-bottom-width: 0.02rem;
+	padding-bottom: 0.2rem;
+
+}
+
+.poular-item .cate a{
+	display: inline-block;
+	text-align: center;
+	width: 1.6rem;
+	height: 0.44rem;
+	line-height: 0.44rem;
+	background: #E1F4E4;
+	border-radius: 0.08rem;
+	color: #1E772D;
+	font-size: 0.26rem;
+}
+
+.poular-item .time{
+	font-size: 0.26rem;
+	margin-right: 0.37rem;
+	color: #262626;
+	height: 0.44rem;
+	line-height: 0.44rem;
+	margin-left: 0.21rem;
+}
+
+.poular-item .title{
+	margin-top: 0.29rem;
+}
+
+.poular-item .title a{
+	color: #262626;
+	font-weight: 500;
+	font-size: 0.3rem;
+}
+/* 推荐阅读end */
+
+
+
+/* 文章使用心得start */
+.sexual-box{
+	margin-top: 0.4rem;
+	margin-left: 0.2rem;
+	margin-right: 0.24rem;
+	margin-bottom: 0.6rem;
+	border-bottom: 0.01rem solid #E6E6E6;
+	padding-bottom: 0.4rem;
+}
+.sexual-box .sexual-img{
+	float:right;
+}
+.sexual-box .sexual-top{
+	display: flex;
+}
+.sexual-box .sexual-text{
+	float:left;
+	padding-right: 0.2rem;
+	align-self: center;
+	width: 5.2rem;
+}
+.sexual-box .sexual-text .main-title{
+	font-size: 0.3rem;
+	font-weight: 500;
+
+}
+.sexual-box .sexual-text .main-title a{
+	color: #000000;
+}
+.sexual-box .sexual-img img{
+	width: 1.96rem;
+	/*height: 1.6rem;*/
+}
+.sexual-box .sexual-buttom{
+	margin-top: 0.2rem;
+}
+.sexual-box .sexual-buttom .brief{
+	font-size: 0.26rem;
+	color: #999999;
+}
+.sexual-box .sexual-buttom .brief a{
+	color: #1E772D;
+}
+/* 文章使用心得end */
+
+
+
+/* 兩性健康start */
+.health-box{
+	margin-top: 0.4rem;
+	margin-left: 0.2rem;
+	margin-right: 0.24rem;
+	margin-bottom: 0.6rem;
+	border-bottom: 0.01rem solid #E6E6E6;
+	padding-bottom: 0.4rem;
+}
+.health-box .health-single .main-title a{
+	font-size: 0.3rem;
+	color: #000000;
+	font-weight: 500;
+}
+.health-box .health-img{
+	float:right;
+	width: 1.96rem;
+}
+.health-box .health-many{
+	margin-top: 0.2rem;
+}
+.health-box .health-text{
+	float:left;
+	padding-left: 0.25rem;
+	padding-right: 0.25rem;
+	align-self: center;
+	width: 4.9rem;
+	height: 1.6rem;
+	background: #FAFAFA;
+	display: flex;
+}
+.health-box .health-text .main-title{
+	font-size: 0.3rem;
+	font-weight: 500;
+
+}
+.health-box .health-text .main-title a{
+	color: #000000;
+}
+.health-box .health-img img{
+	width: 1.96rem;
+
+}
+
+.health-box .brief{
+	color: #999999;
+	font-size: 0.26rem;
+	align-self: center;
+}
+
+.health-box .brief a{
+	color: #1E772D;
+	float: right;
+}
+
+/* 兩性健康end */
+.box-shop .goods{
+	position: relative;
+}
+.gradual{
+	height: 2.5rem;
+	width: 100%;
+	background-color: #fff;
+	position: absolute;
+	bottom: 0.3rem;
+	background: linear-gradient(to bottom,rgba(255,255,255,0) 0%,rgba(255,255,255,0.1) 10%,rgba(255,255,255,0.2) 20%,rgba(255,255,255,0.3) 30%,rgba(255,255,255,0.4) 40%,rgba(255,255,255,0.5) 50%,rgba(255,255,255,0.6),rgba(255,255,255,0.7),rgba(255,255,255,0.9),rgba(255,255,255,1) 90%);
+}
+
+.goods-hide{
+	display: none;
+}

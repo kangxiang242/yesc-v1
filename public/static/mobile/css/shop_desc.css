@@ -1,0 +1,224 @@
+
+.shop {
+    /*margin-top: 0.3rem;*/
+    padding-right: 0.2rem;
+    padding-left: 0.2rem;
+}
+
+.product-row {
+    
+}
+
+.product-box {
+    padding-bottom: 0.3rem;
+    border-radius: 0.1rem;
+    position: relative;
+    /* margin-bottom: 0.1rem; */
+}
+
+.shop-img {
+    float: left;
+}
+.shop-img img {
+    width: 3.2rem;
+
+}
+
+.shop-text {
+    float: left;
+    margin-left: 0.2rem;
+
+    width: 3.6rem;
+    background-image: url(/static/mobile/img/watermark.jpg);
+    background-repeat: no-repeat;
+    background-size: 3.7rem 3.2rem;
+    background-position-y: -0.24rem;
+}
+
+.main-title {
+    font-size: 0.28rem;
+    margin-bottom: 0.2rem;
+    font-weight: 500;
+}
+
+.sub-title {
+    font-size: 0.24rem;
+    text-indent:-0.1rem;
+}
+
+.grey-price {
+    margin-top: 0.2rem;
+    font-size: 0.22rem;
+    color: #999999;
+    text-decoration:line-through;
+
+}
+
+.red-price {
+    color: #ED0C0C;
+    font-size: 0.28rem;
+    font-weight: 500;
+}
+
+.buy-button {
+    /* position: absolute;
+    top: 2rem;
+    right: 0.2rem; */
+	margin-top: 0.3rem;
+}
+
+.buy-button button {
+    width: 3.6rem;
+    height: 0.72rem;
+    background: var(--main-color);
+
+    border-radius: 0.08rem;
+    color: #FFFFFF;
+    border: none;
+    font-size: 0.28rem;
+    font-weight: 500;
+/* 	background: linear-gradient(360deg, #FBAD07, #FFD272);
+	box-shadow: 0 0.02rem 0.06rem 0 rgba(144, 98, 0, 0.4);
+	text-shadow: 0 0.02rem 0.06rem #906200; */
+    outline: none;
+}
+
+.explain {
+    --yellow: #fff7e4;
+	color: #f3a110;
+    margin-top: 0.2rem;
+    display: inline-block;
+    font-size: 0.24rem;
+    font-weight: 500;
+    text-align: center;
+	border-radius: 0.1rem;
+	padding: 0.1rem 0;
+	border: 0.02rem dashed #ffc600;
+    width: 100%;
+	background: linear-gradient(135deg, var(--yellow) 0%, var(--yellow) 40%, #ffffff 60%,var(--yellow) 80%,var(--yellow) 100%);
+    background-size: 200% 200%;
+    animation: gold-glow 4s ease infinite;
+    
+}
+@keyframes gold-glow {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 0% 50%;
+	}
+	
+	100% {
+		background-position: -200% 50%;
+	}
+}
+
+.grey-line{
+    display: none;
+	height:0.02rem;
+	background: #E6E6E6;
+    margin: 0 auto;
+    margin-right: -15px;
+    margin-left: -15px;
+
+}
+
+.product-content h2{
+	text-align: center;
+	margin-top: 0.4rem;
+	margin-bottom: 0.4rem;
+}
+
+.product-content{
+	/*padding-left: 0.3rem;
+	padding-right: 0.3rem;*/
+}
+.product-content .detailed{
+    border: 0.02rem solid var(--main-color);
+    border-radius: 0.3rem;
+    background-color: #fafffb;
+    padding: 0.3rem 0 0;
+    margin-bottom: 0.3rem;
+    overflow: hidden;
+}
+.product-content .detailed p{
+	font-size: 0.26rem;
+	line-height: 0.36rem;
+}
+
+.product-content .detailed .text{
+    padding: 0.2rem;
+}
+.product-content .detailed .text .unfold{
+	float:right;
+	margin-right: 0.2rem;
+}
+.product-content .detailed .img img{
+	width: 100%;
+}
+
+.product-content .detailed .img-increase{
+	margin-top: 0.3rem;
+	/* margin-bottom: 0.3rem; */
+    width: 100%;
+
+}
+.product-content .detailed .text-xiala{
+	/* margin-bottom: 0.58rem; */
+}
+.green-title{
+    float:left;
+	color: var(--main-color);
+    margin-right: 0.05rem;
+}
+.simple-cont{
+    float:left;
+    width: 5rem;
+}
+.img-back{
+    height:4rem;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    font-size: 0.26rem;
+    margin-bottom: 0.3rem;
+}
+.increase-bg1{
+    background-image: url("/static/mobile/img/increase-bg1.jpg");
+}
+.increase-bg2{
+    background-image: url("/static/mobile/img/increase-bg2.jpg");
+}
+.increase-bg3{
+    height:4.4rem!important;
+    background-image: url("/static/mobile/img/increase-bg3.jpg");
+}
+.increase-bg4{
+    margin: 0;
+    width: 100%;
+
+    background-image: url("/static/mobile/img/increase-bg4.jpg");
+}
+.img-back .increase-left{
+    padding-top: 0.2rem;
+    padding-left: 0.35rem;
+}
+.img-back .increase-right{
+    padding-top: 0.5rem;
+    padding-right: 0.35rem;
+    float:right;
+}
+.img-back .increase-left .simple{
+    display: flex;
+}
+.img-back .increase-left .simple-cont{
+    width: 3.72rem;
+}
+.img-back .simple .green-title{
+    float: none;
+}
+.simple-cont-bak{
+    width: 3.5rem;
+}
+.img-back .ceng:first-child{
+    margin-bottom: 0.46rem;
+}

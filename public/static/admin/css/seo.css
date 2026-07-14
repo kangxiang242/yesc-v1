@@ -1,0 +1,21 @@
+.art-mask{
+	display: none;
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	background: rgba(0,0,0,0.4);
+}
+.seo{
+	width:80%;
+	margin: 100px auto 0 auto;
+	background: #fff;
+	padding: 20px;
+	position: relative;
+}
+.seo .close{
+	position: absolute;
+	right: 30px;
+	top: 30px;
+}

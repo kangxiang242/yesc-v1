@@ -1,0 +1,185 @@
+body {
+  background-color: #f2f2f2;
+}
+.breadcrumb {
+  background: none;
+}
+.shop {
+  padding: 0 0.3rem;
+}
+.shop .product-row {
+  width: 100%;
+  position: relative;
+  background-color: #FFF;
+  border-radius: 0.2rem;
+}
+.shop .product-row .secret {
+  position: absolute;
+  overflow: hidden;
+  width: 1.4rem;
+  height: 1.4rem;
+  top: -0.1rem;
+  left: -0.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.shop .product-row .secret:before {
+  content: '隱密發貨';
+  position: absolute;
+  width: 150%;
+  height: 0.52rem;
+  /* background-image: linear-gradient(45deg, #4bb400 0%, #7fd741 51%, #7cd83a 100%); */
+  /* background-image: linear-gradient(45deg, #ff8f00 0%, #ffb709 51%, #ffd332 100%); */
+  background-image: linear-gradient(45deg, #ff8b00 0%, #ffb61b 51%, #ffc03b 100%);
+  /* background-color: #ffb61b; */
+  transform: rotate(-45deg) translateY(-0.26rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.02rem;
+  text-transform: uppercase;
+  box-shadow: 0px 0.03rem 0.08rem rgba(0, 0, 0, 0.3);
+  font-size: 0.26rem;
+  line-height: 1;
+}
+.shop .product-row .secret:after {
+  content: '';
+  position: absolute;
+  width: 0.2rem;
+  bottom: 0;
+  left: 0;
+  height: 0.2rem;
+  z-index: -1;
+  box-shadow: 1.2rem -1.2rem #e29d00;
+  /* background-image: linear-gradient(45deg, #FF512F 0%, #F09819 51%, #FF512F 100%); */
+  background-color: #e29d00;
+}
+.shop .product-row .product-box {
+  width: 100%;
+  padding: 0.3rem;
+}
+.shop .product-row .product-box .shop-head {
+  display: flex;
+  gap: 0.1rem;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.shop .product-row .product-box .shop-head .shop-img img {
+  width: 60%;
+  display: block;
+  margin: 0 auto;
+}
+.shop .product-row .product-box .shop-head .shop-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.shop .product-row .product-box .shop-head .shop-text .free {
+  font-size: 0.22rem;
+  padding: 0.06rem;
+  color: #ed0e0d;
+  border: 0.02rem solid #ed0e0d;
+  border-radius: 0.06rem;
+  position: relative;
+  bottom: 0.05rem;
+  margin-left: 0.06rem;
+}
+.shop .product-row .product-box .shop-foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: 0.3rem;
+}
+.shop .product-row .product-box .shop-foot .buy-price {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-end;
+                    align-items: baseline; */
+  line-height: 1;
+  /* margin-top: 0.2rem; */
+}
+.shop .product-row .product-box .shop-foot .buy-price .red-price {
+  display: flex;
+  align-items: baseline;
+  margin-top: 0.06rem;
+}
+.shop .product-row .product-box .shop-foot .buy-price .red-price .twd {
+  font-size: 0.2rem;
+  font-weight: 700;
+  margin-right: 0.08rem;
+}
+.shop .product-row .product-box .shop-foot .buy-button {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  /* bottom: -0.1rem;
+                    right: -0.1rem; */
+}
+.shop .product-row .product-box .ensure {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin-top: 0.3rem;
+}
+.shop .product-row .product-box .ensure .ensure-item {
+  place-self: center;
+  display: flex;
+  align-items: center;
+  font-size: 0.22rem;
+  line-height: 0.2rem;
+  font-weight: 500;
+  color: #000;
+}
+.shop .product-row .product-box .ensure .ensure-item .righticon {
+  width: 0.26rem;
+  height: 0.26rem;
+  flex-shrink: 0;
+  margin-right: 0.1rem;
+}
+.detailed {
+  border-radius: 0.2rem;
+  overflow: hidden;
+  background-color: #FFF;
+  margin-bottom: 0.6rem;
+}
+.detailed img {
+  width: 100%;
+  display: block;
+  transform: scale(0.9);
+}
+.detailed .present .ls {
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-bottom: 0.02rem solid #f2f2f2;
+  margin: 0 0.3rem;
+}
+.detailed .present .ls:last-child:after {
+  display: none;
+}
+.detailed .present .ls .s1 {
+  width: 1.6rem;
+  text-align: center;
+  flex-shrink: 0;
+  height: 100%;
+  font-weight: 700;
+  font-size: 0.24rem;
+  /* display: flex;
+                align-items: center;
+                justify-content: center; */
+  padding: 0.2rem 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.detailed .present .ls .s2 {
+  font-size: 0.24rem;
+  padding: 0.2rem 0.2rem 0.2rem 1.8rem;
+  flex-grow: 1;
+  font-weight: 400;
+}
+.container-fluid {
+  margin-bottom: 5.3rem;
+}

@@ -1,0 +1,141 @@
+/* @body-bg-color: #F6F7F9; */
+.order {
+  width: 100%;
+  padding: 0.6rem 0.3rem;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background: #ddeeff;
+}
+@media screen and (min-width: 769px) {
+  .order {
+    max-width: 920px;
+    margin: 0.4rem auto;
+    padding: 0.4rem 0.3rem;
+  }
+}
+.tips {
+  width: 100%;
+  font-size: 0.28rem;
+  margin: 0.3rem 0;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.3);
+}
+.ordertable {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.8));
+  border-radius: 0.28rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #FFF;
+  border-bottom: none;
+  padding: 0;
+  margin-bottom: 0.4rem;
+  overflow: hidden;
+}
+.ordertable .item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0.28rem 0.3rem;
+  border-bottom: 1px solid rgba(62, 150, 247, 0.1);
+}
+.ordertable .item:last-child {
+  border-bottom: none;
+}
+.ordertable .item label {
+  padding: 0 0 0 0.22rem;
+  margin-bottom: 0.08rem;
+  font-size: 0.26rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #3e96f7;
+  border-left: 0.06rem solid #3e96f7;
+  border-radius: 0 2px 2px 0;
+}
+.ordertable .item label span {
+  width: 100%;
+}
+.ordertable .item .conta {
+  padding: 0 0 0 0.28rem;
+  font-size: 0.28rem;
+  line-height: 1.5;
+  color: #000;
+  word-break: break-all;
+}
+.ordertable .item:nth-child(2) .conta {
+  font-weight: 700;
+}
+.ordertable .item:nth-child(9) .conta {
+  font-weight: 700;
+  font-size: 0.3rem;
+}
+.ordertable .item .conta .shopitem {
+  padding: 0.2rem 0;
+  margin-bottom: 0.16rem;
+  border-bottom: 1px solid rgba(62, 150, 247, 0.1);
+}
+.ordertable .item .conta .shopitem:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+.ordertable .item .conta .shopitem .shopMsg {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 0.16rem;
+}
+.ordertable .item .conta .shopitem .shopMsg .name {
+  width: 100%;
+  font-size: 0.26rem;
+  font-weight: 500;
+  line-height: 1.4;
+  margin-bottom: 0.06rem;
+  color: #000;
+}
+.ordertable .item .conta .shopitem .shopMsg .name em {
+  font-style: normal;
+  color: #e53935;
+}
+.ordertable .item .conta .shopitem .shopMsg span {
+  font-size: 0.24rem;
+  line-height: 1.4;
+  color: #000;
+}
+.ordertable .item .conta .shopitem .shopMsg span:last-of-type {
+  font-weight: 700;
+}
+.ordertable .item .conta .shopitem .shopImg {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.1rem;
+  overflow: hidden;
+  border: 1px solid rgba(62, 150, 247, 0.1);
+}
+.ordertable .item .conta .shopitem .shopImg img {
+  width: 100%;
+}
+.ordertable .item .trigger .hide {
+  display: none;
+}
+.ordertable .item .trigger {
+  position: absolute;
+  right: 0.2rem;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.12rem;
+  margin-top: 0.2rem;
+  padding: 0.12rem 0 0 0.22rem;
+  font-size: 0.24rem;
+  color: #3e96f7;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  font-weight: 500;
+}
+.ordertable .item .trigger .hideicon,
+.ordertable .item .trigger .showicon {
+  width: 0.36rem;
+  height: 0.36rem;
+  vertical-align: middle;
+  fill: #3e96f7;
+}

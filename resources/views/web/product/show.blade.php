@@ -299,9 +299,6 @@
 
                         el.querySelectorAll('.line-dot2 animate, .line-dot3 animate')
                             .forEach(anim => anim.beginElement());
-
-                        const decorationCircle = el.parentElement?.querySelector('.decoration-circle');
-                        if (decorationCircle) decorationCircle.classList.add('now');
                     }
 
                     processed.add(el);
@@ -340,7 +337,7 @@
             <p class="goods-label">100%隱密包裝</p>
             <p class="goods-label box-buyer-count" data-box-count="{{ $product->quantity }}">近24小時已有0人訂購 {{ $product->quantity }}盒@if($product->quantity < 3)裝@elseif($product->quantity >= 3 && $product->quantity < 10)方案@else組合@endif</p>
         </div>
-        {{--<p class="goods-subname">"{{ $product->subname }}"</p>--}}
+        
         <dl class="sub-sec">
             <dt class="sub-title">活性成份</dt>
             <dd class="sub-content">Sildenafil</dd>
@@ -351,23 +348,7 @@
             <dt class="sub-title">保質期限</dt>
             <dd class="sub-content">60個月</dd>
         </dl>
-        {{--<div class="indication-sec">
-            <h3 class="indication-title">適用於：</h3>
-            <ul class="indication-box">
-                <li class="indication-item">
-                    <span class="tick"><svg class="tickicon" viewBox="0 0 1024 1024"><use href="#icon-tickicon"></use></svg></span>
-                    <p class="indication-text">有效改善勃起功能障礙</p>
-                </li>
-                <li class="indication-item">
-                    <span class="tick"><svg class="tickicon" viewBox="0 0 1024 1024"><use href="#icon-tickicon"></use></svg></span>
-                    <p class="indication-text">提升勃起硬度 / 穩定維持 / 延長時間 / 改善早洩</p>
-                </li>
-                <li class="indication-item">
-                    <span class="tick"><svg class="tickicon" viewBox="0 0 1024 1024"><use href="#icon-tickicon"></use></svg></span>
-                    <p class="indication-text">降低肺動脈高壓、預防高山肺水腫</p>
-                </li>
-            </ul>
-        </div>--}}
+
         <ul class="tags">
             @foreach($goods->label_tags as $label)
                 <li class="tag-item">
@@ -416,6 +397,73 @@
         </div>
     </div>
     @include('components.secret')
+    <div class="center-banner">
+        <div class="center-banner-content">
+            <p class="banner-desc mon">*數據統計回饋</p>
+            <p class="banner-desc mon">大多數男士隨犀利士使用經驗增加</p>
+            <p class="banner-desc highlight-line2 mon">自信心大幅提升</p>
+        </div>
+        <svg class="line" viewBox="0 0 300 200" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+                <linearGradient id="aurora-gradient-v2" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" class="aurora-stop-start"/>
+                    <stop offset="100%" class="aurora-stop-end"/>
+                </linearGradient>
+
+                <filter id="dot-glow" x="-200%" y="-200%" width="400%" height="400%">
+                    <feGaussianBlur stdDeviation="2" result="blur"/>
+                    <feMerge>
+                        <feMergeNode in="blur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+            </defs>
+
+
+            <path
+                d="M0,190 C90,185 220,140 300,0"
+                class="inner-line"
+                pathLength="1"
+                stroke-dasharray="1"
+                stroke-dashoffset="1">
+                <animate
+                    id="lineDraw"
+                    attributeName="stroke-dashoffset"
+                    from="1"
+                    to="0"
+                    dur="2s"
+                    begin="indefinite"
+                    fill="freeze"
+                    calcMode="spline"
+                    keyTimes="0;1"
+                    keySplines="0.4 0 0.2 1"
+                />
+            </path>
+            <g class="dot-group" filter="url(#dot-glow)">
+                <circle class="line-dot" r="4" cx="0" cy="0"/>
+
+                <circle class="line-dot2" r="0" cx="0" cy="0">
+                    <animate attributeName="r" from="0" to="18" dur="2s" begin="indefinite"/>
+                    <animate attributeName="opacity" from="0.8" to="0" dur="2s" begin="indefinite"/>
+                    <animate attributeName="stroke-width" from="4" to="0" dur="2s" begin="indefinite"/>
+                </circle>
+
+
+                <animateMotion
+                    id="dotMove"
+                    dur="2s"
+                    begin="indefinite"
+                    fill="freeze"
+                    path="M0,190 C90,185 220,140 300,0"
+                    calcMode="spline"
+                    keyTimes="0;1"
+                    keySplines="0.4 0 0.2 1"
+                />
+            </g>
+        </svg>
+        <p class="bottom-text mon">*數據來源：根據 1998-2025 年多項臨床研究與使用者問卷回饋綜合統計</p>
+        <img class="center-banner-img" src="/static/img/infoban.webp" decoding="async" loading="lazy" alt="犀利士Cialis使用者心理焦慮降數據統計：使用者感到更自信">
+    </div>
     <section class="detailed">
         <h2 class="sec-title">藥品訊息</h2>
         <dl class="present">
@@ -425,93 +473,7 @@
             @endforeach
         </dl>
     </section>
-    @php
-        $pageIndexSprite = asset('static/svg/page-index.svg');
-    @endphp
-    <div class="center-banner">
-        <div class="center-banner-content">
-            <p class="banner-desc mon">*數據統計回饋</p>
-            <p class="banner-desc mon">大多數男士隨犀利士使用經驗增加</p>
-            {{--<p class="banner-desc highlight-line1 mon">對性生活的焦慮感降低
-                <strong class="highlight">
-                    <span class="highlight-number">85</span><span class="highlight-percent">%</span>
-                </strong>
-                <svg class="downbg-icon"><use href="{{ $pageIndexSprite }}#icon-godown"/></svg>
-            </p>--}}
-            <p class="banner-desc highlight-line2 mon">自信心大幅提升
-            {{--<strong class="highlight">
-                    <span class="highlight-number">200</span><span class="highlight-percent">%</span>
-                </strong>--}}
-                <svg class="downbg-icon"><use href="{{ $pageIndexSprite }}#icon-godown"/></svg>
-            </p>
-        </div>
-        <div class="line-wrap" aria-hidden="true">
-            <svg class="line" viewBox="0 0 300 200" preserveAspectRatio="none">
-                <defs>
-                    <linearGradient id="aurora-gradient-v2" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" class="aurora-stop-start"/>
-                        <stop offset="100%" class="aurora-stop-end"/>
-                    </linearGradient>
-
-                    <filter id="dot-glow" x="-200%" y="-200%" width="400%" height="400%">
-                        <feGaussianBlur stdDeviation="2" result="blur"/>
-                        <feMerge>
-                            <feMergeNode in="blur"/>
-                            <feMergeNode in="SourceGraphic"/>
-                        </feMerge>
-                    </filter>
-                </defs>
-
-
-                <path
-                    d="M0,190 C90,185 220,140 300,0"
-                    class="inner-line"
-                    pathLength="1"
-                    stroke-dasharray="1"
-                    stroke-dashoffset="1">
-                    <animate
-                        id="lineDraw"
-                        attributeName="stroke-dashoffset"
-                        from="1"
-                        to="0"
-                        dur="2s"
-                        begin="indefinite"
-                        fill="freeze"
-                        calcMode="spline"
-                        keyTimes="0;1"
-                        keySplines="0.4 0 0.2 1"
-                    />
-                </path>
-                <g class="dot-group" filter="url(#dot-glow)">
-                    <circle class="line-dot" r="4" cx="0" cy="0"/>
-
-                    <circle class="line-dot2" r="0" cx="0" cy="0">
-                        <animate attributeName="r" from="0" to="18" dur="2s" begin="indefinite"/>
-                        <animate attributeName="opacity" from="0.8" to="0" dur="2s" begin="indefinite"/>
-                        <animate attributeName="stroke-width" from="4" to="0" dur="2s" begin="indefinite"/>
-                    </circle>
-
-
-                    <animateMotion
-                        id="dotMove"
-                        dur="2s"
-                        begin="indefinite"
-                        fill="freeze"
-                        path="M0,190 C90,185 220,140 300,0"
-                        calcMode="spline"
-                        keyTimes="0;1"
-                        keySplines="0.4 0 0.2 1"
-                    />
-                </g>
-            </svg>
-            <div class="decoration-circle"></div>
-
-        </div>
-        <p class="bottom-text mon">*數據來源：根據 1998-2025 年多項臨床研究與使用者問卷回饋綜合統計</p>
-        <div class="center-banner-bg">
-            <img src="/static/img/center-banner.webp" decoding="async" loading="lazy" alt="犀利士Cialis使用者心理焦慮降數據統計：使用者感到更自信">
-        </div>
-    </div>
+    
     <section class="iief">
         <h2 class="sec-title">國際勃起功能指數表 (IIEF-5)</h2>
         <p class="iief-sub">國際通用的勃起性功能障礙自我評估表(簡稱IIEF-5)為國際臨床常用的勃起功能自我評估工具，可用於初步了解目前狀態與風險程度。</p>

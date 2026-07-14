@@ -1,0 +1,31 @@
+body {
+  background: #fff;
+}
+.banner {
+  width: 100%;
+}
+.banner img {
+  width: 100%;
+}
+.main {
+  margin: 40px 0;
+}
+.main .content {
+  overflow: hidden;
+  margin-top: 40px;
+}
+.main .page-r {
+  width: 765px;
+  float: left;
+}
+.main .color {
+  font-size: 22px;
+  color: #3190e2;
+  margin-bottom: 20px;
+}
+.main p {
+  font-size: 18px;
+  color: #020202;
+  line-height: 26px;
+  margin-bottom: 20px;
+}

@@ -24,7 +24,6 @@ yarn-error.log
 /.vscode
 /.zed
 /public/uploads/
-/public/static/
 
 # Sensitive credentials
 

@@ -93,6 +93,8 @@ class LayoutComposer
 
         $view->with('slides',$this->slideRepository->all());
 
+        $view->with('page_banner_bg', $this->pageBannerBg());
+
     }
 
     /**
@@ -129,14 +131,29 @@ class LayoutComposer
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
     protected function globalBanners(){
-        $global_banners =  get_setting('global_banners')->toArray();
-        $banner = '';
-        if($global_banners){
-            $banner = storage_url(data_get($global_banners,array_rand($global_banners)));
-        } else {
-            $banner = '/static/img/center-banner.webp';
+        $global_banners = collect(get_setting('global_banners')->toArray())
+            ->filter(fn($image) => is_string($image) && $image !== '')
+            ->values()
+            ->all();
+        if ($global_banners) {
+            return storage_url($global_banners[array_rand($global_banners)]);
         }
-        return $banner;
+
+        return '/static/img/center-banner.webp';
+    }
+
+    protected function pageBannerBg(): string
+    {
+        $pool = collect(get_setting('global_banners')->toArray())
+            ->filter(fn($image) => is_string($image) && $image !== '')
+            ->values()
+            ->all();
+
+        if ($pool === []) {
+            return url('/static/img/gbanner.jpg');
+        }
+
+        return url(storage_url($pool[array_rand($pool)]));
     }
 
 

@@ -1,0 +1,20 @@
+.section {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 80px;
+  position: relative;
+}
+.section .section-wrapper {
+  width: 1040px;
+  margin: 0 auto;
+}
+.section .section-1100 {
+  width: 1100px;
+}
+.section .wrapper-1140 {
+  width: 1140px;
+}
+.section .wrapper-1168 {
+  width: 1168px;
+}
+/*# sourceMappingURL=section.css.map */

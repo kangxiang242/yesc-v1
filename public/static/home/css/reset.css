@@ -1,0 +1,47 @@
+@charset "utf-8";
+body,h1,h2,h3,h4,h5,h6,div,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+body,button,input,select,textarea{font:12px/1.5 'Microsoft YaHei', 'SimSun', '宋体', '\5B8B\4F53'}
+body{_overflow:auto;_height:100%;margin:0 auto;}
+html{_overflow:hidden}
+h1,h2,h3,h4,h5,h6{font-size:100%}
+address,cite,dfn,em,var{font-style:normal}
+code,kbd,pre,samp{font-family:courier new,courier,monospace}
+small{font-size:12px}
+ul,ol,li,dl,dt,dd{list-style:none}
+sup{vertical-align:text-top}
+sub{vertical-align:text-bottom}
+legend{color:#000}
+fieldset,img{border:0}
+button,input,select,textarea{font:12px/1.5 tahoma,arial,sans-serif; vertical-align:middle;}
+table{border-collapse:collapse;border-spacing:0}
+.clear{display:block;float:none;clear:both;overflow:hidden;visibility:hidden;width:0;height:0;background:none;border:0;font-size:0}
+input,button,img,a,textarea{outline:none;}
+img{display: block;}
+/*a*/
+a,a:hover{ text-decoration:none; color: inherit;display: inline-block;text-indent: 0;}
+
+/*title*/
+h1 { font-size:50px;}
+h2 { font-size:40px;}
+h3 { font-size:30px;}
+h4 { font-size:14px;}
+h5 { font-size:12px;}
+h6 { font-size:9px;}
+
+body,html{line-height: 1;}
+body{min-width: 1200px;overflow-x: hidden;background: #fff;}
+.clearfix{display: inline-block;}
+.clearfix:after{display:block;content:"";height:0;line-height: 0;clear:both;visibility: hidden;}
+
+/*DIY*/
+.container{width:1200px;height:100%;margin:0 auto;}
+
+.fl{float: left;}
+.fr{float: right;}
+
+.pagelist{text-align: center;}
+.pagelist a, .pagelist span {line-height: 30px;padding: 0 10px;color: #000;display: inline-block;text-decoration: none;margin-left: 5px;font-size: 16px; box-sizing: border-box;}
+.pagelist a:hover, .pagelist .current {border: 1px solid #3190e2;margin-left: 5px;}
+.pagelist .current{background: #3190e2; color: #fff;}
+.pagelist form{display: none;}
+.pagelist .disabled, .pagelist span{cursor: no-drop;}

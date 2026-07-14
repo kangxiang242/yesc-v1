@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use App\Filament\Components\WangEditor;
 use App\Models\Config;
+use App\Repositories\ConfigRepository;
 use Filament\Forms;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -39,10 +40,12 @@ class SiteGuidePage extends Page implements HasForms
             // 首页
             'home_about_title' => $g('home_about_title'),
             'home_about_desc' => $g('home_about_desc'),
+            'home_banners' => json_decode($g('home_banners', '[]'), true) ?: [],
             'choose' => json_decode($g('choose', '[]'), true) ?: [],
             'taboo' => json_decode($g('taboo', '[]'), true) ?: [],
 
             // 產品頁面
+            'goods_images' => json_decode($g('goods_images', '[]'), true) ?: [],
             'goods_instructions' => json_decode($g('goods_instructions', '[]'), true) ?: [],
         ]);
     }
@@ -64,6 +67,20 @@ class SiteGuidePage extends Page implements HasForms
     {
         return Forms\Components\Tabs\Tab::make('首页')
             ->schema([
+                Forms\Components\Section::make('首屏輪播圖')
+                    ->description('對應首頁 hero-slide，最多 4 張；順序即輪播順序。未上傳時使用預設靜態圖。')
+                    ->schema([
+                        Forms\Components\FileUpload::make('home_banners')
+                            ->label('輪播圖片')
+                            ->directory('home')
+                            ->image()
+                            ->multiple()
+                            ->reorderable()
+                            ->maxFiles(4)
+                            ->imageEditor()
+                            ->helperText('建議尺寸約 1920×1080，格式 webp / jpg / png'),
+                    ]),
+
                 Forms\Components\TextInput::make('home_about_title')
                     ->label('標題')
                     ->maxLength(255),
@@ -124,6 +141,19 @@ class SiteGuidePage extends Page implements HasForms
     {
         return Forms\Components\Tabs\Tab::make('產品頁面')
             ->schema([
+                Forms\Components\Section::make('產品詳情背景圖')
+                    ->description('對應產品詳情頁 bg-box 背景輪播；可上傳多張，前台隨機輪播。')
+                    ->schema([
+                        Forms\Components\FileUpload::make('goods_images')
+                            ->label('背景圖片')
+                            ->directory('goods')
+                            ->image()
+                            ->multiple()
+                            ->reorderable()
+                            ->imageEditor()
+                            ->helperText('建議寬圖，格式 webp / jpg / png'),
+                    ]),
+
                 Forms\Components\Section::make('藥品說明')->collapsible()->schema([
                     Forms\Components\Repeater::make('goods_instructions')
                         ->label(false)
@@ -152,16 +182,26 @@ class SiteGuidePage extends Page implements HasForms
 
         foreach ($data as $key => $value) {
             if (is_array($value)) {
-                // Filter out removed items and re-index
-                $filtered = collect($value)
-                    ->filter(fn($item) => !($item['_remove_'] ?? false))
-                    ->map(function ($item) {
-                        unset($item['_remove_']);
-                        return $item;
-                    })
-                    ->values()
-                    ->toArray();
-                $value = json_encode($filtered, JSON_UNESCAPED_UNICODE);
+                $isFileList = $value === [] || array_is_list($value) && is_string($value[0] ?? null);
+
+                if ($isFileList) {
+                    $value = json_encode(
+                        array_values(array_filter($value, fn($item) => is_string($item) && $item !== '')),
+                        JSON_UNESCAPED_UNICODE
+                    );
+                } else {
+                    $filtered = collect($value)
+                        ->filter(fn($item) => !($item['_remove_'] ?? false))
+                        ->map(function ($item) {
+                            if (is_array($item)) {
+                                unset($item['_remove_']);
+                            }
+                            return $item;
+                        })
+                        ->values()
+                        ->toArray();
+                    $value = json_encode($filtered, JSON_UNESCAPED_UNICODE);
+                }
             }
 
             Config::updateOrCreate(
@@ -169,6 +209,8 @@ class SiteGuidePage extends Page implements HasForms
                 ['name' => $key, 'content' => $value ?? '']
             );
         }
+
+        ConfigRepository::make()->forget();
 
         Notification::make()->title('保存成功')->success()->send();
     }

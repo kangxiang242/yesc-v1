@@ -2,23 +2,18 @@
 
 namespace App\Http\Middleware;
 
-use App\Handlers\DeviceTypeHandlers;
 use Closure;
 
 class RedirectDeviceMiddleware
 {
     public function handle($request, Closure $next)
     {
-        $is_mobile = DeviceTypeHandlers::isMobile();
-        if ($is_mobile) {
-            $url = config('app.m_url');
-        } else {
-            $url = config('app.url');
-        }
+        // 站點已改響應式，不再依 UA 跳轉 m 域名；僅校正非 APP_URL 的 host（如 127.0.0.1 → localhost）
+        $url = config('app.url');
         if ($url) {
             $parse_url = parse_url($url);
             if (isset($parse_url['host']) && $parse_url['host'] != $request->getHost()) {
-                $n_u = $url . '/' . trim($request->path(), '/');
+                $n_u = rtrim($url, '/') . '/' . trim($request->path(), '/');
                 return redirect($n_u);
             }
         }

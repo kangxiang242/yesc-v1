@@ -1,0 +1,137 @@
+
+.shop {
+    /*margin-top: 0.3rem;*/
+    padding-right: 0.2rem;
+    padding-left: 0.2rem;
+}
+
+.product-row {
+    
+}
+
+.product-box {
+    /* border: 0.02rem solid #1c6ab44a;	
+    padding: 0.2rem 0; */
+    padding-bottom: 0.3rem;
+    border-radius: 0.3rem;
+    position: relative;
+}
+
+.shop-img {
+    
+}
+.shop-img img {
+    width: 2.6rem;
+    height: 2.6rem;
+}
+
+.shop-text {
+    position: relative;
+    /* margin-left: 0.19rem; */
+    padding: 0 0.1rem;
+    width: 100%;
+    background-image: url(../img/shuiyin.jpg);
+    background-repeat: no-repeat;
+    background-size: 4rem 2.6rem;
+}
+
+
+.main-title {
+    font-size: 0.3rem;
+    margin-bottom: 0.1rem;
+    font-weight: 500;
+}
+
+.sub-title {
+    color: #999999;
+    font-size: 0.26rem;
+}
+
+.grey-price {
+    font-size: 0.24rem;
+    color: #999999;
+    text-decoration:line-through;
+    font-weight: 500;
+    margin-left: 0.14rem;
+}
+
+.red-price {
+    color: #ED2730;
+    font-size: 0.36rem;
+	font-weight: 700;
+    line-height: 1;
+    margin-top: 0.6rem;
+}
+.twd{
+    font-size: 0.22rem;
+    margin-right: 0.06rem;
+}
+
+.buy-button {
+    position: absolute;
+    top: 1.1rem;
+    right: 0.2rem;
+    
+}
+
+.buy-button button {
+    width: 3.4rem;
+    height: 0.72rem;
+    background: #1C6AB4;
+    box-shadow: 0px 0.02rem 0.04rem 0px rgba(33, 62, 108, 0.5);
+    border-radius: 0.08rem;
+    color: #FFFFFF;
+    border: none;
+    font-size: 0.28rem;
+    font-weight: 500;
+}
+
+.explain {
+    color: #1C6AB4;
+    font-size: 0.24rem;
+    margin-top: 0.29rem;
+    padding-left: 0.11rem;
+    padding-right: 0.11rem;
+}
+.grey-line{
+	/*width: 100%;
+	height:0.2rem;
+	background: #F5F5F5;
+    margin: 0 auto;*/
+
+}
+
+.product-content h2{
+	text-align: center;
+	margin-top: 0.4rem;
+	margin-bottom: 0.55rem;
+}
+
+.product-content{
+	/*padding-left: 0.3rem;
+	padding-right: 0.3rem;*/
+}
+
+.product-content .detailed p{
+	font-size: 0.28rem;
+	line-height: 0.36rem;
+}
+
+.product-content .detailed .text{
+	margin-bottom: 0.38rem;
+}
+.product-content .detailed .text .unfold{
+	float:right;
+	margin-right: 0.2rem;
+}
+.product-content .detailed .img img{
+	width: 100%;
+}
+
+.product-content .detailed .img-increase{
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+.product-content .detailed .text-xiala{
+	margin-bottom: 0.58rem;
+}

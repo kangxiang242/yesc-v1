@@ -1,0 +1,139 @@
+
+.news-main{
+    width: 864px;
+    margin-top: 100px;
+    float:left;
+}
+.popularity{
+    float:right;
+    margin-top: 74px;
+}
+
+.news-main .news-item{
+    border-top: 1px solid #E6E6E6;
+    padding-top: 32px;
+    display: flex;
+    position: relative;
+    margin-bottom: 32px;
+
+}
+
+.news-desc{
+    position: relative;
+    margin-left: 23px;
+    display: flex;
+}
+
+.news-img,.news-text{
+    float:left;
+    align-self: center;
+}
+
+.news-img img{
+    width: 247px;
+    /*height: 296px;*/
+}
+
+.news-text{
+    /*margin-top: 70px;*/
+
+}
+
+.news-text .news-title{
+    font-size: 20px;
+    font-weight: 600;
+    color: #00a629;
+}
+
+.news-text .news-sku{
+    color: #999999;
+    font-size: 14px;
+
+}
+
+.news-text .news-tips{
+    margin-top: 32px;
+    font-size: 14px;
+    color: #333333;
+    line-height: 22px;
+}
+
+
+.go-desc{
+
+    border: 2px solid #00a629;
+    border-radius: 6px;
+    display: inline-block;
+    text-align: center;
+    width: 32px;
+    height: 32px;
+    line-height: 26px;
+    font-size: 18px;
+    color: #00a629;
+    margin-top: 30px;
+    /*position: absolute;
+    left:0;
+    bottom: 0;*/
+
+}
+
+.go-desc:hover{
+    color: #fff;
+    background: #00a629;
+
+}
+
+
+
+
+
+.popularity-item{
+    margin-top: 23px;
+}
+
+.popularity .box-header a{
+    background: #00a629;
+    border-radius: 10px 10px 0px 0px;
+    color: #fff;
+    padding: 3px 10px;
+    display: inline-block;
+}
+.popularity-product{
+    width: 240px;
+    border: 1px solid #E6E6E6;
+    border-top-color:#00a629;
+    text-align: center;
+    padding: 0 16px;
+    padding-bottom: 90px;
+
+}
+
+.popularity-product img{
+    width: 208px;
+}
+
+.popularity-product .item-list{
+    text-align: right;
+    color: #00a629;
+    font-size: 14px;
+}
+
+.popularity-product .item-list span{
+    font-size: 24px;
+    font-weight: 600;
+}
+.popularity-product .new-name{
+    color: #1A1A1A;
+    text-align: left;
+    font-size: 14px;
+}
+.popularity-item-a{
+    color: #333;
+    font-size: 14px;
+}
+.popularity-item-a:hover{
+    color: #00a629;
+}
+.popularity-item-img:hover + .new-name .popularity-item-a{
+    color: #00a629;
+}

@@ -46,7 +46,7 @@ if (! function_exists('template')) {
     /**
      * Get the evaluated view contents for the given view.
      *
-     * Web-only（移动端走独立域名，由 RedirectDeviceMiddleware 处理跳转，不拆分 mobile 模板）。
+     * Web-only（響應式單模板，不再拆分 mobile 視圖）。
      *
      * @param  string|null  $view
      * @param  \Illuminate\Contracts\Support\Arrayable|array  $data

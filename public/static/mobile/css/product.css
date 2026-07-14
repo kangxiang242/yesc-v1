@@ -1,0 +1,94 @@
+.shop {
+    margin-top: 0.3rem;
+	padding-right: 0.2rem;
+}
+
+.product-row {
+    margin-top: 0.1rem;
+	padding-left: 0.2rem;
+}
+
+.product-box {
+    border: 0.02rem solid #1c6ab44a;
+	padding: 0.3rem 0.1rem;
+	border-radius: 0.3rem;
+	position: relative;
+	margin-bottom: 0.3rem;
+}
+.product-sec{
+	display: flex;
+	position: relative;
+}
+.shop-img {
+    width: 2.6rem;
+}
+
+.shop-img img {
+    width: 100%;
+}
+
+.shop-text {
+    position: relative;
+	background-image: url(../img/shuiyin.jpg);
+	background-repeat: no-repeat;
+	width: 4rem;
+	background-size: 4rem 2.6rem;
+	margin-left: calc(100% - 6.6rem);
+	background-position: 0% 100%;
+}
+
+.main-title {
+    font-size: 0.3rem;
+    margin-bottom: 0.2rem;
+
+}
+.main-title a{
+    color: #000;
+    font-weight: 500;
+}
+
+.sub-title {
+    color: #999999;
+    font-size: 0.26rem;
+}
+
+.grey-price {
+    margin-top: 0.2rem;
+	font-size: 0.24rem;
+	color:#999999;
+	text-decoration: line-through;
+	font-weight: 500;
+}
+
+.red-price {
+    color: #ED2730;
+	font-size: 0.32rem;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.buy-button {
+    position: absolute;
+    bottom: 0;
+    right: 0.1rem;
+}
+
+.buy-button button {
+    width: 2.2rem;
+	height: 0.6rem;
+	background: #1C6AB4;
+	box-shadow: 0px 0.02rem 0.04rem 0px rgba(33, 62, 108, 0.5);
+	border-radius: 0.08rem;
+	color: #FFFFFF;
+	border: none;
+	font-size: 0.28rem;
+	font-weight: 500;
+}
+
+.explain{
+	color: #1C6AB4;
+	font-size: 0.24rem;
+	margin-top: 0.29rem;
+	padding-left: 0.11rem;
+	padding-right: 0.11rem;
+}

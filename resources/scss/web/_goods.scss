@@ -120,36 +120,12 @@
             left: 0;
             border-radius: 0;
         }
-        &::after{
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, transparent 0%, rgba($main-color, 0.20), $main-color, #FFF);
-            z-index: 1;
-            @include media.mobile {
-                background: linear-gradient(to bottom, transparent 0%, rgba($main-color, 0.20), $main-color, $body-bg-color);
-            }
+
+        &.has-bg-layers{
+            mask-image: linear-gradient(to bottom, #000000 40%, rgba(0, 0, 0, 0) 70%);
+            -webkit-mask-image: linear-gradient(to bottom, #000000 40%, rgba(0, 0, 0, 0) 70%);
         }
-        &:before{
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: top;
-            z-index: 0;
-            opacity: 1;
-            transition: opacity 1s ease-in-out;
-        }
-    
-        &.has-bg-layers:before{
-            opacity: 0;
-        }
+
         .bg-layer{
             position: absolute;
             top: 0;
@@ -454,129 +430,82 @@
 .center-banner{
     position: relative;
     width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
-    font-size: clamp(13px, 1.5vw, 16px);
+    height: 300px;
+    font-size: clamp(13px, 1.5vw, 18px);
     grid-column: 1 / -1;
     margin-bottom: 40px;
+    overflow: hidden;
     @include media.desktop{
-        height: fit-content;
-        border-radius: 60px;
-        overflow: hidden;
+        grid-column: 2;
+        width: 100%;
+        border-radius: 40px;
         margin-bottom: 100px;
     }
     @include media.mobile{
+        height: 150px;
         padding: 0 15px;
         margin-bottom: 60px;
+        border-radius: 0;
     }
-    .center-banner-bg{
-        z-index: 0;
-        @include media.mobile{
-            border-radius: 30px;
-            overflow: hidden;
-        }
-        &:before{
-            content: '';
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(at 0% 100%, $main-color, rgba(darken($main-color, 40%), 60%) 40%, transparent 70%);
-            z-index: 1;
-            @include media.mobile{
-                background: linear-gradient(to right, #3e96f7, rgba(darken($main-color, 40%), 60%) 10%, transparent 80%);
-            }
-        }
-        img{
-            display: block;
-            width: 100%;
-        }
-    }
-    .line-wrap{
+    &::before{
+        content: '';
         position: absolute;
-        bottom: 0;
-        left: 0;
-        display: flex;
-        padding: 0 30px 0 0;
+        inset: 0;
         width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, rgba(0, 0, 0, 0.5), transparent 70%);
         z-index: 1;
-        .line{
-            overflow: visible;
-            .aurora-stop-start{
-                stop-color: $body-bg-color;
-                stop-opacity: 0.6;
-            }
-            .aurora-stop-end{
-                stop-color: $body-bg-color;
-                stop-opacity: 1;
-            }
-            .inner-line{
-                fill: none;
-                stroke: $main-color;
-                stroke-width: 3px;
-                stroke-linecap: round;
-            }
-            .inner-fill{
-                fill: url(#aurora-gradient-v2);
-                opacity: 0;
-                animation: fade-fill 0.3s 3s forwards;
-            }
-            .dot-group{
-                fill: $main-color;
-                .line-dot{
-                    r: 4;
-                    fill: #FFF;
-                }
-                .line-dot2{
-                    r: 0;
-                    fill: none;
-                    stroke: #FFF;
-                    stroke-width: 4;
-                    opacity: 0.8;
-                }
-            }
-
+        pointer-events: none;
+    }
+    .center-banner-img{
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        z-index: 0;
+    }
+    .line{
+        position: absolute;
+        bottom: -5%;
+        left: 0;
+        display: block;
+        width: auto;
+        height: 95%;
+        z-index: 1;
+        overflow: visible;
+        .aurora-stop-start{
+            stop-color: $body-bg-color;
+            stop-opacity: 0.6;
         }
-        .decoration-circle {
-            position: absolute;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            top: 0;
-            right: 30px;
-            z-index: -1;
-            &.now{
-                &:before, &:after{
-                    animation: center-banner-decoration-circle 2s 2s linear infinite;
-                }
+        .aurora-stop-end{
+            stop-color: $body-bg-color;
+            stop-opacity: 1;
+        }
+        .inner-line{
+            fill: none;
+            stroke: $main-color;
+            stroke-width: 3px;
+            stroke-linecap: round;
+        }
+        .inner-fill{
+            fill: url(#aurora-gradient-v2);
+            opacity: 0;
+            animation: fade-fill 0.3s 3s forwards;
+        }
+        .dot-group{
+            fill: $main-color;
+            .line-dot{
+                r: 4;
+                fill: #FFF;
             }
-            &:before, &:after{
-                position: absolute;
-                content: "";
-                height: 50px;
-                width: 50px;
-                border: 8px solid $main-color;
-                border-radius: 50%;
-                opacity: 0;
-            }
-            &:after{
-                opacity: 0;
-                animation-delay: 3s !important;
-            }
-
-            @keyframes center-banner-decoration-circle {
-                0% {
-                    border: 8px solid #FFF;
-                    transform: scale(0);
-                    opacity: 1;
-                }
-
-                100% {
-                    border: 0 solid #FFF;
-                    transform: scale(1);
-                    opacity: 0;
-                }
+            .line-dot2{
+                r: 0;
+                fill: none;
+                stroke: #FFF;
+                stroke-width: 4;
+                opacity: 0.8;
             }
         }
     }
@@ -591,9 +520,6 @@
         color: rgba(255, 255, 255, 0.6);
         mix-blend-mode: plus-lighter;
         z-index: 1;
-        @include media.mobile{
-            bottom: -2em;
-        }
     }
     .center-banner-content{
         position: absolute;
@@ -635,21 +561,12 @@
                         padding-top: 5px;
                     }
                 }
-                .downbg-icon{
-                    width: 2em;
-                    height: 2em;
-                    color: #FFF;
-                }
             }
             &.highlight-line1{
                 font-size: 1.2em;
             }
             &.highlight-line2{
                 font-size: clamp(2em, 2vw, 2em);
-
-                .downbg-icon{
-                    transform: rotateX(180deg);
-                }
             }
 
         }

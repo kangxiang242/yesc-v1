@@ -71,9 +71,20 @@ class IndexController extends Controller
             ->take(3);
 
         $banner = BannerRepository::make()->getPageBanner("/");
-        $home_banners = get_setting("home_banners")->toArray();
-        foreach ($home_banners as &$image) {
-            $image = "/storage/" . $image;
+        $defaultHeroSlides = [
+            asset("static/img/indexbg.webp"),
+            asset("static/img/indexbg2.webp"),
+            asset("static/img/indexbg3.webp"),
+            asset("static/img/indexbg4.webp"),
+        ];
+        $home_banners = collect(get_setting("home_banners")->toArray())
+            ->filter(fn($image) => is_string($image) && $image !== "")
+            ->map(fn($image) => storage_url($image))
+            ->take(4)
+            ->values()
+            ->all();
+        if ($home_banners === []) {
+            $home_banners = $defaultHeroSlides;
         }
 
         return template(

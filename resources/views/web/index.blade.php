@@ -963,63 +963,52 @@
             </li>
         </ul>
         <div class="hero-carousel" id="hero-video-carousel" role="region" aria-roledescription="carousel" aria-label="犀利士產品特點輪播">
-            <img
-                class="hero-slide is-active"
-                src="{{ asset('static/img/indexbg.webp') }}"
-                width="1920"
-                height="1080"
-                alt="禮來犀利士長達36小時藥效"
-                aria-roledescription="slide"
-                aria-label="1 / 4：長達 36小時 藥效"
-                aria-labelledby="text-banner-0-title"
-                aria-describedby="text-banner-0"
-                data-bind-text="text-banner-0"
-                aria-hidden="false"
-                decoding="async"
-                fetchpriority="high"
-            >
-            <img
-                class="hero-slide"
-                src="{{ asset('static/img/indexbg2.webp') }}"
-                width="1920"
-                height="1080"
-                alt="禮來犀利士每日5mg保養方案"
-                aria-roledescription="slide"
-                aria-label="2 / 4：每日 5mg 保養"
-                aria-labelledby="text-banner-1-title"
-                aria-describedby="text-banner-1"
-                data-bind-text="text-banner-1"
-                aria-hidden="true"
-                decoding="async"
-            >
-            <img
-                class="hero-slide"
-                src="{{ asset('static/img/indexbg3.webp') }}"
-                width="1920"
-                height="1080"
-                alt="禮來犀利士全球上市23年臨床經驗"
-                aria-roledescription="slide"
-                aria-label="3 / 4：全球上市 23年"
-                aria-labelledby="text-banner-2-title"
-                aria-describedby="text-banner-2"
-                data-bind-text="text-banner-2"
-                aria-hidden="true"
-                decoding="async"
-            >
-            <img
-                class="hero-slide"
-                src="{{ asset('static/img/indexbg4.webp') }}"
-                width="1920"
-                height="1080"
-                alt="禮來犀利士高達98%使用者滿意度"
-                aria-roledescription="slide"
-                aria-label="4 / 4：高達 98% 滿意度"
-                aria-labelledby="text-banner-3-title"
-                aria-describedby="text-banner-3"
-                data-bind-text="text-banner-3"
-                aria-hidden="true"
-                decoding="async"
-            >
+            @php
+                $heroSlideMeta = [
+                    [
+                        'alt' => '禮來犀利士長達36小時藥效',
+                        'aria' => '長達 36小時 藥效',
+                    ],
+                    [
+                        'alt' => '禮來犀利士每日5mg保養方案',
+                        'aria' => '每日 5mg 保養',
+                    ],
+                    [
+                        'alt' => '禮來犀利士全球上市23年臨床經驗',
+                        'aria' => '全球上市 23年',
+                    ],
+                    [
+                        'alt' => '禮來犀利士高達98%使用者滿意度',
+                        'aria' => '高達 98% 滿意度',
+                    ],
+                ];
+                $slideTotal = count($home_banners);
+            @endphp
+            @foreach($home_banners as $index => $slideSrc)
+                @php
+                    $meta = $heroSlideMeta[$index] ?? [
+                        'alt' => '禮來犀利士',
+                        'aria' => '輪播圖 ' . ($index + 1),
+                    ];
+                    $isActive = $index === 0;
+                    $textId = 'text-banner-' . $index;
+                @endphp
+                <img
+                    class="hero-slide{{ $isActive ? ' is-active' : '' }}"
+                    src="{{ $slideSrc }}"
+                    width="1920"
+                    height="1080"
+                    alt="{{ $meta['alt'] }}"
+                    aria-roledescription="slide"
+                    aria-label="{{ ($index + 1) . ' / ' . $slideTotal . '：' . $meta['aria'] }}"
+                    aria-labelledby="{{ $textId }}-title"
+                    aria-describedby="{{ $textId }}"
+                    data-bind-text="{{ $textId }}"
+                    aria-hidden="{{ $isActive ? 'false' : 'true' }}"
+                    decoding="async"
+                    @if($isActive) fetchpriority="high" @endif
+                >
+            @endforeach
         </div>
         @include('components.core-sec', ['variant' => 'hero'])
         <a href="#compare" class="scroll-down" aria-label="下滑查看更多犀利士資訊" title="更多犀利士資訊"><span></span><span></span><span></span>更多犀利士資訊</a>
@@ -1174,11 +1163,11 @@
                     </h3>
                     <p class="progress-text mon">大多數男士表示在服用犀利士期間，不再被表現壓力打亂親密節奏，伴侶的每次性生活整體感受效果明顯提升</p>
                     {{--<a href="/product" class="main-btn mon">查看全部 犀利士組合方案<img src="/static/img/btnpill.webp" decoding="async" loading="lazy" alt="犀利士Cialis組合方案按鈕圖示"></a>--}}
-                    <p class="progress-sub mon">*基於1000名顧客服用犀利士超過三個月後的回饋數據整理，非即時效果，依個人體質有所差異。</p>
+                    <p class="progress-sub mon">*基於1000名顧客服用犀利士超過三個月後的回饋數據整理。</p>
                 </div>
             </div>
             <div class="pb-bg">
-                <img src="/static/img/pb.jpg" decoding="async" loading="lazy" alt="犀利士Cialis提升男性自信心">
+                <img src="/static/img/indexb.webp" decoding="async" loading="lazy" alt="犀利士Cialis提升男性自信心">
             </div>
 
         </div>

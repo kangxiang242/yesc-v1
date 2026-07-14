@@ -1,0 +1,275 @@
+.banner{
+	width: 100%;
+	img{
+		width: 100%;
+	}
+}
+.title{
+	margin-top: 40px;
+	margin-bottom: 10px;
+	font-family: "Microsoft YaHei";
+	font-size: 32px;
+	color: #00487d;
+	font-weight: bold;
+	h1{
+		display: inline-block;
+		font-size: 32px;
+		color: #00487d;
+	}
+}
+.content{
+	width: 100%;
+	overflow: hidden;
+	margin-bottom: 40px;
+	.shop-item{
+		font-family: "Microsoft YaHei";
+		width: 400px;
+		height: 504px;
+		overflow: hidden;
+		box-sizing: border-box;
+		float: left;
+		padding: 40px;
+		position: relative;
+		.shop_img{
+			width: 216px;
+			margin: 0 auto;
+			a,img{
+				width: 100%;
+			}
+		}
+		.shop_msg{
+			width: 100%;
+			padding-top: 10px;
+			.shop_name{
+				font-size: 24px;
+			}
+			p{
+				margin-top: 14px;
+				color: #9d9d9d;
+				font-size: 18px;
+				font-weight: 400;
+				text-indent: -10px;
+			}
+			.price{
+				color: #000;
+				font-size: 16px;
+				text-decoration: line-through;
+				text-indent: 0;
+			}
+			.nowPrice{
+				color: #3f94e2;
+				font-size: 22px;
+				font-weight: bold;
+				text-indent: 0;
+			}
+		}
+		.shop_r{
+			display: block;
+			width: 150px;
+			height: 34px;
+			margin-top: 20px;
+			line-height: 34px;
+			position: relative;
+			padding-left: 20px;
+			background-color: #3f94e2;
+			border-radius: 6px;
+			font-size: 22px;
+			font-weight: bold;
+			color: #fff;
+			background-image: url('../images/cart.png');
+			background-repeat: no-repeat;
+			background-position: 120px center;
+			background-size: 24px 24px;
+		}
+		.line{
+			position: absolute;
+			left: 40px;
+			right: 40px;
+			bottom: 0;
+			display: block;
+			height: 2px;
+			background: #f4f4f4;
+		}
+	}
+
+}
+.main{
+	background: #fff;
+}
+.goods {
+    padding: 50px;
+    box-sizing: border-box;
+    .goods-top {
+	    height: 230px;
+	    border-bottom: 1px dashed #e5e5e5;
+	    padding-bottom: 20px;
+	    .goods-img{
+	    	float: left;
+		    width: 245px;
+		    height: 230px;
+		    overflow: hidden;
+	    }
+	    .goods-msg{
+		    width: 460px;
+		    padding: 0 20px;
+		    float: left;
+		    .title{
+			    font-size: 24px;
+			    font-weight: 700;
+			    color: #034882;
+			    padding-bottom: 10px;
+			    margin-bottom: 10px;
+			    text-align: left;
+		    }
+		    .text-p{
+	    	    padding-bottom: 10px;
+	    	    line-height: 25px;
+    	        font-size: 16px;
+	    	    &.color{
+		    	    color: rgba(3, 72, 130, 0.6);
+	    	    }
+	    	    &.price{
+	    	    	font-size: 14px;
+				    font-weight: 700;
+				    .old-price{
+				    	text-decoration: line-through;
+				    }
+				    .now-price{
+			    	    color: #f00;
+					    font-size: 26px;
+					    font-weight: 700;
+					    margin: 0 20px;
+		    	    }
+	    	    }
+		    }
+	    }
+	    .goods-sub{
+	    	display: block;
+	    	float: left;
+		    width: 113px;
+		    height: 35px;
+		    border-radius: 4px 4px;
+		    background: #034882;
+		    font-size: 20px;
+		    font-weight: bold;
+		    text-align: center;
+		    color: #fff;
+		    line-height: 35px;
+	        margin: 70px 0 0 20px;
+	    }
+	}
+}
+.goods-btm{
+    padding: 20px;
+    p{
+    	overflow: hidden;
+    	line-height: 25px;
+    	&.color{
+    		color:#1C6AB4;
+    		font-size: 14px;
+    	}
+    }
+    span{
+    	font-size:16px;
+    	color: #034882;
+    	margin-right: 20px;
+    }
+    .btn-con{
+    	font-size:16px;
+    }
+    .red{
+    	color: red;
+    }
+}
+
+.shop_con {
+    box-sizing: border-box;
+    padding: 40px 50px;
+}
+.shop_table{
+    margin-bottom: 20px;
+    border-width: 1px;
+    border-color: #cacaca;
+    border-collapse: collapse;
+    th{
+	    padding: 8px;
+	    border: solid 1px #cacaca;
+    }
+    td{
+	    padding: 8px;
+	    border: solid 1px #cacaca;
+	    text-align: center;
+    }
+}
+.shopping{
+	border: solid 1px #cacaca;
+    margin-bottom: 50px;
+    .title{
+    	height: 44px;
+	    line-height: 44px;
+	    border-bottom: solid 1px #cacaca;
+	    padding-left: 10px;
+	    font-size: 18px;
+	    font-weight: 700;
+	    color: #034882;
+    }
+    form{
+    	padding: 50px 20px 50px 50px;
+    }
+    .form-item{
+	    margin-bottom: 10px;
+	    &.text_bot{
+	    	padding-left: 66px;
+	    	line-height: 25px;
+	    }
+	    .text{
+
+	    	line-height: 25px;
+	    	&.align-top{
+	    		vertical-align: top;
+	    	}
+	    }
+	    .input{
+	    	width: 185px;
+		    height: 22px;
+		    border: 1px solid #a0a0a0;
+		    font: 14px/17px;
+		    color: #666;
+		    padding: 0px 3px;
+		    margin-right: 5px;
+		    &.long{
+		    	width: 610px;
+		    }
+		    &.area{
+		    	width: 610px;
+		    	height: 140px;
+		    }
+	    }
+	    .form_select{
+	    	width: 90px;
+	    	font-size: 14px;
+	    }
+	    .input[name="city_more"]{
+    	    width: 432px;
+	    }
+	    .form-btn{
+    	    display: block;
+		    width: 230px;
+		    height: 55px;
+		    text-align: center;
+		    line-height: 55px;
+		    border: 0;
+		    margin: 20px 0px 0px 60px;
+		    border-radius: 6px 6px;
+		    background: #034882;
+		    text-align: center;
+		    font-size: 24px;
+		    font-weight: 700;
+		    color: #fff;
+		    cursor: pointer;
+	    }
+    }
+}
+.qj, .ibon{
+	display: none;
+}

@@ -3,6 +3,8 @@
 namespace App\Filament\Pages;
 
 use App\Models\Config;
+use App\Models\Product;
+use App\Repositories\ConfigRepository;
 use Filament\Forms;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -48,6 +50,7 @@ class SiteConfig extends Page implements HasForms
             'close_site_tips' => $g('close_site_tips'),
             'pc_m_redirect' => $g('pc_m_redirect', '0'),
             'asset_version' => $g('asset_version'),
+            'global_banners' => json_decode($g('global_banners', '[]'), true) ?: [],
 
             // Google Search
             'robots' => $g('robots'),
@@ -66,15 +69,60 @@ class SiteConfig extends Page implements HasForms
             'freight' => $g('freight'),
 
             // 產品分組
-            'product_group_trial_intro' => $g('product_group_trial_intro'),
-            'product_group_trial_faqs' => json_decode($g('product_group_trial_faqs', '[]'), true) ?: [],
-            'product_group_recommend_intro' => $g('product_group_recommend_intro'),
-            'product_group_recommend_faqs' => json_decode($g('product_group_recommend_faqs', '[]'), true) ?: [],
-            'product_group_repurchase_intro' => $g('product_group_repurchase_intro'),
-            'product_group_repurchase_faqs' => json_decode($g('product_group_repurchase_faqs', '[]'), true) ?: [],
-            'product_group_longterm_intro' => $g('product_group_longterm_intro'),
-            'product_group_longterm_faqs' => json_decode($g('product_group_longterm_faqs', '[]'), true) ?: [],
+            ...$this->productGroupFormState($c),
         ]);
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    protected function productGroupFormState(array $config): array
+    {
+        $state = [];
+        $g = fn($key, $default = '') => Arr::get($config, $key, $default);
+
+        foreach ($this->productGroupDefaults() as $key => $defaults) {
+            $title = $g("product_group_{$key}_title");
+            $intro = $g("product_group_{$key}_intro");
+            $productIds = json_decode($g("product_group_{$key}_product_ids", '[]'), true) ?: [];
+            $faqs = json_decode($g("product_group_{$key}_faqs", '[]'), true) ?: [];
+
+            $state["product_group_{$key}_title"] = $title !== '' ? $title : $defaults['title'];
+            $state["product_group_{$key}_intro"] = $intro !== '' ? $intro : $defaults['intro'];
+            $state["product_group_{$key}_product_ids"] = $productIds ?: $defaults['product_ids'];
+            $state["product_group_{$key}_faqs"] = $faqs;
+        }
+
+        return $state;
+    }
+
+    /**
+     * @return array<string, array{title: string, intro: string, product_ids: int[]}>
+     */
+    protected function productGroupDefaults(): array
+    {
+        return [
+            'trial' => [
+                'title' => '初次體驗選擇',
+                'intro' => '若為首次接觸犀利士Cialis的族群，可從較小盒數組合開始，便於觀察自身反應與適應情況。此類方案適合偶爾需求或評估效果者，能在控制成本的同時，了解犀利士Cialis的實際表現與適合程度。',
+                'product_ids' => [11, 12, 13],
+            ],
+            'recommend' => [
+                'title' => '省心推薦專區',
+                'intro' => '彙整常見需求與高評價組合，減少逐一比對的時間。適合希望一次掌握熱門選項、在效果與預算之間取得務實平衡的使用族群。',
+                'product_ids' => [14, 15, 16, 17],
+            ],
+            'repurchase' => [
+                'title' => '穩定回購專區',
+                'intro' => '適合已建立使用節奏、清楚自身需求的族群。以固定週期補貨為取向，兼顧單盒成本與備貨充足度，降低臨時斷貨的不便。',
+                'product_ids' => [18, 19, 20],
+            ],
+            'longterm' => [
+                'title' => '長期保養專區',
+                'intro' => '面向長期規劃與較大備量需求，透過多盒組合拉低平均成本。適合希望長期備用、降低單顆負擔並減少頻繁下單的使用者。',
+                'product_ids' => [21, 22, 23, 24],
+            ],
+        ];
     }
 
     public function form(Form $form): Form
@@ -128,6 +176,18 @@ class SiteConfig extends Page implements HasForms
                     ->options(['1' => '開啟', '0' => '關閉'])
                     ->default('0'),
                 Forms\Components\TextInput::make('asset_version')->label('資源版本號'),
+                Forms\Components\Section::make('頁面頂部背景圖池')
+                    ->description('用於產品、新聞等頁面頂部背景；每次重整頁面隨機取一張。')
+                    ->schema([
+                        Forms\Components\FileUpload::make('global_banners')
+                            ->label('背景圖片')
+                            ->directory('banners')
+                            ->image()
+                            ->multiple()
+                            ->reorderable()
+                            ->imageEditor()
+                            ->helperText('可上傳多張；建議寬圖，例如 1920×600'),
+                    ]),
             ]);
     }
 
@@ -196,10 +256,29 @@ class SiteConfig extends Page implements HasForms
     {
         return Forms\Components\Tabs\Tab::make($label)
             ->schema([
+                Forms\Components\TextInput::make("product_group_{$key}_title")
+                    ->label('標題')
+                    ->required()
+                    ->maxLength(120),
                 Forms\Components\Textarea::make("product_group_{$key}_intro")
-                    ->label('介紹')
+                    ->label('描述')
                     ->rows(4)
-                    ->helperText('顯示在該分組組合列表上方'),
+                    ->helperText('顯示在該分組標題下方'),
+                Forms\Components\Select::make("product_group_{$key}_product_ids")
+                    ->label('包含產品')
+                    ->options(
+                        Product::query()
+                            ->orderByDesc('sort')
+                            ->orderBy('id')
+                            ->get()
+                            ->mapWithKeys(fn(Product $product) => [
+                                $product->id => "#{$product->id} {$product->name}" . ($product->quantity ? "（{$product->quantity}盒）" : ''),
+                            ])
+                    )
+                    ->multiple()
+                    ->searchable()
+                    ->preload()
+                    ->helperText('選擇順序即前台列表順序'),
                 Forms\Components\Repeater::make("product_group_{$key}_faqs")
                     ->label('常見問題')
                     ->schema([
@@ -210,6 +289,7 @@ class SiteConfig extends Page implements HasForms
                     ->defaultItems(0)
                     ->addActionLabel('新增常見問題')
                     ->collapsible()
+                    ->reorderable()
                     ->itemLabel(fn(array $state): ?string => mb_substr($state['q'] ?? '', 0, 30)),
             ]);
     }
@@ -227,6 +307,8 @@ class SiteConfig extends Page implements HasForms
                 ['name' => $key, 'content' => $value ?? '']
             );
         }
+
+        ConfigRepository::make()->forget();
 
         Notification::make()->title('保存成功')->success()->send();
     }

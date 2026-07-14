@@ -1,0 +1,36 @@
+.master-title{
+    font-size: 28px;
+    font-weight: 500;
+    color: #333333;
+    border-bottom: 1px solid #E6E6E6;
+    text-align: center;
+    margin-top: 24px;
+    padding-bottom: 24px;
+}
+
+.article-content{
+    margin-top: 59px;
+}
+
+.article-content p{
+    font-size: 15px;
+    line-height: 20px;
+    letter-spacing: 0.8px;
+    font-weight: 300;
+    margin-top: 15px;
+}
+
+.article-content img{
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.article-content a{
+/*    color: #00A629;*/
+    color: rgb(69, 143, 232);
+}
+
+.article-content h2{
+    margin-bottom: 10px;
+    font-weight: 500;
+}

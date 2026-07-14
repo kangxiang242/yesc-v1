@@ -1,0 +1,274 @@
+
+.protect{
+    text-align: center;
+    font-size: 12px;
+    color: #3D3D3D;
+    a{
+        text-decoration: underline;
+    }
+}
+
+.message-container{
+    padding: 60px 0;
+    @media screen and (max-width: 768px){
+        padding: 0 0 60px;
+    }
+    .side{
+        width: 1000px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        @media screen and (max-width: 768px){
+            width: 100%;
+            padding: 0 15px;
+            flex-direction: column;
+        }
+        .left-side{
+            width: 520px;
+            @media screen and (max-width: 768px){
+                width: 100%;
+            }
+        }
+        .right-side{
+            width: 360px;
+            background: #FAFAFA;
+            height: fit-content;
+            @media screen and (max-width: 768px){
+                width: 100%;
+                margin-top: 60px;
+            }
+
+        }
+        .head{
+
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            .title{
+                font-size: 24px;
+            }
+            .desc{
+                font-size: 14px;
+                margin-top: 20px;
+                @media screen and (max-width: 768px){
+                    font-size: 16px;
+                }
+            }
+        }
+        .body{
+            .form-main{
+                .form-group{
+                    display: flex;
+                    margin-bottom: 48px;
+                    @media screen and (max-width: 768px){
+                        justify-content: space-between;
+                        margin-bottom: 30px;
+                    }
+                    label{
+                        font-size: 14px;
+                        width: 80px;
+                        margin: auto 0;
+                        font-weight: 500;
+                        @media screen and (max-width: 768px){
+                            font-size: 16px;
+                        }
+                    }
+                    .form-control{
+                        width: 430px;
+                        height: 40px;
+                        border: 1px solid #A7A7A7;
+                        border-radius: 4px;
+                        flex-shrink: 0;
+                        padding: 0 15px;
+                        background-color: transparent;
+                        color: #000;
+                        @media screen and (max-width: 768px){
+                            width: 260px;
+                            font-size: 14px;
+                            font-weight: 300;
+                        }
+                        option{
+                            color: #000;
+                        }
+                    }
+                    .form-textarea{
+                        height: 123px;
+                        padding:10px 26px;
+                        font-family: Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+                    }
+                    .form-btn{
+                        width: 100%;
+                        height: 46px;
+                        background: var(--main-color);
+                        border: none;
+                        color: #fff;
+                        font-size: 16px;
+                        border-radius: 23px;
+                    }
+                    .activate-btn{
+                        background: #003fe2;
+                        color: #fff;
+
+                    }
+
+                    .option{
+                        align-self: center;
+                        display: flex;
+                        .checkbox{
+                            margin-left: 16px;
+                            &:first-child{
+                                margin-left: 0;
+                            }
+                            .checked-label{
+                                display: flex;
+                                align-items: center;
+                                padding-left: 10px;
+                                .dress{
+                                    width: 18px;
+                                    height: 18px;
+                                    opacity: 1;
+                                    border: 1px solid #D8D8D8;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    border-radius: 50%;
+                                    flex-shrink: 0;
+                                    &:after{
+                                        content: "";
+                                        width: 12px;
+                                        height: 12px;
+                                        border-radius: 50%;
+                                        background-color: var(--main-color);
+                                        opacity: 0;
+                                    }
+                                }
+                                .text{
+                                    margin-left: 4px;
+                                    font-weight: 300;
+                                }
+
+                            }
+                            .form-radio{
+                                display: none;
+                                &:checked{
+                                    +.checked-label{
+                                        .dress{
+                                            border: 1px solid var(--main-color);
+                                            &:after{
+                                                opacity: 1;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .appendix{
+                    display: flex;
+                    margin-bottom: 48px;
+                    label{
+                        font-size: 14px;
+                        width: 80px;
+
+                    }
+                    .atlas{
+                        .seat{
+                            .file_hide{
+                                display: none;
+                            }
+                            .seize{
+                                width: 120px;
+                                height: 120px;
+                                background-color: #F5F5F5;
+                                border-radius: 4px;
+
+
+                                padding: 0;
+                                display: flex;
+                                position: relative;
+                                justify-content: center;
+                                align-items: center;
+
+                                img{
+                                    width: 100%;
+                                    position: relative;
+                                    z-index: 2;
+                                    display: none;
+                                    max-height: 120px;
+                                }
+                                .remove-pic{
+                                    position: absolute;
+                                    top: -6px;
+                                    right: -6px;
+                                    background-color: red;
+                                    border-radius: 50%;
+                                    display: flex;
+                                    width: 18px;
+                                    height: 18px;
+                                    justify-content: center;
+                                    align-items: center;
+                                    z-index: 3;
+                                    opacity: 0;
+                                    i{
+                                        color: #fff;
+                                        font-size: 12px;
+                                        font-weight: bold;
+                                    }
+                                }
+                                .add-pic{
+                                    position: absolute;
+                                    color: #D8D8D8;
+                                    font-size: 40px;
+                                    z-index: 1;
+                                    opacity: 1;
+                                }
+                                &.have{
+                                    .remove-pic{
+                                        opacity: 1;
+                                    }
+                                    .add-pic{
+                                        opacity: 0;
+                                    }
+                                    img{
+                                        display: block;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
+        .contact{
+            padding: 40px;
+            .group{
+                line-height: 1.5;
+                .p1{
+                    color: #3D3D3D;
+                    font-size: 18px;
+                    margin-bottom: 20px;
+
+                }
+                .specific{
+                    margin-bottom: 20px;
+                }
+                .p2{
+                    font-size: 14px;
+                    font-weight: 300;
+                }
+                .p3{
+                    font-size: 14px;
+                    font-weight: 300;
+                }
+            }
+        }
+
+
+
+
+    }
+
+}

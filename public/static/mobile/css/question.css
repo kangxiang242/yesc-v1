@@ -1,0 +1,67 @@
+.question {
+/*    margin-top: 0.58rem; */
+    padding-right: 0.2rem;
+}
+
+.question-row {
+    margin-top: 0.6rem;
+    margin-left: 0.41rem;
+}
+
+.question-row .item {
+    position: relative;
+    border-bottom: 0.01rem solid #E6E6E6;
+    margin-bottom: 0.3rem;
+    padding-bottom: 0.2rem;
+}
+
+.question-row .item .title {
+    margin-bottom: 0.2rem;
+}
+
+.question-row .item .title a {
+    color: #000000;
+    font-size: 0.3rem;
+    font-weight: 500;
+}
+
+.question-row .item .text {
+    float: left;
+    width: 3.67rem;
+    height: 1.6rem;
+    display: flex;
+}
+
+.question-row .item .text p {
+    line-height: 0.42rem;
+    align-self: center;
+}
+
+.question-row .item .text a {
+    color: #999999;
+    font-size: 0.26rem;
+}
+
+.question-row .item .question-img {
+    float: right;
+}
+
+.question-row .item .question-img img {
+    width: 2.8rem;
+    height: 1.6rem;
+}
+
+.question-row .item .question-button {
+    margin-top: 0.1rem;
+    display: inline-flex;
+}
+
+.question-row .item .question-button button {
+    width: 1.60rem;
+    height: 0.48rem;
+    background: #1C6AB4;
+    border-radius: 0.06rem;
+    border: none;
+    color: #FFFFFF;
+    font-size: 0.26rem;
+}

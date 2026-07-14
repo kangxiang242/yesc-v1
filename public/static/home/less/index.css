@@ -1,0 +1,340 @@
+.banner {
+  position: relative;
+  width: 100%;
+  min-width: 1000px;
+}
+.banner .swiper-wrapper {
+  position: relative;
+  width: 100%;
+}
+.banner .swiper-wrapper .swiper-slide {
+  overflow: hidden;
+}
+.banner .swiper-wrapper .ban_img,
+.banner .swiper-wrapper a {
+  width: 100%;
+}
+.swiper-pagination-bullet {
+  width: 32px;
+  height: 8px;
+  background: none;
+  opacity: 1;
+  background: #ccc;
+}
+.swiper-pagination-bullet-active {
+  background: #3190e1;
+}
+.imgList {
+  font-size: 0;
+  margin-top: 80px;
+}
+.imgList img {
+  display: inline-block;
+  width: 280px;
+  margin-right: 26px;
+}
+.imgList img:last-child {
+  margin-right: 0;
+}
+.indexTitle {
+  margin-top: 80px;
+  margin-bottom: 20px;
+  font-size: 0;
+  font-weight: bold;
+}
+.indexTitle .line {
+  display: inline-block;
+  width: 40%;
+  height: 2px;
+  background: #3190e1;
+  vertical-align: top;
+  margin-top: 28px;
+  position: relative;
+}
+.indexTitle .line:after {
+  display: block;
+  position: absolute;
+  right: -6px;
+  top: -2px;
+  width: 6px;
+  height: 6px;
+  content: '';
+  background: #3190e1;
+  border-radius: 50%;
+}
+.indexTitle .line.right:after {
+  right: unset;
+  left: -6px;
+}
+.indexTitle a {
+  width: 20%;
+  display: inline-block;
+  text-align: center;
+}
+.indexTitle h2,
+.indexTitle h3 {
+  font-size: 32px;
+}
+.indexTitle p {
+  font-size: 20px;
+  font-weight: bold;
+  color: #3190e1;
+  margin-top: 10px;
+}
+.shoplist {
+  width: 1168px;
+  overflow: hidden;
+  margin: 60px auto 0;
+  font-family: "Microsoft YaHei";
+}
+.shoplist .item {
+  box-sizing: border-box;
+  width: 25%;
+  float: left;
+  padding: 24px;
+  color: #000;
+}
+.shoplist .item .img {
+  width: 100%;
+  height: 220px;
+}
+.shoplist .item .img a {
+  width: 100%;
+}
+.shoplist .item .img img {
+  width: 100%;
+  height: 100%;
+}
+.shoplist .item h3 {
+  margin-top: 20px;
+  font-size: 18px;
+}
+.shoplist .item span {
+  display: block;
+  font-size: 14px;
+  margin: 12px 0;
+  text-indent: -6px;
+  color: #9d9d9d;
+}
+.shoplist .item p {
+  font-size: 14px;
+  margin: 12px 0;
+}
+.shoplist .item p.old {
+  text-decoration: line-through;
+}
+.shoplist .item p b {
+  font-size: 18px;
+  color: #3f94e2;
+}
+.shoplist .item p.save {
+  color: #ec4343;
+}
+.shoplist .item .buyNow {
+  display: block;
+  width: 80px;
+  height: 34px;
+  background: #3190e2;
+  color: #fff;
+  text-align: center;
+  line-height: 34px;
+  font-size: 14px;
+  font-weight: bold;
+}
+.seemore {
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+.taboo {
+  margin: 20px 0;
+}
+.taboo .container {
+  position: relative;
+}
+.taboo img {
+  width: 100%;
+}
+.taboo .title {
+  margin-bottom: 20px;
+}
+.taboo .title div {
+  font-size: 32px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+.taboo .title p {
+  font-size: 20px;
+  font-weight: bold;
+  color: #3192e1;
+}
+.taboo .text {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  color: #fff;
+  top: 80px;
+}
+.taboo .text div {
+  position: absolute;
+  height: 94px;
+  line-height: 94px;
+  width: 415px;
+  box-sizing: border-box;
+}
+.taboo .text div label {
+  display: inline-block;
+  vertical-align: top;
+  padding: 0 30px;
+  width: 257px;
+  font-size: 14px;
+}
+.taboo .text div span {
+  width: 94px;
+  height: 94px;
+  text-align: center;
+  line-height: 94px;
+  display: inline-block;
+  font-size: 30px;
+  font-weight: bold;
+}
+.taboo .text .txt1 {
+  left: 54px;
+  top: 12px;
+}
+.taboo .text .txt2 {
+  left: 0;
+  top: 168px;
+}
+.taboo .text .txt2 label {
+  padding: 26px 30px;
+  line-height: 20px;
+}
+.taboo .text .txt3 {
+  left: 54px;
+  top: 326px;
+}
+.taboo .text .txt3 label {
+  padding: 20px 30px;
+  line-height: 20px;
+}
+.taboo .text .txt4 {
+  right: 53px;
+  top: 12px;
+}
+.taboo .text .txt5 {
+  right: 0;
+  top: 170px;
+}
+.taboo .text .txt5 label {
+  padding: 26px 30px;
+  line-height: 20px;
+}
+.taboo .text .txt6 {
+  right: 54px;
+  bottom: 10px;
+}
+.taboo .text .txt6 label {
+  padding: 26px 30px;
+  line-height: 20px;
+}
+.article {
+  margin-top: 60px;
+  overflow: hidden;
+}
+.article .title {
+  margin-bottom: 20px;
+}
+.article .title h2,
+.article .title h3 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+.article .title p {
+  font-size: 20px;
+  font-weight: bold;
+  color: #3192e1;
+}
+.article .left {
+  width: 760px;
+  float: left;
+}
+.article .left .box {
+  margin-bottom: 40px;
+}
+.article .left .box .list {
+  border-bottom: #ececec 1px solid;
+}
+.article .left .box .list .item {
+  border-top: #ececec 1px solid;
+  padding: 10px 0;
+  overflow: hidden;
+  font-size: 0;
+}
+.article .left .box .list .item .img {
+  width: 260px;
+  height: 140px;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+}
+.article .left .box .list .item .img img {
+  width: 260px;
+}
+.article .left .box .list .item .msg {
+  width: 480px;
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 20px;
+}
+.article .left .box .list .item .msg .name {
+  width: 500px;
+  box-sizing: border-box;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 22px;
+}
+.article .left .box .list .item .msg .describe {
+  width: 500px;
+  padding-top: 10px;
+  box-sizing: border-box;
+  font-size: 16px;
+  color: #a1a1a1;
+  line-height: 24px;
+}
+.article .left .box .list .item .msg .describe a {
+  margin-left: 4px;
+  color: #5da7e7;
+}
+.article .left .box .more {
+  display: block;
+  color: #000;
+  font-size: 14px;
+  background: #e6e6e6;
+  text-align: center;
+  line-height: 36px;
+  margin-top: 20px;
+  font-weight: bold;
+}
+.article .right {
+  width: 380px;
+  float: right;
+  background: #e6e6e6;
+  padding: 40px 0;
+}
+.article .right .title {
+  text-align: center;
+}
+.article .right li {
+  font-size: 16px;
+  line-height: 20px;
+  margin: 0 20px;
+  padding: 10px 0;
+  border-top: 1px solid #fff;
+}
+.article .right li:last-child {
+  border-bottom: 1px solid #fff;
+}

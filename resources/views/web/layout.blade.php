@@ -254,7 +254,7 @@
             <nav class="mobile-nav" aria-label="主選單">
                 <ul class="mobile-nav__list" role="list">
                     <li class="mobile-nav__item"><a class="mobile-nav__link" href="/">首頁<svg class="mobile-nav__arrow" viewBox="0 0 1024 1024" aria-hidden="true"><use href="#icon-arrowicon"></use></svg></a></li>
-                    <li class="mobile-nav__item"><a class="mobile-nav__link main-btn" href="/product">犀利士線上訂購<span>最高享受65%優惠</span><img src="/static/img/btnpill.webp" decoding="async" loading="lazy" alt="犀利士線上訂購"></a></li>
+                    <li class="mobile-nav__item"><a class="mobile-nav__link main-btn" href="/product">犀利士線上訂購<span>最高享受65%優惠</span></a></li>
                     <li class="mobile-nav__item"><a class="mobile-nav__link" href="/sideeffects">犀利士副作用與禁忌<svg class="mobile-nav__arrow" viewBox="0 0 1024 1024" aria-hidden="true"><use href="#icon-arrowicon"></use></svg></a></li>
                     <li class="mobile-nav__item"><a class="mobile-nav__link" href="/effect">犀利士使用心得<svg class="mobile-nav__arrow" viewBox="0 0 1024 1024" aria-hidden="true"><use href="#icon-arrowicon"></use></svg></a></li>
                     <li class="mobile-nav__item"><a class="mobile-nav__link" href="/health">兩性健康<svg class="mobile-nav__arrow" viewBox="0 0 1024 1024" aria-hidden="true"><use href="#icon-arrowicon"></use></svg></a></li>
@@ -263,7 +263,10 @@
                 </ul>
             </nav>
         </header>
-        <main class="main-content">
+        <main
+            class="main-content"
+            style="--page-banner-bg: url('{{ $page_banner_bg }}')"
+        >
             @yield('content')
 
             @if(!request()->is('check/*') &&!request()->is('order/*') &&!request()->is('shopping/*'))

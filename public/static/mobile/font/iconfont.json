@@ -1,0 +1,121 @@
+{
+  "id": "2039405",
+  "name": "luoshixian",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "7148955",
+      "name": "右箭头",
+      "font_class": "youjiantou",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "1049964",
+      "name": "右三角",
+      "font_class": "yousanjiao",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "6119215",
+      "name": "右-三角",
+      "font_class": "right-s",
+      "unicode": "e627",
+      "unicode_decimal": 58919
+    },
+    {
+      "icon_id": "953311",
+      "name": "返回",
+      "font_class": "fanhui",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "7372237",
+      "name": "返回",
+      "font_class": "fanhui1",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "8300818",
+      "name": "返回",
+      "font_class": "fanhui2",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "10070319",
+      "name": "返回",
+      "font_class": "shangchuanicon-fuben",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "4425828",
+      "name": "上拉",
+      "font_class": "shangla",
+      "unicode": "e797",
+      "unicode_decimal": 59287
+    },
+    {
+      "icon_id": "10025458",
+      "name": "上拉",
+      "font_class": "pullup01",
+      "unicode": "e73e",
+      "unicode_decimal": 59198
+    },
+    {
+      "icon_id": "14996399",
+      "name": "上拉",
+      "font_class": "shangla1",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "15001638",
+      "name": "上拉",
+      "font_class": "shangla2",
+      "unicode": "e65d",
+      "unicode_decimal": 58973
+    },
+    {
+      "icon_id": "16663283",
+      "name": "上拉",
+      "font_class": "shangla3",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
+    },
+    {
+      "icon_id": "1546595",
+      "name": "下拉",
+      "font_class": "xiala2",
+      "unicode": "e698",
+      "unicode_decimal": 59032
+    },
+    {
+      "icon_id": "6413471",
+      "name": "下  拉",
+      "font_class": "xiala",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "977029",
+      "name": "赞",
+      "font_class": "zan",
+      "unicode": "e63b",
+      "unicode_decimal": 58939
+    },
+    {
+      "icon_id": "1223053",
+      "name": "踩",
+      "font_class": "cai",
+      "unicode": "e672",
+      "unicode_decimal": 58994
+    }
+  ]
+}

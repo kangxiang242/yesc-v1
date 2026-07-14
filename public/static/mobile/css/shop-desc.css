@@ -1,0 +1,256 @@
+
+.shop {
+    /*margin-top: 0.3rem;*/
+    padding-right: 0.3rem;
+    padding-left: 0.3rem;
+}
+
+/* .product-row {
+    margin-top: 0.4rem;
+    padding-left: 0.2rem;
+    padding-bottom: 0.4rem;
+} */
+
+.product-box {
+
+    border-radius: 0.1rem;
+    position: relative;
+
+}
+
+.shop-img img {
+    width: 2.6rem;
+}
+
+.shop-text {
+    position: relative;
+    /* margin-left: 0.19rem; */
+    /* padding: 0.1rem 0.2rem; */
+    width: 100%;
+    background-image: url(../img/shuiyin.jpg);
+    background-repeat: no-repeat;
+    background-size: 2rem 1.7rem;
+    background-position: right bottom;
+}
+
+/* .main-title {
+    font-size: 0.32rem;
+    margin-bottom: 0.1rem;
+    font-weight: 700;
+} */
+
+.sub-title {
+    font-size: 0.24rem;
+    text-indent:-0.1rem;
+    color: #999999;
+}
+
+.grey-price {
+    font-size: 0.22rem;
+    color: #808080;
+    text-decoration: line-through;
+    font-weight: 500;
+    margin-left: 0.14rem;
+
+}
+
+.red-price {
+    color: #ff1924;
+    font-size: 0.36rem;
+    font-weight: 700;
+    line-height: 1;
+    
+}
+
+.red-price .twd{
+    font-size: 0.22rem;
+    margin-right: 0.06rem;
+}
+
+/* .buy-button {
+    position: absolute;
+    bottom: 0;
+    right: 0.2rem;
+} */
+
+/* .buy-button button {
+    width: 3.4rem;
+    height: 0.72rem;
+    background: #FCB946;
+    border-radius: 0.08rem;
+    color: #FFFFFF;
+    border: none;
+    font-size: 0.28rem;
+    font-weight: 500;
+} */
+
+.explain {
+    color: #4B8900;
+    font-size: 0.26rem;
+    margin-top: 0.39rem;
+    padding-left: 0.11rem;
+    padding-right: 0.11rem;
+}
+.explain p{
+    width: 6rem;
+    margin: 0 auto;
+}
+.grey-line{
+
+	height:0.2rem;
+	background: #F5F5F5;
+    margin: 0 auto;
+    margin-right: -15px;
+    margin-left: -15px;
+
+}
+
+.detailed{
+    padding: 0 0.2rem;
+}
+
+.product-content h2{
+	text-align: center;
+	margin-top: 0.4rem;
+	margin-bottom: 0.3rem;
+}
+
+.product-content{
+	/*padding-left: 0.3rem;
+	padding-right: 0.3rem;*/
+    margin: 1rem 0;
+}
+
+.product-content .detailed p{
+	font-size: 0.28rem;
+	line-height: 0.36rem;
+}
+
+.product-content .detailed .text{
+	margin-bottom: 0.38rem;
+}
+.product-content .detailed .text .unfold{
+	float:right;
+	margin-right: 0.2rem;
+}
+.product-content .detailed .img img{
+	width: 100%;
+}
+
+.product-content .detailed .img-increase{
+	margin-top: 0.3rem;
+	margin-bottom: 0.3rem;
+    width: 100%;
+
+}
+.product-content .detailed .text-xiala{
+	margin-bottom: 0.58rem;
+}
+.green-title{
+
+	color:#CCCCCC;
+   /* margin-right: 0.65rem;*/
+}
+.detailed .green-title{
+    float:left;
+    margin-right: 0.65rem;
+}
+
+.simple-cont{
+    float:left;
+    width: 5rem;
+}
+.img-back{
+    height:4rem;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    font-size: 0.26rem;
+    margin-bottom: 0.3rem;
+}
+.increase-bg1{
+    background-image: url("/static/mobile/img/increase-bg1.jpg");
+}
+.increase-bg2{
+    background-image: url("/static/mobile/img/increase-bg2.jpg");
+}
+.increase-bg3{
+    height:4.4rem!important;
+    background-image: url("/static/mobile/img/increase-bg3.jpg");
+}
+.increase-bg4{
+    height:3.66rem!important;
+    background-image: url("/static/mobile/img/info5.jpg");
+}
+.img-back .increase-left{
+    padding-top: 0.2rem;
+    padding-left: 0.35rem;
+}
+.img-back .increase-right{
+    padding-top: 0.5rem;
+    padding-right: 0.1rem;
+    float:right;
+}
+.img-back .increase-left .simple{
+    display: flex;
+}
+.img-back .increase-left .simple-cont{
+    width: 3.72rem;
+}
+.img-back .simple .green-title{
+    float: none;
+    color: var(--main-color);
+    font-weight: 500;
+}
+.simple-cont-bak{
+    width: 3.5rem;
+}
+.img-back .ceng:first-child{
+    margin-bottom: 0.46rem;
+}
+
+
+
+/* .footer-menu{
+    padding-left: 0.2rem;
+    background: rgba(255, 255, 255,1);
+}
+
+.footer-menu .shop-img,.footer-menu .shop-price ,.footer-menu .shop-buy{
+    align-self: center;
+}
+.footer-menu .shop-price{
+    margin-left: 0.1rem;
+}
+.footer-menu .footer-img{
+    align-self: center;
+}
+.footer-menu .footer-img img{
+    width: 1.2rem;
+}
+.footer-menu .green-title{
+    color: #333;
+    font-size: 0.26rem;
+    font-weight: 500;
+}
+.footer-menu .red-price{
+    font-size: 0.28rem;
+    margin-top: 0.1rem;
+}
+.footer-menu .shop-buy{
+    position: absolute;
+    right: 0.2rem
+}
+.footer-menu .shop-buy a{
+    width: 3.2rem;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    background: #FCB946;
+    border-radius: 0.4rem;
+    display: inline-block;
+    text-align: center;
+    color: #fff;
+    font-size: 0.28rem;
+    letter-spacing: 0.05rem;
+    font-weight: 700;
+} */
+
