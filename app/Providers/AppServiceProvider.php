@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
 
         // doc/TRACKING_API.md #3：collect 端点限流 120/min（按 IP）
         RateLimiter::for('analytics-collect', function (\Illuminate\Http\Request $request) {
-            return \Illuminate\Support\Facades\Limit::perMinute(120)
+            return \Illuminate\Cache\RateLimiting\Limit::perMinute(120)
                 ->by($request->header('cf-connecting-ip', $request->ip()));
         });
 
