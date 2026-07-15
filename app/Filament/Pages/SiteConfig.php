@@ -175,7 +175,9 @@ class SiteConfig extends Page implements HasForms
                     ->label('PC 移動端跳轉')
                     ->options(['1' => '開啟', '0' => '關閉'])
                     ->default('0'),
-                Forms\Components\TextInput::make('asset_version')->label('資源版本號'),
+                Forms\Components\TextInput::make('asset_version')->label('資源版本號')
+                    ->helperText('⚠️ 已廢棄：前端改用 Release Token（release:stamp 生成），此欄位不再生效')
+                    ->disabled(),
                 Forms\Components\Section::make('頁面頂部背景圖池')
                     ->description('用於產品、新聞等頁面頂部背景；每次重整頁面隨機取一張。')
                     ->schema([

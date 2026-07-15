@@ -77,7 +77,9 @@ class OrderRepository extends Repository
                 'ipcountry'=>request()->header('cf-ipcountry'),
                 'user_agent'=>request()->header('user-agent'),
                 'product_price'=>$product_price,
-                'delivery_type'=>Arr::get($data,'order_type')
+                'delivery_type'=>Arr::get($data,'order_type'),
+                'release_token'=>Arr::get($data,'release_token') ?: (function_exists('release_token') ? release_token() : null),
+                'visitor_id'=>Arr::get($data,'visitor_id') ?: request()->cookie('vid_web') ?: request()->cookie('vid_m'),
             ];
 
             if(Arr::get($data,'order_type') > 0){

@@ -34,6 +34,7 @@ Route::any('/observer/store', function () {
 })->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class]);
 
 // 前端行为分析采集（跳过 CSRF，匹配前端 sendBeacon）
+// 对接 doc/TRACKING_API.md + doc/RELEASE_TOKEN.md
 Route::post('/api/analytics/collect', function (\Illuminate\Http\Request $request) {
     try {
         $body = $request->json()->all();
@@ -41,45 +42,61 @@ Route::post('/api/analytics/collect', function (\Illuminate\Http\Request $reques
             return response()->json(['status' => 'ok']);
         }
 
-        $platform = $body['platform'] ?? 'web';
-        $visitorId = $body['visitor_id'] ?? null;
-        $sessionId = $body['session_id'] ?? null;
+        $platform   = $body['platform'] ?? 'web';
+        $visitorId  = $body['visitor_id'] ?? null;
+        $sessionId  = $body['session_id'] ?? null;
         $pageViewId = $body['page_view_id'] ?? null;
+        $clientIp   = $request->header('cf-connecting-ip', $request->ip());
+
+        // doc/TRACKING_API.md #2：props allowlist + PII 丢弃
+        $propsFilter = new \App\Services\AnalyticsPropsFilter();
+        // doc/TRACKING_API.md #7：双发事件规范化
+        $dedup = new \App\Services\AnalyticsEventDedup();
+        // doc/RELEASE_TOKEN.md #1：Release 映射派生
+        $releaseMapping = new \App\Services\ReleaseMappingService();
 
         foreach ($body['events'] as $event) {
             if (!isset($event['event_name'])) {
                 continue;
             }
 
-            $props = isset($event['props']) ? $event['props'] : [];
-            $releaseToken = null;
-            if (is_array($props) && isset($props['html_token'])) {
-                $releaseToken = $props['html_token'];
-            }
+            // 双发事件 alias → canonical
+            $eventName = $dedup->canonicalize($event['event_name']);
+
+            // props allowlist 过滤（丢弃 PII）
+            $props = $propsFilter->filter($event['props'] ?? []);
+
+            // Release 映射派生（仅 page_view 派生，其余事件继承同 page_view_id 的 token）
+            $releaseData = $releaseMapping->derive($props);
 
             \App\Models\AnalyticsEvent::create([
-                'platform' => $platform,
-                'event_name' => $event['event_name'],
-                'visitor_id' => $visitorId,
-                'session_id' => $sessionId,
-                'page_view_id' => $pageViewId,
-                'page_path' => $event['page_path'] ?? null,
-                'page_type' => $event['page_type'] ?? null,
-                'element_id' => $event['element_id'] ?? null,
-                'props' => $props,
-                'ip' => $request->header('cf-connecting-ip', $request->ip()),
-                'user_agent' => $request->userAgent(),
-                'host' => $request->getHost(),
-                'client_ts' => $event['client_ts'] ?? null,
-                'release_token' => $releaseToken,
+                'platform'              => $platform,
+                'event_name'            => $eventName,
+                'visitor_id'            => $visitorId,
+                'session_id'            => $sessionId,
+                'page_view_id'          => $pageViewId,
+                'page_path'             => $event['page_path'] ?? null,
+                'page_type'             => $event['page_type'] ?? null,
+                'element_id'            => $event['element_id'] ?? null,
+                'props'                 => $props,
+                'ip'                    => $clientIp,
+                'user_agent'            => $request->userAgent(),
+                'host'                  => $request->getHost(),
+                'client_ts'             => $event['client_ts'] ?? null,
+                'release_token'         => $releaseData['release_token'],
+                'release_version'       => $releaseData['release_version'],
+                'release_deployed_at'   => $releaseData['release_deployed_at'],
+                'release_status'        => $releaseData['release_status'],
+                'asset_token_status'    => $releaseData['asset_token_status'],
             ]);
         }
     } catch (\Exception $e) {
-        // 静默处理
+        // 静默处理（前端 sendBeacon 不读响应）
     }
 
     return response()->json(['status' => 'ok']);
-})->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class]);
+})->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class])
+  ->middleware('throttle:analytics-collect');
 
 // Admin: wangEditor image upload（Filament 富文本上传用，保留）
 Route::post('/admin/upload/wang-editor/image', [WangEditorUploadController::class, 'upload'])

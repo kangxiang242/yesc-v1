@@ -63,3 +63,6 @@ yarn-error.log
 /fix-robots.php
 
 .pi/
+
+# AtomCode local-scope configs (machine-specific)
+.atomcode/local/

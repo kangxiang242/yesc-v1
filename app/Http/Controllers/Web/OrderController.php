@@ -149,7 +149,11 @@ class OrderController extends Controller
             if(!$products || $products->isEmpty()){
                 return ResponseHelper::make()->message("商品数据有误")->error();
             }
-            $order = $this->orderRepository->store($request->all(),$products);
+            // doc/TRACKING_API.md #5：订单关联 visitor_id + release_token
+            $data = $request->all();
+            $data['release_token'] = function_exists('release_token') ? release_token() : null;
+            $data['visitor_id'] = $request->cookie('vid_web') ?: $request->cookie('vid_m');
+            $order = $this->orderRepository->store($data,$products);
             return ResponseHelper::make()->message("訂單提交成功")->redirect('/check/'.$order->no)->flash()->success();
         }catch (\Exception $exception){
             return ResponseHelper::make()->message("系統出現異常：" . $exception->getMessage())->error();
