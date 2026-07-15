@@ -10,7 +10,7 @@ class ReleaseStamp extends Command
 {
     protected $signature = 'release:stamp
         {--bump= : 版本遞增級別：patch/minor/major}
-        {--version= : 指定版本號，例如 1.04}';
+        {--ver= : 指定版本號，例如 1.04}';
 
     protected $description = '產生新的 release token 並記錄版本資訊';
 
@@ -20,8 +20,8 @@ class ReleaseStamp extends Command
         $latest = Release::orderBy('deployed_at', 'desc')->first();
         $currentVersion = $latest ? $latest->version : '0.0';
 
-        if ($this->option('version')) {
-            $newVersion = $this->option('version');
+        if ($this->option('ver')) {
+            $newVersion = $this->option('ver');
         } elseif ($this->option('bump')) {
             $parts = explode('.', $currentVersion);
             $major = (int)($parts[0] ?? 0);
