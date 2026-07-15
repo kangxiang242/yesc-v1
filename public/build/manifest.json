@@ -1,0 +1,39 @@
+{
+  "public/static/img/original.svg": {
+    "file": "assets/original-B780rmkA.svg",
+    "src": "public/static/img/original.svg"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-BpTCRj8I.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/pages/home-gsap.js"
+    ]
+  },
+  "resources/js/pages/home-gsap.js": {
+    "file": "assets/home-gsap-DT6fCikW.js",
+    "name": "home-gsap",
+    "src": "resources/js/pages/home-gsap.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "resources/scss/app.scss": {
+    "file": "assets/app-CPfvRulK.css",
+    "src": "resources/scss/app.scss",
+    "isEntry": true
+  },
+  "resources/scss/home.scss": {
+    "file": "assets/home-kqtK09pq.css",
+    "src": "resources/scss/home.scss",
+    "isEntry": true
+  },
+  "resources/scss/landing.scss": {
+    "file": "assets/landing-D8ESprUj.css",
+    "src": "resources/scss/landing.scss",
+    "isEntry": true
+  }
+}
