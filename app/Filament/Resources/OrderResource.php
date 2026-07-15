@@ -31,7 +31,7 @@ class OrderResource extends Resource
     protected static ?string $label = '訂單';
 
     protected static ?string $pluralLabel = '訂單';
-    protected static ?string $navigationGroup = '系統管理';
+    protected static ?string $navigationGroup = null;
 
     protected static ?int $navigationSort = 1;
 

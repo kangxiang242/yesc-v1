@@ -19,7 +19,7 @@ class MessageResource extends Resource
     protected static ?string $navigationLabel = '留言管理';
     protected static ?string $label = '留言';
     protected static ?string $pluralLabel = '留言';
-    protected static ?string $navigationGroup = '系統管理';
+    protected static ?string $navigationGroup = null;
     protected static ?int $navigationSort = 6;
 
     public static function form(Form $form): Form
