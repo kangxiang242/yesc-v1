@@ -1,5 +1,9 @@
 @extends('web.layout')
 
+@section('track-init')
+<script>Track.init({ platform: 'web', page_type: 'order_check' });</script>
+@endsection
+
 @section('style')
     @parent
 @stop
@@ -7,8 +11,8 @@
 @section('script')
     @parent
 
-    <script src="{{ asset('static/js/sweetalert2.js') }}"></script>
-    <script src="{{ assetv('static/js/FormHelper.js') }}"></script>
+    <script src="{{ release_asset('static/js/sweetalert2.js') }}"></script>
+    <script src="{{ release_asset('static/js/FormHelper.js') }}"></script>
     <script>
         // 查询方式切换
         document.addEventListener('DOMContentLoaded', function() {
@@ -166,7 +170,38 @@
                 };
             }
 
-            FormHelper.submit("#check-form", { rules });
+            FormHelper.submit("#check-form", {
+                rules,
+                onValidateFail: function (errors) {
+                    if (typeof Track !== 'undefined' && errors && errors.length) {
+                        Track.validationError(errors[0].field || 'unknown');
+                    }
+                },
+                onSuccess: function (data) {
+                    if (typeof Track !== 'undefined') {
+                        if (data && (data.code == 200 || data.status === 'success' || data.redirect || data.jump)) {
+                            Track.orderCheckSuccess();
+                        } else {
+                            Track.orderCheckError({ error_code: 'query_fail' });
+                        }
+                    }
+                    if (data && data.jump) {
+                        window.location.href = data.jump;
+                    } else if (data && data.redirect) {
+                        window.location.href = data.redirect;
+                    } else if (data && data.status === 'success') {
+                        Swal.fire({ icon: 'success', text: data.message || '操作成功', timer: 1500, showConfirmButton: false });
+                    } else {
+                        Swal.fire({ icon: 'error', text: (data && data.message) || '查詢失敗', timer: 2000, showConfirmButton: false });
+                    }
+                },
+                onError: function (err) {
+                    if (typeof Track !== 'undefined') {
+                        Track.orderCheckError({ error_code: (err && err.message) || 'server_error' });
+                    }
+                    Swal.fire({ icon: 'error', text: (err && err.message) || '服務器錯誤', timer: 1500, showConfirmButton: false });
+                },
+            });
         });
 
     </script>

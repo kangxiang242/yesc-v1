@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-TW" class="{{ release_token() }}">
     <head>
         <meta charset="utf-8">
         @if(isset($mate))
@@ -84,7 +84,7 @@
 
         @section('style')@show
         @section('script')
-            <script src="/static/mobile/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+            <script src="{{ release_asset('static/mobile/js/jquery.min.js') }}" type="text/javascript" charset="utf-8"></script>
 
             <script>
                 window.flash = @json(session('flash', null));
@@ -101,7 +101,7 @@
                     }
                 });
             </script>
-            <script src="/static/mobile/js/iife.min.js" type="text/javascript" charset="utf-8"></script>
+            <script src="{{ release_asset('static/mobile/js/iife.min.js') }}" type="text/javascript" charset="utf-8"></script>
             {!! function_exists('request_log_script') ? request_log_script() : '' !!}
 
             <script>
@@ -127,6 +127,9 @@
                             btn.classList.add('close-menu');
                             btn.setAttribute('aria-expanded', 'true');
                             document.body.classList.add('mobile-nav-open');
+                            if (typeof Track !== 'undefined') {
+                                Track.click('nav.menu.open', { explain: '側欄-打開', click_zone: 'header' });
+                            }
                         }
                         function close() {
                             nav.classList.remove('is-open');
@@ -134,6 +137,9 @@
                             btn.classList.remove('close-menu');
                             btn.setAttribute('aria-expanded', 'false');
                             document.body.classList.remove('mobile-nav-open');
+                            if (typeof Track !== 'undefined') {
+                                Track.click('nav.menu.close', { explain: '側欄-關閉', click_zone: 'header' });
+                            }
                         }
                         function toggle() {
                             nav.classList.contains('is-open') ? close() : open();
@@ -222,19 +228,19 @@
             @endif
 
             <nav class="nav">
-                <a class="logo" href="/" itemprop="url">
+                <a class="logo" href="/" itemprop="url" data-track="header.logo" data-observer="頂部-Logo" data-track-section="header" data-track-zone="header">
                     <img src="/static/img/{{ request()->is('/') ? 'C_white.svg' : 'C_black.svg' }}" alt="禮來犀利士 Cialis®">
                 </a>
                 @if(!request()->is('shopping/*'))
                     <ul class="web-nav">
-                        <li class="nav-item"><a href="/">首頁</a></li>
-                        <li class="nav-item"><a href="/sideeffects">犀利士副作用與禁忌</a></li>
-                        <li class="nav-item"><a href="/effect">犀利士使用心得</a></li>
-                        <li class="nav-item"><a href="/health">兩性健康</a></li>
+                        <li class="nav-item"><a href="/" data-track="header.nav.home" data-observer="頂部導航-首頁" data-track-section="header" data-track-zone="header">首頁</a></li>
+                        <li class="nav-item"><a href="/sideeffects" data-track="header.nav.sideeffects" data-observer="頂部導航-副作用" data-track-section="header" data-track-zone="header">犀利士副作用與禁忌</a></li>
+                        <li class="nav-item"><a href="/effect" data-track="header.nav.effect" data-observer="頂部導航-使用心得" data-track-section="header" data-track-zone="header">犀利士使用心得</a></li>
+                        <li class="nav-item"><a href="/health" data-track="header.nav.health" data-observer="頂部導航-兩性健康" data-track-section="header" data-track-zone="header">兩性健康</a></li>
                     </ul>
                 @endif
                 @if(!request()->is('shopping/*') &&!request()->is('check/*') &&!request()->is('order/*'))
-                    <a class="main-btn go-shop-btn {{ (request()->is('/') || request()->is('product*') || request()->is('goods*')) ? '' : 'noindex' }}" href="/product">
+                    <a class="main-btn go-shop-btn {{ (request()->is('/') || request()->is('product*') || request()->is('goods*')) ? '' : 'noindex' }}" href="/product" data-track="header.order_btn" data-observer="頂部-線上訂購" data-track-section="header" data-track-zone="header">
                         犀利士線上訂購
                     </a>
                     <button class="menu-btn" type="button" aria-label="Menu toggle">
@@ -253,13 +259,13 @@
 
             <nav class="mobile-nav" aria-label="主選單">
                 <ul class="mobile-nav__list" role="list">
-                    <li class="mobile-nav__item"><a class="mobile-nav__link" href="/">首頁<svg class="mobile-nav__arrow" viewBox="0 0 1024 1024" aria-hidden="true"><use href="#icon-arrowicon"></use></svg></a></li>
-                    <li class="mobile-nav__item"><a class="mobile-nav__link main-btn" href="/product">犀利士線上訂購<span>最高享受65%優惠</span></a></li>
-                    <li class="mobile-nav__item"><a class="mobile-nav__link" href="/sideeffects">犀利士副作用與禁忌<svg class="mobile-nav__arrow" viewBox="0 0 1024 1024" aria-hidden="true"><use href="#icon-arrowicon"></use></svg></a></li>
-                    <li class="mobile-nav__item"><a class="mobile-nav__link" href="/effect">犀利士使用心得<svg class="mobile-nav__arrow" viewBox="0 0 1024 1024" aria-hidden="true"><use href="#icon-arrowicon"></use></svg></a></li>
-                    <li class="mobile-nav__item"><a class="mobile-nav__link" href="/health">兩性健康<svg class="mobile-nav__arrow" viewBox="0 0 1024 1024" aria-hidden="true"><use href="#icon-arrowicon"></use></svg></a></li>
-                    <li class="mobile-nav__item"><a class="mobile-nav__link" href="/check">訂單查詢<svg class="mobile-nav__arrow" viewBox="0 0 1024 1024" aria-hidden="true"><use href="#icon-arrowicon"></use></svg></a></li>
-                    <li class="mobile-nav__item"><a class="mobile-nav__link" href="/message">線上客服<svg class="mobile-nav__arrow" viewBox="0 0 1024 1024" aria-hidden="true"><use href="#icon-arrowicon"></use></svg></a></li>
+                    <li class="mobile-nav__item"><a class="mobile-nav__link" href="/" data-track="mobile_nav.home" data-observer="側欄-首頁" data-track-section="mobile_nav" data-track-zone="header">首頁<svg class="mobile-nav__arrow" viewBox="0 0 1024 1024" aria-hidden="true"><use href="#icon-arrowicon"></use></svg></a></li>
+                    <li class="mobile-nav__item"><a class="mobile-nav__link main-btn" href="/product" data-track="mobile_nav.order" data-observer="側欄-線上訂購" data-track-section="mobile_nav" data-track-zone="header">犀利士線上訂購<span>最高享受65%優惠</span></a></li>
+                    <li class="mobile-nav__item"><a class="mobile-nav__link" href="/sideeffects" data-track="mobile_nav.sideeffects" data-observer="側欄-副作用" data-track-section="mobile_nav" data-track-zone="header">犀利士副作用與禁忌<svg class="mobile-nav__arrow" viewBox="0 0 1024 1024" aria-hidden="true"><use href="#icon-arrowicon"></use></svg></a></li>
+                    <li class="mobile-nav__item"><a class="mobile-nav__link" href="/effect" data-track="mobile_nav.effect" data-observer="側欄-使用心得" data-track-section="mobile_nav" data-track-zone="header">犀利士使用心得<svg class="mobile-nav__arrow" viewBox="0 0 1024 1024" aria-hidden="true"><use href="#icon-arrowicon"></use></svg></a></li>
+                    <li class="mobile-nav__item"><a class="mobile-nav__link" href="/health" data-track="mobile_nav.health" data-observer="側欄-兩性健康" data-track-section="mobile_nav" data-track-zone="header">兩性健康<svg class="mobile-nav__arrow" viewBox="0 0 1024 1024" aria-hidden="true"><use href="#icon-arrowicon"></use></svg></a></li>
+                    <li class="mobile-nav__item"><a class="mobile-nav__link" href="/check" data-track="mobile_nav.check" data-observer="側欄-訂單查詢" data-track-section="mobile_nav" data-track-zone="header">訂單查詢<svg class="mobile-nav__arrow" viewBox="0 0 1024 1024" aria-hidden="true"><use href="#icon-arrowicon"></use></svg></a></li>
+                    <li class="mobile-nav__item"><a class="mobile-nav__link" href="/message" data-track="mobile_nav.message" data-observer="側欄-線上客服" data-track-section="mobile_nav" data-track-zone="header">線上客服<svg class="mobile-nav__arrow" viewBox="0 0 1024 1024" aria-hidden="true"><use href="#icon-arrowicon"></use></svg></a></li>
                 </ul>
             </nav>
         </header>
@@ -276,8 +282,8 @@
         </main>
 
         <footer class="main-footer">
-            <div class="footer-logo">
-                <a class="logo" href="/">
+            <div class="footer-logo" data-track-section-view data-track-section="footer.brand" data-track-section-label="頁腳品牌區">
+                <a class="logo" href="/" data-track="footer.logo" data-observer="頁腳-Logo" data-track-section="footer" data-track-zone="footer">
                     <img src="/static/img/C_black.svg" decoding="async" loading="lazy" alt="禮來犀利士 Cialis®">
                 </a>
                 <p class="site-name">禮來犀利士<sup>®</sup>（台灣）</p>
@@ -288,22 +294,22 @@
                 <img class="trust-icon" src="/static/img/FDA.svg" decoding="async" loading="lazy" alt="FDA">
                 <img class="trust-icon" src="/static/img/EMA.svg" decoding="async" loading="lazy" alt="EMA">
             </div>
-            <nav class="footer-link-sec">
+            <nav class="footer-link-sec" data-track-section-view data-track-section="footer.nav" data-track-section-label="頁腳導航">
                 <h4 class="footer-section-title">網站導航</h4>
                 <ul class="footer-links">
-                    <li class="footer-link"><a href="/">首頁</a></li>
-                    <li class="footer-link"><a href="/product">犀利士線上訂購</a></li>
+                    <li class="footer-link"><a href="/" data-track="footer.nav.home" data-observer="頁腳-首頁" data-track-section="footer" data-track-zone="footer">首頁</a></li>
+                    <li class="footer-link"><a href="/product" data-track="footer.nav.product" data-observer="頁腳-線上訂購" data-track-section="footer" data-track-zone="footer">犀利士線上訂購</a></li>
                 </ul>
                 <h4 class="footer-section-title">健康資訊</h4>
                 <ul class="footer-links">
-                    <li class="footer-link"><a href="/sideeffects">犀利士副作用與禁忌</a></li>
-                    <li class="footer-link"><a href="/effect">犀利士使用心得</a></li>
-                    <li class="footer-link"><a href="/health">兩性健康</a></li>
+                    <li class="footer-link"><a href="/sideeffects" data-track="footer.nav.sideeffects" data-observer="頁腳-副作用" data-track-section="footer" data-track-zone="footer">犀利士副作用與禁忌</a></li>
+                    <li class="footer-link"><a href="/effect" data-track="footer.nav.effect" data-observer="頁腳-使用心得" data-track-section="footer" data-track-zone="footer">犀利士使用心得</a></li>
+                    <li class="footer-link"><a href="/health" data-track="footer.nav.health" data-observer="頁腳-兩性健康" data-track-section="footer" data-track-zone="footer">兩性健康</a></li>
                 </ul>
                 <h4 class="footer-section-title">訂單服務</h4>
                 <ul class="footer-links">
-                    <li class="footer-link"><a href="/check">訂單查詢</a></li>
-                    <li class="footer-link"><a href="/message">線上客服</a></li>
+                    <li class="footer-link"><a href="/check" data-track="footer.nav.check" data-observer="頁腳-訂單查詢" data-track-section="footer" data-track-zone="footer">訂單查詢</a></li>
+                    <li class="footer-link"><a href="/message" data-track="footer.nav.message" data-observer="頁腳-線上客服" data-track-section="footer" data-track-zone="footer">線上客服</a></li>
                 </ul>
             </nav>
             <div class="footer-copyright">
@@ -320,5 +326,6 @@
         @stack('tick-scroll')
         @stack('qa-js')
         @include('web.svg-sprite')
+        @include('partials.analytics-scripts', ['trackPlatform' => 'web'])
     </body>
 </html>

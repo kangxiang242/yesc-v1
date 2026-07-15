@@ -60,8 +60,8 @@
 
 @section('script')
     @parent
-    <script src="{{ asset('static/js/jquery.contip.js') }}"></script>
-    <script src="{{ asset('static/js/sweetalert2.js') }}"></script>
+    <script src="{{ release_asset('static/js/jquery.contip.js') }}"></script>
+    <script src="{{ release_asset('static/js/sweetalert2.js') }}"></script>
     <script src="{{ release_asset('static/js/api.js')}}"></script>
     <script src="{{ release_asset('static/js/xarea.js')}}"></script>
     <script id="CHECKOUT-M-1">

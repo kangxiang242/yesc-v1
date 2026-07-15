@@ -1,17 +1,44 @@
 @extends('web.layout')
 
+@section('track-init')
+<script>Track.init({ platform: 'web', page_type: 'message' });</script>
+@endsection
+
 @section('style')
     @parent
 @stop
 
 @section('script')
     @parent
-    <script src="{{ asset('static/js/sweetalert2.js') }}"></script>
-    <script src="{{ assetv('static/js/FormHelper.js') }}"></script>
+    <script src="{{ release_asset('static/js/sweetalert2.js') }}"></script>
+    <script src="{{ release_asset('static/js/FormHelper.js') }}"></script>
     <script>
         document.querySelector("#message-form").addEventListener("submit", e => {
             e.preventDefault();
             FormHelper.submit("#message-form", {
+                onValidateFail: function (errors) {
+                    if (typeof Track !== 'undefined' && errors && errors.length) {
+                        Track.validationError(errors[0].field || 'unknown');
+                    }
+                },
+                onSuccess: function (data) {
+                    if (typeof Track !== 'undefined') {
+                        Track.messageSubmit({ status: 'success' });
+                    }
+                    if (data && data.redirect) {
+                        window.location.href = data.redirect;
+                    } else if (data && data.status === 'success') {
+                        Swal.fire({ icon: 'success', text: data.message || '操作成功', timer: 1500, showConfirmButton: false });
+                    } else {
+                        Swal.fire({ icon: 'error', text: (data && data.message) || '操作失败', timer: 2000, showConfirmButton: false });
+                    }
+                },
+                onError: function (err) {
+                    if (typeof Track !== 'undefined') {
+                        Track.messageSubmitError({ error_code: (err && err.message) || 'server_error' });
+                    }
+                    Swal.fire({ icon: 'error', text: (err && err.message) || '服務器錯誤', timer: 1500, showConfirmButton: false });
+                },
                 rules: {
                     email: {
                         type: "email|required",
@@ -171,7 +198,7 @@
 
         </div>
 
-        <button class="form-btn main-btn" type="submit"><svg class="btn-icon sent-icon" viewBox="0 0 1024 1024"><use href="#icon-senticon"></use></svg>確認送出
+        <button class="form-btn main-btn" type="submit" data-track="message.submit" data-observer="留言-確認送出" data-track-section="message.form" data-track-zone="content"><svg class="btn-icon sent-icon" viewBox="0 0 1024 1024"><use href="#icon-senticon"></use></svg>確認送出
         </button>
         <p class="form-desc"><svg class="righticon" viewBox="0 0 1024 1024"><use href="#icon-righticon"></use></svg>專業客服將在第一時間回覆您</p>
     </form>

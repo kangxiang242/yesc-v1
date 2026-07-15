@@ -1,12 +1,16 @@
 @extends('web.layout')
 
+@section('track-init')
+<script>Track.init({ platform: 'web', page_type: 'order_show' });</script>
+@endsection
+
 @section('style')
     @parent
 @stop
 @section('title','訂單詳情')
 @section('script')
     @parent
-    <script src="{{ asset('static/js/sweetalert2.js') }}?ver={{ get_setting('asset_version') }}"></script>
+    <script src="{{ release_asset('static/js/sweetalert2.js') }}"></script>
     <script>
         if(typeof flash_data !== 'undefined' && flash_data){
             Swal.fire({

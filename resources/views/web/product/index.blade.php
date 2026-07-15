@@ -1,5 +1,9 @@
 @extends('web.layout')
 
+@section('track-init')
+<script>Track.init({ platform: 'web', page_type: 'product_list' });</script>
+@endsection
+
 @section('style')
     @parent
 @stop
@@ -10,7 +14,7 @@
 
 @section('script')
     @parent
-    <script src="{{ assetv('static/js/price-animator.js') }}"></script>
+    <script src="{{ release_asset('static/js/price-animator.js') }}"></script>
     <script>
         // 計算 flow-wrap 的高度：從第一個 box-container 的 shopt 到最後一個 box-container 的 shopt
         function calculateFlowWrapHeight() {
@@ -69,7 +73,7 @@
    
 
     @foreach($groups as $group)
-        <section class="box-container" data-group="{{ $group['key'] }}">
+        <section class="box-container" data-group="{{ $group['key'] }}" data-track-section-view data-track-section="product.list.{{ $group['key'] }}" data-track-section-label="{{ $group['title'] }}">
             <div class="product-area">
                 <h2 class="shopt guide">{{ $group['title'] }}</h2>
                 <p class="shopt-desc">{{ $group['des'] }}</p>
@@ -77,7 +81,7 @@
                 <ol class="product-list watermark">
                     @foreach($group['items'] as $item)
                         <li class="product-card">
-                            <a class="product-card-link" href="{{ url('goods/'.$item->id) }}">
+                            <a class="product-card-link" href="{{ url('goods/'.$item->id) }}" data-track="product.list.detail" data-observer="列表-查看詳情-{{ $item->name }}" data-track-section="product.list" data-track-zone="content" data-goods-id="{{ $item->id }}">
                                 <span class="original-label" aria-label="原裝進口">原裝進口</span>
                                 
                                 <img class="product-card-img" src="{{ storage_url($item->m_img?:$item->img) }}" loading="auto" decoding="async" width="380" height="260" alt="{{ $item->name }}">
@@ -103,7 +107,7 @@
                                     
                                     <p class="red-price"><span class="twd">NT$</span><span class="price-number">{{ number_format(round($item->market_price)) }}</span></p>
                                 </div>
-                                <a class="main-btn" href="{{ url('goods/'.$item->id) }}">查看詳情<svg class="btn-icon buy-icon" viewBox="0 0 1055 1024"><use href="#icon-buyicon"></use></svg>
+                                <a class="main-btn" href="{{ url('goods/'.$item->id) }}" data-track="product.list.checkout" data-observer="列表-立即訂購-{{ $item->name }}" data-track-section="product.list" data-track-zone="content" data-goods-id="{{ $item->id }}">查看詳情<svg class="btn-icon buy-icon" viewBox="0 0 1055 1024"><use href="#icon-buyicon"></use></svg>
                                     @if($item->quantity >= 4)
                                         <div class="discount">
                                             <span class="discount-content">免運</span>

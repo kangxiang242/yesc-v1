@@ -1,4 +1,9 @@
 @extends('web.layout')
+
+@section('track-init')
+<script>Track.init({ platform: 'web', page_type: 'product_detail', goods_id: {{ $product->id }} });</script>
+@endsection
+
 @section('title',$product->name)
 @section('style')
     @parent
@@ -6,7 +11,7 @@
 
 @section('script')
     @parent
-    <script src="{{ assetv('static/js/price-animator.js') }}"></script>
+    <script src="{{ release_asset('static/js/price-animator.js') }}"></script>
 
     <script>
         // 滚动监听
@@ -317,7 +322,7 @@
 @section('content')
     @include('components.breadcrumb', ['itemsHtml' => '<li class="breadcrumb__item"><a href="' . url('product') . '">訂購犀利士</a></li><li class="breadcrumb__item">犀利士 20mg ' . $product->quantity . '盒</li>'])
 
-    <section class="goods-info-card">
+    <section class="goods-info-card" data-track-section-view data-track-section="product.detail.main" data-track-section-label="商品主資訊">
         <h2 class="goods-title">禮來犀利士Cialis 20mg<strong class="box-count">{{ $product->name }}<span class="box-num">{{ $product->quantity }}</span>盒</strong></h2>
         <div class="price-box" data-market-price="{{ round($product->market_price) }}" data-price="{{ round($product->price) }}">
             <div class="mk-price">
@@ -382,7 +387,7 @@
         <p class="pro-tips">作為全球信賴的勃起功能障礙長效治療藥物，<strong>禮來犀利士Cialis</strong>的藥效穩定性與安全性經嚴格控管。為了確保您獲得的是 100% 原廠正品，建議通過 <a href="/" class="inner-link" title="犀利士Cialis台灣正品通路">犀利士正品通路</a> 進行訂購。
         </p>
         <p class="pro-tips">本站所有產品均有原廠防偽標籤，並提供隱密包裝與快速配送服務。若您想瞭解更多犀利士資訊，可查閱下方詳細的藥品訊息。</p>
-        <a class="main-btn" href="{{ url('shopping/'.$product->id) }}">立即訂購<svg class="btn-icon buy-icon" viewBox="0 0 1055 1024"><use href="#icon-buyicon"></use></svg>
+        <a class="main-btn" href="{{ url('shopping/'.$product->id) }}" data-track="product.buy" data-observer="詳情-立即訂購" data-track-section="product.detail" data-track-zone="content" data-goods-id="{{ $product->id }}">立即訂購<svg class="btn-icon buy-icon" viewBox="0 0 1055 1024"><use href="#icon-buyicon"></use></svg>
             @if($product->quantity >= 4)
                 <div class="discount">
                     <span class="discount-content">還有免運哦</span>
@@ -615,13 +620,13 @@
         </ol>
     </section>
 
-    <section class="footer-buy">
+    <section class="footer-buy" data-track-sticky-buy data-track-section-view data-track-section="product.sticky" data-track-section-label="Sticky購買條">
         <div class="footer-left">
             <img src="{{ storage_url($product->m_img?:$product->img) }}" loading="auto" decoding="async" alt="{{ $product->name }}">
             <p class="green-title">禮來犀利士CialisCialis<span>{{ $product->name }} {{ $product->quantity }}盒<span></p>
             <p class="red-price"><span class="twd">NT$</span>{{ number_format(round($product->price)) }}</p>
         </div>
-        <a class="main-btn" href="{{ url('shopping/'.$product->id) }}">立即訂購<svg class="btn-icon buy-icon" viewBox="0 0 1055 1024"><use href="#icon-buyicon"></use></svg>
+        <a class="main-btn" href="{{ url('shopping/'.$product->id) }}" data-track="product.sticky.buy" data-observer="Sticky-立即訂購" data-track-section="product.sticky" data-track-zone="content" data-goods-id="{{ $product->id }}" data-track-sticky-buy>立即訂購<svg class="btn-icon buy-icon" viewBox="0 0 1055 1024"><use href="#icon-buyicon"></use></svg>
             @if($product->quantity >= 4)
                 <div class="discount">
                     <span class="discount-content">還有免運哦</span>

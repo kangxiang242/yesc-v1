@@ -1,4 +1,9 @@
 @extends('web.layout')
+
+@section('track-init')
+<script>Track.init({ platform: 'web', page_type: 'news_detail', article_id: {{ $news->id }}, category_uri: @json(request()->segment(1)) });</script>
+@endsection
+
 @if($news->seo_title)
     @section('title', $news->seo_title)
 @else
@@ -450,7 +455,7 @@
             <button type="button" class="summary-mask" aria-label="收起閱讀導覽"></button>
         </div>
 
-        <section class="article-content" id="articleContent">
+        <section class="article-content" id="articleContent" data-track-scroll-target data-track-section-view data-track-section="news.content" data-track-section-label="文章正文">
             @if(!empty($firstParagraph))
                 {!! $firstParagraph !!}
                 <img src="{{ storage_url($news->thumbnail('800')) }}"

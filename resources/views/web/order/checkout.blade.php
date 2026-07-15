@@ -8,6 +8,11 @@
         $delivery_type_all = json_decode(\App\Services\ConfigService::get('delivery_type',[]),true);
     }
 @endphp
+
+@section('track-init')
+<script>Track.init({ platform: 'web', page_type: 'checkout', goods_id: {{ $goods->id }} });</script>
+@endsection
+
 @section('style')
     @parent
     <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
@@ -21,7 +26,7 @@
 
 @section('script')
     @parent
-    <script src="{{ asset('static/js/sweetalert2.js') }}"></script>
+    <script src="{{ release_asset('static/js/sweetalert2.js') }}"></script>
     {{-- <script src="{{ asset('static/js/xarea.js') }}?ver={{ get_setting('asset_version') }}"></script> --}}
     <style>
     /* 门店列表样式 */
@@ -246,8 +251,8 @@
             });
         });
     </script>
-    <script src="{{ asset('static/js/FormHelper.js') }}"></script>
-    <script src="{{ asset('static/js/price-animator.js') }}"></script>
+    <script src="{{ release_asset('static/js/FormHelper.js') }}"></script>
+    <script src="{{ release_asset('static/js/price-animator.js') }}"></script>
     <script id="CHECKOUT-M-1">
 
         var freight_where = parseInt('{{ $freight_where }}');
@@ -268,6 +273,32 @@
     </script>
     <script>
         const formRules = {
+            onValidateFail: function (errors) {
+                if (typeof Track !== 'undefined' && errors && errors.length) {
+                    Track.validationError(errors[0].field || 'unknown');
+                }
+            },
+            onSuccess: function (data) {
+                if (typeof Track !== 'undefined') {
+                    var orderNo = (data && data.data && (data.data.id || data.data.order_no)) || (data && data.order_no) || '';
+                    Track.orderSubmit({ order_no: orderNo, goods_id: {{ $goods->id }}, product_id: String({{ $goods->id }}) });
+                }
+                if (data && data.redirect) {
+                    window.location.href = data.redirect;
+                } else if (data && data.data && data.data.id) {
+                    window.location.href = '/order/' + data.data.id;
+                } else if (data && data.status === 'success') {
+                    Swal.fire({ icon: 'success', text: data.message || '操作成功', timer: 1500, showConfirmButton: false });
+                } else {
+                    Swal.fire({ icon: 'error', text: (data && data.message) || '操作失败', timer: 2000, showConfirmButton: false });
+                }
+            },
+            onError: function (err) {
+                if (typeof Track !== 'undefined') {
+                    Track.orderSubmitError({ error_code: (err && err.message) || 'server_error', product_id: String({{ $goods->id }}) });
+                }
+                Swal.fire({ icon: 'error', text: (err && err.message) || '服務器錯誤', timer: 1500, showConfirmButton: false });
+            },
             rules: {
                 name: {
                     type: "required",
@@ -506,7 +537,7 @@
             <p class="red-price"><span style="font-size: 0.22rem; font-weight: 700; margin-right: 0.1rem;">訂單總額：NT$</span><span id="foot-order-price">{{ number_format(round($goods->price>=$freight_where?$goods->price:$goods->price+$freight_price)) }}</span></p>
         </div>
         <div class="shop-buy">
-            <button class="form-btn" onclick="$('#order-form').submit();">
+            <button class="form-btn" data-track="checkout.submit" data-observer="結帳-提交訂單" data-track-section="checkout.form" data-track-zone="content" onclick="$('#order-form').submit();">
                 <svg class="checkouticon" viewBox="0 0 1024 1024"><use href="#icon-checkouticon"></use></svg>提交訂單
             </button>
         </div>
@@ -516,7 +547,7 @@
 
 @section('content')
     <h1 style="font-size: clamp(20px, 2vw, 32px); text-align: center;">安全結帳</h1>
-    <form class="checkout-container" method="POST" action="{{ url('order') }}" id="order-form" >
+    <form class="checkout-container" method="POST" action="{{ url('order') }}" id="order-form" data-track-section-view data-track-section="checkout.form" data-track-section-label="結帳表單">
         {{ csrf_field() }}
         <input type="hidden" value="{{ $form_token }}" name="form_token">
         <input type="hidden" value="{{ $goods->id }}" name="goods_id">
@@ -675,7 +706,7 @@
             <p class="form-title">訂單備註</p>
             <textarea class="form-textarea" name="remarks" placeholder="（選填）"></textarea>
         </div>
-        <button class="checkout-btn">
+        <button class="checkout-btn" type="submit" data-track="checkout.submit" data-observer="結帳-提交訂單" data-track-section="checkout.form" data-track-zone="content">
             <svg class="checkouticon" viewBox="0 0 1024 1024"><use href="#icon-checkouticon"></use></svg>提交訂單
         </button>
     </form>

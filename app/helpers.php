@@ -24,9 +24,8 @@ if (!function_exists('assetv')) {
      */
     function assetv($path)
     {
-        $fullPath = public_path($path);
-        $version = file_exists($fullPath) ? filemtime($fullPath) : time();
-        return asset($path) . '?v=' . $version;
+        // 统一走 release token（?token），不再混用 filemtime ?v=
+        return release_asset($path);
     }
 }
 
@@ -241,7 +240,13 @@ if (!function_exists('release_asset')) {
     function release_asset($path)
     {
         $token = release_token();
+        $path = ltrim((string) $path, '/');
         $url = asset($path);
+        // 去掉既有 query，避免 ?v= 与 token 混用
+        $qPos = strpos($url, '?');
+        if ($qPos !== false) {
+            $url = substr($url, 0, $qPos);
+        }
         if ($token) {
             $url .= '?' . $token;
         }

@@ -100,6 +100,14 @@ function getCity(type){
 
             selectOption(result,'city');
             removeLoadingEffect('#load-1')
+            if (typeof Track !== 'undefined') {
+                Track.areaLoad('city', 'ok');
+            }
+        },
+        error: function () {
+            if (typeof Track !== 'undefined') {
+                Track.areaLoad('city', 'fail');
+            }
         }
     });
 }
@@ -123,6 +131,14 @@ function getCounty(type,city_name){
             }
             selectOption(result,'county');
             removeLoadingEffect('#load-2')
+            if (typeof Track !== 'undefined') {
+                Track.areaLoad('county', 'ok');
+            }
+        },
+        error: function () {
+            if (typeof Track !== 'undefined') {
+                Track.areaLoad('county', 'fail');
+            }
         }
     });
 }
@@ -144,6 +160,14 @@ function getRoad(type,city_name,county_name){
             }
             selectOption(result,'street');
             removeLoadingEffect('#load-3')
+            if (typeof Track !== 'undefined') {
+                Track.areaLoad('street', 'ok');
+            }
+        },
+        error: function () {
+            if (typeof Track !== 'undefined') {
+                Track.areaLoad('street', 'fail');
+            }
         }
     });
 }
@@ -165,6 +189,9 @@ function getShop(type,city_name,county_name,road_name){
         },
         success : function(result) {//返回数据根据结果进行相应的处理
             $('#form-store-row').html(result);
+            if (typeof Track !== 'undefined') {
+                Track.areaLoad('shop', 'ok');
+            }
 
         }
     });

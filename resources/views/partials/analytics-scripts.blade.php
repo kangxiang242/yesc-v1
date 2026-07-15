@@ -1,4 +1,4 @@
-<script src="{{ release_asset('static/js/track.min.js') }}"></script>
+<script src="{{ release_asset('static/js/track.js') }}"></script>
 @hasSection('track-init')
     @yield('track-init')
 @else

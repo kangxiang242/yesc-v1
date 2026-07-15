@@ -1,5 +1,9 @@
 @extends('web.layout')
 
+@section('track-init')
+<script>Track.init({ platform: 'web', page_type: 'cms', cms_uri: @json(request()->segment(1)) });</script>
+@endsection
+
 @section('style')
     @parent
 @stop
@@ -362,7 +366,7 @@
             <button type="button" class="summary-mask" aria-label="收起閱讀導覽"></button>
         </div>
 
-        <section class="article-content" id="spageContent">
+        <section class="article-content" id="spageContent" data-track-scroll-target data-track-section-view data-track-section="cms.content" data-track-section-label="CMS正文">
             {!! $page->content !!}
         </section>
         

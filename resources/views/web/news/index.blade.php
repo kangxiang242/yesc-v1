@@ -1,5 +1,9 @@
 @extends('web.layout')
 
+@section('track-init')
+<script>Track.init({ platform: 'web', page_type: 'news_list', category_uri: @json(request()->segment(1)) });</script>
+@endsection
+
 @section('style')
     @parent
 @stop

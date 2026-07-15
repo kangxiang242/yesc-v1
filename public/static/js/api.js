@@ -215,11 +215,18 @@ function orderStore(){
         data: $('#order-form').serialize(),
         dataType: "json",
         success: function(data){
+            if (typeof Track !== 'undefined') {
+                var orderNo = (data && data.data && data.data.id) || '';
+                Track.orderSubmit({ order_no: orderNo });
+            }
             observer_order('order-form',data.observer,function () {
                 window.location.href = "/order/"+data.data.id;
             });
         },
         error:function(jqXHR, textStatus, errorThrown){
+            if (typeof Track !== 'undefined') {
+                Track.orderSubmitError({ error_code: 'ajax_error' });
+            }
             var response = JSON.parse(jqXHR.responseText)
             Swal.fire({
                 title: '訂單提交失敗!',
@@ -298,9 +305,14 @@ function orderCheck(){
         dataType: "json",
         success: function(data){
             if(data.code == 200){
+                if (typeof Track !== 'undefined') {
+                    Track.orderCheckSuccess();
+                }
                 window.location.href = data.jump;
             }else{
-
+                if (typeof Track !== 'undefined') {
+                    Track.orderCheckError({ error_code: String(data.code || 'query_fail') });
+                }
                 Swal.fire({
                     title: '查詢失敗!',
                     text: data.message,
@@ -315,6 +327,9 @@ function orderCheck(){
             $("img.captcha").click()
         },
         error:function(jqXHR, textStatus, errorThrown){
+            if (typeof Track !== 'undefined') {
+                Track.orderCheckError({ error_code: 'ajax_error' });
+            }
             var response = JSON.parse(jqXHR.responseText)
             Swal.fire({
                 title: '查詢失敗!',
@@ -407,6 +422,9 @@ function messageStore(){
         dataType: "json",
         success: function(data){
             if (data.code == 200){
+                if (typeof Track !== 'undefined') {
+                    Track.messageSubmit({ status: 'success' });
+                }
                 observer_message('message-form',data.observer,function () {
                     Swal.fire({
                         title: data.msg,
@@ -423,6 +441,9 @@ function messageStore(){
                 });
                 closeLoadingActionBtn('.form-btn');
             }else{
+                if (typeof Track !== 'undefined') {
+                    Track.messageSubmitError({ error_code: String(data.code || 'fail') });
+                }
                 Swal.fire({
                     title: data.msg,
                     text: data.sub_msg,

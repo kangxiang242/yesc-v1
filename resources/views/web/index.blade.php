@@ -1,8 +1,12 @@
 @extends('web.layout')
 
+@section('track-init')
+<script>Track.init({ platform: 'web', page_type: 'home' });</script>
+@endsection
+
 @section('script')
     @parent
-    <script src="{{ assetv('static/js/price-animator.js') }}"></script>
+    <script src="{{ release_asset('static/js/price-animator.js') }}"></script>
     <script>
         var bannerTextExitMs = 800;
         var bannerExitTimer = null;
@@ -934,32 +938,32 @@
     $pageIndexSprite = asset('static/svg/page-index.svg');
     @endphp
 
-    <section class="index-banner">
+    <section class="index-banner" data-track-section-view data-track-section="home.hero" data-track-section-label="首屏 Banner">
         <h1><span class="brand">禮來犀利士<sup>®</sup></span>長效陪伴 讓每一次都自信從容</h1>
         <ul class="text-effect-wrap" role="list" aria-label="犀利士產品特點說明">
             <li class="text-effect text-effect--static" id="text-banner-0" role="group" aria-labelledby="text-banner-0-title" aria-hidden="false">
                 <strong class="text-effect-p1" id="text-banner-0-title">長達 36小時 藥效</strong>
                 <p class="text-effect-p2"><svg class="tickicon" viewBox="0 0 1024 1024" aria-hidden="true"><use href="#icon-tickicon"></use></svg>禮來經典原廠藥，專注長效研發</p>
                 <p class="text-effect-p3"><svg class="tickicon" viewBox="0 0 1024 1024" aria-hidden="true"><use href="#icon-tickicon"></use></svg>有效時間領先傳統短效壯陽藥9倍</p>
-                <a href="/product" class="main-btn">立即體驗<svg class="btn-icon buy-icon" aria-hidden="true"><use href="#icon-buyicon"></use></svg></a>
+                <a href="/product" class="main-btn" data-track="home.hero.cta" data-observer="首屏-立即體驗" data-track-section="home.hero" data-track-zone="content">立即體驗<svg class="btn-icon buy-icon" aria-hidden="true"><use href="#icon-buyicon"></use></svg></a>
             </li>
             <li class="text-effect" id="text-banner-1" role="group" aria-labelledby="text-banner-1-title" aria-hidden="true">
                 <strong class="text-effect-p1" id="text-banner-1-title">每日 5mg 保養</strong>
                 <p class="text-effect-p2"><svg class="tickicon" viewBox="0 0 1024 1024" aria-hidden="true"><use href="#icon-tickicon"></use></svg>首款FDA核准於治療ED與攝護腺肥大</p>
                 <p class="text-effect-p3"><svg class="tickicon" viewBox="0 0 1024 1024" aria-hidden="true"><use href="#icon-tickicon"></use></svg>泌尿科臨床醫師首選長效ED治療方案</p>
-                <a href="/product" class="main-btn">查看組合方案<svg class="btn-icon buy-icon" aria-hidden="true"><use href="#icon-buyicon"></use></svg></a>
+                <a href="/product" class="main-btn" data-track="home.hero.cta" data-observer="首屏-查看組合方案" data-track-section="home.hero" data-track-zone="content">查看組合方案<svg class="btn-icon buy-icon" aria-hidden="true"><use href="#icon-buyicon"></use></svg></a>
             </li>
             <li class="text-effect" id="text-banner-2" role="group" aria-labelledby="text-banner-2-title" aria-hidden="true">
                 <strong class="text-effect-p1" id="text-banner-2-title">全球上市 23年</strong>
                 <p class="text-effect-p2"><svg class="tickicon" viewBox="0 0 1024 1024" aria-hidden="true"><use href="#icon-tickicon"></use></svg>累積大量臨床使用經驗與安全數據</p>
                 <p class="text-effect-p3"><svg class="tickicon" viewBox="0 0 1024 1024" aria-hidden="true"><use href="#icon-tickicon"></use></svg>長期受到國際醫療體系廣泛應用</p>
-                <a href="/product" class="main-btn">立即訂購<svg class="btn-icon buy-icon" aria-hidden="true"><use href="#icon-buyicon"></use></svg></a>
+                <a href="/product" class="main-btn" data-track="home.hero.cta" data-observer="首屏-立即訂購" data-track-section="home.hero" data-track-zone="content">立即訂購<svg class="btn-icon buy-icon" aria-hidden="true"><use href="#icon-buyicon"></use></svg></a>
             </li>
             <li class="text-effect" id="text-banner-3" role="group" aria-labelledby="text-banner-3-title" aria-hidden="true">
                 <strong class="text-effect-p1" id="text-banner-3-title">高達 98% 滿意度</strong>
                 <p class="text-effect-p2"><svg class="tickicon" viewBox="0 0 1024 1024" aria-hidden="true"><use href="#icon-tickicon"></use></svg>幫助全球數千萬患者重拾自信</p>
                 <p class="text-effect-p3"><svg class="tickicon" viewBox="0 0 1024 1024" aria-hidden="true"><use href="#icon-tickicon"></use></svg>更穩定持久的表現讓伴侶滿足感大幅提升</p>
-                <a href="/product" class="main-btn">重拾自信表現<svg class="btn-icon buy-icon" aria-hidden="true"><use href="#icon-buyicon"></use></svg></a>
+                <a href="/product" class="main-btn" data-track="home.hero.cta" data-observer="首屏-重拾自信表現" data-track-section="home.hero" data-track-zone="content">重拾自信表現<svg class="btn-icon buy-icon" aria-hidden="true"><use href="#icon-buyicon"></use></svg></a>
             </li>
         </ul>
         <div class="hero-carousel" id="hero-video-carousel" role="region" aria-roledescription="carousel" aria-label="犀利士產品特點輪播">
@@ -1015,7 +1019,7 @@
     </section>
     
 
-    <section class="compare" id="compare">
+    <section class="compare" id="compare" data-track-section-view data-track-section="home.compare" data-track-section-label="效果對比">
         <h2 class="sec-title">犀利士與短效壯陽藥效果對比</h2>
         <table class="table-container">
             <thead class="table-top">
@@ -1172,7 +1176,7 @@
 
         </div>
     </section>
-    <section class="product watermark">
+    <section class="product watermark" data-track-section-view data-track-section="home.products" data-track-section-label="首页产品列表">
         <h2 class="product-sec-title sec-title">犀利士線上訂購</h2>
         {{--@foreach($groups as $group)
             <div class="box-container">
@@ -1262,7 +1266,7 @@
                             </li>
                         @endforeach
                     </ul>
-                    <a class="main-btn {{ $goods->id === 14 ? 'main-btn--featured' : 'main-btn--outline' }}" href="{{ url('goods/'.$goods->id) }}">立即訂購 {{ $goods->name }}
+                    <a class="main-btn {{ $goods->id === 14 ? 'main-btn--featured' : 'main-btn--outline' }}" href="{{ url('goods/'.$goods->id) }}" data-track="home.product.checkout" data-observer="首頁-立即訂購-{{ $goods->name }}" data-track-section="home.products" data-track-zone="content" data-goods-id="{{ $goods->id }}">立即訂購 {{ $goods->name }}
                         <svg class="btn-icon buy-icon" viewBox="0 0 1055 1024"><use href="#icon-buyicon"></use></svg>
                         @if(in_array($goods->id, [14, 18]) && $goods->quantity >= 4)
                             <div class="discount">
@@ -1276,7 +1280,7 @@
         @include('components.secret')
 
     </section>
-    <section class="intro mon">
+    <section class="intro mon" data-track-section-view data-track-section="home.intro" data-track-section-label="產品介紹">
         <h2 class="intro-title"><span class="intro-title-label">犀利士上市28年</span><span class="sec-title">至今仍為勃起障礙臨床長效治療首選方案</span></h2>
         @include('components.rice-scroll')
         <div class="intro-wrap">
@@ -1392,7 +1396,7 @@
         </div>
     </section>
 
-    <section class="usage">
+    <section class="usage" data-track-section-view data-track-section="home.usage" data-track-section-label="使用方式">
         <h2 class="sec-title">醫師建議用法</h2>
         <p class="usage-content">為什麼有些人服用犀利士後覺得「沒效果」？多半不是藥物失效，而是使用方式與時機不對。犀利士（他達拉非）屬於長效型 PDE5 抑制劑，並不會在服藥後自動勃起，仍需要性刺激與心理放鬆配合，藥物才能幫助陰莖海綿體充血。掌握以下幾點，才能讓他達拉非在 36 小時的藥效窗口內穩定發揮：</p>
         <ol class="usage-list">
@@ -1430,7 +1434,7 @@
     </section>
 
 
-    <section class="work">
+    <section class="work" data-track-section-view data-track-section="home.work" data-track-section-label="作用機制">
         <h2 class="sec-title">犀利士助勃機轉</h2>
         <ol class="work-wrap">
             <li class="work-item mon">
@@ -1462,7 +1466,7 @@
             </li>
         </ol>
     </section>
-    <section class="safe-medication">
+    <section class="safe-medication" data-track-section-view data-track-section="home.safety" data-track-section-label="安全用藥">
         <h2 class="sec-title">犀利士用藥安全</h2>
         <section class="side-effects">
             <h3 class="snd-title">犀利士常見副作用</h3>
@@ -1553,7 +1557,7 @@
             </section>
         @endif
     </section>
-    <section class="health health-home mon">
+    <section class="health health-home mon" data-track-section-view data-track-section="home.health" data-track-section-label="兩性健康">
         <h2 class="sec-title">兩性健康</h2>
         @if($healthReading->isNotEmpty())
             <ul class="news-wrap">
