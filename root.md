@@ -151,24 +151,44 @@ php artisan serve --port=8001
 | 项目 | 内容 |
 |:-----|:------|
 | 测试域名 | https://slir4.top |
-| 测试服务器 | 45.148.120.52（1Panel Docker） |
-| SSH 密钥 | `~/workspace/wwwroot/hk-server-keys/deploy_key`（需 `ssh -A` agent forwarding） |
-| SSH 用户 | root:22 |
-| 站点路径（宿主机） | `/opt/1panel/www/sites/slir4.top/index/` |
-| 站点路径（容器内） | `/www/sites/slir4.top/index/` |
-| Nginx 配置 | `/opt/1panel/www/conf.d/slir4.top.conf` |
-| PHP 容器 | `php82`（`docker exec -w <path> php82 php ...`） |
-| Nginx 容器 | `1Panel-openresty-UOYX` |
-| 数据库 | MySQL `yescialis_v1`（Docker `1Panel-mysql-FTgQ`） |
+| 测试服务器 | 5.182.210.43（原生服务，已移除 1Panel + Docker） |
+| SSH 密钥 | `~/workspace/wwwroot/hk-server-keys/deploy_key`（ed25519，与 52 同密钥） |
+| SSH 用户 | root@5.182.210.43:22（已禁用密码登录） |
+| 站点路径 | `/opt/1panel/www/sites/slir4.top/index/` |
+| Nginx 配置 | `/etc/nginx/sites-available/slir4.top` |
+| PHP | 原生 PHP 8.2 FPM（`127.0.0.1:9000`） |
+| Nginx | 原生 nginx 1.18.0 |
+| 数据库 | 原生 MariaDB 11.4.12 `yescialis_v1`（48 张表，root / mariadb_2312） |
 | 后台路径 | `/pthj1l0cxsau` |
 | 后台账号 | `web0wer16888` / `888d00rkeeper888` |
-| 部署方式 | `rsync -avz --exclude={vendor,node_modules,.git,.env} -e 'ssh -A' ./ root@45.148.120.52:/opt/1panel/www/sites/slir4.top/index/` |
-| Composer | `docker exec -w /www/sites/slir4.top/index php82 composer install --no-dev` |
-| 快取清除 | `docker exec -w /www/sites/slir4.top/index php82 php artisan optimize:clear` |
-| CF 账号 | `aqs33202@outlook.com`（Token: ⚠️ 已从提交历史中移除，请查看 .env / 1Panel 面板） |
+| 部署方式 | `rsync -avz --exclude={vendor,node_modules,.git,.env} -e 'ssh -i ~/workspace/wwwroot/hk-server-keys/deploy_key' ./ root@5.182.210.43:/opt/1panel/www/sites/slir4.top/index/` |
+| Composer | `ssh root@5.182.210.43 'cd /opt/1panel/www/sites/slir4.top/index && composer install --no-dev'` |
+| 快取清除 | `ssh root@5.182.210.43 'cd /opt/1panel/www/sites/slir4.top/index && php artisan optimize:clear'` |
+| CF 账号 | `aqs33202@outlook.com` / `1ver!ter3321`（Token: ⚠️ 已从提交历史中移除，请查看 .env） |
+| CF API Token | ⚠️ 已从提交历史中移除，请查看 .env |
 | CF Zone ID | `97709f8bb53a452a8379fcc230c5e28e` |
 | GIT 仓库 | `git@github.com:kangxiang242/yesc-v1.git`（main） |
-| SSH 注意 | 服务器 `MaxStartups` 限制严格，短时间多次连接会被拒绝，需等待5-10秒重试，加 `-A` 转发 agent |
+
+### DNS 解析（Cloudflare）
+
+测试域名 `slir4.top` 通过 Cloudflare DNS 解析到 5.182.210.43：
+
+| 记录类型 | 名称 | 内容 | 代理状态 |
+|:--------:|:-----|:-----|:--------:|
+| A | `slir4.top` | `5.182.210.43` | 仅 DNS（或橙云代理） |
+
+> 如需切回旧测试服务器 45.148.120.52，将上述 A 记录内容改为 `45.148.120.52` 即可。两个服务器 SSH 使用同一密钥。
+
+### DNS 切换记录
+
+| 日期 | 操作 | A 记录旧值 | A 记录新值 | 状态 |
+|:-----|:-----|:----------:|:----------:|:----:|
+| 2026-07-15 | Cloudflare DNS 切换测试服务器 | `45.148.120.52` | `5.182.210.43` | ✅ 已生效 |
+
+- **记录 ID**：`054b44897e9632aede946fa87fe24b4c`
+- **代理状态**：橙云（proxied: true）
+- **生效方式**：开启橙云代理，Cloudflare 边缘节点秒级更新
+- **切换 API**：`PATCH /zones/{zone_id}/dns_records/{record_id}`
 
 ---
 
@@ -212,11 +232,13 @@ c834597  docs: 更新 root.md 为 yesc-v1（Cialis）专属内容
 
 | 日期 | 内容 |
 |:-----|:------|
+| 2026-07-15 | 测试环境 DNS 解析从 45.148.120.52 切到 5.182.210.43（原生服务） |
 | 2026-07-09 | 修复 OrderRepository 商品名称硬编码 |
 | 2026-07-09 | root.md 全面更新为 yesc-v1 专属内容 |
 | 2026-07-07 | yesc-v1 仓库建立，基于 twshop-v1 模板首次推送 |
 
 ## 参考
 
-- 服务器文档：`/Users/a123/workspace/wwwroot/my-notes/香港集策/服务器/测试与备份/test-45.148.120.52.md`
+- 服务器文档：`/Users/a123/workspace/wwwroot/my-notes/香港集策/服务器/测试与备份/test-5.182.210.43.md`
+- 旧测试服务器（备用）：45.148.120.52，文档 `/Users/a123/workspace/wwwroot/my-notes/香港集策/服务器/测试与备份/test-45.148.120.52.md`
 - 原始模板：`/Users/a123/workspace/wwwroot/Y-yescialis.com/yescialis.com`
