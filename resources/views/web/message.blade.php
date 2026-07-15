@@ -40,6 +40,10 @@
                     Swal.fire({ icon: 'error', text: (err && err.message) || '服務器錯誤', timer: 1500, showConfirmButton: false });
                 },
                 rules: {
+                    name: {
+                        type: "required",
+                        messages: { required: "請填寫您的昵稱" }
+                    },
                     email: {
                         type: "email|required",
                         messages: { required: "請填寫郵箱", email: "郵箱格式不正確" }
@@ -186,6 +190,15 @@
         {!! csrf_field() !!}
         <div class="data-group">
             <textarea class="form-textarea" name="content" rows="4" required minlength="10" maxlength="600" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" inputmode="text" enterkeyhint="done" placeholder="我想補充訂單備註／想修改訂單地址..."></textarea>
+
+            <div class="form-item">
+                <svg class="formicon" viewBox="0 0 1024 1024"><use href="#icon-formicon-user"></use></svg>
+                <div class="form-input">
+                    <input type="text" id="name" name="name" autocomplete="name" autocapitalize="words" spellcheck="false" autocorrect="off" placeholder="您的昵稱" enterkeyhint="next" required>
+                    <label class="js-split-label" data-split-step="50">請留下您的昵稱</label>
+                    <p class="hint">您的稱呼</p>
+                </div>
+            </div>
 
             <div class="form-item">
                 <svg t="1765935415924" class="formicon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="159398" width="200" height="200"><path d="M1024 768c0 22.4-6.2 43.4-16.4 61.6L684.4 467.8 1004.2 188c12.4 19.8 19.8 42.8 19.8 68L1024 768 1024 768 1024 768zM512 533.6 957 144.2c-18.2-10-38.8-16.2-61-16.2L128 128c-22.2 0-42.8 6.2-61 16.2L512 533.6 512 533.6 512 533.6zM636.2 510l-103 90.2c-6 5.2-13.6 7.8-21 7.8-7.6 0-15-2.6-21-7.8L388 510 60.6 876.4c19.6 12.2 42.6 19.8 67.4 19.8l768.2 0c24.8 0 47.8-7.4 67.4-19.8L636.2 510 636.2 510 636.2 510zM19.8 188C7.4 207.8 0 230.8 0 256l0 512c0 22.4 6.2 43.4 16.4 61.6l323.4-362L19.8 188 19.8 188 19.8 188zM19.8 188" p-id="159399" fill="currentColor"></path></svg>

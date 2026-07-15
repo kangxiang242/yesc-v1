@@ -22,17 +22,17 @@
     ]
   },
   "resources/scss/app.scss": {
-    "file": "assets/app-CPfvRulK.css",
+    "file": "assets/app-CxrP0axy.css",
     "src": "resources/scss/app.scss",
     "isEntry": true
   },
   "resources/scss/home.scss": {
-    "file": "assets/home-kqtK09pq.css",
+    "file": "assets/home-A8sVOGyr.css",
     "src": "resources/scss/home.scss",
     "isEntry": true
   },
   "resources/scss/landing.scss": {
-    "file": "assets/landing-D8ESprUj.css",
+    "file": "assets/landing-C5WC39vV.css",
     "src": "resources/scss/landing.scss",
     "isEntry": true
   }

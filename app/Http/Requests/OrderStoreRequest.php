@@ -13,7 +13,7 @@ class OrderStoreRequest extends BaseRequest
     {
         return [
             'name' => 'required',
-            'phone' => ['required', 'regex:/^(09\d{2})-\d{3}-\d{3}$/'],
+            'phone' => ['required', 'regex:/^09\d{2}\s\d{3}\s\d{3}$/'],
             'email' => 'required|email',
             'city' => ['required', 'not_in:0'],
             'county' => ['required', 'not_in:0'],
@@ -35,7 +35,7 @@ class OrderStoreRequest extends BaseRequest
             'street.required' => '請選擇路段',
             'street.not_in' => '請選擇路段',
             'goods_id.required' => '商品数据错误',
-            'phone.regex' => 'Error'
+            'phone.regex' => '請輸入正確的手機號格式（09XX XXX XXX）'
         ];
     }
 }

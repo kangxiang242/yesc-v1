@@ -6,9 +6,6 @@
 
 @section('style')
     @parent
-@stop
-
-@section('landing_style')
     @vite(['resources/scss/home.scss', 'resources/js/app.js'])
 @stop
 
