@@ -45,13 +45,13 @@
             }
 
             .product-area{
-                flex: 1.5;
-                min-width: 0;
+                flex: none;
+                width: 58%;
             }
 
             .qa-wrap{
-                flex: 1;
-                min-width: 0;
+                flex: none;
+                width: 38%;
                 margin: 0;
                 height: auto;
                 align-self: flex-start;

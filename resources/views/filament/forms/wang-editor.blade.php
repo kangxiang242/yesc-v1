@@ -83,6 +83,11 @@
                     return;
                 }
 
+                // 切换 wangEditor 语言为繁中
+                if (window.wangEditor.i18nChangeLanguage) {
+                    window.wangEditor.i18nChangeLanguage('zh-TW');
+                }
+
                 var w = target || document.querySelector('.wang-editor-wrapper[data-ready="1"]');
                 if (!w) return;
                 if (w.__weDone) return;
@@ -117,7 +122,7 @@
                 if (!editorEl) return;
 
                 var ec = {
-                    placeholder: '请输入内容...',
+                    placeholder: '請輸入內容...',
                     MENU_CONF: {
                         uploadImage: {
                             server: uploadUrl,

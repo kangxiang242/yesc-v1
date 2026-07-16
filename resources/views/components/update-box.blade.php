@@ -9,6 +9,19 @@
             timer: null,
             apiBaseUrl: '/api/buyer-message',
 
+            randInt: function(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            },
+
+            setBuyerCount: function($elem, count) {
+                var $num = $elem.find('.box-buyer-num');
+                if ($num.length > 0) {
+                    $num.text(count);
+                } else {
+                    $elem.text('近24小時已有' + count + '人訂購');
+                }
+            },
+
             init: function() {
                 var self = this;
 
@@ -68,10 +81,16 @@
                             if ($container.length > 0) {
                                 var $subname = $container.find('.goods-subname');
                                 if ($subname.length > 0) {
-                                    $buyerCount = $('<p class="box-buyer-count" data-box-count="' + boxNum + '">近24小時已有0人訂購</p>');
+                                    $buyerCount = $('<p class="box-buyer-count" data-box-count="' + boxNum + '"></p>');
                                     $subname.after($buyerCount);
                                 }
                             }
+                        }
+
+                        // 初始顯示一個隨機購買人數，避免顯示 0
+                        if ($buyerCount && $buyerCount.length > 0) {
+                            var initialCount = randInt(80, 200);
+                            self.setBuyerCount($buyerCount, initialCount);
                         }
 
                         processedBoxNums[boxNum] = true;
@@ -89,8 +108,10 @@
                     success: function(response) {
                         if (response.success && response.data) {
                             for (var boxNum in response.data) {
-                                var countText = '近24小時已有' + response.data[boxNum] + '人訂購';
-                                $('.box-buyer-count[data-box-count="' + boxNum + '"]').text(countText);
+                                var $elem = $('.box-buyer-count[data-box-count="' + boxNum + '"]');
+                                if ($elem.length > 0) {
+                                    self.setBuyerCount($elem, response.data[boxNum]);
+                                }
                             }
                         }
                     }
@@ -152,8 +173,10 @@
 
                     if (boxBuyers) {
                         for (var key in boxBuyers) {
-                            var countText = '近24小時已有' + boxBuyers[key] + '人訂購';
-                            $('.box-buyer-count[data-box-count="' + key + '"]').text(countText);
+                            var $elem = $('.box-buyer-count[data-box-count="' + key + '"]');
+                            if ($elem.length > 0) {
+                                self.setBuyerCount($elem, boxBuyers[key]);
+                            }
                         }
                     }
 

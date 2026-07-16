@@ -124,8 +124,8 @@
             
             // 监听所有单选按钮的变化
             $('input[type="radio"][name^="iief_q"]').on('change', function() {
-                // 移除同组其他选项的选中样式
-                $(this).closest('.iief-options').find('.iief-option').removeClass('selected');
+                // 移除同一题（同一行）其他选项的选中样式
+                $(this).closest('.iief-row').find('.iief-option').removeClass('selected');
                 // 添加当前选项的选中样式
                 $(this).closest('.iief-option').addClass('selected');
                 calculateTotalScore();
@@ -340,7 +340,7 @@
         </div>
         <div class="goods-label-sec">
             <p class="goods-label">100%隱密包裝</p>
-            <p class="goods-label box-buyer-count" data-box-count="{{ $product->quantity }}">近24小時已有0人訂購 {{ $product->quantity }}盒@if($product->quantity < 3)裝@elseif($product->quantity >= 3 && $product->quantity < 10)方案@else組合@endif</p>
+            <p class="goods-label box-buyer-count" data-box-count="{{ $product->quantity }}">近24小時已有<span class="box-buyer-num">0</span>人訂購 {{ $product->quantity }}盒@if($product->quantity < 3)裝@elseif($product->quantity >= 3 && $product->quantity < 10)方案@else組合@endif</p>
         </div>
         
         <dl class="sub-sec">

@@ -5,8 +5,7 @@
     grid-area: qa;
     margin: 120px auto;
     height: fit-content;
-    max-width: 1024px;
-    width: 100%;
+    width: 524px;
     @include media.mobile {
         padding: 0 15px;
     }
@@ -143,7 +142,7 @@
         }
 
         &.is-qa-ready .faq-answer {
-            transition: height 1s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: height 0s;
         }
     }
 
@@ -151,8 +150,7 @@
         .faq-item {
             .faq-question .faq-arrow,
             .faq-question .faq-arrow::before,
-            .faq-question .faq-arrow::after,
-            .faq-answer {
+            .faq-question .faq-arrow::after {
                 transition: none !important;
             }
         }

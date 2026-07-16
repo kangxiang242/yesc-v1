@@ -3,7 +3,6 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Dashboard;
-use App\Filament\Widgets\DashboardLeftPanel;
 use App\Filament\Widgets\PageAccessRankingWidget;
 use App\Filament\Widgets\RightStatsWidget;
 use Filament\Http\Middleware\Authenticate;
@@ -56,7 +55,6 @@ class AdminPanelProvider extends PanelProvider
                 Dashboard::class,
             ])
             ->widgets([
-                DashboardLeftPanel::class,
                 RightStatsWidget::class,
                 PageAccessRankingWidget::class,
             ])

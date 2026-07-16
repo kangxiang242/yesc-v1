@@ -1,14 +1,8 @@
 @php
     $openFirst = $openFirst ?? false;
-    $headingLevel = max(2, min(5, (int) ($headingLevel ?? 2)));
-    $titleTag = 'h' . $headingLevel;
-    $questionTag = 'h' . min(6, $headingLevel + 1);
-    $idPrefix = $idPrefix ?? 'faq';
-    $withSchema = $withSchema ?? true;
 @endphp
-@if(!empty($faqs) && count($faqs))
 <section class="qa-wrap">
-    <{{ $titleTag }} class="sec-title">常見疑問</{{ $titleTag }}>
+    <h2 class="sec-title">常見疑問</h2>
     <ul class="faq-list">
         @foreach($faqs as $faq)
             @php
@@ -44,10 +38,10 @@
                 }
 
                 $isOpen = $openFirst && $loop->index === 0;
-                $faqId = $idPrefix . '-' . $loop->iteration;
+                $faqId = $loop->iteration;
             @endphp
             <li class="faq-item{{ $isOpen ? ' is-open' : '' }}">
-                <{{ $questionTag }} class="faq-item__title">
+                <h3 class="faq-item__title">
                     <button
                         type="button"
                         class="faq-question"
@@ -58,7 +52,7 @@
                         <span class="faq-question__text">{{ $faq->title }}</span>
                         <span class="faq-arrow" aria-hidden="true"></span>
                     </button>
-                </{{ $questionTag }}>
+                </h3>
                 <div
                     class="faq-answer"
                     id="faq-answer-{{ $faqId }}"
@@ -73,7 +67,27 @@
     </ul>
 </section>
 
-@once
+
+
+@if(!empty($faqs) && count($faqs))
+
+@php
+    $schema = [
+        "@context" => "https://schema.org",
+        "@type" => "FAQPage",
+        "mainEntity" => collect($faqs)->map(function($faq){
+            return [
+                "@type" => "Question",
+                "name" => strip_tags($faq->title),
+                "acceptedAnswer" => [
+                    "@type" => "Answer",
+                    "text" => strip_tags($faq->content)
+                ]
+            ];
+        })->values()->toArray()
+    ];
+@endphp
+
 @push('qa-js')
 <script>
     (function () {
@@ -83,7 +97,6 @@
         var PANEL_SELECTOR = '.faq-answer';
         var ENHANCED_CLASS = 'is-qa-enhanced';
         var READY_CLASS = 'is-qa-ready';
-        var ANIMATING_CLASS = 'is-animating';
         var COLLAPSING_CLASS = 'is-collapsing';
 
         function getButton(item) {
@@ -111,137 +124,41 @@
             panel.style.height = Math.max(0, Math.round(value)) + 'px';
         }
 
-        function transitionHeight(panel, toHeight) {
-            var fromHeight = panel.getBoundingClientRect().height;
-
-            if (Math.abs(fromHeight - toHeight) < 1) {
-                setHeight(panel, toHeight);
-                return;
-            }
-
-            panel.dataset.animating = '1';
-            panel.classList.add(ANIMATING_CLASS);
-            setHeight(panel, fromHeight);
-            panel.offsetHeight;
-
-            requestAnimationFrame(function () {
-                setHeight(panel, toHeight);
-            });
-
-            var onEnd = function (event) {
-                if (event.propertyName !== 'height') {
-                    return;
-                }
-                panel.dataset.animating = '';
-                panel.classList.remove(ANIMATING_CLASS);
-                panel.removeEventListener('transitionend', onEnd);
-            };
-
-            panel.addEventListener('transitionend', onEnd);
-        }
-
-        function openItem(item, animate) {
+        function openItem(item) {
             var panel = item.querySelector(PANEL_SELECTOR);
-            if (!panel) {
-                return;
-            }
-
+            if (!panel) return;
             item.classList.remove(COLLAPSING_CLASS);
             panel.removeAttribute('hidden');
             setItemOpen(item, true);
-            var targetHeight = panel.scrollHeight;
-
-            if (animate) {
-                transitionHeight(panel, targetHeight);
-            } else {
-                setHeight(panel, targetHeight);
-            }
+            setHeight(panel, panel.scrollHeight);
         }
 
-        function closeItem(item, animate) {
+        function closeItem(item) {
             var panel = item.querySelector(PANEL_SELECTOR);
-            if (!panel) {
-                return;
-            }
-
-            var currentHeight = panel.getBoundingClientRect().height || panel.scrollHeight;
-
-            if (!animate) {
-                setHeight(panel, 0);
-                setItemOpen(item, false);
-                panel.setAttribute('hidden', '');
-                item.classList.remove(COLLAPSING_CLASS);
-                return;
-            }
-
-            item.classList.add(COLLAPSING_CLASS);
-            panel.dataset.animating = '1';
-            panel.classList.add(ANIMATING_CLASS);
-            setHeight(panel, currentHeight);
-            panel.offsetHeight;
-
-            requestAnimationFrame(function () {
-                setHeight(panel, 0);
-            });
-
-            var onEnd = function (event) {
-                if (event.propertyName !== 'height') {
-                    return;
-                }
-                setItemOpen(item, false);
-                panel.setAttribute('hidden', '');
-                item.classList.remove(COLLAPSING_CLASS);
-                panel.dataset.animating = '';
-                panel.classList.remove(ANIMATING_CLASS);
-                panel.removeEventListener('transitionend', onEnd);
-            };
-
-            panel.addEventListener('transitionend', onEnd);
+            if (!panel) return;
+            setHeight(panel, 0);
+            setItemOpen(item, false);
+            panel.setAttribute('hidden', '');
+            item.classList.remove(COLLAPSING_CLASS);
         }
 
         function closeSiblings(wrap, currentItem) {
             wrap.querySelectorAll(ITEM_SELECTOR).forEach(function (item) {
                 if (item !== currentItem && isItemOpen(item)) {
-                    closeItem(item, true);
-                }
-            });
-        }
-
-        function recalcOpenPanels(items, animate) {
-            items.forEach(function (item) {
-                if (!isItemOpen(item)) {
-                    return;
-                }
-                var panel = item.querySelector(PANEL_SELECTOR);
-                if (!panel) {
-                    return;
-                }
-                var nextHeight = panel.scrollHeight;
-                if (animate) {
-                    transitionHeight(panel, nextHeight);
-                } else {
-                    setHeight(panel, nextHeight);
+                    closeItem(item);
                 }
             });
         }
 
         function initAccordion(wrap) {
-            if (wrap.classList.contains(ENHANCED_CLASS)) {
-                return;
-            }
-
             var items = Array.prototype.slice.call(wrap.querySelectorAll(ITEM_SELECTOR));
-            if (!items.length) {
-                return;
-            }
+            if (!items.length) return;
 
             wrap.classList.add(ENHANCED_CLASS);
 
             items.forEach(function (item) {
                 var panel = item.querySelector(PANEL_SELECTOR);
-                if (!panel) {
-                    return;
-                }
+                if (!panel) return;
                 item.classList.remove(COLLAPSING_CLASS);
                 panel.removeAttribute('hidden');
                 setHeight(panel, isItemOpen(item) ? panel.scrollHeight : 0);
@@ -258,78 +175,21 @@
 
             wrap.addEventListener('click', function (event) {
                 var btn = event.target.closest(BUTTON_SELECTOR);
-                if (!btn || !wrap.contains(btn)) {
-                    return;
-                }
+                if (!btn || !wrap.contains(btn)) return;
 
                 var item = btn.closest(ITEM_SELECTOR);
-                if (!item) {
-                    return;
-                }
+                if (!item) return;
 
                 event.preventDefault();
 
                 if (isItemOpen(item)) {
-                    closeItem(item, true);
+                    closeItem(item);
                     return;
                 }
 
                 closeSiblings(wrap, item);
-                openItem(item, true);
+                openItem(item);
             });
-
-            if ('ResizeObserver' in window) {
-                var observer = new ResizeObserver(function (entries) {
-                    var targets = new Set();
-
-                    entries.forEach(function (entry) {
-                        var item = entry.target.closest(ITEM_SELECTOR);
-                        if (item && isItemOpen(item)) {
-                            targets.add(item);
-                        }
-                    });
-
-                    targets.forEach(function (item) {
-                        var panel = item.querySelector(PANEL_SELECTOR);
-                        if (!panel || panel.dataset.animating === '1') {
-                            return;
-                        }
-                        transitionHeight(panel, panel.scrollHeight);
-                    });
-                });
-
-                items.forEach(function (item) {
-                    var panel = item.querySelector(PANEL_SELECTOR);
-                    if (!panel) {
-                        return;
-                    }
-                    var observedNode = panel.querySelector('.faq-answer__inner') || panel;
-                    observer.observe(observedNode);
-                });
-            }
-
-            if (document.fonts && document.fonts.ready) {
-                document.fonts.ready
-                    .then(function () {
-                        recalcOpenPanels(items, true);
-                    })
-                    .catch(function () {});
-            }
-
-            var resizeRaf = null;
-            window.addEventListener(
-                'resize',
-                function () {
-                    if (resizeRaf) {
-                        cancelAnimationFrame(resizeRaf);
-                    }
-                    resizeRaf = requestAnimationFrame(function () {
-                        recalcOpenPanels(items, false);
-                        resizeRaf = null;
-                    });
-                },
-                { passive: true }
-            );
         }
 
         function bootstrap() {
@@ -345,30 +205,12 @@
     })();
 </script>
 @endpush
-@endonce
 
-@if($withSchema)
-@php
-    $schema = [
-        "@context" => "https://schema.org",
-        "@type" => "FAQPage",
-        "mainEntity" => collect($faqs)->map(function($faq){
-            return [
-                "@type" => "Question",
-                "name" => strip_tags($faq->title),
-                "acceptedAnswer" => [
-                    "@type" => "Answer",
-                    "text" => strip_tags($faq->content)
-                ]
-            ];
-        })->values()->toArray()
-    ];
-@endphp
 @push('schema')
 <script type="application/ld+json">
 {!! json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
 </script>
 @endpush
-@endif
 
 @endif
+

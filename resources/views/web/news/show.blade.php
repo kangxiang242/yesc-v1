@@ -489,12 +489,7 @@
             </div>
         </footer>
     </article>
-    <div class="share-box">
-        <svg class="shareicon" viewBox="0 0 1024 1024"><use href="#icon-shareicon-1"></use></svg>
-        <svg class="shareicon" viewBox="0 0 1024 1024"><use href="#icon-shareicon-2"></use></svg>
-        <svg class="shareicon" viewBox="0 0 1024 1024"><use href="#icon-shareicon-3"></use></svg>
-        <svg class="shareicon" viewBox="0 0 1024 1024"><use href="#icon-shareicon-4"></use></svg>
-    </div>
+
     <nav class="page">
         <a href="{{ route('news.show',[$prev->cate->uri,$prev->id]) }}" class="prev">
             <span><svg class="arrowicon" viewBox="0 0 1024 1024"><use href="#icon-arrowicon"></use></svg>上一篇</span>

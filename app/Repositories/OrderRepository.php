@@ -9,6 +9,7 @@ use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Services\VehicleService;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use GuzzleHttp\Client;
@@ -268,11 +269,7 @@ class OrderRepository extends Repository
      * @return string
      */
     public function makeOrderNo(){
-        $no = date('YmdHi').rand(1000,9999);
-        $order = $this->model()->where('no',$no)->first();
-        if($order){
-            $this->makeOrderNo();
-        }
+        $no = Str::uuid()->toString();
         return $no;
     }
 
@@ -281,8 +278,7 @@ class OrderRepository extends Repository
      * @return string
      */
     public function makeOrderInsideNo(){
-        $count = $this->model()->whereBetWeen('created_at',[Carbon::now()->startOfDay(),Carbon::now()->endOfDay()])->count();
-        return 'R1-'.date('YmdHi').'-'.($count+1);
+        return 'R1-'.Str::uuid()->toString();
     }
 
 
