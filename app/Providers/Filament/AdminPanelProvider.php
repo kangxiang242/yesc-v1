@@ -3,6 +3,9 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Dashboard;
+use App\Filament\Widgets\DashboardLeftPanel;
+use App\Filament\Widgets\PageAccessRankingWidget;
+use App\Filament\Widgets\RightStatsWidget;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -53,7 +56,9 @@ class AdminPanelProvider extends PanelProvider
                 Dashboard::class,
             ])
             ->widgets([
-                \App\Filament\Widgets\DashboardLeftPanel::class,
+                DashboardLeftPanel::class,
+                RightStatsWidget::class,
+                PageAccessRankingWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
