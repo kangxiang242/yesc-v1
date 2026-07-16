@@ -8,6 +8,8 @@ use Filament\Widgets\Widget;
 
 class PageAccessRankingWidget extends Widget
 {
+    protected static bool $lazy = false;
+
     protected static string $view = 'filament.widgets.page-access-ranking';
 
     protected ?string $heading = '頁面訪問排行 (前10個)';

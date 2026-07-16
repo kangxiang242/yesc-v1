@@ -11,6 +11,8 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class RightStatsWidget extends BaseWidget
 {
+    protected static bool $lazy = false;
+
     protected ?string $heading = '數據概覽';
 
     protected static ?int $sort = 1;
