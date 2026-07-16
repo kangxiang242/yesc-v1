@@ -55,8 +55,7 @@ class AdminPanelProvider extends PanelProvider
                 Dashboard::class,
             ])
             ->widgets([
-                RightStatsWidget::class,
-                PageAccessRankingWidget::class,
+                // 临时移除：RightStatsWidget/PageAccessRankingWidget 的 Livewire 懒加载在服务器环境触发 500
             ])
             ->middleware([
                 EncryptCookies::class,
