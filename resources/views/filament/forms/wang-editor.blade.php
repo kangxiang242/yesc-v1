@@ -138,6 +138,54 @@
                     },
                 };
 
+                // —— HTML 预清洗：移除空 <a>、空 <span>、修复块级元素嵌套 ——
+                function cleanEditorHtml(raw) {
+                    if (!raw) return '';
+                    var d = document.createElement('div');
+                    d.innerHTML = raw;
+
+                    // 1) 移除空 <a>（无子节点或仅空白文本）
+                    d.querySelectorAll('a').forEach(function (el) {
+                        var txt = el.textContent.replace(/\s+/g, '');
+                        if (!txt && !el.querySelector('img, video, iframe')) {
+                            el.remove();
+                        }
+                    });
+
+                    // 2) 移除空 <span>（无子节点或仅空白文本/换行）
+                    d.querySelectorAll('span').forEach(function (el) {
+                        if (!el.children.length && !el.textContent.trim()) {
+                            el.remove();
+                        }
+                    });
+
+                    // 3) 将 <span> 内的块级子元素（p, div, h1-h6, ul, ol, table 等）上提一层
+                    d.querySelectorAll('span').forEach(function (el) {
+                        var blockChild = el.querySelector('p, div, h1, h2, h3, h4, h5, h6, ul, ol, table, blockquote, pre');
+                        if (blockChild) {
+                            // 将 span 的所有子节点上提到 span 父级
+                            var parent = el.parentNode;
+                            if (parent) {
+                                while (el.firstChild) {
+                                    parent.insertBefore(el.firstChild, el);
+                                }
+                                el.remove();
+                            }
+                        }
+                    });
+
+                    // 4) 清理残留的空 <p></p>（多个连续只保留一个）
+                    d.querySelectorAll('p').forEach(function (el) {
+                        if (!el.children.length && !el.textContent.trim()) {
+                            el.remove();
+                        }
+                    });
+
+                    return d.innerHTML;
+                }
+
+                html = cleanEditorHtml(html);
+
                 try {
                     var ed = window.wangEditor.createEditor({
                         selector: editorEl,
@@ -153,6 +201,25 @@
                     });
                 } catch (e) {
                     console.error('WE:', e);
+                    // 创建失败时降级：显示可编辑的 textarea
+                    if (!document.getElementById(id + '-ed-fallback')) {
+                        var fallback = document.createElement('textarea');
+                        fallback.id = id + '-ed-fallback';
+                        fallback.className = 'we-code-textarea';
+                        fallback.style.position = 'relative';
+                        fallback.style.top = 'auto';
+                        fallback.value = html;
+                        editorEl.parentNode.replaceChild(fallback, editorEl);
+
+                        // 同步到隐藏 input
+                        fallback.addEventListener('input', function () {
+                            var h2 = document.getElementById(id + '-h');
+                            if (h2 && h2.value !== fallback.value) {
+                                h2.value = fallback.value;
+                                h2.dispatchEvent(new Event('change', { bubbles: true }));
+                            }
+                        });
+                    }
                     w.__weDone = false;
                     return;
                 }
