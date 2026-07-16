@@ -3,8 +3,6 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Dashboard;
-use App\Filament\Widgets\PageAccessRankingWidget;
-use App\Filament\Widgets\RightStatsWidget;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -55,7 +53,7 @@ class AdminPanelProvider extends PanelProvider
                 Dashboard::class,
             ])
             ->widgets([
-                // 临时移除：RightStatsWidget/PageAccessRankingWidget 的 Livewire 懒加载在服务器环境触发 500
+                \App\Filament\Widgets\DashboardLeftPanel::class,
             ])
             ->middleware([
                 EncryptCookies::class,

@@ -6,6 +6,8 @@ use Filament\Widgets\Widget;
 
 class DashboardLeftPanel extends Widget
 {
+    protected static bool $lazy = false;
+
     protected static string $view = 'filament.widgets.dashboard-left-panel';
 
     protected int | string | array $columnSpan = 1;
