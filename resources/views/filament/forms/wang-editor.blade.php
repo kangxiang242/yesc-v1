@@ -22,7 +22,7 @@
     >
         <div id="{{ $htmlId }}-tb" style="border-bottom: 1px solid #dbe3e6;"></div>
         <div id="{{ $htmlId }}-ed" style="height: 500px;"></div>
-        <input type="hidden" id="{{ $htmlId }}-h" :value="weVal">
+        <input type="hidden" id="{{ $htmlId }}-h" :value="weVal" value="{{ $initialContent }}">
     </div>
 
     <style>
