@@ -9,11 +9,11 @@
 | 入口 | 地址 |
 |------|------|
 | 🌐 前台（测试域名） | https://slir4.top |
-| 🔐 后台（机密域名） | https://ami3-17drt4-6ne634russ.slir4.top/pthj1l0cxsau |
-| 🔐 后台（本地） | http://localhost:8001/pthj1l0cxsau |
+| 🔐 后台（机密域名·线上43） | https://ami3-17drt4-6ne634russ.slir4.top/mgx7k9p2 |
+| 🔐 后台（本地开发·8001） | http://localhost:8001/pthj1l0cxsau |
 | 👤 后台账号 | `web0wer16888` |
 | 🔑 后台密码 | `888d00rkeeper888` |
-| ⚠️ 注意 | 主域名 `slir4.top/pthj1l0cxsau` 已 Nginx 层拦截返回 404，仅机密子域名可访问后台 |
+| ⚠️ 注意 | 主域名 `slir4.top/mgx7k9p2` 已 Nginx 层拦截返回 404，仅机密子域名 `ami3-17drt4-6ne634russ.slir4.top` 可访问后台（map 文件 `/etc/nginx/conf.d/admin-host-map.conf`） |
 
 ---
 
@@ -44,7 +44,7 @@ yesc-v1/
 │   ├── Exceptions/              # MsgException, ValidationFailedException
 │   ├── Exports/                 # OrderXlsxExport
 │   ├── Filament/
-│   │   ├── Resources/           # 19 个后台资源（Order/Product/Article/Banner/...）
+│   │   ├── Resources/           # 14 个后台资源(_disabled/ 内有 5 个空数据资源已停用)
 │   │   ├── Pages/               # 6 个自定义页面（SiteConfig/AnalyticsReport/...）
 │   │   └── Widgets/             # Dashboard widgets
 │   ├── Handlers/                # DeviceTypeHandlers, ArticleAnchorsHandler
@@ -159,7 +159,7 @@ php artisan serve --port=8001
 | PHP | 原生 PHP 8.2 FPM（`127.0.0.1:9000`） |
 | Nginx | 原生 nginx 1.18.0 |
 | 数据库 | 原生 MariaDB 11.4.12 `yescialis_v1`（48 张表，root / mariadb_2312） |
-| 后台路径 | `/pthj1l0cxsau` |
+| 后台路径 | `/mgx7k9p2`（线上43）；本地開發用 `/pthj1l0cxsau`（ADMIN_PATH 环境变量差异） |
 | 后台账号 | `web0wer16888` / `888d00rkeeper888` |
 | 部署方式 | `rsync -avz --exclude={vendor,node_modules,.git,.env} -e 'ssh -i ~/workspace/wwwroot/hk-server-keys/deploy_key' ./ root@5.182.210.43:/opt/1panel/www/sites/slir4.top/index/` |
 | Composer | `ssh root@5.182.210.43 'cd /opt/1panel/www/sites/slir4.top/index && composer install --no-dev'` |
@@ -168,6 +168,7 @@ php artisan serve --port=8001
 | CF API Token | ⚠️ 已从提交历史中移除，请查看 .env |
 | CF Zone ID | `97709f8bb53a452a8379fcc230c5e28e` |
 | GIT 仓库 | `git@github.com:kangxiang242/yesc-v1.git`（main） |
+| 后台访问限制 | 主域名 `slir4.top` 访问 `/mgx7k9p2` 或 `/admin` 一律 Nginx 404（map 文件 `/etc/nginx/conf.d/admin-host-map.conf`）；仅子域名 `ami3-17drt4-6ne634russ.slir4.top` 可进后台 |
 
 ### DNS 解析（Cloudflare）
 
@@ -232,6 +233,7 @@ c834597  docs: 更新 root.md 为 yesc-v1（Cialis）专属内容
 
 | 日期 | 内容 |
 |:-----|:------|
+| 2026-07-15 | 移除空数据后台板块(Anchor/Author/Exception/SiteGuide/Slide)，订单/留言管理置顶；修复 AppServiceProvider 兼容性(class_exists 保护 + error_reporting 抑制) |
 | 2026-07-15 | 测试环境 DNS 解析从 45.148.120.52 切到 5.182.210.43（原生服务） |
 | 2026-07-09 | 修复 OrderRepository 商品名称硬编码 |
 | 2026-07-09 | root.md 全面更新为 yesc-v1 专属内容 |

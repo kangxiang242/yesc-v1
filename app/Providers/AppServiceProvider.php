@@ -36,10 +36,16 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrapFive();
 
         // doc/TRACKING_API.md #3：collect 端点限流 120/min（按 IP）
-        RateLimiter::for('analytics-collect', function (\Illuminate\Http\Request $request) {
-            return \Illuminate\Cache\RateLimiting\Limit::perMinute(120)
-                ->by($request->header('cf-connecting-ip', $request->ip()));
-        });
+        // 注意：某些服务器 PHP vendor 缺少 \Illuminate\Cache\RateLimiting\Limit 导致 500，故加 class_exists 保护
+        if (class_exists(\Illuminate\Cache\RateLimiting\Limit::class)) {
+            RateLimiter::for('analytics-collect', function (\Illuminate\Http\Request $request) {
+                return \Illuminate\Cache\RateLimiting\Limit::perMinute(120)
+                    ->by($request->header('cf-connecting-ip', $request->ip()));
+            });
+        }
+
+        // 抑制 PHP 8.2 tempnam() 废弃警告（blade-icons 图标缓存影响）
+        error_reporting(error_reporting() & ~E_DEPRECATED & ~E_WARNING);
 
         // 前端 web.* 视图公共数据（平移自源项目 LayoutComposer）
         view()->composer(
