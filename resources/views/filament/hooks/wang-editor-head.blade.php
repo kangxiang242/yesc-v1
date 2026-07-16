@@ -33,7 +33,7 @@
                     listModule: { unOrderedList: '無序列表', orderedList: '有序列表' },
                     tableModule: { deleteCol: '删除列', deleteRow: '删除行', deleteTable: '删除表格', widthAuto: '宽度自适应', insertCol: '插入列', insertRow: '插入行', insertTable: '插入表格', header: '表头' },
                     videoModule: { delete: '删除视频', uploadVideo: '上传视频', insertVideo: '插入视频', videoSrc: '视频地址', videoSrcPlaceHolder: '视频文件 url 或第三方 <iframe>', videoPoster: '视频封面', videoPosterPlaceHolder: '封面图片 url', ok: '确定', editSize: '修改尺寸', width: '宽度', height: '高度' },
-                    uploadImgModule: { uploadImage: '上传图片', uploadError: '{{fileName}} 上传出错' },
+                    uploadImgModule: { uploadImage: '上传图片', uploadError: '@{{fileName}} 上传出错' },
                     highLightModule: { selectLang: '选择语言' },
                 });
             }

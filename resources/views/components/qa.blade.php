@@ -88,6 +88,7 @@
     ];
 @endphp
 
+@once
 @push('qa-js')
 <script>
     (function () {
@@ -129,6 +130,7 @@
             if (!panel) return;
             item.classList.remove(COLLAPSING_CLASS);
             panel.removeAttribute('hidden');
+            panel.offsetHeight;
             setItemOpen(item, true);
             setHeight(panel, panel.scrollHeight);
         }
@@ -205,6 +207,7 @@
     })();
 </script>
 @endpush
+@endonce
 
 @push('schema')
 <script type="application/ld+json">

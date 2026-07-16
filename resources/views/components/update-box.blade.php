@@ -89,7 +89,7 @@
 
                         // 初始顯示一個隨機購買人數，避免顯示 0
                         if ($buyerCount && $buyerCount.length > 0) {
-                            var initialCount = randInt(80, 200);
+                            var initialCount = self.randInt(80, 200);
                             self.setBuyerCount($buyerCount, initialCount);
                         }
 
@@ -108,9 +108,13 @@
                     success: function(response) {
                         if (response.success && response.data) {
                             for (var boxNum in response.data) {
+                                var count = response.data[boxNum];
+                                if (!count || count <= 0) {
+                                    continue;
+                                }
                                 var $elem = $('.box-buyer-count[data-box-count="' + boxNum + '"]');
                                 if ($elem.length > 0) {
-                                    self.setBuyerCount($elem, response.data[boxNum]);
+                                    self.setBuyerCount($elem, count);
                                 }
                             }
                         }
