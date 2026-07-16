@@ -161,9 +161,10 @@ php artisan serve --port=8001
 | 数据库 | 原生 MariaDB 11.4.12 `yescialis_v1`（48 张表，root / mariadb_2312） |
 | 后台路径 | `/mgx7k9p2`（线上43）；本地開發用 `/pthj1l0cxsau`（ADMIN_PATH 环境变量差异） |
 | 后台账号 | `web0wer16888` / `888d00rkeeper888` |
-| 部署方式 | `rsync -avz --exclude={vendor,node_modules,.git,.env} -e 'ssh -i ~/workspace/wwwroot/hk-server-keys/deploy_key' ./ root@5.182.210.43:/opt/1panel/www/sites/slir4.top/index/` |
+| 部署方式 | `rsync -avz --exclude={vendor,node_modules,.git,.env,storage/framework/cache,storage/framework/sessions,storage/framework/views,storage/logs,bootstrap/cache/packages.php,bootstrap/cache/services.php} -e 'ssh -i ~/workspace/wwwroot/hk-server-keys/deploy_key' ./ root@5.182.210.43:/opt/1panel/www/sites/slir4.top/index/` |
 | Composer | `ssh root@5.182.210.43 'cd /opt/1panel/www/sites/slir4.top/index && composer install --no-dev'` |
 | 快取清除 | `ssh root@5.182.210.43 'cd /opt/1panel/www/sites/slir4.top/index && php artisan optimize:clear'` |
+| ⚠️ 部署后 | `ssh root@5.182.210.43 'chown -R www-data:www-data /opt/1panel/www/sites/slir4.top/index/storage/ /opt/1panel/www/sites/slir4.top/index/bootstrap/cache/ && chmod -R 775 /opt/1panel/www/sites/slir4.top/index/storage/ /opt/1panel/www/sites/slir4.top/index/bootstrap/cache/ && systemctl restart php8.2-fpm'`（修复 rsync 覆盖的权限） |
 | CF 账号 | `aqs33202@outlook.com` / `1ver!ter3321`（Token: ⚠️ 已从提交历史中移除，请查看 .env） |
 | CF API Token | ⚠️ 已从提交历史中移除，请查看 .env |
 | CF Zone ID | `97709f8bb53a452a8379fcc230c5e28e` |
