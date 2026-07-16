@@ -6,7 +6,7 @@ use Filament\Widgets\Widget;
 
 class DashboardLeftPanel extends Widget
 {
-    protected static bool $lazy = false;
+    protected static bool $isLazy = false;
 
     protected static string $view = 'filament.widgets.dashboard-left-panel';
 
