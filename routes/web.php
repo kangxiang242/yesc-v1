@@ -38,7 +38,7 @@ $webDomains = array_values(array_unique(array_filter([
     '127.0.0.1',
 ])));
 
-foreach ($webDomains as $wd) {
+foreach ($webDomains as $i => $wd) {
     // Observer store - 订单/留言表单提交通知（虚拟端点返回 200，跳过 CSRF）
     Route::domain($wd)->post('/observer/store', function () {
         return response()->json(['status' => 'ok']);
@@ -152,10 +152,14 @@ foreach ($webDomains as $wd) {
         Route::get('/get711', [AreaController::class, 'getShop']);
     });
 
-    // 兜底页面 / 文章路由（放最后）
-    Route::domain($wd)->middleware(['redirect.device', 'googlebot.checked'])->group(function () {
+    // 兜底页面 / 文章路由（放最后）；news.show 仅在主域命名，避免 route:cache 同名冲突
+    Route::domain($wd)->middleware(['redirect.device', 'googlebot.checked'])->group(function () use ($i) {
         Route::get('{uri}', [PageController::class, 'index']);
-        Route::get('{uri}/{id}.html', [NewsController::class, 'show'])->name('news.show');
+        if ($i === 0) {
+            Route::get('{uri}/{id}.html', [NewsController::class, 'show'])->name('news.show');
+        } else {
+            Route::get('{uri}/{id}.html', [NewsController::class, 'show']);
+        }
         Route::get('{uri}/{id}', [NewsController::class, 'show']);
     });
 }
