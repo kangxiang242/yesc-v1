@@ -244,9 +244,8 @@
     }
 }
 
-// /promise 页面正文已被隐藏，仅剩 H1 标题，
-// 移除 .article 残留的 min-height:200vh 空白，避免 H1 与承诺卡片间出现大块空白。
-// 不影响其他 CMS 长文页（其 .article 仍保留 200vh）。
+// /promise 页面不渲染 .article（標題已移至 cover-header，內容為 promise-icon）
+// 保留此規則以備其他路徑載入時覆蓋 min-height:200vh
 .page-promise .article{
     min-height: 0;
 }
@@ -260,7 +259,10 @@
         align-items: center;
         justify-content: center;
         min-height: clamp(160px, 16vw, 280px);
-        grid-area: unset;
+
+        @include media.desktop {
+            grid-column: 1 / -1;
+        }
 
         .page-header-title {
             font-size: clamp(28px, 4vw, 52px);
@@ -283,6 +285,8 @@
         /* 自然跟在 cover-header 之後，無需額外 padding-top */
 
         @include media.desktop {
+            grid-column: 1 / -1;
+
             /* 麵包屑在封面下方，恢復深色文字 */
             .breadcrumb {
                 color: rgba(0, 0, 0, 0.85);
