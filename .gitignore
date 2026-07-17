@@ -64,8 +64,22 @@ yarn-error.log
 
 .pi/
 
-# AtomCode local-scope configs (machine-specific)
-.atomcode/local/
+# AtomCode configs (machine-specific)
+.atomcode/
+
+# Claude Code local config
+.claude/
 
 # WorkBuddy agent memory (project data, never commit)
 .workbuddy/
+
+# Pi subagent run artifacts
+.pi-subagents/
+
+# Temporary diff/analysis reports
+diff-report/
+
+# Deploy docs with secrets (CF tokens, etc.)
+deploy/*.md
+
+
