@@ -1,4 +1,5 @@
 @use "tokens" as *;
+@use "breakpoints" as media;
 
 $order-radius: 14px;
 $order-padding: 14px;
@@ -159,5 +160,21 @@ $order-conta-size: 14px;
         height: 18px;
         vertical-align: middle;
         fill: $main-color;
+    }
+}
+
+/* 手機：訂單詳情頁緊湊化，減少大留白 */
+@include media.mobile {
+    .order {
+        padding: 15px 12px;
+    }
+    .ordertable .item {
+        padding: 12px 10px;
+    }
+    .ordertable .item label {
+        font-size: 12px;
+    }
+    .ordertable .item .trigger {
+        font-size: 12px;
     }
 }

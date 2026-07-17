@@ -21,57 +21,59 @@
             text-align: start;
         }
 
-        .box-container{
-            display: flex;
-            align-items: flex-start;
-            gap: 60px;
-
-            &:nth-of-type(1){
-                grid-area: product-list-1;
-            }
-            &:nth-of-type(2){
-                grid-area: product-list-2;
-            }
-            &:nth-of-type(3){
-                grid-area: product-list-3;
-            }
-            &:nth-of-type(4){
-                grid-area: product-list-4;
-            }
-
-            @include media.mobile{
+            .box-container{
+                display: flex;
                 flex-direction: column;
+                align-items: flex-start;
                 gap: 24px;
-            }
 
-            .product-area{
-                flex: none;
-                width: 58%;
-            }
-
-            .qa-wrap{
-                flex: none;
-                width: 38%;
-                margin: 0;
-                height: auto;
-                align-self: flex-start;
-
-                @include media.desktop{
-                    position: sticky;
-                    top: 120px;
-                    max-height: calc(100vh - 140px);
-                    overflow-y: auto;
+                &:nth-of-type(1){
+                    grid-area: product-list-1;
+                }
+                &:nth-of-type(2){
+                    grid-area: product-list-2;
+                }
+                &:nth-of-type(3){
+                    grid-area: product-list-3;
+                }
+                &:nth-of-type(4){
+                    grid-area: product-list-4;
                 }
 
-                @include media.mobile{
+                /* 768–1023px (tablet band) 繼承 base：堆疊為單欄，避免 58% + 38% + 60px gap 超出容器寬度造成水平溢出 */
+                @include media.desktop{
+                    flex-direction: row;
+                    gap: 60px;
+                }
+
+                .product-area{
+                    flex: none;
+                    width: 100%;
+                    @include media.desktop{
+                        width: 58%;
+                    }
+                }
+
+                .qa-wrap{
+                    flex: none;
+                    width: 100%;
+                    margin: 0;
+                    height: auto;
+                    align-self: flex-start;
                     position: relative;
                     top: auto;
                     max-height: none;
                     overflow: visible;
-                    width: 100%;
+
+                    @include media.desktop{
+                        position: sticky;
+                        top: 120px;
+                        max-height: calc(100vh - 140px);
+                        overflow-y: auto;
+                        width: 38%;
+                    }
                 }
             }
-        }
 
         .page-content{
             grid-area: page-content;
@@ -89,6 +91,19 @@
     z-index: 2;
     border-top: 1px solid rgba($main-color, 0.2);
     font-size: clamp(12px, 1vw, 14px);
+
+    /* 手機：包裝說明文字 white-space:nowrap 在窄欄會超出視口，改為直排並允許換行 */
+    @include media.mobile{
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        .packageright{
+            width: 100%;
+        }
+        .packagetext{
+            white-space: normal;
+        }
+    }
     .packageleft{
         position: relative;
         width: 5.4em;
@@ -229,7 +244,7 @@
     position: relative;
     width: 100%;
     @include media.mobile{
-        padding: 0 0 60px 20px;
+        padding: 0 12px 60px 12px;
     }
 
     .shop-hero{
@@ -253,12 +268,18 @@
         .product-card-info{
             flex: 2;
             @include media.mobile{
-                flex: 1.3;
+                flex: 1;
             }
-            
+
         }
         .price-box{
             margin-top: auto;
+        }
+
+        /* 移動端：圖文改為上下堆疊，避免 412px 下過窄 */
+        @include media.mobile {
+            flex-direction: column;
+            gap: 12px;
         }
     }
 
@@ -361,9 +382,9 @@
     padding: 30px;
     border-radius: 30px;
     @include media.mobile{
-        padding: 10px;
-        gap: 10px;
-        border-radius: 20px 0 0 20px;
+        padding: 8px;
+        gap: 12px;
+        border-radius: 16px;
     }
 
     .product-card{
@@ -383,8 +404,9 @@
         z-index: 1;
         overflow: hidden;
         @include media.mobile{
-            padding: 10px;
+            padding: 12px;
             gap: 10px;
+            border-radius: 14px;
         }
         &.product-card-show{
             opacity: 1;
@@ -410,6 +432,15 @@
             /* .product-card-img{
                 z-index: -1;
             } */
+            .product-card-img{
+                @include media.mobile {
+                    width: 100%;
+                    max-height: 180px;
+                    object-fit: cover;
+                    border-radius: 10px;
+                }
+            }
+
             .preview-box{
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
@@ -417,7 +448,8 @@
                 width: 70%;
                 margin: 0 auto;
                 @include media.mobile{
-                    width: 80%;
+                    width: 100%;
+                    gap: 3%;
                 }
                 .preview-img{
                     border: 1px solid rgba(0,0,0,0.1);

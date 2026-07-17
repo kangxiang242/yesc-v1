@@ -82,6 +82,12 @@ body{
         aspect-ratio: 16 / 5;
         padding: 0 clamp(20px, 2vw, 30px);
         text-align: center;
+
+        @include media.mobile {
+            aspect-ratio: auto;
+            padding: 16px 14px 12px;
+            font-size: clamp(20px, 5vw, 28px);
+        }
     }
 }
 .page-product,
@@ -111,7 +117,7 @@ body{
         -webkit-mask-position: 0 0;
 
         @include media.mobile {
-            aspect-ratio: 12 / 5;
+            aspect-ratio: 2 / 1;
         }
     }
 }
@@ -301,8 +307,8 @@ body{
         }
 
         @include media.mobile{
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px 0;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px 0;
         }
     }
 }

@@ -8,6 +8,12 @@ form{
         gap: 30px;
         padding-top: 20px;
         margin-bottom: 50px;
+
+        @include media.mobile {
+            gap: 20px;
+            padding-top: 12px;
+            margin-bottom: 30px;
+        }
     }
     .form-item{
         display: flex;
@@ -124,6 +130,12 @@ form{
             border-color: $main-color;
             outline: none;
             caret-color: $main-color;
+        }
+
+        @include media.mobile {
+            padding: 12px;
+            font-size: 14px;
+            min-height: 100px;
         }
     }
 }
