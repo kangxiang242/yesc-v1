@@ -121,8 +121,11 @@ body{
         }
     }
 
-    /* 移動端：封面 ::before 是 absolute 不佔文檔流，需用 padding-top 將內容推到封面下方 */
+    /* 封面 ::before 是 absolute 不佔文檔流，需用 padding-top 將內容推到封面下方 */
     .main-content {
+        @include media.desktop {
+            padding-top: 31.25%; /* 配合 aspect-ratio: 16/5 的桌面封面高度 */
+        }
         @include media.mobile {
             padding-top: 52%; /* 配合 aspect-ratio: 2/1 的封面高度，讓內容顯示在封面下方 */
         }
