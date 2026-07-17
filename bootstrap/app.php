@@ -12,6 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        // Trust Cloudflare proxies (fix Mixed Content behind CF)
+        $middleware->trustProxies(at: '*');
+
         $middleware->append(\App\Http\Middleware\AccessLogMiddleware::class);
         // 必须放在全局栈：在 web group 的 AddQueuedCookiesToResponse 写入 Set-Cookie 之后清理
         $middleware->append(\App\Http\Middleware\EnforceCacheHeadersMiddleware::class);
