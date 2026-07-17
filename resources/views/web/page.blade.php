@@ -333,17 +333,15 @@
         @include('components.breadcrumb', ['itemsHtml' => '<li class="breadcrumb__item">'.$page->title.'</li>'])
     @endif
 
+    @if(!request()->is('promise'))
     <article class="article">
-        @if(!request()->is('promise'))
         <header class="article-header">
             <h1 class="page-header-title">{{ $page->title }}</h1>
             @if(!empty($page->desc))
                 <p class="page-header-description">{{ $page->desc }}</p>
             @endif
         </header>
-        @endif
 
-        @if(!request()->is('promise'))
         <div class="summary-fixed is-collapsed">
             <nav class="article-summary" id="articleSummary">
                 <div class="summary-header">
@@ -377,9 +375,7 @@
             </nav>
             <button type="button" class="summary-mask" aria-label="收起閱讀導覽"></button>
         </div>
-        @endif
 
-        @if(!request()->is('promise'))
         <section class="article-content" id="spageContent" data-track-scroll-target data-track-section-view data-track-section="cms.content" data-track-section-label="CMS正文">
             {!! $page->content !!}
         </section>
@@ -393,7 +389,6 @@
                 <p class="team-description">醫療審閱聲明：本網站內容僅供健康資訊與衛教參考使用，並不構成任何形式之醫療診斷或治療建議，亦無法取代專業醫師之臨床判斷。如您有任何症狀、用藥需求或潛在疑慮，請務必諮詢合格醫師或醫療專業人員，以獲得安全之醫療建議。</p>
             </div>
         </footer>
-        @endif
 
         @if(isset($page->topics_data) && !empty($page->topics_data))
         <section class="news-topic-sections" aria-label="{{ $page->topics_title ?? '主题分类' }}">
@@ -423,8 +418,8 @@
             @endforeach
         </section>
         @endif
-
     </article>
+    @endif
 
     <!-- 底部内容区块 -->
     @if(!request()->is('promise') && isset($page->bottom_html) && !empty($page->bottom_html))
