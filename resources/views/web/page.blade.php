@@ -326,12 +326,13 @@
 
     <article class="article">
         <header class="article-header">
-            <h1 class="page-header-title">{{ $page->title }}</h1>
-            @if(!empty($page->desc))
+            <h1 class="page-header-title">@if(request()->is('promise'))犀利士承諾@else{{ $page->title }}@endif</h1>
+            @if(!empty($page->desc) && !request()->is('promise'))
                 <p class="page-header-description">{{ $page->desc }}</p>
             @endif
         </header>
-        
+
+        @if(!request()->is('promise'))
         <div class="summary-fixed is-collapsed">
             <nav class="article-summary" id="articleSummary">
                 <div class="summary-header">
@@ -365,11 +366,13 @@
             </nav>
             <button type="button" class="summary-mask" aria-label="收起閱讀導覽"></button>
         </div>
+        @endif
 
+        @if(!request()->is('promise'))
         <section class="article-content" id="spageContent" data-track-scroll-target data-track-section-view data-track-section="cms.content" data-track-section-label="CMS正文">
             {!! $page->content !!}
         </section>
-        
+
         <footer class="team-box">
             <img src="/static/img/team.webp" decoding="async" loading="lazy" alt="犀利士專業醫師團隊">
             <div class="team-text">
@@ -379,10 +382,9 @@
                 <p class="team-description">醫療審閱聲明：本網站內容僅供健康資訊與衛教參考使用，並不構成任何形式之醫療診斷或治療建議，亦無法取代專業醫師之臨床判斷。如您有任何症狀、用藥需求或潛在疑慮，請務必諮詢合格醫師或醫療專業人員，以獲得安全之醫療建議。</p>
             </div>
         </footer>
-    </article>
+        @endif
 
-    <!-- 主题分类区块 -->
-    @if(isset($page->topics_data) && !empty($page->topics_data))
+        @if(isset($page->topics_data) && !empty($page->topics_data))
         <section class="news-topic-sections" aria-label="{{ $page->topics_title ?? '主题分类' }}">
             @if(isset($page->topics_title) && !empty($page->topics_title))
                 <h2 class="sec-title">{{ $page->topics_title }}</h2>
@@ -409,16 +411,18 @@
                 </section>
             @endforeach
         </section>
-    @endif
+        @endif
+
+    </article>
 
     <!-- 底部内容区块 -->
-    @if(isset($page->bottom_html) && !empty($page->bottom_html))
+    @if(!request()->is('promise') && isset($page->bottom_html) && !empty($page->bottom_html))
         <section class="page-bottom-content">
             {!! $page->bottom_html !!}
         </section>
     @endif
 
-    @if(isset($faqs) && count($faqs))
+    @if(!request()->is('promise') && isset($faqs) && count($faqs))
         @include('components.qa', ['faqs' => $faqs])
     @endif
 
