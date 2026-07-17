@@ -54,6 +54,9 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
     'm_url' => env('APP_M_URL', ''),
+    // 后台（Filament）独立子域名与路径；生产 ADMIN_PATH 留空即无路径后缀
+    'admin_domain' => env('ADMIN_DOMAIN'),
+    'admin_path' => env('ADMIN_PATH', 'pthj1l0cxsau'),
 
     /*
     |--------------------------------------------------------------------------

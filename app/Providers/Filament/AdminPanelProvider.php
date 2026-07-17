@@ -27,7 +27,8 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
-            ->path(env('ADMIN_PATH', 'mgx7k9p2'))
+            ->domain(config('app.admin_domain'))
+            ->path(config('app.admin_path', 'pthj1l0cxsau'))
         ->login(\App\Filament\Pages\Auth\Login::class)
         ->brandName(config('app.name'))
         ->darkMode(false)
