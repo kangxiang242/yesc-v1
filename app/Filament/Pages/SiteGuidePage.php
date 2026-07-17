@@ -72,7 +72,7 @@ class SiteGuidePage extends Page implements HasForms
                     ->schema([
                         Forms\Components\FileUpload::make('home_banners')
                             ->label('輪播圖片')
-                            ->directory('home')
+                            ->directory('article')
                             ->image()
                             ->multiple()
                             ->reorderable()
