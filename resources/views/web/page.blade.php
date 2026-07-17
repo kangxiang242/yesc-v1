@@ -322,15 +322,26 @@
     page-spage{{ request()->is('promise') ? ' page-promise' : '' }}
 @endsection
 @section('content')
-    @include('components.breadcrumb', ['itemsHtml' => '<li class="breadcrumb__item">'.$page->title.'</li>'])
+    @if(request()->is('promise'))
+        {{-- Promise 頁：標題浮在封面上，麵包屑在封面下方 --}}
+        <header class="article-header cover-header">
+            <h1 class="page-header-title">犀利士承諾</h1>
+        </header>
+        <div class="below-cover">
+        @include('components.breadcrumb', ['itemsHtml' => '<li class="breadcrumb__item">'.$page->title.'</li>'])
+    @else
+        @include('components.breadcrumb', ['itemsHtml' => '<li class="breadcrumb__item">'.$page->title.'</li>'])
+    @endif
 
     <article class="article">
+        @if(!request()->is('promise'))
         <header class="article-header">
-            <h1 class="page-header-title">@if(request()->is('promise'))犀利士承諾@else{{ $page->title }}@endif</h1>
-            @if(!empty($page->desc) && !request()->is('promise'))
+            <h1 class="page-header-title">{{ $page->title }}</h1>
+            @if(!empty($page->desc))
                 <p class="page-header-description">{{ $page->desc }}</p>
             @endif
         </header>
+        @endif
 
         @if(!request()->is('promise'))
         <div class="summary-fixed is-collapsed">
@@ -473,6 +484,7 @@
                 </div>
             </li>
         </ul>
+        </div>{{-- /.below-cover --}}
     @endif
 
 @endsection

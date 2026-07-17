@@ -251,3 +251,50 @@
     min-height: 0;
 }
 
+/* Promise 頁：標題浮在封面上，麵包屑及內容在封面下方 */
+.page-promise {
+    .cover-header {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: clamp(200px, 20vw, 360px);
+        padding: 120px 30px 40px;
+        text-align: center;
+        grid-area: unset;
+
+        .page-header-title {
+            font-size: clamp(28px, 4vw, 52px);
+            color: #fff;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+            margin: 0;
+        }
+
+        @include media.mobile {
+            min-height: auto;
+            padding: 80px 20px 20px;
+            .page-header-title {
+                font-size: clamp(22px, 6vw, 32px);
+            }
+        }
+    }
+
+    .below-cover {
+        @include media.desktop {
+            padding-top: 31.25%; /* 配合 aspect-ratio: 16/5 的封面高度，將內容推到封面下方 */
+
+            /* 麵包屑在封面下方，恢復深色文字 */
+            .breadcrumb {
+                color: rgba(0, 0, 0, 0.85);
+                .breadcrumb__link {
+                    color: $main-color;
+                }
+                .breadcrumb__item:not(:last-child):after {
+                    color: rgba(0, 0, 0, 0.65);
+                }
+            }
+        }
+    }
+}
+
