@@ -9,6 +9,7 @@ use App\Repositories\ArticleCategoryRepository;
 use App\Repositories\ArticleRepository;
 use App\Repositories\PageRepository;
 use App\Models\Faq;
+use Illuminate\Support\Facades\Redirect;
 use DOMDocument;
 use DOMXPath;
 
@@ -26,6 +27,12 @@ class PageController extends Controller
         // 排除后台管理员路径，避免拦截 Filament Admin 路由
         if ($uri === config('global.admin_path')) {
             abort(404);
+        }
+
+        // 已关闭的单页 → 301 到首页（后台关闭后外部链接不应再展示内容）
+        $closedPages = config('global.closed_pages', []);
+        if (in_array($uri, $closedPages, true)) {
+            return Redirect::to('/', 301);
         }
 
         $page = PageRepository::make()->findToUri($uri);
