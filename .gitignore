@@ -66,3 +66,6 @@ yarn-error.log
 
 # AtomCode local-scope configs (machine-specific)
 .atomcode/local/
+
+# WorkBuddy agent memory (project data, never commit)
+.workbuddy/

@@ -8,12 +8,13 @@
 
 | 入口 | 地址 |
 |------|------|
-| 🌐 前台（测试域名） | https://slir4.top |
-| 🔐 后台（机密域名·线上43） | https://ami3-17drt4-6ne634russ.slir4.top/mgx7k9p2 |
-| 🔐 后台（本地开发·8001） | http://localhost:8001/pthj1l0cxsau |
+| 🌐 前台（生产） | https://yescialis.com/ |
+| 🔐 后台（生产·独立子域名·无后缀） | https://am-d6do8-45n89inan.yescialis.com/ |
+| 🌐 前台（本地开发·8012） | http://localhost:8012/ |
+| 🔐 后台（本地开发·8012·带后缀） | http://localhost:8012/pthj1l0cxsau |
 | 👤 后台账号 | `web0wer16888` |
 | 🔑 后台密码 | `888d00rkeeper888` |
-| ⚠️ 注意 | 主域名 `slir4.top/mgx7k9p2` 已 Nginx 层拦截返回 404，仅机密子域名 `ami3-17drt4-6ne634russ.slir4.top` 可访问后台（map 文件 `/etc/nginx/conf.d/admin-host-map.conf`） |
+| ⚠️ 注意 | 生产后台为独立子域名且无路径后缀；仅本地开发才允许带 `/pthj1l0cxsau` 后缀。生产服务器 IP：5.182.210.30（Small Summer） |
 
 ---
 
@@ -24,7 +25,7 @@
 | 框架 | Laravel 11.x |
 | PHP | ^8.2 |
 | 後台 | Filament 3.3.x |
-| 数据库 | MySQL（本地 `yescialis`） |
+| 数据库 | MySQL（生产 `yescialis_v1` / 本地 `yescialis`） |
 | 缓存 | Database（prefix: `yesc_`） |
 | Session | Database |
 | Queue | Database |
@@ -139,58 +140,60 @@ yesc-v1/
 ## 本地启动
 
 ```bash
-php artisan serve --port=8001
+php artisan serve --port=8012
 ```
 
-> 必须使用 `localhost:8001` 访问。`127.0.0.1` 会触发 `redirect.device` 中间件重定向到配置的 APP_URL。
+> 必须使用 `localhost:8012` 访问。`127.0.0.1` 会触发 `redirect.device` 中间件重定向到配置的 APP_URL。本地后台需带 `/pthj1l0cxsau` 后缀；生产后台为独立子域名、无后缀。
 
 ---
 
-## 测试环境
+## 生产环境
+
+站点部署在 Small Summer 服务器（5.182.210.30），域名绑定原 yescialis.com 的 Cloudflare 账号。
 
 | 项目 | 内容 |
 |:-----|:------|
-| 测试域名 | https://slir4.top |
-| 测试服务器 | 5.182.210.43（原生服务，已移除 1Panel + Docker） |
-| SSH 密钥 | `~/workspace/wwwroot/hk-server-keys/deploy_key`（ed25519，与 52 同密钥） |
-| SSH 用户 | root@5.182.210.43:22（已禁用密码登录） |
-| 站点路径 | `/opt/1panel/www/sites/slir4.top/index/` |
-| Nginx 配置 | `/etc/nginx/sites-available/slir4.top` |
-| PHP | 原生 PHP 8.2 FPM（`127.0.0.1:9000`） |
-| Nginx | 原生 nginx 1.18.0 |
-| 数据库 | 原生 MariaDB 11.4.12 `yescialis_v1`（48 张表，root / mariadb_2312） |
-| 后台路径 | `/mgx7k9p2`（线上43）；本地開發用 `/pthj1l0cxsau`（ADMIN_PATH 环境变量差异） |
+| 主域名（前台） | https://yescialis.com/ |
+| WWW | https://www.yescialis.com/ |
+| 移动端 | https://m.yescialis.com/ |
+| 后台 | https://am-d6do8-45n89inan.yescialis.com/（独立子域名，无路径后缀） |
+| 服务器 IP | 5.182.210.30（Small Summer） |
+| SSH 密钥 | `~/.ssh/small-summer` |
+| SSH 用户 | root@5.182.210.30:22 |
+| 站点代码路径 | `/www/sites/yescialis.com/index` |
+| Nginx 站点配置 | `/etc/nginx/sites-available/yescialis.com` |
+| Nginx 可用站点 | `viagra-twshop.com` / `viagraeshop.com` / `xenicalofficial.com` / `yescialis.com` |
+| PHP | 源码编译安装 `/usr/local/php82/`，FPM 服务名 `php82-fpm`（非 apt 的 `/etc/php/8.2/`） |
+| Nginx | 原生 nginx |
+| 数据库 | MariaDB `yescialis_v1`（root / root，127.0.0.1:3306） |
+| 时区 | 全栈统一 `Asia/Taipei`（OS / PHP-FPM / Laravel / MySQL） |
 | 后台账号 | `web0wer16888` / `888d00rkeeper888` |
-| 部署方式 | `rsync -avz --exclude={vendor,node_modules,.git,.env,storage/framework/cache,storage/framework/sessions,storage/framework/views,storage/logs,bootstrap/cache/packages.php,bootstrap/cache/services.php} -e 'ssh -i ~/workspace/wwwroot/hk-server-keys/deploy_key' ./ root@5.182.210.43:/opt/1panel/www/sites/slir4.top/index/` |
-| Composer | `ssh root@5.182.210.43 'cd /opt/1panel/www/sites/slir4.top/index && composer install --no-dev'` |
-| 快取清除 | `ssh root@5.182.210.43 'cd /opt/1panel/www/sites/slir4.top/index && php artisan optimize:clear'` |
-| ⚠️ 部署后 | `ssh root@5.182.210.43 'chown -R www-data:www-data /opt/1panel/www/sites/slir4.top/index/storage/ /opt/1panel/www/sites/slir4.top/index/bootstrap/cache/ && chmod -R 775 /opt/1panel/www/sites/slir4.top/index/storage/ /opt/1panel/www/sites/slir4.top/index/bootstrap/cache/ && systemctl restart php8.2-fpm'`（修复 rsync 覆盖的权限） |
-| CF 账号 | `aqs33202@outlook.com` / `1ver!ter3321`（Token: ⚠️ 已从提交历史中移除，请查看 .env） |
-| CF API Token | ⚠️ 已从提交历史中移除，请查看 .env |
-| CF Zone ID | `97709f8bb53a452a8379fcc230c5e28e` |
+| 部署方式 | `git pull` + `php artisan config:cache` + `php artisan route:cache` + `php artisan view:clear` + `systemctl reload php82-fpm` + `nginx -t && systemctl reload nginx` |
 | GIT 仓库 | `git@github.com:kangxiang242/yesc-v1.git`（main） |
-| 后台访问限制 | 主域名 `slir4.top` 访问 `/mgx7k9p2` 或 `/admin` 一律 Nginx 404（map 文件 `/etc/nginx/conf.d/admin-host-map.conf`）；仅子域名 `ami3-17drt4-6ne634russ.slir4.top` 可进后台 |
+| CF 账号 | yescialis.com 属账号 #10 `christiegeorgina519532982@gmail.com` |
+| CF Zone ID | `ada76e0d5948cb195cfbca2cdb99180b` |
+| Cloudflare 代理 | 橙云（proxied: true），SSL 模式 Flexible（回源 80 端口） |
 
 ### DNS 解析（Cloudflare）
 
-测试域名 `slir4.top` 通过 Cloudflare DNS 解析到 5.182.210.43：
+生产域名 `yescialis.com` 通过 Cloudflare DNS 解析到 5.182.210.30：
 
 | 记录类型 | 名称 | 内容 | 代理状态 |
 |:--------:|:-----|:-----|:--------:|
-| A | `slir4.top` | `5.182.210.43` | 仅 DNS（或橙云代理） |
+| A | `yescialis.com` | `5.182.210.30` | 橙云 ✅ |
+| A | `www.yescialis.com` | `5.182.210.30` | 橙云 ✅ |
+| A | `m.yescialis.com` | `5.182.210.30` | 橙云 ✅ |
+| A | `am-d6do8-45n89inan.yescialis.com` | `5.182.210.30` | 橙云 ✅ |
 
-> 如需切回旧测试服务器 45.148.120.52，将上述 A 记录内容改为 `45.148.120.52` 即可。两个服务器 SSH 使用同一密钥。
+### 已关闭单页（访问 301 → 首页）
 
-### DNS 切换记录
+| URI | 说明 |
+|:----:|:-----|
+| `/side-effects` | 副作用说明页 |
+| `/contraindications` | 禁忌页 |
+| `/usage` | 使用方法页 |
 
-| 日期 | 操作 | A 记录旧值 | A 记录新值 | 状态 |
-|:-----|:-----|:----------:|:----------:|:----:|
-| 2026-07-15 | Cloudflare DNS 切换测试服务器 | `45.148.120.52` | `5.182.210.43` | ✅ 已生效 |
-
-- **记录 ID**：`054b44897e9632aede946fa87fe24b4c`
-- **代理状态**：橙云（proxied: true）
-- **生效方式**：开启橙云代理，Cloudflare 边缘节点秒级更新
-- **切换 API**：`PATCH /zones/{zone_id}/dns_records/{record_id}`
+> 配置位置：`config/global.php` 的 `closed_pages` 数组，新增关闭页只需追加 URI 字符串。
 
 ---
 
@@ -234,6 +237,7 @@ c834597  docs: 更新 root.md 为 yesc-v1（Cialis）专属内容
 
 | 日期 | 内容 |
 |:-----|:------|
+| 2026-07-17 | root.md 更新：改为生产环境信息（yescialis.com / 5.182.210.30 / Small Summer）；移除"测试环境"整章（slir4.top / 5.182.210.43）；本地端口 8001→8012；补后台独立子域名无后缀、CF Zone、已关闭单页 301 等 |
 | 2026-07-15 | 移除空数据后台板块(Anchor/Author/Exception/SiteGuide/Slide)，订单/留言管理置顶；修复 AppServiceProvider 兼容性(class_exists 保护 + error_reporting 抑制) |
 | 2026-07-15 | 测试环境 DNS 解析从 45.148.120.52 切到 5.182.210.43（原生服务） |
 | 2026-07-09 | 修复 OrderRepository 商品名称硬编码 |
@@ -242,6 +246,6 @@ c834597  docs: 更新 root.md 为 yesc-v1（Cialis）专属内容
 
 ## 参考
 
-- 服务器文档：`/Users/a123/workspace/wwwroot/my-notes/香港集策/服务器/测试与备份/test-5.182.210.43.md`
+- 生产服务器文档：`/Users/a123/workspace/wwwroot/my-notes/香港集策/服务器/new-服务器.md`
 - 旧测试服务器（备用）：45.148.120.52，文档 `/Users/a123/workspace/wwwroot/my-notes/香港集策/服务器/测试与备份/test-45.148.120.52.md`
 - 原始模板：`/Users/a123/workspace/wwwroot/Y-yescialis.com/yescialis.com`
