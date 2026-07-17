@@ -92,13 +92,18 @@
     border-top: 1px solid rgba($main-color, 0.2);
     font-size: clamp(12px, 1vw, 14px);
 
-    /* 手機：包裝說明文字 white-space:nowrap 在窄欄會超出視口，改為直排並允許換行 */
+    /* 手機：保持左右結構（圖左文右），僅允許文字換行避免溢出 */
     @include media.mobile{
-        flex-direction: column;
-        align-items: center;
-        gap: 16px;
+        gap: 12px;
+        padding: 20px 12px;
+        .packageleft{
+            width: 4em;
+            height: 4em;
+            flex-shrink: 0;
+        }
         .packageright{
-            width: 100%;
+            flex: 1;
+            min-width: 0;
         }
         .packagetext{
             white-space: normal;
