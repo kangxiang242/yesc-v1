@@ -244,3 +244,10 @@
     }
 }
 
+// /promise 页面正文已被隐藏，仅剩 H1 标题，
+// 移除 .article 残留的 min-height:200vh 空白，避免 H1 与承诺卡片间出现大块空白。
+// 不影响其他 CMS 长文页（其 .article 仍保留 200vh）。
+.page-promise .article{
+    min-height: 0;
+}
+
