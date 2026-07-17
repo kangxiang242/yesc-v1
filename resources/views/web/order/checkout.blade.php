@@ -562,7 +562,7 @@
                     <img class="goods-img" src="{{ storage_url($goods->img) }}" alt="{{ $goods->name }}">
                 </div>
                 <div class="info">
-                    <p class="goods-title"><span>禮來犀利士Cialis<sup>®</sup> 100mg</span>{{ $goods->name }}{{ $goods->quantity }}盒</p>
+                    <p class="goods-title"><span>禮來犀利士Cialis<sup>®</sup> 20mg</span>{{ $goods->name }}{{ $goods->quantity }}盒</p>
                     
                     <p class="sub-title">• 4錠/盒 共{{ $goods->quantity }}盒（原裝進口）</p>
                     <p class="sub-title">• 隱密包裝</p>
