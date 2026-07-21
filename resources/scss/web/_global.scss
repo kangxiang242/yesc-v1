@@ -127,7 +127,7 @@ body{
             padding-top: 52%; /* 配合 aspect-ratio: 2/1 的封面高度，讓內容顯示在封面下方 */
         }
         @include media.desktop {
-            padding-top: 20%; /* 封面底部：標題出現在封面漸變區域內 */
+            padding-top: 15%; /* 封面中下部：標題出現在封面漸變區域內，再上調一點 */
         }
     }
 }
