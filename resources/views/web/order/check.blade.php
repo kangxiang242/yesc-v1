@@ -399,7 +399,6 @@
 
 @section('content')
         @include('components.breadcrumb', ['itemsHtml' => '<li class="breadcrumb__item">訂單追蹤</li>'])
-        <h1 class="page-title">訂單追蹤</h1>
         {{--<header class="page-header">
             <h1 class="page-header-title">訂單查詢</h1>
             <p class="page-header-description">透過下單資訊或訂單號碼即可查看您的訂單與出貨進度</p>
@@ -408,6 +407,7 @@
 
         <form action="" id="check-form" method="post" onsubmit="return orderCheck()">
             {{ csrf_field() }}
+            <h1 class="page-title">訂單追蹤</h1>
             
             <div class="check-type-selector">
                 <input type="radio" name="check_type" id="check-type-order-id" value="order_id" checked>

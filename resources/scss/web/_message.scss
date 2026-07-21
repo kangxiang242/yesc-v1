@@ -19,6 +19,19 @@
             "form qa";
             gap: 0 60px;
         }
+
+        /* 頁面標題移到 form 內部後，移除 banner 的大 aspect-ratio */
+        .page-title {
+            aspect-ratio: auto;
+            padding: 0 0 20px;
+            font-size: clamp(20px, 2vw, 28px);
+            text-align: center;
+            align-content: center;
+            @include media.mobile {
+                padding: 0 0 16px;
+            }
+        }
+
         .qa-wrap{
             @include media.desktop{
                 margin: 40px 0;

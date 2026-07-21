@@ -179,7 +179,6 @@
 @section('content')
 
     @include('components.breadcrumb', ['itemsHtml' => '<li class="breadcrumb__item">線上客服</li>'])
-    <h1 class="page-title">線上客服</h1>
     {{--<header class="page-header">
         <h1 class="page-header-title">線上客服</h1>
         <p class="page-header-description">如有任何疑問、諮詢需求，皆可與官網專業醫師客服團隊線上聯絡取得協助。</p>
@@ -188,6 +187,7 @@
 
     <form method="post" action="" id="message-form">
         {!! csrf_field() !!}
+        <h1 class="page-title">線上客服</h1>
         <div class="data-group">
             <textarea class="form-textarea" name="content" rows="4" required minlength="10" maxlength="600" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" inputmode="text" enterkeyhint="done" placeholder="我想補充訂單備註／想修改訂單地址..."></textarea>
 
