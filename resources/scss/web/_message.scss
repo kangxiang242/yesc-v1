@@ -27,6 +27,9 @@
             font-size: clamp(20px, 2vw, 28px);
             text-align: center;
             align-content: center;
+            @include media.desktop {
+                margin-top: -60px; /* form padding:100px vs qa-wrap margin:40px → 差60px，對齊常見疑問 */
+            }
             @include media.mobile {
                 padding: 0 0 16px;
             }
