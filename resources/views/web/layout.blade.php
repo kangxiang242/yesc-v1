@@ -11,8 +11,14 @@
             <meta name="keywords" content="@yield('keywords')"/>
             <meta name="description" content="@yield('description')"/>
         @endif
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="format-detection" content="telephone=no">
+        <script>
+            // 行動端禁止雙指縮放，與 mobile 端一致
+            ['gesturestart', 'gesturechange', 'gestureend'].forEach(function (evt) {
+                document.addEventListener(evt, function (e) { e.preventDefault(); }, { passive: false });
+            });
+        </script>
         @if (View::hasSection('landing_style'))
             @yield('landing_style')
             @vite(['resources/scss/landing.scss', 'resources/js/app.js'])

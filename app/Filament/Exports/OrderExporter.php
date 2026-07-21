@@ -45,12 +45,21 @@ class OrderExporter extends Exporter
                 )->implode(PHP_EOL)),
             ExportColumn::make('address')
                 ->label('收貨地址')
-                ->formatStateUsing(fn ($record) => trim(implode(' ', array_filter([
-                    $record->city ?? '',
-                    $record->county ?? '',
-                    $record->street ?? '',
-                    $record->address ?? '',
-                ])))),
+                ->formatStateUsing(function ($record) {
+                    if ($record->delivery_type > 0) {
+                        // 超商取貨：{門市地址}（7-11{門市名}門市{門市號}）
+                        // 依生產資料，全部超商訂單皆為 7-11（shop_type 僅 0/1），故固定 7-11 前綴
+                        return $record->address . '（7-11' . $record->shop_name . '門市' . $record->shop_no . '）';
+                    }
+
+                    // 宅配到府
+                    return trim(implode(' ', array_filter([
+                        $record->city ?? '',
+                        $record->county ?? '',
+                        $record->street ?? '',
+                        $record->address ?? '',
+                    ])));
+                }),
             ExportColumn::make('shop_name')
                 ->label('門市名稱'),
             ExportColumn::make('shop_no')

@@ -12,7 +12,7 @@
             "form"
             "qa";
         @include media.desktop{
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr 1fr;
             grid-template-areas: 
             "breadcrumb breadcrumb"
             "page-header page-header"

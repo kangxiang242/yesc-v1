@@ -446,12 +446,10 @@ class OrderResource extends Resource
                 }
             }
 
-            // 地址（與舊站相同邏輯）
+            // 地址：超商取貨格式為 {門市地址}（7-11{門市名}門市{門市號}）
+            // 依生產資料，全部超商訂單皆為 7-11（shop_type 僅 0/1），故固定 7-11 前綴
             if ($item->delivery_type > 0) {
-                $shopTypeName = $item->shop_type
-                    ? (Order::SHOP_TYPE_TXT[$item->shop_type] ?? '超商')
-                    : '超商';
-                $addr = $item->address . "（{$shopTypeName}{$item->shop_name}門市{$item->shop_no}自取件）電話通知到店取貨";
+                $addr = $item->address . '（7-11' . $item->shop_name . '門市' . $item->shop_no . '）';
             } else {
                 // 配送時間計算（與舊站一致）
                 if ($item->delivery_time == 1) {
