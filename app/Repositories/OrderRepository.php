@@ -113,7 +113,7 @@ class OrderRepository extends Repository
                             foreach($result['data'] as $item) {
                                 if($item['id'] == $store_id) {
                                     $shop = [
-                                        'shop_no' => $item['id'],
+                                        'shop_no' => $item['store_no'] ?? $item['id'],
                                         'shop_name' => $item['store_name'] ?? $item['name'] ?? '',
                                         'shop_address' => $item['address'] ?? '',
                                     ];
