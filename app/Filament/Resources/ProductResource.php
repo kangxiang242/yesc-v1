@@ -21,7 +21,7 @@ class ProductResource extends Resource
     protected static ?string $label = '商品';
 
     protected static ?string $pluralLabel = '商品';
-    protected static ?string $navigationGroup = '內容管理';
+    
 
     protected static ?int $navigationSort = 2;
 

@@ -2,8 +2,6 @@
 
 namespace App\Filament\Resources;
 
-use App\Exports\OrderXlsxExport;
-use App\Filament\Exports\OrderExporter;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Models\Order;
 use Filament\Forms;
@@ -12,13 +10,9 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ActionGroup;
-use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Filament\Support\Facades\FilamentView;
 use Filament\Tables\Enums\FiltersLayout;
-use Filament\Tables\View\TablesRenderHook;
-use Maatwebsite\Excel\Facades\Excel;
 
 class OrderResource extends Resource
 {
@@ -31,7 +25,6 @@ class OrderResource extends Resource
     protected static ?string $label = '訂單';
 
     protected static ?string $pluralLabel = '訂單';
-    protected static ?string $navigationGroup = null;
 
     protected static ?int $navigationSort = 1;
 
@@ -70,7 +63,7 @@ class OrderResource extends Resource
                                 Forms\Components\TextInput::make('unit_price')
                                     ->label('單價')
                                     ->disabled(),
-                                Forms\Components\TextInput::make('total_price')
+                                Forms\Components\TextInput::make('product_price')
                                     ->label('商品小計')
                                     ->disabled(),
                             ])->columns(4)
@@ -136,6 +129,7 @@ class OrderResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->selectable()
             ->columns([
                 Tables\Columns\TextColumn::make('no')
                     ->label('訂單號')
@@ -240,8 +234,8 @@ class OrderResource extends Resource
                         if (!$ua) {
                             return '';
                         }
-                        $device = \App\Filament\Support\DeviceInfo::device($ua);
-                        $browser = \App\Filament\Support\DeviceInfo::browser($ua);
+                        $device = \App\Handlers\DeviceTypeHandlers::getDevice($ua);
+                        $browser = \App\Handlers\DeviceTypeHandlers::getBrowser($ua);
                         return '<p style="margin:0">' . e($device) . '</p>'
                              . '<p style="margin:0;font-size:0.75rem;color:#6b7280">' . e($browser ?? '未知') . '</p>';
                     })
@@ -267,11 +261,11 @@ class OrderResource extends Resource
                         $html .= '<p>共' . $count . '單</p>';
                         return $html;
                     }),
-                Tables\Columns\TextColumn::make('release_token')
+                Tables\Columns\TextColumn::make('version')
                     ->label('版本')
                     ->size('sm')
-                    ->copyable()
-                    ->copyMessage('Token 已複製'),
+                    ->badge()
+                    ->color('gray'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('下單時間')
                     ->dateTime('Y-m-d H:i')
@@ -312,9 +306,8 @@ class OrderResource extends Resource
                         $query->where(function (Builder $q) {
                             $q->where('is_test', 0)
                               ->where('name', 'not like', 'test%')
-                              ->where('name', 'not like', '测试%')
-                              ->where('name', 'not like', '測試%')
-                              ->where('name', 'not like', '設備-%')
+                              ->where('name', 'not like', '%测试%')
+                              ->where('name', 'not like', '%測試%')
                               ->where('name', '!=', 'RainGor Ye');
                         });
                     }),
@@ -343,20 +336,25 @@ class OrderResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\BulkAction::make('update_status')
-                        ->label('批量修改狀態')
-                        ->form([
-                            Forms\Components\Radio::make('status')
-                                ->label('訂單狀態')
-                                ->options(\App\Models\Order::STATUS_TXT)
-                                ->required(),
-                        ])
-                        ->action(function (array $data, \Illuminate\Database\Eloquent\Collection $records) {
-                            $records->each->update(['status' => $data['status']]);
-                        })
-                        ->deselectRecordsAfterCompletion(),
-                ]),
+                Tables\Actions\BulkAction::make('update_status')
+                    ->label('批量修改狀態')
+                    ->icon('heroicon-o-pencil-square')
+                    ->color('primary')
+                    ->form([
+                        Forms\Components\Select::make('status')
+                            ->label('訂單狀態')
+                            ->options(\App\Models\Order::STATUS_TXT)
+                            ->required(),
+                    ])
+                    ->action(function (\Illuminate\Support\Collection $records, array $data) {
+                        $records->each(fn (Order $record) => $record->update(['status' => $data['status']]));
+                        \Filament\Notifications\Notification::make()
+                            ->title('已更新 ' . $records->count() . ' 筆訂單狀態')
+                            ->success()
+                            ->send();
+                    })
+                    ->deselectRecordsAfterCompletion()
+                    ->requiresConfirmation(),
             ])
             ->headerActions([
                 Tables\Actions\Action::make('refresh')
@@ -367,19 +365,16 @@ class OrderResource extends Resource
                         $livewire->dispatch('$refresh');
                     }),
                 ActionGroup::make([
-                    Action::make('export_all')
+                    Tables\Actions\Action::make('export_all')
                         ->label('全部匯出')
                         ->icon('heroicon-o-document-text')
-                        ->action(function () {
-                            return static::exportOrdersToXlsx(Order::query(), 'orders-all-' . now()->format('Ymd-His') . '.xlsx');
-                        }),
-                    Action::make('export_selected')
+                        ->action('exportAll'),
+                    Tables\Actions\Action::make('export_selected')
                         ->label('匯出選中')
                         ->icon('heroicon-o-check-circle')
                         ->accessSelectedRecords()
                         ->action(function ($livewire) {
-                            $selected = $livewire->getSelectedTableRecords();
-                            return static::exportOrdersToXlsx($selected, 'orders-selected-' . now()->format('Ymd-His') . '.xlsx');
+                            return $livewire->exportSelected();
                         }),
                 ])
                     ->label('匯出')
@@ -387,15 +382,51 @@ class OrderResource extends Resource
                     ->color('primary')
                     ->button(),
             ]);
+    }
 
-        static $registered = false;
-        if (! $registered) {
-            FilamentView::registerRenderHook(
-                TablesRenderHook::TOOLBAR_END,
-                fn () => view('filament.hooks.order-toolbar-buttons')->render(),
-            );
-            $registered = true;
+    public static function buildExportData($orders): array
+    {
+        $data = [];
+        foreach ($orders as $item) {
+            $productTxt = '';
+            foreach ($item->products as $k => $vv) {
+                $productTxt .= $vv->product_name . "({$vv->unit_price}/件)*{$vv->number}";
+                if (($k + 1) < count($item->products)) {
+                    $productTxt .= PHP_EOL;
+                }
+            }
+
+            if ($item->delivery_type > 0) {
+                $addr = $item->address . '（7-11' . $item->shop_name . '門市' . $item->shop_no . '）';
+            } else {
+                $updateGettime = $item->delivery_time
+                    ? $item->created_at->copy()->addDay()->toTimeString()
+                    : $item->created_at->copy()->addDay()->toTimeString();
+                $addr = $item->city . $item->county . $item->street . $item->address
+                    . '-請於' . substr($updateGettime, 0, 5) . '前送達';
+            }
+
+            $deliveryTime = $item->delivery_time
+                ? (Order::DELIVERY_TIME[$item->delivery_time] ?? '')
+                : '';
+
+            $data[] = [
+                $item->no,
+                $item->inside_no,
+                $productTxt,
+                $item->total_price,
+                $item->name,
+                $item->phone,
+                $item->email,
+                $addr,
+                Order::DELIVERY_TYPE_TXT[$item->delivery_type] ?? '',
+                $deliveryTime,
+                $item->remarks,
+                Order::STATUS_TXT[$item->status] ?? $item->status,
+            ];
         }
+
+        return $data;
     }
 
     public static function getRelations(): array
@@ -414,91 +445,5 @@ class OrderResource extends Resource
     public static function canCreate(): bool
     {
         return false;
-    }
-
-    /**
-     * 匯出訂單為 XLSX（參考舊站 twshop 的 OrderExpoter 格式）。
-     * 支援多選：$recordsOrQuery 為 Collection 時匯入選中 ID 查詢；
-     * 傳入 Query 時直接用當前查詢（保持過濾條件）。
-     */
-    public static function exportOrdersToXlsx($recordsOrQuery, string $fileName)
-    {
-        // 構建查詢
-        if ($recordsOrQuery instanceof \Illuminate\Database\Eloquent\Collection) {
-            $ids = $recordsOrQuery->pluck('id');
-            $query = Order::with('products')->whereIn('id', $ids);
-        } else {
-            $query = $recordsOrQuery->with('products');
-        }
-
-        $orders = $query->orderBy('created_at', 'desc')->get();
-
-        // 標題行（與舊站一致）
-        $data[] = ['訂單號', '内單號', '商品', '總價', '名字', '電話', '郵箱', '地址', '收貨方式', '配送時間', '備注', '訂單狀態'];
-
-        foreach ($orders as $item) {
-            // 商品文字（格式：商品名(單價/件)*數量，多商品換行）
-            $productTxt = '';
-            foreach ($item->products as $k => $vv) {
-                $productTxt .= $vv->product_name . "({$vv->unit_price}/件)*{$vv->number}";
-                if (($k + 1) < count($item->products)) {
-                    $productTxt .= PHP_EOL;
-                }
-            }
-
-            // 地址：超商取貨格式為 {門市地址}（7-11{門市名}門市{門市號}）
-            // 依生產資料，全部超商訂單皆為 7-11（shop_type 僅 0/1），故固定 7-11 前綴
-            if ($item->delivery_type > 0) {
-                $addr = $item->address . '（7-11' . $item->shop_name . '門市' . $item->shop_no . '）';
-            } else {
-                // 配送時間計算（與舊站一致）
-                if ($item->delivery_time == 1) {
-                    $gettime = '11:20:00';
-                } elseif ($item->delivery_time == 2) {
-                    $gettime = '14:35:00';
-                } else {
-                    $gettime = '18:50:00';
-                }
-                $parts = explode(':', $gettime);
-                if ($parts[1] == '55') {
-                    $parts[1] = '00';
-                    $parts[0] = (int) $parts[0] + 1;
-                    if ($parts[0] < 10) {
-                        $parts[0] = '0' . $parts[0];
-                    }
-                } else {
-                    $parts[1] = (int) $parts[1] + 5;
-                    if ($parts[1] < 10) {
-                        $parts[1] = '0' . $parts[1];
-                    }
-                }
-                $updateGetTime = $parts[0] . ':' . $parts[1] . ':00';
-                $addr = $item->city . $item->county . $item->street . $item->address
-                    . '-請於' . substr($updateGetTime, 0, 5) . '前送達';
-            }
-
-            // 配送時段
-            $deliveryTime = '09:00~12:00';
-            if (!is_null($item->delivery_time)) {
-                $deliveryTime = Order::DELIVERY_TIME[$item->delivery_time] ?? $deliveryTime;
-            }
-
-            $data[] = [
-                $item->no,
-                $item->inside_no,
-                $productTxt,
-                $item->total_price,
-                $item->name,
-                $item->phone,
-                $item->email,
-                $addr,
-                '本人收貨',
-                $deliveryTime,
-                $item->remarks,
-                Order::STATUS_TXT[$item->status] ?? $item->status,
-            ];
-        }
-
-        return Excel::download(new OrderXlsxExport($data), $fileName);
     }
 }

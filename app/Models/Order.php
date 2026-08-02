@@ -1,37 +1,43 @@
 <?php
 
 namespace App\Models;
-    use Illuminate\Database\Eloquent\Model;
+
+use Illuminate\Database\Eloquent\Model;
+
 class Order extends Model
 {
     const STATUS_TXT = [
-        '0'=>'待處理','1'=>'包裝中','2'=>'已包裝','3'=>'運輸中','4'=>'已付款','5'=>'拒絕付款','10'=>'訂單完成','-1'=>'訂單取消'
+        '0' => '待處理', '1' => '發貨中', '2' => '已發貨', '3' => '運輸中',
+        '4' => '已付款', '5' => '拒絕付款', '10' => '訂單完成', '-1' => '訂單取消'
     ];
 
     const DELIVERY_TYPE_TXT = [
-        '0'=>'宅配到府','1'=>'7-11便利店'
+        '0' => '宅配到府', '1' => '7-11便利店'
     ];
 
     const DELIVERY_TIME = [
-        '1'=>'09:00~12:00',
-        '2'=>'12:00~17:00',
-        '3'=>'17:00~20:00',
+        '1' => '09:00~12:00',
+        '2' => '12:00~17:00',
+        '3' => '17:00~20:00',
     ];
 
     const SHOP_TYPE_TXT = [
-        '1'=>'7-11超商',
-        '2'=>'全家超商',
-        '3'=>'OK超商',
-        '4'=>'萊爾富超商',
+        '1' => '7-11超商',
+        '2' => '全家超商',
+        '3' => 'OK超商',
+        '4' => '萊爾富超商',
     ];
 
     protected $casts = [
-        'shop_data' => 'json', // 声明json类型
+        'shop_data' => 'json',
     ];
 
     protected $fillable = [
-        'no','inside_no','total_price','product_price','freight','delivery_type','delivery_time','payment_type','name','phone','email','country','province','city','county','street','address','status','remarks','ip','ipcountry','user_agent','shop_name','shop_type','shop_no','shop_data',
-        'release_token','visitor_id',
+        'secret', 'is_test', 'no', 'inside_no', 'total_price', 'product_price', 'freight',
+        'delivery_type', 'delivery_time', 'payment_type', 'name', 'phone', 'email',
+        'country', 'province', 'city', 'county', 'street', 'address', 'status',
+        'remarks', 'ip', 'ipcountry', 'user_agent', 'shop_name', 'shop_type',
+        'shop_no', 'shop_data', 'release_token', 'version'
     ];
 
     public function products()

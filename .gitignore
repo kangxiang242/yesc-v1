@@ -83,3 +83,6 @@ diff-report/
 deploy/*.md
 
 
+
+# 数据库同步备份(不入库)
+.sync/
