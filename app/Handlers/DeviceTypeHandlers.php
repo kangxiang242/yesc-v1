@@ -103,6 +103,35 @@ class DeviceTypeHandlers
     }
 
 
+    public static function getBrowser($agent = null)
+    {
+        if (!$agent) {
+            $agent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+        }
+        $agent = strtolower($agent);
+
+        if (strpos($agent, 'edg/') !== false || strpos($agent, 'edge/') !== false) {
+            return 'Edge';
+        }
+        if (strpos($agent, 'opr/') !== false || strpos($agent, 'opera/') !== false) {
+            return 'Opera';
+        }
+        if (strpos($agent, 'chrome/') !== false && strpos($agent, 'chromium') === false) {
+            if (strpos($agent, 'samsung') !== false) {
+                return 'Samsung Internet';
+            }
+            return 'Chrome';
+        }
+        if (strpos($agent, 'firefox/') !== false) {
+            return 'Firefox';
+        }
+        if ((strpos($agent, 'safari/') !== false || strpos($agent, 'safari,')) && strpos($agent, 'chrome') === false) {
+            return 'Safari';
+        }
+        return null;
+    }
+
+
     /**
      *    判断是否为搜索引擎蜘蛛
      *
