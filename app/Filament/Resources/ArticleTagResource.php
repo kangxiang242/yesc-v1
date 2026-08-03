@@ -22,6 +22,8 @@ class ArticleTagResource extends Resource
     protected static ?string $navigationGroup = '內容管理';
     protected static ?int $navigationSort = 6;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     public static function form(Form $form): Form
     {
         return $form->schema([
