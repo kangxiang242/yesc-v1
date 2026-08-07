@@ -6,7 +6,7 @@ class Message extends Model
 {
 
     protected $fillable = [
-        'name','phone','email','content','ip','user_agent','type','sex'
+        'name','phone','email','content','ip','ipcountry','user_agent','type','sex'
     ];
 
 
