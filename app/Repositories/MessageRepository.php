@@ -20,7 +20,7 @@ class MessageRepository extends Repository
      */
     public function store(array $data){
         $data = Arr::only($data,['name','email','phone','content','type','sex']);
-        $insert = array_merge($data,['ip'=>VehicleService::IP(),'user_agent'=>VehicleService::userAgent()]);
+        $insert = array_merge($data, ['ip'=>VehicleService::IP(), 'ipcountry'=>request()->header('cf-ipcountry'), 'user_agent'=>VehicleService::userAgent()]);
         return $this->model()->create($insert);
     }
 

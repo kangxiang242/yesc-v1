@@ -19,7 +19,7 @@ class MessageResource extends Resource
     protected static ?string $navigationLabel = '留言管理';
     protected static ?string $label = '留言';
     protected static ?string $pluralLabel = '留言';
-    protected static ?string $navigationGroup = null;
+    protected static ?string $navigationGroup = '客服管理';
     protected static ?int $navigationSort = 6;
 
     public static function form(Form $form): Form
@@ -136,14 +136,17 @@ class MessageResource extends Resource
                     ->html()
                     ->formatStateUsing(function ($record) {
                         $html = e($record->ip);
+                        $meta = [];
+                        if ($record->ipcountry) {
+                            $meta[] = e($record->ipcountry);
+                        }
                         if ($record->user_agent) {
                             $device = \App\Filament\Support\DeviceInfo::device($record->user_agent);
                             $browser = \App\Filament\Support\DeviceInfo::browser($record->user_agent);
-                            $html .= '<br><small>' . e($device);
-                            if ($browser) {
-                                $html .= ' / ' . e($browser);
-                            }
-                            $html .= '</small>';
+                            $meta[] = e($device) . ($browser ? ' / ' . e($browser) : '');
+                        }
+                        if ($meta) {
+                            $html .= '<br><small>' . implode(' · ', $meta) . '</small>';
                         }
                         return $html;
                     }),
