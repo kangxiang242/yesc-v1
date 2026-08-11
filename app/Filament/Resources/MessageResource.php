@@ -130,24 +130,17 @@ class MessageResource extends Resource
                         }
                         return implode("\n", $lines);
                     }),
-                Tables\Columns\TextColumn::make('ip')
-                    ->label('IP / 設備')
+                                Tables\Columns\TextColumn::make('ip')
+                    ->label('IP')
                     ->searchable()
                     ->html()
                     ->formatStateUsing(function ($record) {
-                        $html = e($record->ip);
-                        $meta = [];
-                        if ($record->ipcountry) {
-                            $meta[] = e($record->ipcountry);
-                        }
-                        if ($record->user_agent) {
-                            $device = \App\Filament\Support\DeviceInfo::device($record->user_agent);
-                            $browser = \App\Filament\Support\DeviceInfo::browser($record->user_agent);
-                            $meta[] = e($device) . ($browser ? ' / ' . e($browser) : '');
-                        }
-                        if ($meta) {
-                            $html .= '<br><small>' . implode(' · ', $meta) . '</small>';
-                        }
+                        $ipCounts = \App\Models\Message::select('ip', \Illuminate\Support\Facades\DB::raw('count(*) as cnt'))
+                            ->groupBy('ip')->pluck('cnt', 'ip');
+                        $count = $ipCounts[$record->ip] ?? 0;
+                        $html = '<p style="width: 130px;overflow: hidden;margin: 0">' . e($record->ip) . '</p>';
+                        $html .= '<p style="margin: 0">' . e($record->ipcountry ?? '') . '</p>';
+                        $html .= '<p>共' . $count . '單</p>';
                         return $html;
                     }),
                 Tables\Columns\TextColumn::make('created_at')->label('時間')->dateTime('Y-m-d H:i')->sortable()->size('sm'),
