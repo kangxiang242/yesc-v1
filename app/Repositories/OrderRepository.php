@@ -77,6 +77,8 @@ class OrderRepository extends Repository
                 'ip'=>VehicleService::IP(),
                 'ipcountry'=>request()->header('cf-ipcountry'),
                 'user_agent'=>request()->header('user-agent'),
+                'from_domain'=>request()->getHost(),
+                'source_site'=>$_COOKIE['conv_from'] ?? (request()->cookie('conv_from') ?: session('conv_from')),
                 'product_price'=>$product_price,
                 'delivery_type'=>Arr::get($data,'order_type'),
                 'release_token'=>Arr::get($data,'release_token') ?: (function_exists('release_token') ? release_token() : null),
@@ -196,6 +198,14 @@ class OrderRepository extends Repository
             $insert_data = array_merge($insert_data,$insert_data2);
             $insert_data['phone'] = str_replace('-','',$insert_data['phone']);
             $order = $this->model()->create($insert_data);
+        // 下单成功，清除来源归因（一次性使用，避免影响后续订单）
+        try {
+            \Cookie::queue(\Cookie::forget('conv_from'));
+            session()->forget('conv_from');
+        } catch (\Throwable $e) {
+            // 清除失败不影响订单
+        }
+
 
             $order_product = [];
             $time = date('Y-m-d H:i:s');
