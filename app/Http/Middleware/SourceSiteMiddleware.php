@@ -43,7 +43,7 @@ class SourceSiteMiddleware
         $ref = $request->headers->get('referer');
         if ($ref) {
             $host = parse_url($ref, PHP_URL_HOST);
-            if ($host && !$this->isSelfDomain($host)) {
+            if ($host && !$this->isSelfDomain($host) && !$this->isIgnoredDomain($host)) {
                 $this->setSource($request, $host);
             }
         }
@@ -152,6 +152,31 @@ HTML;
             'viagra-twshop.com', 'yescialis.com',
         ];
         foreach ($self as $d) {
+            if ($host === $d || str_ends_with($host, '.' . $d)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 是否为应忽略的搜索引擎/社交域名（含子域）。命中则不记为来源。
+     * 避免 ?from= 归因失效时 Referer 兜底把 google.com 等误记成来源。
+     */
+    protected function isIgnoredDomain($host)
+    {
+        $host = strtolower(trim((string) $host));
+        if ($host === '') {
+            return false;
+        }
+        $host = preg_replace('/^www\./', '', $host);
+        $ignore = [
+            'google.com','google.com.tw','google.com.hk','bing.com','yahoo.com','search.yahoo.com',
+            'duckduckgo.com','baidu.com','yandex.com','sogou.com','so.com','ecosia.org',
+            'facebook.com','fb.com','instagram.com','t.co','x.com','twitter.com',
+            'youtube.com','tiktok.com','line.me','lin.ee','pinterest.com','reddit.com',
+        ];
+        foreach ($ignore as $d) {
             if ($host === $d || str_ends_with($host, '.' . $d)) {
                 return true;
             }
