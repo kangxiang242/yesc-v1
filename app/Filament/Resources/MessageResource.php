@@ -150,6 +150,21 @@ class MessageResource extends Resource
                         }
                         return $html;
                     }),
+                                Tables\Columns\TextColumn::make('from_domain')
+                    ->label('來源')
+                    ->html()
+                    ->wrap()
+                    ->formatStateUsing(function ($record) {
+                        $html = '';
+                        if ($record->source_site) {
+                            $html .= '<p style="margin:0">静态站: ' . e($record->source_site) . '</p>';
+                        }
+                        if ($record->from_domain) {
+                            $html .= '<p style="margin:0">转化站: ' . e($record->from_domain) . '</p>';
+                        }
+                        return $html ?: '—';
+                    })
+                    ,
                 Tables\Columns\TextColumn::make('created_at')->label('時間')->dateTime('Y-m-d H:i')->sortable()->size('sm'),
             ])
             ->defaultSort('created_at', 'desc')
