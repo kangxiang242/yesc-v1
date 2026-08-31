@@ -28,6 +28,15 @@ class OrderResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        try {
+            return static::getModel()::query()->exists();
+        } catch (\Throwable $e) {
+            return true;
+        }
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -273,9 +282,22 @@ class OrderResource extends Resource
                         $count = $ipCounts[$record->ip] ?? 0;
                         $html = '<p style="width: 130px;overflow: hidden;margin: 0">' . e($record->ip) . '</p>';
                         $html .= '<p style="margin: 0">' . e($record->ipcountry) . '</p>';
-                        $html .= '<p>共' . $count . '單</p>';
+                        $html .= '<p style="margin:0;color:#94a3b8">共' . $count . '單</p>';
                         return $html;
-                    }),
+                    })
+                    ->action(Tables\Actions\Action::make('view_access_logs')
+                        ->modalHeading('最近訪問記錄')
+                        ->modalContent(function ($record) {
+                            $logs = \Illuminate\Support\Facades\DB::table('access_logs')
+                                ->where('ip', $record->ip)
+                                ->latest('created_at')->limit(10)->get();
+                            $rows = $logs->map(fn ($log) => '<tr><td>' . e($log->url ?? '') . '</td><td>' . e($log->referer ?? '') . '</td><td>' . e($log->created_at ?? '') . '</td></tr>')->implode('');
+                            return new \Illuminate\Support\HtmlString('<table class="w-full text-sm"><thead><tr><th>URL</th><th>來源</th><th>時間</th></tr></thead><tbody>' . ($rows ?: '<tr><td colspan="3">暫無訪問記錄</td></tr>') . '</tbody></table>');
+                        })
+                        ->modalSubmitAction(false)
+                        ->modalCancelActionLabel('關閉')
+                        ->modalWidth('4xl')),
+
                 Tables\Columns\TextColumn::make('version')
                     ->label('版本')
                     ->size('sm')
@@ -370,6 +392,10 @@ class OrderResource extends Resource
                     })
                     ->deselectRecordsAfterCompletion()
                     ->requiresConfirmation(),
+                Tables\Actions\BulkAction::make('hidden_dummy')
+                    ->label('')
+                    ->hidden()
+                    ->action(fn () => null),
             ])
             ->headerActions([
                 Tables\Actions\Action::make('refresh')

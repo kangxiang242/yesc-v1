@@ -19,6 +19,8 @@ class ArticleResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
     protected static ?string $navigationLabel = '文章管理';
+    protected static ?string $modelLabel = '文章';
+    protected static ?string $pluralModelLabel = '文章';
 
     protected static ?string $label = '文章';
 
@@ -26,6 +28,15 @@ class ArticleResource extends Resource
     
 
     protected static ?int $navigationSort = 3;
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        try {
+            return static::getModel()::query()->exists();
+        } catch (\Throwable $e) {
+            return true;
+        }
+    }
 
     public static function form(Form $form): Form
     {

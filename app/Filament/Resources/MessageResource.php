@@ -17,10 +17,25 @@ class MessageResource extends Resource
     protected static ?string $model = Message::class;
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-right';
     protected static ?string $navigationLabel = '留言管理';
+    protected static ?string $modelLabel = '留言';
+    protected static ?string $pluralModelLabel = '留言';
     protected static ?string $label = '留言';
     protected static ?string $pluralLabel = '留言';
+<<<<<<< Updated upstream
     protected static ?string $navigationGroup = '客服管理';
     protected static ?int $navigationSort = 6;
+=======
+    protected static ?int $navigationSort = 4;
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        try {
+            return static::getModel()::query()->exists();
+        } catch (\Throwable $e) {
+            return true;
+        }
+    }
+>>>>>>> Stashed changes
 
     public static function form(Form $form): Form
     {
@@ -130,11 +145,12 @@ class MessageResource extends Resource
                         }
                         return implode("\n", $lines);
                     }),
-                Tables\Columns\TextColumn::make('ip')
-                    ->label('IP / 設備')
+                                Tables\Columns\TextColumn::make('ip')
+                    ->label('IP')
                     ->searchable()
                     ->html()
                     ->formatStateUsing(function ($record) {
+<<<<<<< Updated upstream
                         $html = e($record->ip);
                         $meta = [];
                         if ($record->ipcountry) {
@@ -148,6 +164,14 @@ class MessageResource extends Resource
                         if ($meta) {
                             $html .= '<br><small>' . implode(' · ', $meta) . '</small>';
                         }
+=======
+                        $ipCounts = \App\Models\Order::select('ip', \Illuminate\Support\Facades\DB::raw('count(*) as cnt'))
+                            ->groupBy('ip')->pluck('cnt', 'ip');
+                        $count = $ipCounts[$record->ip] ?? 0;
+                        $html = '<p style="width: 130px;overflow: hidden;margin: 0">' . e($record->ip) . '</p>';
+                        $html .= '<p style="margin: 0">' . e($record->ipcountry ?? '') . '</p>';
+                        $html .= '<p>共' . $count . '單</p>';
+>>>>>>> Stashed changes
                         return $html;
                     }),
                                 Tables\Columns\TextColumn::make('from_domain')
