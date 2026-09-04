@@ -26,6 +26,15 @@ class ArticleCateResource extends Resource
 
     protected static ?int $navigationSort = 4;
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        try {
+            return static::getModel()::query()->exists();
+        } catch (\Throwable $e) {
+            return true;
+        }
+    }
+
     public static function form(Form $form): Form
     {
         return $form

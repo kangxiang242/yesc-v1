@@ -20,6 +20,15 @@ class NavigationResource extends Resource
     protected static ?string $navigationGroup = '內容管理';
     protected static ?int $navigationSort = 10;
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        try {
+            return static::getModel()::query()->exists();
+        } catch (\Throwable $e) {
+            return true;
+        }
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([

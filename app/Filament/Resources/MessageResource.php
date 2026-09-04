@@ -17,9 +17,11 @@ class MessageResource extends Resource
     protected static ?string $model = Message::class;
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-right';
     protected static ?string $navigationLabel = '留言管理';
+    protected static ?string $modelLabel = '留言';
+    protected static ?string $pluralModelLabel = '留言';
     protected static ?string $label = '留言';
     protected static ?string $pluralLabel = '留言';
-    protected static ?string $navigationGroup = null;
+    protected static ?string $navigationGroup = '客服管理';
     protected static ?int $navigationSort = 6;
 
     public static function form(Form $form): Form
@@ -130,23 +132,34 @@ class MessageResource extends Resource
                         }
                         return implode("\n", $lines);
                     }),
-                Tables\Columns\TextColumn::make('ip')
-                    ->label('IP / 設備')
+                                Tables\Columns\TextColumn::make('ip')
+                    ->label('IP')
                     ->searchable()
                     ->html()
                     ->formatStateUsing(function ($record) {
-                        $html = e($record->ip);
-                        if ($record->user_agent) {
-                            $device = \App\Filament\Support\DeviceInfo::device($record->user_agent);
-                            $browser = \App\Filament\Support\DeviceInfo::browser($record->user_agent);
-                            $html .= '<br><small>' . e($device);
-                            if ($browser) {
-                                $html .= ' / ' . e($browser);
-                            }
-                            $html .= '</small>';
-                        }
+                        $ipCounts = \App\Models\Order::select('ip', \Illuminate\Support\Facades\DB::raw('count(*) as cnt'))
+                            ->groupBy('ip')->pluck('cnt', 'ip');
+                        $count = $ipCounts[$record->ip] ?? 0;
+                        $html = '<p style="width: 130px;overflow: hidden;margin: 0">' . e($record->ip) . '</p>';
+                        $html .= '<p style="margin: 0">' . e($record->ipcountry ?? '') . '</p>';
+                        $html .= '<p>共' . $count . '單</p>';
                         return $html;
                     }),
+                                Tables\Columns\TextColumn::make('from_domain')
+                    ->label('來源')
+                    ->html()
+                    ->wrap()
+                    ->formatStateUsing(function ($record) {
+                        $html = '';
+                        if ($record->source_site) {
+                            $html .= '<p style="margin:0">静态站: ' . e($record->source_site) . '</p>';
+                        }
+                        if ($record->from_domain) {
+                            $html .= '<p style="margin:0">转化站: ' . e($record->from_domain) . '</p>';
+                        }
+                        return $html ?: '—';
+                    })
+                    ,
                 Tables\Columns\TextColumn::make('created_at')->label('時間')->dateTime('Y-m-d H:i')->sortable()->size('sm'),
             ])
             ->defaultSort('created_at', 'desc')

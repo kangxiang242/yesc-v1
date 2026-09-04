@@ -205,7 +205,58 @@
          white-space: nowrap !important;
          min-width: fit-content !important;
      }
- </style>
+ 
+    /* === 補齊 Filament 編譯 CSS 缺失的 Tailwind 工具類（自定義頁面用） === */
+    .fi-body .bg-blue-500 { background-color: #3b82f6 !important; }
+    .fi-body .bg-green-500 { background-color: #22c55e !important; }
+    .fi-body .bg-amber-500 { background-color: #f59e0b !important; }
+    .fi-body .bg-red-500 { background-color: #ef4444 !important; }
+    .fi-body .bg-red-100 { background-color: #fee2e2 !important; }
+    .fi-body .bg-yellow-50 { background-color: #fefce8 !important; }
+    .fi-body .bg-yellow-100 { background-color: #fef9c3 !important; }
+    .fi-body .bg-indigo-50 { background-color: #eef2ff !important; }
+    .fi-body .bg-indigo-100 { background-color: #e0e7ff !important; }
+    .fi-body .text-gray-900 { color: #111827; }
+    .fi-body .text-yellow-800 { color: #854d0e; }
+    .fi-body .text-red-700 { color: #b91c1c; }
+    .fi-body .text-indigo-600 { color: #4f46e5; }
+    .fi-body .opacity-80 { opacity: 0.8; }
+    .fi-body .mb-6 { margin-bottom: 1.5rem; }
+    /* 深色模式下這些卡片仍需白字，避免主題反轉導致看不清 */
+    .fi-body .bg-blue-500, .fi-body .bg-green-500,
+    .fi-body .bg-amber-500, .fi-body .bg-red-500 { color: #ffffff !important; }
+    .fi-body .bg-blue-500 *, .fi-body .bg-green-500 *,
+    .fi-body .bg-amber-500 *, .fi-body .bg-red-500 * { color: #ffffff !important; }
+    @media (min-width: 768px) {
+        .fi-body [class~="md:grid-cols-4"] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+
+    /* === inline-label 欄位（如 Radio::inline()）與 180px 標題欄同行 === */
+    .fi-resource-edit-record-page .fi-fo-field-wrp > .grid > [class~="sm:col-span-2"],
+    .fi-resource-create-record-page .fi-fo-field-wrp > .grid > [class~="sm:col-span-2"] {
+        grid-column: 2 / 3 !important;
+    }
+
+    /* Synced compact table layout (twshop-v1@88ea64b). */
+    .fi-ta-cell {
+        padding-block: 0.5rem !important;
+    }
+    .fi-ta-header-cell {
+        padding-block: 0.5rem !important;
+        font-size: 0.75rem !important;
+    }
+    .fi-ta-cell .fi-ta-col-text {
+        font-size: 0.8125rem !important;
+        line-height: 1.25rem !important;
+    }
+    .fi-ta-cell .fi-fo-select {
+        min-width: 100px !important;
+    }
+    .fi-ta-cell .fi-fo-select .fi-input-wrp {
+        padding: 0.25rem 0.5rem !important;
+        font-size: 0.75rem !important;
+    }
+</style>
 
  {{-- 防止浏览器自动填充登录表单 --}}
 <script>

@@ -17,6 +17,8 @@ class ProductResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-cube';
 
     protected static ?string $navigationLabel = '商品管理';
+    protected static ?string $modelLabel = '商品';
+    protected static ?string $pluralModelLabel = '商品';
 
     protected static ?string $label = '商品';
 
@@ -24,6 +26,15 @@ class ProductResource extends Resource
     
 
     protected static ?int $navigationSort = 2;
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        try {
+            return static::getModel()::query()->exists();
+        } catch (\Throwable $e) {
+            return true;
+        }
+    }
 
     public static function form(Form $form): Form
     {
