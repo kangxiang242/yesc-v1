@@ -38,6 +38,12 @@ $webDomains = array_values(array_unique(array_filter([
     '127.0.0.1',
 ])));
 
+// c0~c9 子域（转化站新策略：所有子域访问同一转化站）
+foreach (['c0','c1','c2','c3','c4','c5','c6','c7','c8','c9'] as $ci) {
+    $webDomains[] = $ci . '.' . $webHost;
+}
+$webDomains = array_values(array_unique($webDomains));
+
 foreach ($webDomains as $i => $wd) {
     // Observer store - 订单/留言表单提交通知（虚拟端点返回 200，跳过 CSRF）
     Route::domain($wd)->post('/observer/store', function () {

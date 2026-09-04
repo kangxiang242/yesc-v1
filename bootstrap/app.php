@@ -12,12 +12,15 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        // conv_from 明文存储（来源归因 cookie，避免加密序列化问题）
+        $middleware->encryptCookies(['conv_from']);
         // Trust Cloudflare proxies (fix Mixed Content behind CF)
         $middleware->trustProxies(at: '*');
 
         $middleware->append(\App\Http\Middleware\AccessLogMiddleware::class);
         // 必须放在全局栈：在 web group 的 AddQueuedCookiesToResponse 写入 Set-Cookie 之后清理
         $middleware->append(\App\Http\Middleware\EnforceCacheHeadersMiddleware::class);
+        $middleware->append(\App\Http\Middleware\SourceSiteMiddleware::class);
         $middleware->alias([
             'redirect.device' => \App\Http\Middleware\RedirectDeviceMiddleware::class,
             'googlebot.checked' => \App\Http\Middleware\GooglebotChecked::class,

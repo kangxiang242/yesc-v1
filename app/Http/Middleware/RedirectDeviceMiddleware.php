@@ -36,6 +36,12 @@ class RedirectDeviceMiddleware
             $allowed[] = parse_url($adminDomain, PHP_URL_HOST);
         }
 
+        // c0~c9 子域直接访问同一转化站（放行主域及其子域）
+        $mainHost = parse_url($url, PHP_URL_HOST);
+        if ($mainHost && strlen($host) > strlen($mainHost) && substr($host, -strlen($mainHost) - 1) === '.' . $mainHost) {
+            return $next($request);
+        }
+
         if (!in_array($host, $allowed, true)) {
             $n_u = rtrim($url, '/') . '/' . trim($request->path(), '/');
             return redirect($n_u);

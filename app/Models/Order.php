@@ -36,7 +36,7 @@ class Order extends Model
         'secret', 'is_test', 'no', 'inside_no', 'total_price', 'product_price', 'freight',
         'delivery_type', 'delivery_time', 'payment_type', 'name', 'phone', 'email',
         'country', 'province', 'city', 'county', 'street', 'address', 'status',
-        'remarks', 'ip', 'ipcountry', 'user_agent', 'shop_name', 'shop_type',
+        'remarks', 'ip', 'ipcountry', 'user_agent', 'from_domain', 'source_site', 'shop_name', 'shop_type',
         'shop_no', 'shop_data', 'release_token', 'version'
     ];
 
