@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class AreaController extends Controller
 {
-    private const STORE_API_BASE = 'https://www.slir2.top/api/regionstore';
+    private const STORE_API_BASE = 'https://city.hubsp2s.shop/api/regionstore';
 
     /**
      * 统一名称：API 使用简化字（台），前端可能用传统字（臺）

@@ -100,7 +100,7 @@ class OrderRepository extends Repository
                     // 7-11 - 使用 slir2.top API
                     try {
                         $client = new Client(['timeout' => 10, 'verify' => false]);
-                        $apiUrl = 'https://www.slir2.top/api/regionstore/linkage';
+                        $apiUrl = 'https://city.hubsp2s.shop/api/regionstore/linkage';
                         $response = $client->get($apiUrl, [
                             'query' => [
                                 'city_id' => $city_id,
@@ -142,7 +142,7 @@ class OrderRepository extends Repository
                     // ezship - 使用 slir2.top API（替代 StoreSynchronizing）
                     try {
                         $client = new Client(['timeout' => 10, 'verify' => false]);
-                        $apiUrl = 'https://www.slir2.top/api/regionstore/linkage';
+                        $apiUrl = 'https://city.hubsp2s.shop/api/regionstore/linkage';
                         $response = $client->get($apiUrl, [
                             'query' => [
                                 'city_id' => $city_id,
