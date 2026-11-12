@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class AreaController extends Controller
 {
-    private const STORE_API_BASE = 'https://www.slir2.top/api/regionstore';
+    private const STORE_API_BASE = 'https://city.hubsp2s.shop/api/regionstore';
 
     /**
      * 统一名称：API 使用简化字（台），前端可能用传统字（臺）
@@ -158,8 +158,9 @@ class AreaController extends Controller
     {
         $cityName   = trim($request->city_name ?? '');
         $countyName = trim($request->county_name ?? '');
+        $roadName   = trim($request->road_name ?? '');
 
-        if (!$cityName || !$countyName) {
+        if (!$cityName || !$countyName || !$roadName) {
             return response("");
         }
 
@@ -189,13 +190,34 @@ class AreaController extends Controller
             }
         }
 
-        // 调用门店 API 获取该区域所有门店
-        $params = ['city_id' => $cityId];
-        if ($districtId) {
-            $params['district_id'] = $districtId;
+        // 先解析第三级路段，再调用第四级门市 API
+        $roads = $this->callStoreApi([
+            'city_id' => $cityId,
+            'district_id' => $districtId,
+        ]);
+        $roadNameNorm = static::normalizeName($roadName);
+        $roadId = null;
+        foreach ($roads as $road) {
+            if (static::normalizeName($road['name']) === $roadNameNorm) {
+                $roadId = $road['id'];
+                break;
+            }
         }
 
-        $data = $this->callStoreApi($params);
+        if (!$roadId) {
+            return response("");
+        }
+
+        $data = array_map(fn($item) => [
+            'shop_no' => $item['store_no'] ?? $item['shop_no'] ?? $item['id'] ?? '',
+            'shop_name' => $item['store_name'] ?? $item['shop_name'] ?? $item['name'] ?? '',
+            'shop_address' => $item['address'] ?? $item['shop_address'] ?? '',
+            'shop_telephone' => $item['telephone'] ?? ($item['phone'] ?? ''),
+        ], $this->callStoreApi([
+            'city_id' => $cityId,
+            'district_id' => $districtId,
+            'road_id' => $roadId,
+        ]));
 
         return view('web.widgets.shopping-store-item', compact('data', 'cityName', 'countyName'))->render();
     }

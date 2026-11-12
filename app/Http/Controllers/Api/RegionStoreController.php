@@ -25,7 +25,7 @@ class RegionStoreController extends Controller
         if ($districtId !== null) $params['district_id'] = $districtId;
         if ($roadId !== null) $params['road_id'] = $roadId;
 
-        $externalUrl = 'https://www.slir2.top/api/regionstore/linkage';
+        $externalUrl = 'https://city.hubsp2s.shop/api/regionstore/linkage';
 
         try {
             $client = new \GuzzleHttp\Client([
@@ -74,7 +74,7 @@ class RegionStoreController extends Controller
         if ($districtId) $params['district_id'] = $districtId;
         if ($roadId) $params['road_id'] = $roadId;
 
-        $externalUrl = 'https://www.slir2.top/api/regionstore/linkage';
+        $externalUrl = 'https://city.hubsp2s.shop/api/regionstore/linkage';
 
         try {
             $client = new \GuzzleHttp\Client([
